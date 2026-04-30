@@ -99,6 +99,8 @@ export default function BlogAcademy() {
                     src={featuredPost.featuredImage} 
                     alt={featuredPost.alt || featuredPost.title}
                     fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     referrerPolicy="no-referrer"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
@@ -128,6 +130,7 @@ export default function BlogAcademy() {
                         alt={featuredPost.author} 
                         width={40}
                         height={40}
+                        sizes="40px"
                         referrerPolicy="no-referrer"
                         className="w-10 h-10 rounded-full border border-white/10 object-cover" 
                       />
@@ -188,6 +191,7 @@ export default function BlogAcademy() {
                     src={post.featuredImage} 
                     alt={post.alt || post.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     referrerPolicy="no-referrer"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />

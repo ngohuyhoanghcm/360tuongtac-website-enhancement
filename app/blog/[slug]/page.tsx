@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import { Mail, Calendar, User, Clock, ChevronLeft, ArrowRight, Share2, Facebook, Twitter, Link2, MessageCircle } from 'lucide-react';
 import { BLOG_POSTS, BlogPost } from '@/lib/constants/blog';
-import TableOfContents from '@/components/blog/TableOfContents';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import NavigationBack from '@/components/ui/NavigationBack';
 import SocialShare from '@/components/blog/SocialShare';
-import InteractiveChart from '@/components/blog/InteractiveChart';
+
+const InteractiveChart = dynamic(() => import('@/components/blog/InteractiveChart'));
+const TableOfContents = dynamic(() => import('@/components/blog/TableOfContents'));
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -175,6 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
                         alt={post.author} 
                         width={48}
                         height={48}
+                        sizes="48px"
                         referrerPolicy="no-referrer"
                         className="w-12 h-12 rounded-full border border-white/10 object-cover"
                       />
@@ -277,6 +280,7 @@ export default async function BlogPostPage({ params }: Props) {
                     alt={post.author} 
                     width={96}
                     height={96}
+                    sizes="96px"
                     referrerPolicy="no-referrer"
                     className="w-24 h-24 rounded-full border-4 border-white/5 object-cover"
                   />
@@ -340,6 +344,8 @@ export default async function BlogPostPage({ params }: Props) {
                       src={post.featuredImage} 
                       alt={post.alt || post.title} 
                       fill
+                      priority
+                      sizes="(max-width: 1280px) 100vw, 33vw"
                       referrerPolicy="no-referrer"
                       className="object-cover rounded-2xl filter brightness-110 contrast-105 group-hover:scale-105 transition-transform duration-700" 
                     />
