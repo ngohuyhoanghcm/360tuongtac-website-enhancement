@@ -56,7 +56,7 @@ export default function Pricing() {
                     <p className="font-stat text-xs font-semibold text-[#00E5FF] tracking-wider">ƯU ĐÃI KHÁCH MỚI</p>
                   </div>
                 </div>
-                <Link href="https://360tuongtac.com/product/tiktok/tiktok-views" className="w-full bg-[#6C63FF] hover:bg-[#5a52d3] text-white py-4 rounded-xl font-h1 font-bold flex items-center justify-center gap-2 transition-all neon-glow">
+                <Link href="https://360tuongtac.com/service/tiktok/tiktok-views" className="w-full bg-[#6C63FF] hover:bg-[#5a52d3] text-white py-4 rounded-xl font-h1 font-bold flex items-center justify-center gap-2 transition-all neon-glow">
                   <ShoppingCart size={20} /> Đặt hàng ngay
                 </Link>
               </div>

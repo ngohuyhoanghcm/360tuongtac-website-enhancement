@@ -23,7 +23,9 @@ export const tangFollowInstagram: LandingPage = {
     },
     education: {
       title: 'Instagram Algorithm - Tại sao Follower là "Chứng chỉ uy tín"?',
-      content: `Instagram là nền tảng của cái đẹp và sự tin tưởng (Aesthetics & Trust). Khác với TikTok, người dùng Instagram có xu hướng "soi" profile rất kĩ trước khi nhấn Follow. Con số Follower đóng vai trò là "Social Currency" (Tiền tệ xã hội). Nó khẳng định giá trị thương hiệu và chất lượng nội dung của bạn trong mắt cộng đồng.\n\nThuật toán Instagram sẽ ưu tiên hiển thị bài viết lên mục "Explore" nếu kênh của bạn có lượng fan ổn định và tăng trưởng đều. Đặc biệt, khi bạn đạt mốc 10,000 followers, bạn sẽ được mở khóa những tính năng cao cấp của tài khoản Business. Dịch vụ tăng follow instagram giúp bạn vượt qua "điểm nghẹt" ban đầu. Việc sở hữu một con số ấn tượng sẽ tạo hiệu ứng Halo: Người dùng sẽ mặc định nội dung của bạn có giá trị cao và dễ dàng nhấn Follow bạn hơn một cách tự nhiên. 360TuongTac cung cấp nguồn Follower sạch, giúp bạn nhanh chóng xây dựng một profile "triệu đô" để thu hút khách hàng và đối tác.`
+      content: `Instagram là nền tảng của cái đẹp và sự tin tưởng (Aesthetics & Trust). Khác với TikTok, người dùng Instagram có xu hướng "soi" profile rất kĩ trước khi nhấn Follow. Con số Follower đóng vai trò là "Social Currency" (Tiền tệ xã hội). Nó khẳng định giá trị thương hiệu và chất lượng nội dung của bạn trong mắt cộng đồng.
+
+Thuật toán Instagram sẽ ưu tiên hiển thị bài viết lên mục "Explore" nếu kênh của bạn có lượng fan ổn định và tăng trưởng đều. Đặc biệt, khi bạn đạt mốc 10,000 followers, bạn sẽ được mở khóa những tính năng cao cấp của tài khoản Business. Dịch vụ tăng follow instagram giúp bạn vượt qua "điểm nghẹt" ban đầu. Việc sở hữu một con số ấn tượng sẽ tạo hiệu ứng Halo: Người dùng sẽ mặc định nội dung của bạn có giá trị cao và dễ dàng nhấn Follow bạn hơn một cách tự nhiên. 360TuongTac cung cấp nguồn Follower sạch, giúp bạn nhanh chóng xây dựng một profile "triệu đô" để thu hút khách hàng và đối tác.`
     },
     solution: {
       title: 'Giải pháp xây dựng Profile Instagram đẳng cấp',
@@ -37,9 +39,9 @@ export const tangFollowInstagram: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Follow Instagram',
       packages: [
-        { id: 'ig-fol-500', name: 'Gói Mini Profile', price: 45000, duration: '24h hoàn thành', features: ['500 Follower chất lượng', 'Bảo hành 30 ngày', 'An toàn tuyệt đối'], productUrl: 'https://360tuongtac.com/product/tang-follow-instagram' },
-        { id: 'ig-fol-2k', name: 'Gói Fashion/Shop', price: 160000, duration: '2-3 ngày', features: ['2000 Follower uy tín', 'Server VIP ổn định', 'Tăng uy tín thương hiệu'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-follow-instagram' },
-        { id: 'ig-fol-10k', name: 'Gói Influencer', price: 750000, duration: '7-10 ngày', features: ['10,000 Follower khủng', 'Tư vấn tối ưu Profile', 'Bảo hành vĩnh viễn'], productUrl: 'https://360tuongtac.com/product/tang-follow-instagram' }
+        { id: 'ig-fol-500', name: 'Gói Mini Profile', price: 45000, duration: '24h hoàn thành', features: ['500 Follower chất lượng', 'Bảo hành 30 ngày', 'An toàn tuyệt đối'], productUrl: 'https://360tuongtac.com/service/instagram/instagram-followers' },
+        { id: 'ig-fol-2k', name: 'Gói Fashion/Shop', price: 160000, duration: '2-3 ngày', features: ['2000 Follower uy tín', 'Server VIP ổn định', 'Tăng uy tín thương hiệu'], recommended: true, productUrl: 'https://360tuongtac.com/service/instagram/instagram-followers' },
+        { id: 'ig-fol-10k', name: 'Gói Influencer', price: 750000, duration: '7-10 ngày', features: ['10,000 Follower khủng', 'Tư vấn tối ưu Profile', 'Bảo hành vĩnh viễn'], productUrl: 'https://360tuongtac.com/service/instagram/instagram-followers' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const tangFollowInstagram: LandingPage = {
         { question: 'Làm sao để biết dịch vụ đang chạy?', answer: 'Bạn sẽ nhận được thông báo Follow mới liên tục từ ứng dụng Instagram của mình.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['case-study-tang-viewer-tiktok', 'seeding-comment-tiktok-hieu-qua', 'thuat-toan-tiktok-2025'],
 };

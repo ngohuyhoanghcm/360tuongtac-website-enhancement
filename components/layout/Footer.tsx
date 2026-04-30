@@ -8,7 +8,7 @@ const FOOTER_LINKS = {
     title: "DỊCH VỤ",
     links: [
       { name: "Tăng tương tác MXH", href: "https://360tuongtac.com/home" },
-      { name: "Tài khoản Premium", href: "https://360tuongtac.com/product/all" },
+      { name: "Tài khoản Premium", href: "https://360tuongtac.com/service/all" },
       { name: "Proxy & Server", href: "https://360tuongtac.com/proxy/proxy-v4-static" },
       { name: "Bảng giá dịch vụ", href: "/bang-gia" },
       { name: "CTV - Đại lý", href: "https://360tuongtac.com/upgrade" }
@@ -17,11 +17,11 @@ const FOOTER_LINKS = {
   accounts: {
     title: "TÀI KHOẢN HOT",
     links: [
-      { name: "ChatGPT Plus", href: "https://360tuongtac.com/product/all" },
-      { name: "Netflix Premium", href: "https://360tuongtac.com/product/all" },
-      { name: "Spotify Premium", href: "https://360tuongtac.com/product/all" },
-      { name: "Canva Pro", href: "https://360tuongtac.com/product/all" },
-      { name: "Microsoft 365", href: "https://360tuongtac.com/product/all" }
+      { name: "ChatGPT Plus", href: "https://360tuongtac.com/service/all" },
+      { name: "Netflix Premium", href: "https://360tuongtac.com/service/all" },
+      { name: "Spotify Premium", href: "https://360tuongtac.com/service/all" },
+      { name: "Canva Pro", href: "https://360tuongtac.com/service/all" },
+      { name: "Microsoft 365", href: "https://360tuongtac.com/service/all" }
     ]
   }
 };
@@ -85,10 +85,10 @@ export default function Footer() {
           <div className="space-y-6">
             <h4 className="text-white text-sm font-bold tracking-wider mb-2">HỖ TRỢ & LIÊN HỆ</h4>
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <MessageCircle className="w-5 h-5 text-white/40" />
-                <span className="text-sm text-slate-400 font-medium">Zalo: 0388.009.669</span>
-              </div>
+              <Link href="https://zalo.me/0388009669" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group w-fit">
+                <MessageCircle className="w-5 h-5 text-white/40 group-hover:text-[#00E5FF] transition-colors" />
+                <span className="text-sm text-slate-400 font-medium group-hover:text-white transition-colors">Zalo: 0388.009.669</span>
+              </Link>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-white/40" />
                 <span className="text-sm text-slate-400 font-medium">contact@flowra.vn</span>

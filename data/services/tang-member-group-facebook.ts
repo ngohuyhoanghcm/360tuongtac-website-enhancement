@@ -23,7 +23,9 @@ export const tangMemberGroupFacebook: LandingPage = {
     },
     education: {
       title: 'Giá trị của "Số lượng thành viên" đối với Cộng đồng Facebook',
-      content: `Facebook Group đang trở thành "mỏ vàng" mới cho việc bán hàng và seeding thương hiệu. Tuy nhiên, rào cản lớn nhất của một Group mới chính là "Uy tín số đông". Khi một người dùng thấy gợi ý tham gia nhóm, con số đầu tiên họ nhìn vào chính là số lượng thành viên (Members count).\n\nViệc sử dụng dịch vụ tăng member group facebook giúp bạn vượt qua giai đoạn "con số không" đầy thử thách. Một Group có 10,000 thành viên sẽ tự động thu hút thêm hàng trăm thành viên thật mỗi ngày thông qua cơ chế đề xuất "Nhóm gợi ý" của Facebook. Đây gọi là hiệu ứng mạng (Network Effect). Ngoài ra, số lượng thành viên lớn còn giúp các bài đăng trong nhóm dễ dàng đạt Reach cao hơn và tăng điểm ưu tiên trong công cụ tìm kiếm của Facebook. 360TuongTac cung cấp lượng Member sạch, giúp group của bạn trông chuyên nghiệp, tin cậy và sẵn sàng cho các chiến dịch kinh doanh quy mô lớn.`
+      content: `Facebook Group đang trở thành "mỏ vàng" mới cho việc bán hàng và seeding thương hiệu. Tuy nhiên, rào cản lớn nhất của một Group mới chính là "Uy tín số đông". Khi một người dùng thấy gợi ý tham gia nhóm, con số đầu tiên họ nhìn vào chính là số lượng thành viên (Members count).
+
+Việc sử dụng dịch vụ tăng member group facebook giúp bạn vượt qua giai đoạn "con số không" đầy thử thách. Một Group có 10,000 thành viên sẽ tự động thu hút thêm hàng trăm thành viên thật mỗi ngày thông qua cơ chế đề xuất "Nhóm gợi ý" của Facebook. Đây gọi là hiệu ứng mạng (Network Effect). Ngoài ra, số lượng thành viên lớn còn giúp các bài đăng trong nhóm dễ dàng đạt Reach cao hơn và tăng điểm ưu tiên trong công cụ tìm kiếm của Facebook. 360TuongTac cung cấp lượng Member sạch, giúp group của bạn trông chuyên nghiệp, tin cậy và sẵn sàng cho các chiến dịch kinh doanh quy mô lớn.`
     },
     solution: {
       title: 'Giải pháp xây dựng Cộng đồng thần tốc',
@@ -37,9 +39,9 @@ export const tangMemberGroupFacebook: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Member Group Facebook',
       packages: [
-        { id: 'fb-mem-1k', name: 'Gói Khởi Tạo Nhóm', price: 150000, duration: '2-3 ngày', features: ['1000 Thành viên thật', 'Bảo hành rớt 30 ngày', 'Tăng uy tín tức thì'], productUrl: 'https://360tuongtac.com/product/tang-member-group' },
-        { id: 'fb-mem-5k', name: 'Gói Cộng Đồng Pro', price: 650000, duration: '5-7 ngày', features: ['5000 Thành viên chất lượng', 'Nick Việt hoạt động', 'Hỗ trợ đề xuất nhóm'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-member-group' },
-        { id: 'fb-mem-10k', name: 'Gói Mega Group', price: 1200000, duration: '10-15 ngày', features: ['10,000 Thành viên khủng', 'Server VIP ưu tiên', 'Bảo hành không tụt vĩnh viễn'], productUrl: 'https://360tuongtac.com/product/tang-member-group' }
+        { id: 'fb-mem-1k', name: 'Gói Khởi Tạo Nhóm', price: 150000, duration: '2-3 ngày', features: ['1000 Thành viên thật', 'Bảo hành rớt 30 ngày', 'Tăng uy tín tức thì'], productUrl: 'https://360tuongtac.com/service/facebook/tang-member' },
+        { id: 'fb-mem-5k', name: 'Gói Cộng Đồng Pro', price: 650000, duration: '5-7 ngày', features: ['5000 Thành viên chất lượng', 'Nick Việt hoạt động', 'Hỗ trợ đề xuất nhóm'], recommended: true, productUrl: 'https://360tuongtac.com/service/facebook/tang-member' },
+        { id: 'fb-mem-10k', name: 'Gói Mega Group', price: 1200000, duration: '10-15 ngày', features: ['10,000 Thành viên khủng', 'Server VIP ưu tiên', 'Bảo hành không tụt vĩnh viễn'], productUrl: 'https://360tuongtac.com/service/facebook/tang-member' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const tangMemberGroupFacebook: LandingPage = {
         { question: 'Nạp tiền vào tài khoản như thế nào?', answer: 'Hệ thống hỗ trợ nạp tiền tự động qua Ngân hàng và MoMo 24/7 trên website.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['cap-nhat-thuat-toan-tiktok-thang-4-2026', 'tin-hieu-tiktok-la-gi', 'seeding-comment-tiktok-hieu-qua'],
 };

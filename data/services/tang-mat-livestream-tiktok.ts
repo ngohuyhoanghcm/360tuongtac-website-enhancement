@@ -23,7 +23,11 @@ export const tangMatLivestreamTiktok: LandingPage = {
     },
     education: {
       title: 'Hiểu đúng về Thuật toán Phân phối Livestream TikTok',
-      content: `Thuật toán TikTok vận hành dựa trên cơ chế "Phễu thử nghiệm". Khi bạn bắt đầu phát trực tiếp, hệ thống sẽ đưa link live của bạn đến một nhóm nhỏ người dùng (khoảng 100-200 người). Tại đây, TikTok đo lường 2 chỉ số sống còn: Concurrent Viewers (Số người xem cùng lúc) và Average Watch Time (Thời gian xem trung bình).\n\nNếu trong 10 phút đầu, chỉ số mắt xem tăng trưởng ổn định và có sự tương tác, thuật toán sẽ hiểu đây là một buổi live chất lượng và tiếp tục mở rộng phễu đến 1,000, 5,000 người dùng tiếp theo. Ngược lại, nếu mắt xem tụt nhanh và vắng vẻ, TikTok sẽ ngừng phân phối ngay lập tức.\n\nDịch vụ tăng mắt livestream tiktok đóng vai trò là "mồi lửa" quan trọng. Nó giúp duy trì một con số ổn định, tạo ra hiệu ứng Social Proof (Bằng chứng xã hội). Theo tâm lý học đám đông, người dùng có xu hướng dừng lại xem lâu hơn ở những nơi có đông người. Điều này gián tiếp làm tăng "Average Watch Time" từ người dùng thật, giúp TikTok nhận diện tín hiệu tốt và đẩy livestream của bạn lên TAB XU HƯỚNG một cách tự nhiên. Đây không chỉ là việc mua viewer livestream tiktok, mà là chiến thuật kích hoạt bộ máy đề xuất của nền tảng.`
+      content: `Thuật toán TikTok vận hành dựa trên cơ chế "Phễu thử nghiệm". Khi bạn bắt đầu phát trực tiếp, hệ thống sẽ đưa link live của bạn đến một nhóm nhỏ người dùng (khoảng 100-200 người). Tại đây, TikTok đo lường 2 chỉ số sống còn: Concurrent Viewers (Số người xem cùng lúc) và Average Watch Time (Thời gian xem trung bình).
+
+Nếu trong 10 phút đầu, chỉ số mắt xem tăng trưởng ổn định và có sự tương tác, thuật toán sẽ hiểu đây là một buổi live chất lượng và tiếp tục mở rộng phễu đến 1,000, 5,000 người dùng tiếp theo. Ngược lại, nếu mắt xem tụt nhanh và vắng vẻ, TikTok sẽ ngừng phân phối ngay lập tức.
+
+Dịch vụ tăng mắt livestream tiktok đóng vai trò là "mồi lửa" quan trọng. Nó giúp duy trì một con số ổn định, tạo ra hiệu ứng Social Proof (Bằng chứng xã hội). Theo tâm lý học đám đông, người dùng có xu hướng dừng lại xem lâu hơn ở những nơi có đông người. Điều này gián tiếp làm tăng "Average Watch Time" từ người dùng thật, giúp TikTok nhận diện tín hiệu tốt và đẩy livestream của bạn lên TAB XU HƯỚNG một cách tự nhiên. Đây không chỉ là việc mua viewer livestream tiktok, mà là chiến thuật kích hoạt bộ máy đề xuất của nền tảng.`
     },
     solution: {
       title: 'Hệ thống tăng mắt Livestream chuẩn SEO & An toàn',
@@ -37,9 +41,9 @@ export const tangMatLivestreamTiktok: LandingPage = {
     pricing: {
       title: 'Bảng giá dịch vụ Tăng mắt TikTok',
       packages: [
-        { id: 'tt-live-basic', name: 'Gói Trải Nghiệm', price: 25000, duration: '60 phút', features: ['50 Mắt xem ổn định', 'Kích hoạt sau 5 phút', 'Hỗ trợ 24/7'], productUrl: 'https://360tuongtac.com/product/tang-mat-tiktok-live' },
-        { id: 'tt-live-pro', name: 'Gói Bán Hàng PRO', price: 120000, duration: '120 phút', features: ['200 Mắt xem ổn định', 'Ưu tiên luồng server mạnh', 'Tặng kèm seeding mồi', 'Bảo hành rớt mắt'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-mat-tiktok-live' },
-        { id: 'tt-live-vip', name: 'Gói Live Brand', price: 450000, duration: '240 phút', features: ['500+ Mắt xem', 'Sử dụng server riêng biệt', 'Phân phối viewer theo vùng', 'Quản lý chiến dịch riêng'], productUrl: 'https://360tuongtac.com/product/tang-mat-tiktok-live' }
+        { id: 'tt-live-basic', name: 'Gói Trải Nghiệm', price: 25000, duration: '60 phút', features: ['50 Mắt xem ổn định', 'Kích hoạt sau 5 phút', 'Hỗ trợ 24/7'], productUrl: 'https://360tuongtac.com/service/tiktok/livestream-views' },
+        { id: 'tt-live-pro', name: 'Gói Bán Hàng PRO', price: 120000, duration: '120 phút', features: ['200 Mắt xem ổn định', 'Ưu tiên luồng server mạnh', 'Tặng kèm seeding mồi', 'Bảo hành rớt mắt'], recommended: true, productUrl: 'https://360tuongtac.com/service/tiktok/livestream-views' },
+        { id: 'tt-live-vip', name: 'Gói Live Brand', price: 450000, duration: '240 phút', features: ['500+ Mắt xem', 'Sử dụng server riêng biệt', 'Phân phối viewer theo vùng', 'Quản lý chiến dịch riêng'], productUrl: 'https://360tuongtac.com/service/tiktok/livestream-views' }
       ]
     },
     process: {
@@ -70,5 +74,7 @@ export const tangMatLivestreamTiktok: LandingPage = {
         { question: 'Chính sách hoàn tiền như thế nào?', answer: 'Nếu hệ thống lỗi không lên mắt, phí dịch vụ sẽ được tự động hoàn lại vào số dư tài khoản của bạn trên website để bạn có thể sử dụng cho đơn sau.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['seeding-la-gi', 'case-study-tiktok-shop-thanh-cong', 'so-sanh-dich-vu-tang-viewer-tiktok'],
 };

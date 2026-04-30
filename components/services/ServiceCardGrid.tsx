@@ -17,6 +17,15 @@ const ICONS: Record<string, any> = {
   Globe
 };
 
+const PLATFORM_COLORS: Record<string, string> = {
+  TikTok: 'text-cyan-400',
+  Facebook: 'text-blue-500',
+  Instagram: 'text-pink-500',
+  YouTube: 'text-red-500',
+  Website: 'text-orange-500',
+  'Khác': 'text-[#FF8C00]'
+};
+
 interface ServiceCardGridProps {
   services: ServiceItem[];
 }
@@ -82,6 +91,11 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
 
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#FF2E63]/0 to-[#FF2E63]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                {/* Background Icon */}
+                <div className={`absolute -bottom-10 -right-10 opacity-[0.02] group-hover:opacity-[0.06] group-hover:scale-110 transition-all duration-700 pointer-events-none ${PLATFORM_COLORS[service.platform] || 'text-white'}`}>
+                  <Icon size={180} />
+                </div>
               </div>
             </motion.div>
           );

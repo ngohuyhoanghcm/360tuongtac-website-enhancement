@@ -23,7 +23,9 @@ export const tangViewVideoTiktok: LandingPage = {
     },
     education: {
       title: 'Cơ chế vận hành của phễu View TikTok',
-      content: `Thuật toán TikTok là tập hợp của những phễu phân phối nối tiếp nhau. Khi bạn đăng video, TikTok sẽ đưa cho phễu 1 (khoảng 200-300 view). Tại đây, AI sẽ đo lường các chỉ số tương tác. Nếu các chỉ số như Like/Share đạt ngưỡng, TikTok sẽ mở phễu 2 (vài nghìn view), rồi đến phễu 3 (vài chục nghìn view) và cuối cùng là triệu view (Xu hướng).\n\nTuy nhiên, rất nhiều video chất lượng bị "kẹt" ở phễu 200 view do không đạt đủ tốc độ tương tác ban đầu. Dịch vụ tăng view video tiktok giúp bạn "phá vỡ" ngưỡng cửa này. Việc có hàng chục nghìn view ban đầu tạo ra hiệu ứng mồi cực mạnh. Người dùng khi thấy video có sẵn nhiều view sẽ có xu hướng tò mò xem hết video đó (Tăng completion rate). AI của TikTok sẽ nhận diện đây là tín hiệu tích cực và tự động đẩy video của bạn sang những phễu phân phối lớn hơn. Đây chính là bí mật đằng sau những video "bỗng dưng triệu view" sau một đêm.`
+      content: `Thuật toán TikTok là tập hợp của những phễu phân phối nối tiếp nhau. Khi bạn đăng video, TikTok sẽ đưa cho phễu 1 (khoảng 200-300 view). Tại đây, AI sẽ đo lường các chỉ số tương tác. Nếu các chỉ số như Like/Share đạt ngưỡng, TikTok sẽ mở phễu 2 (vài nghìn view), rồi đến phễu 3 (vài chục nghìn view) và cuối cùng là triệu view (Xu hướng).
+
+Tuy nhiên, rất nhiều video chất lượng bị "kẹt" ở phễu 200 view do không đạt đủ tốc độ tương tác ban đầu. Dịch vụ tăng view video tiktok giúp bạn "phá vỡ" ngưỡng cửa này. Việc có hàng chục nghìn view ban đầu tạo ra hiệu ứng mồi cực mạnh. Người dùng khi thấy video có sẵn nhiều view sẽ có xu hướng tò mò xem hết video đó (Tăng completion rate). AI của TikTok sẽ nhận diện đây là tín hiệu tích cực và tự động đẩy video của bạn sang những phễu phân phối lớn hơn. Đây chính là bí mật đằng sau những video "bỗng dưng triệu view" sau một đêm.`
     },
     solution: {
       title: 'Công cụ kích hoạt xu hướng tự động',
@@ -37,9 +39,9 @@ export const tangViewVideoTiktok: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng View TikTok siêu rẻ',
       packages: [
-        { id: 'tt-view-10k', name: 'Gói Phá Ngưỡng 200', price: 15000, duration: 'Sử dụng ngay', features: ['10,000 View cho 1 video', 'Khởi chạy sau 1 phút', 'Duy trì đề xuất'], productUrl: 'https://360tuongtac.com/product/tang-view-tiktok' },
-        { id: 'tt-view-50k', name: 'Gói Tiếp Cận Mạnh', price: 65000, duration: 'Dưới 1 giờ', features: ['50,000 View cực chất', 'Phân phối luồng nhanh', 'Hỗ trợ lên xu hướng'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-view-tiktok' },
-        { id: 'tt-view-500k', name: 'Gói Triệu View', price: 450000, duration: 'Theo yêu cầu', features: ['500,000 View bùng nổ', 'Tặng kèm 500 Like mồi', 'Đảm bảo uy tín profile'], productUrl: 'https://360tuongtac.com/product/tang-view-tiktok' }
+        { id: 'tt-view-10k', name: 'Gói Phá Ngưỡng 200', price: 15000, duration: 'Sử dụng ngay', features: ['10,000 View cho 1 video', 'Khởi chạy sau 1 phút', 'Duy trì đề xuất'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-views' },
+        { id: 'tt-view-50k', name: 'Gói Tiếp Cận Mạnh', price: 65000, duration: 'Dưới 1 giờ', features: ['50,000 View cực chất', 'Phân phối luồng nhanh', 'Hỗ trợ lên xu hướng'], recommended: true, productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-views' },
+        { id: 'tt-view-500k', name: 'Gói Triệu View', price: 450000, duration: 'Theo yêu cầu', features: ['500,000 View bùng nổ', 'Tặng kèm 500 Like mồi', 'Đảm bảo uy tín profile'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-views' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const tangViewVideoTiktok: LandingPage = {
         { question: 'Có cần bật tính năng gì trên điện thoại không?', answer: 'Không. Bạn chỉ cần đảm bảo video để công khai là hệ thống có thể chạy được.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['tai-sao-livestream-tiktok-it-nguoi-xem', 'case-study-tiktok-shop-thanh-cong', 'seeding-comment-tiktok-hieu-qua'],
 };

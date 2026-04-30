@@ -8,11 +8,17 @@ interface ServiceHeroProps {
   badge: string;
   title: string;
   description: string;
+  productUrl?: string;
+  serviceSlug?: string;
 }
 
-export default function ServiceHero({ badge, title, description }: ServiceHeroProps) {
+export default function ServiceHero({ badge, title, description, productUrl, serviceSlug }: ServiceHeroProps) {
+  const ctaUrl = productUrl 
+    ? `${productUrl}?utm_source=grow.360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=hero_cta`
+    : "http://360tuongtac.com/auth/login";
+
   return (
-    <section className="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden border-b border-white/5">
+    <section className="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden border-b border-white/5">
       {/* Background Orbs */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#FF8C00]/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#FF2E63]/10 rounded-full blur-[120px] -z-10 animate-pulse delay-700"></div>
@@ -48,7 +54,7 @@ export default function ServiceHero({ badge, title, description }: ServiceHeroPr
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Link 
-                href="http://360tuongtac.com/auth/login" 
+                href={ctaUrl} 
                 className="px-12 py-5 rounded-2xl bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-black text-xl shadow-[0_0_40px_rgba(255,140,0,0.4)] hover:shadow-[0_0_50px_rgba(255,140,0,0.6)] transition-all duration-300 antialiased block"
               >
                 Đặt Hàng Ngay
@@ -57,6 +63,7 @@ export default function ServiceHero({ badge, title, description }: ServiceHeroPr
             
             <Link 
                href="https://zalo.me/0388009669" 
+               target="_blank" rel="noopener noreferrer"
                className="px-12 py-5 rounded-2xl glass-panel border border-white/10 text-white font-black text-xl hover:bg-white/5 transition-all duration-300 antialiased flex items-center gap-3"
             >
               <MessageSquare size={24} className="text-[#00E5FF]" />

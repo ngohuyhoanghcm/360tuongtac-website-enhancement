@@ -23,7 +23,9 @@ export const tangMatLivestreamFacebook: LandingPage = {
     },
     education: {
       title: 'Tác động của Viewer đối với Thuật toán đề xuất Livestream Facebook',
-      content: `Facebook ưu tiên hiển thị nội dung dựa trên chỉ số "Liveness" (Độ sôi động). Khi bạn bắt đầu Live, Facebook sẽ theo dõi 2 phút đầu tiên. Nếu có lượng người xem lớn ngay lập tức, thuật toán sẽ hiểu đây là một sự kiện quan trọng và đẩy thông báo "Đang phát trực tiếp" đến toàn bộ Fanpage và những người dùng có hành vi tương tự.\n\nDịch vụ tăng mắt livestream facebook của 360TuongTac cung cấp lượng "Mắt mồi" ổn định. Điều này tạo ra Bằng chứng xã hội (Social Proof) cực mạnh. Khách hàng thực khi thấy một buổi live có 500-1000 người xem sẽ có xu hướng tò mò, dừng lại xem lâu hơn, từ đó tăng thời gian xem trung bình. Đây chính là tín hiệu vàng để Facebook tiếp tục duy trì bài live ở vị trí ưu tiên trên mục "Watch" và Newsfeed. Việc tăng mắt không chỉ là con số ảo, mà là công cụ để "giữ chân" người thật lâu nhất có thể, tạo tiền đề để bùng nổ comment và đơn hàng.`
+      content: `Facebook ưu tiên hiển thị nội dung dựa trên chỉ số "Liveness" (Độ sôi động). Khi bạn bắt đầu Live, Facebook sẽ theo dõi 2 phút đầu tiên. Nếu có lượng người xem lớn ngay lập tức, thuật toán sẽ hiểu đây là một sự kiện quan trọng và đẩy thông báo "Đang phát trực tiếp" đến toàn bộ Fanpage và những người dùng có hành vi tương tự.
+
+Dịch vụ tăng mắt livestream facebook của 360TuongTac cung cấp lượng "Mắt mồi" ổn định. Điều này tạo ra Bằng chứng xã hội (Social Proof) cực mạnh. Khách hàng thực khi thấy một buổi live có 500-1000 người xem sẽ có xu hướng tò mò, dừng lại xem lâu hơn, từ đó tăng thời gian xem trung bình. Đây chính là tín hiệu vàng để Facebook tiếp tục duy trì bài live ở vị trí ưu tiên trên mục "Watch" và Newsfeed. Việc tăng mắt không chỉ là con số ảo, mà là công cụ để "giữ chân" người thật lâu nhất có thể, tạo tiền đề để bùng nổ comment và đơn hàng.`
     },
     solution: {
       title: 'Hệ thống tăng mắt Live chuyên nghiệp 24/7',
@@ -37,9 +39,9 @@ export const tangMatLivestreamFacebook: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Mắt Facebook Live',
       packages: [
-        { id: 'fb-live-50', name: 'Gói Mini Shop', price: 30000, duration: '60 phút', features: ['50 Mắt xem ổn định', 'Tự động kích hoạt', 'Hỗ trợ 24/7'], productUrl: 'https://360tuongtac.com/product/tang-mat-fb-live' },
-        { id: 'fb-live-200', name: 'Gói Pro Seller', price: 110000, duration: '120 phút', features: ['200 Mắt xem uy tín', 'Server ưu tiên cao', 'Tặng seeding mồi'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-mat-fb-live' },
-        { id: 'fb-live-1k', name: 'Gói Mega Brand', price: 450000, duration: '180 phút', features: ['1000 Mắt xem khủng', 'Luồng server riêng VIP', 'Bảo hành rớt mắt 100%'], productUrl: 'https://360tuongtac.com/product/tang-mat-fb-live' }
+        { id: 'fb-live-50', name: 'Gói Mini Shop', price: 30000, duration: '60 phút', features: ['50 Mắt xem ổn định', 'Tự động kích hoạt', 'Hỗ trợ 24/7'], productUrl: 'https://360tuongtac.com/service/facebook/tang-mat-livestream' },
+        { id: 'fb-live-200', name: 'Gói Pro Seller', price: 110000, duration: '120 phút', features: ['200 Mắt xem uy tín', 'Server ưu tiên cao', 'Tặng seeding mồi'], recommended: true, productUrl: 'https://360tuongtac.com/service/facebook/tang-mat-livestream' },
+        { id: 'fb-live-1k', name: 'Gói Mega Brand', price: 450000, duration: '180 phút', features: ['1000 Mắt xem khủng', 'Luồng server riêng VIP', 'Bảo hành rớt mắt 100%'], productUrl: 'https://360tuongtac.com/service/facebook/tang-mat-livestream' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const tangMatLivestreamFacebook: LandingPage = {
         { question: 'Nạp tiền bằng phương thức nào?', answer: 'Hỗ trợ nạp tiền qua Ngân hàng và MoMo tự động trên website 360TuongTac.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['tai-sao-livestream-tiktok-it-nguoi-xem', 'case-study-tang-viewer-tiktok', 'cap-nhat-thuat-toan-tiktok-thang-4-2026'],
 };

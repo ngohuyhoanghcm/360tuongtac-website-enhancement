@@ -23,7 +23,11 @@ export const tangLikeTiktok: LandingPage = {
     },
     education: {
       title: 'Vai trò của lượt "Tim" đối với thuật toán FYP',
-      content: `Nút "Like" (Tim) trên TikTok là đơn vị đo lường cảm xúc quan trọng nhất. Thuật toán TikTok sử dụng một chỉ số gọi là Engagement Rate (Tỉ lệ tương tác) để quyết định phân phối video. Trong đó, công thức phổ biến là: (Like + Comment + Share) / Views.\n\nKhi video của bạn nhận được lượng tim lớn trong 30-60 phút đầu tiên, AI của TikTok sẽ đánh giá đây là nội dung "High Quality" (Chất lượng cao). Hệ thống sẽ ngay lập tức mở rộng tệp người xem sang những nhóm người có hành vi tương tự. Đặc biệt, lượng tim lớn tạo ra "Hiệu ứng lôi kéo": Người xem theo bản năng sẽ tò mò và dừng lại xem lâu hơn ở những video đã có hàng nghìn lượt tim, từ đó tăng thời gian xem (Watch time) - yếu tố sống còn để viral.\n\nDịch vụ tăng like tiktok của chúng tôi giúp bạn xây dựng nền móng tương tác ban đầu. Nó không chỉ là con số ảo, mà là công cụ để "đánh lừa" thuật toán một cách thông minh, giúp video của bạn thoát khỏi vùng "tương tác thấp" và bước vào luồng đề xuất xu hướng của nền tảng.`
+      content: `Nút "Like" (Tim) trên TikTok là đơn vị đo lường cảm xúc quan trọng nhất. Thuật toán TikTok sử dụng một chỉ số gọi là Engagement Rate (Tỉ lệ tương tác) để quyết định phân phối video. Trong đó, công thức phổ biến là: (Like + Comment + Share) / Views.
+
+Khi video của bạn nhận được lượng tim lớn trong 30-60 phút đầu tiên, AI của TikTok sẽ đánh giá đây là nội dung "High Quality" (Chất lượng cao). Hệ thống sẽ ngay lập tức mở rộng tệp người xem sang những nhóm người có hành vi tương tự. Đặc biệt, lượng tim lớn tạo ra "Hiệu ứng lôi kéo": Người xem theo bản năng sẽ tò mò và dừng lại xem lâu hơn ở những video đã có hàng nghìn lượt tim, từ đó tăng thời gian xem (Watch time) - yếu tố sống còn để viral.
+
+Dịch vụ tăng like tiktok của chúng tôi giúp bạn xây dựng nền móng tương tác ban đầu. Nó không chỉ là con số ảo, mà là công cụ để "đánh lừa" thuật toán một cách thông minh, giúp video của bạn thoát khỏi vùng "tương tác thấp" và bước vào luồng đề xuất xu hướng của nền tảng.`
     },
     solution: {
       title: 'Hệ thống tăng Tim tự động cho mọi Video',
@@ -37,9 +41,9 @@ export const tangLikeTiktok: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Tim TikTok tốt nhất',
       packages: [
-        { id: 'tt-like-100', name: 'Gói Video Nhỏ', price: 10000, duration: 'Tức thì', features: ['100 Like người dùng Việt', 'Tăng ngay sau 5 phút', 'Không cần mật khẩu'], productUrl: 'https://360tuongtac.com/product/tang-like-tiktok' },
-        { id: 'tt-like-1k', name: 'Gói Viral Video', price: 90000, duration: 'Hàn thành nhanh', features: ['1000 Like chất lượng cao', 'Hỗ trợ lên xu hướng', 'Bảo hành ổn định'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-like-tiktok' },
-        { id: 'tt-like-5k', name: 'Gói Chiến Dịch Lớn', price: 420000, duration: 'Theo yêu cầu', features: ['5000 Like cực VIP', 'Server riêng biệt', 'Hỗ trợ tư vấn seeding'], productUrl: 'https://360tuongtac.com/product/tang-like-tiktok' }
+        { id: 'tt-like-100', name: 'Gói Video Nhỏ', price: 10000, duration: 'Tức thì', features: ['100 Like người dùng Việt', 'Tăng ngay sau 5 phút', 'Không cần mật khẩu'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-likes' },
+        { id: 'tt-like-1k', name: 'Gói Viral Video', price: 90000, duration: 'Hàn thành nhanh', features: ['1000 Like chất lượng cao', 'Hỗ trợ lên xu hướng', 'Bảo hành ổn định'], recommended: true, productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-likes' },
+        { id: 'tt-like-5k', name: 'Gói Chiến Dịch Lớn', price: 420000, duration: 'Theo yêu cầu', features: ['5000 Like cực VIP', 'Server riêng biệt', 'Hỗ trợ tư vấn seeding'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-likes' }
       ]
     },
     process: {
@@ -69,5 +73,7 @@ export const tangLikeTiktok: LandingPage = {
         { question: 'Làm thế nào để nạp tiền vào tài khoản?', answer: 'Hệ thống hỗ trợ nạp tiền qua Ngân hàng và MoMo tự động 24/7. Bạn nạp xong là có thể dùng dịch vụ ngay.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['thuat-toan-tiktok-2025', 'seeding-la-gi', 'tin-hieu-tiktok-la-gi'],
 };

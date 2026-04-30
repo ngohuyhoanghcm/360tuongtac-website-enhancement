@@ -23,7 +23,9 @@ export const seedingCommentTiktok: LandingPage = {
     },
     education: {
       title: 'Seeding Comment - Đòn bẩy tâm lý trong thuật toán TikTok',
-      content: `Trong thế giới của TikTok, "Sự tương tác" (Engagement) là thước đo quan trọng nhất cho sức sống của một video. Tuy nhiên, tâm lý người dùng Việt Nam thường có hành vi "ngại ngần là người đầu tiên". Nếu một video không có bình luận nào, dù khách hàng rất thích sản phẩm, họ cũng thường lướt qua thay vì để lại câu hỏi.\n\nSeeding comment tiktok đóng vai trò phá vỡ tảng băng này. Khi thuật toán TikTok nhận thấy một video có lượng bình luận tăng đột biến, nó sẽ hiểu rằng nội dung này đang tạo ra sự tranh luận hoặc quan tâm lớn (Social Signal). Hệ thống sẽ ngay lập tức đẩy video đó tiếp cận nhiều người dùng hơn. Đặc biệt, việc seeding những câu hỏi như "Shop ở đâu?", "Giá bao nhiêu?", "Dùng tốt lắm shop ơi" sẽ tạo ra hiệu ứng xác nhận xã hội (Social Proof). Khách hàng thật khi thấy có nhiều người hỏi và feedback tốt sẽ tự tin hơn trong việc ra quyết định mua hàng. 360TuongTac giúp bạn thiết kế những kịch bản seeding tự nhiên nhất, biến những lượt xem vô danh thành những đơn hàng thực tế.`
+      content: `Trong thế giới của TikTok, "Sự tương tác" (Engagement) là thước đo quan trọng nhất cho sức sống của một video. Tuy nhiên, tâm lý người dùng Việt Nam thường có hành vi "ngại ngần là người đầu tiên". Nếu một video không có bình luận nào, dù khách hàng rất thích sản phẩm, họ cũng thường lướt qua thay vì để lại câu hỏi.
+
+Seeding comment tiktok đóng vai trò phá vỡ tảng băng này. Khi thuật toán TikTok nhận thấy một video có lượng bình luận tăng đột biến, nó sẽ hiểu rằng nội dung này đang tạo ra sự tranh luận hoặc quan tâm lớn (Social Signal). Hệ thống sẽ ngay lập tức đẩy video đó tiếp cận nhiều người dùng hơn. Đặc biệt, việc seeding những câu hỏi như "Shop ở đâu?", "Giá bao nhiêu?", "Dùng tốt lắm shop ơi" sẽ tạo ra hiệu ứng xác nhận xã hội (Social Proof). Khách hàng thật khi thấy có nhiều người hỏi và feedback tốt sẽ tự tin hơn trong việc ra quyết định mua hàng. 360TuongTac giúp bạn thiết kế những kịch bản seeding tự nhiên nhất, biến những lượt xem vô danh thành những đơn hàng thực tế.`
     },
     solution: {
       title: 'Dịch vụ Seeding chuyên nghiệp từ 360TuongTac',
@@ -37,9 +39,9 @@ export const seedingCommentTiktok: LandingPage = {
     pricing: {
       title: 'Bảng giá Seeding Comment TikTok',
       packages: [
-        { id: 'tt-seed-basic', name: 'Gói Cơ Bản', price: 20000, duration: 'Sử dụng ngay', features: ['20 Comment tùy chọn', 'Hệ thống nick Việt', 'Cài đặt nhanh 5 phút'], productUrl: 'https://360tuongtac.com/product/seeding-comment-tiktok' },
-        { id: 'tt-seed-pro', name: 'Gói Bán Hàng', price: 85000, duration: 'Duy trì lâu dài', features: ['100 Comment kịch bản', 'Có dãn cách tự nhiên', 'Tặng 200 like comment'], recommended: true, productUrl: 'https://360tuongtac.com/product/seeding-comment-tiktok' },
-        { id: 'tt-seed-vip', name: 'Gói Chiến Dịch', price: 350000, duration: 'Theo yêu cầu', features: ['500 Comment VIP', 'Hỗ trợ soạn kịch bản', 'Tư vấn hướng dư luận'], productUrl: 'https://360tuongtac.com/product/seeding-comment-tiktok' }
+        { id: 'tt-seed-basic', name: 'Gói Cơ Bản', price: 20000, duration: 'Sử dụng ngay', features: ['20 Comment tùy chọn', 'Hệ thống nick Việt', 'Cài đặt nhanh 5 phút'], productUrl: 'https://360tuongtac.com/service/tiktok/custom-comment' },
+        { id: 'tt-seed-pro', name: 'Gói Bán Hàng', price: 85000, duration: 'Duy trì lâu dài', features: ['100 Comment kịch bản', 'Có dãn cách tự nhiên', 'Tặng 200 like comment'], recommended: true, productUrl: 'https://360tuongtac.com/service/tiktok/custom-comment' },
+        { id: 'tt-seed-vip', name: 'Gói Chiến Dịch', price: 350000, duration: 'Theo yêu cầu', features: ['500 Comment VIP', 'Hỗ trợ soạn kịch bản', 'Tư vấn hướng dư luận'], productUrl: 'https://360tuongtac.com/service/tiktok/custom-comment' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const seedingCommentTiktok: LandingPage = {
         { question: 'Tôi có cần cấp mật khẩu kênh không?', answer: 'Không, chỉ cần link video công khai là chúng tôi có thể triển khai được.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['seeding-comment-tiktok-hieu-qua', 'cach-tang-tuong-tac-tiktok-hieu-qua', 'huong-dan-seeding-tiktok-shop-tu-a-z'],
 };

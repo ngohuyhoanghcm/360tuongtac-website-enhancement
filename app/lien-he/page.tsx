@@ -1,88 +1,134 @@
-import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+"use client";
+
+import { Phone, Mail, MapPin } from 'lucide-react';
+import ContactForm from './ContactForm';
+import { motion } from 'motion/react';
 
 export default function Contact() {
   return (
-    <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12">
-      <div className="mb-16 text-center md:text-left">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse"></span>
-          <span className="font-stat text-xs font-semibold text-[#00E5FF] tracking-wider uppercase">Sẵn sàng hỗ trợ 24/7</span>
-        </div>
-        <h1 className="font-h1 text-4xl md:text-5xl font-extrabold text-white mb-6">Liên hệ với <span className="text-gradient">chúng tôi</span></h1>
-        <p className="font-body text-lg text-slate-400 max-w-2xl md:mx-0 mx-auto">
-          Đội ngũ chuyên gia của 360 Tương Tác luôn sẵn sàng giải đáp mọi thắc mắc và đồng hành cùng chiến dịch tăng trưởng của bạn.
-        </p>
+    <div className="relative min-h-screen bg-[#0a0a0f] overflow-hidden py-24 mt-16 sm:mt-24">
+      {/* Background Gradients & Mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#FF8C00]/10 blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#FF2E63]/10 blur-[120px]" />
+        <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-[#8B5CF6]/10 blur-[100px]" />
+        <div className="absolute inset-0 bg-[url('/mesh-pattern.png')] opacity-[0.03] mix-blend-overlay"></div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-5 flex flex-col gap-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="glass-card p-6 rounded-2xl group hover:bg-white/5 transition-all">
-              <div className="w-12 h-12 rounded-xl bg-[#6C63FF]/20 flex items-center justify-center mb-4">
-                <Phone className="text-[#c4c0ff]" />
-              </div>
-              <h3 className="font-h1 text-xl font-bold text-white mb-1">Hotline</h3>
-              <p className="font-body text-slate-400 text-sm">0900-123-456</p>
-            </div>
-            <div className="glass-card p-6 rounded-2xl group hover:bg-white/5 transition-all">
-              <div className="w-12 h-12 rounded-xl bg-[#00E5FF]/20 flex items-center justify-center mb-4">
-                <Mail className="text-[#00daf3]" />
-              </div>
-              <h3 className="font-h1 text-xl font-bold text-white mb-1">Email</h3>
-              <p className="font-body text-slate-400 text-sm">support@360tuongtac.com</p>
-            </div>
-            <div className="glass-card p-6 rounded-2xl col-span-1 sm:col-span-2 group hover:bg-white/5 transition-all">
-              <div className="w-12 h-12 rounded-xl bg-[#FF6B6B]/20 flex items-center justify-center mb-4">
-                <MapPin className="text-[#FF6B6B]" />
-              </div>
-              <h3 className="font-h1 text-xl font-bold text-white mb-1">Văn phòng</h3>
-              <p className="font-body text-slate-400 text-sm">Tầng 25, Keangnam Landmark Tower, Phạm Hùng, Hà Nội</p>
-            </div>
+      <div className="relative max-w-[1440px] mx-auto px-6 lg:px-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 mb-6 shadow-[0_0_20px_rgba(255,140,0,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-[#FF8C00] animate-pulse shadow-[0_0_10px_#FF8C00]"></span>
+            <span className="font-stat text-xs font-semibold text-[#FF8C00] tracking-wider uppercase">Sẵn sàng hỗ trợ 24/7</span>
           </div>
+          <h1 className="font-h1 text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">KẾT NỐI <span className="bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] text-transparent bg-clip-text">BỨT PHÁ</span></h1>
+          <p className="font-body text-xl text-slate-400 max-w-2xl mx-auto font-medium">
+            Mở khóa tiềm năng tăng trưởng với hệ sinh thái 360TuongTac. Đội ngũ chuyên gia luôn sẵn sàng giải đáp mọi thắc mắc của bạn.
+          </p>
+        </motion.div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#" className="flex-1 flex items-center justify-center gap-3 py-4 glass-card rounded-2xl hover:bg-white/10 transition-all border-[#6C63FF]/30">
-              <span className="font-h1 font-bold text-white">Zalo Chat</span>
-            </a>
-            <a href="#" className="flex-1 flex items-center justify-center gap-3 py-4 glass-card rounded-2xl hover:bg-white/10 transition-all border-[#00E5FF]/30">
-              <span className="font-h1 font-bold text-white">Telegram Support</span>
-            </a>
-          </div>
-        </div>
+        {/* Huge Glassmorphism Wrapper */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl p-6 md:p-8 lg:p-12 relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none"></div>
+          
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            {/* LEFT SIDE: Info */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-12">
+              <div className="space-y-6">
+                
+                {/* Social Action Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-2">
+                  <a href="https://zalo.me/0388009669" target="_blank" rel="noreferrer" className="relative group overflow-hidden rounded-2xl p-[1px]">
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#0068FF] to-[#00E5FF] rounded-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></span>
+                    <div className="relative flex items-center justify-center gap-2 py-3 bg-[#13121b] rounded-2xl transition-all duration-500 group-hover:bg-[#13121b]/80 backdrop-blur-sm h-full">
+                      <span className="font-h1 font-bold text-white text-sm tracking-wide text-center">Zalo<br/>Tư Vấn</span>
+                    </div>
+                  </a>
+                  
+                  <a href="https://zalo.me/g/stizun489" target="_blank" rel="noreferrer" className="relative group overflow-hidden rounded-2xl p-[1px]">
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] to-[#0068FF] rounded-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></span>
+                    <div className="relative flex items-center justify-center gap-2 py-3 bg-[#13121b] rounded-2xl transition-all duration-500 group-hover:bg-[#13121b]/80 backdrop-blur-sm h-full">
+                      <span className="font-h1 font-bold text-white text-sm tracking-wide text-center">Nhóm<br/>Zalo</span>
+                    </div>
+                  </a>
 
-        <div className="lg:col-span-7">
-          <div className="glass-card p-8 lg:p-12 rounded-3xl h-full border-t border-l border-[#6C63FF]/20 flex flex-col justify-center bg-[#13121b]/60">
-            <h2 className="font-h1 text-3xl font-bold text-white mb-8">Gửi tin nhắn cho chúng tôi</h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="font-stat text-xs font-semibold text-slate-400 tracking-wider">HỌ VÀ TÊN</label>
-                  <input type="text" placeholder="Nguyễn Văn A" className="w-full bg-[#0e0d16] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF] transition-all font-body" />
+                  <a href="https://t.me/CSKH360TuongTac" target="_blank" rel="noreferrer" className="relative group overflow-hidden rounded-2xl p-[1px]">
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#229ED9] to-[#8B5CF6] rounded-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></span>
+                    <div className="relative flex items-center justify-center gap-2 py-3 bg-[#13121b] rounded-2xl transition-all duration-500 group-hover:bg-[#13121b]/80 backdrop-blur-sm h-full">
+                      <span className="font-h1 font-bold text-white text-sm tracking-wide text-center">Telegram<br/>CSKH</span>
+                    </div>
+                  </a>
                 </div>
-                <div className="space-y-2">
-                  <label className="font-stat text-xs font-semibold text-slate-400 tracking-wider">SỐ ĐIỆN THOẠI</label>
-                  <input type="tel" placeholder="09xx xxx xxx" className="w-full bg-[#0e0d16] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF] transition-all font-body" />
+
+                {/* 3D Isometric Styled Cards */}
+                <div className="group relative bg-[#13121b]/80 border border-white/10 p-6 rounded-3xl hover:border-[#FF8C00]/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(255,140,0,0.2)] hover:-translate-y-1">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C00]/0 to-[#FF8C00]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="flex items-center gap-6 relative z-10">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-gradient-to-br from-[#FF8C00] to-[#FF2E63] p-[1px] shadow-[0_10px_20px_rgba(255,140,0,0.3)] transform group-hover:scale-110 transition-transform duration-500">
+                      <div className="w-full h-full bg-[#13121b] rounded-2xl flex items-center justify-center">
+                        <Phone className="text-[#FF8C00] drop-shadow-[0_0_8px_rgba(255,140,0,0.8)]" size={28} />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-stat text-sm font-bold text-slate-400 tracking-wider uppercase mb-1">Hotline VIP</h3>
+                      <p className="font-h1 font-bold text-2xl text-white group-hover:text-[#FF8C00] transition-colors">0388.00.9669</p>
+                    </div>
+                  </div>
                 </div>
+
+                <div className="group relative bg-[#13121b]/80 border border-white/10 p-6 rounded-3xl hover:border-[#FF2E63]/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(255,46,99,0.2)] hover:-translate-y-1">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E63]/0 to-[#FF2E63]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="flex items-center gap-6 relative z-10">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-gradient-to-br from-[#FF2E63] to-[#8B5CF6] p-[1px] shadow-[0_10px_20px_rgba(255,46,99,0.3)] transform group-hover:scale-110 transition-transform duration-500">
+                      <div className="w-full h-full bg-[#13121b] rounded-2xl flex items-center justify-center">
+                        <Mail className="text-[#FF2E63] drop-shadow-[0_0_8px_rgba(255,46,99,0.8)]" size={28} />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-stat text-sm font-bold text-slate-400 tracking-wider uppercase mb-1">Email Support</h3>
+                      <p className="font-h1 font-bold text-xl text-white group-hover:text-[#FF2E63] transition-colors">contact@flowra.vn</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="group relative bg-[#13121b]/80 border border-white/10 p-6 rounded-3xl hover:border-[#8B5CF6]/50 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] hover:-translate-y-1">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/0 to-[#8B5CF6]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="flex items-center gap-6 relative z-10">
+                    <div className="w-16 h-16 shrink-0 rounded-2xl bg-gradient-to-br from-[#8B5CF6] to-[#00E5FF] p-[1px] shadow-[0_10px_20px_rgba(139,92,246,0.3)] transform group-hover:scale-110 transition-transform duration-500">
+                      <div className="w-full h-full bg-[#13121b] rounded-2xl flex items-center justify-center">
+                        <MapPin className="text-[#8B5CF6] drop-shadow-[0_0_8px_rgba(139,92,246,0.8)]" size={28} />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-stat text-sm font-bold text-slate-400 tracking-wider uppercase mb-1">HQ Office</h3>
+                      <p className="font-body font-medium text-white text-lg pr-4 group-hover:text-[#8B5CF6] transition-colors">
+                        403A, lô N07, cc K26, Gò Vấp, HCM
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-              <div className="space-y-2">
-                <label className="font-stat text-xs font-semibold text-slate-400 tracking-wider">DỊCH VỤ QUAN TÂM</label>
-                <select className="w-full bg-[#0e0d16] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF] transition-all font-body appearance-none">
-                  <option>Dịch vụ TikTok</option>
-                  <option>Dịch vụ Facebook</option>
-                  <option>Khác</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="font-stat text-xs font-semibold text-slate-400 tracking-wider">NỘI DUNG TIN NHẮN</label>
-                <textarea rows={4} placeholder="Bạn cần chúng tôi hỗ trợ gì?" className="w-full bg-[#0e0d16] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF] transition-all font-body"></textarea>
-              </div>
-              <button type="button" className="w-full bg-[#6C63FF] text-white py-4 rounded-xl font-h1 font-bold text-lg neon-glow transition-all flex items-center justify-center gap-2 group hover:bg-[#5a52d3]">
-                Gửi yêu cầu ngay
-                <ArrowRight className="transition-transform group-hover:translate-x-1" size={20} />
-              </button>
-            </form>
+            </div>
+
+            {/* RIGHT SIDE: Form */}
+            <div className="lg:col-span-7">
+              <ContactForm />
+            </div>
+
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,5 +1,10 @@
 @import "tailwindcss";
-@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+body {
+  background-color: #13121b !important;
+  color: white !important;
+}
 
 @theme {
   --color-primary: #FF8C00;
@@ -9,8 +14,6 @@
   --color-surface: #13121b;
   --color-on-background: #e4e1ee;
   --color-on-surface-variant: #c7c4d8;
-  --color-warning: #FF8C00;
-  --color-text-secondary: rgba(199, 196, 216, 0.7);
   
   --font-h: var(--font-be-vietnam);
   --font-h1: var(--font-be-vietnam);
@@ -24,60 +27,29 @@
 @utility font-h {
   font-family: var(--font-h);
 }
-@utility font-h1 {
-  font-family: var(--font-h1);
-}
-@utility font-stat {
-  font-family: var(--font-stat);
+
+@utility glass-panel {
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@layer utilities {
-  .glass-panel {
-    @apply bg-white/[0.04] backdrop-blur-[12px] border border-white/10;
-  }
-  .glass-modal {
-    @apply bg-white/[0.08] backdrop-blur-[20px] border border-white/10;
-  }
-  .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-base md:text-lg shadow-[0_0_30px_rgba(255,140,0,0.3)] transition-all duration-300 overflow-hidden;
-  }
-  .btn-primary:hover {
-    @apply shadow-[0_0_50px_rgba(255,46,99,0.5)] scale-105;
-  }
-  .btn-primary:active {
-    @apply scale-95;
-  }
-  .btn-primary::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-[#FF2E63] to-[#FF8C00] opacity-0 transition-opacity duration-300;
-  }
-  /* Note: .group-hover:opacity-100 needs to be handled in HTML or by separate utility if @apply fails */
-  
-  .btn-primary > * { @apply relative z-10; }
-  
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 bg-white/[0.04] backdrop-blur-[12px] border border-white/10 text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 backdrop-blur-xl;
-  }
-  .btn-secondary:hover {
-    @apply bg-white/[0.12] border-white/20 scale-105;
-  }
-  .btn-secondary:active {
-    @apply scale-95;
-  }
-  
-  .gradient-text-warm {
-    @apply bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent;
-  }
-  
-  .section-padding { @apply py-16 md:py-24; }
-  .container-max { @apply max-w-[1440px] mx-auto px-6 lg:px-24; }
+@utility section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@utility container-max {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 @layer base {
-  body {
-    background-color: #13121b;
-    color: #e4e1ee;
-    @apply font-body;
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -86,12 +58,8 @@
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 @keyframes pulse-glow {
-  0%, 100% { filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.4)); }
-  50% { filter: drop-shadow(0 0 20px rgba(108, 99, 255, 0.8)); }
-}
-@keyframes star-move {
-  from { transform: translateY(0); }
-  to { transform: translateY(-100px); }
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.4)); }
+  50% { filter: drop-shadow(0 0 20px rgba(255, 46, 99, 0.8)); }
 }
 @keyframes orbit-3d {
   0% { transform: translate(0, 0) scale(1); z-index: 20; opacity: 1; }
@@ -100,40 +68,54 @@
   75% { transform: translate(-120px, -30px) scale(0.8); z-index: 5; opacity: 0.6; }
   100% { transform: translate(0, 0) scale(1); z-index: 20; opacity: 1; }
 }
-@keyframes float-orb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-@keyframes fade-in-notification {
-  0% { opacity: 0; transform: translateY(10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-10px); }
-}
-@keyframes badge-slide-in {
-  0% { opacity: 0; transform: translateX(-20px); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-@keyframes badge-slide-out {
-  0% { opacity: 1; transform: translateX(0); }
-  100% { opacity: 0; transform: translateX(20px); }
-}
-@keyframes count-up {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
+
+@utility btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-image: linear-gradient(to right, #FF8C00, #FF2E63);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  box-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+  transition: all 0.3s;
+  overflow: hidden;
 }
 
-.animate-rotate-ring { animation: rotate-ring 10s linear infinite; }
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-.animate-starfield { animation: star-move 20s linear infinite; }
-.animate-float-orb { animation: float-orb 8s ease-in-out infinite; }
-.orbit-1 { animation: orbit-3d 12s linear infinite; }
-.orbit-2 { animation: orbit-3d 15s linear infinite -3s; }
-.orbit-3 { animation: orbit-3d 18s linear infinite -6s; }
-.orbit-4 { animation: orbit-3d 20s linear infinite -9s; }
-.orbit-5 { animation: orbit-3d 22s linear infinite -12s; }
-.notification-fade { animation: fade-in-notification 10s ease-in-out infinite; }
-.badge-enter { animation: badge-slide-in 0.5s ease-out forwards; }
-.badge-exit { animation: badge-slide-out 0.5s ease-in forwards; }
-.stat-animated { animation: count-up 0.6s ease-out; }
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+@utility gradient-text-warm {
+  background-image: linear-gradient(to right, #FF8C00, #FF2E63, #8B5CF6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility animate-rotate-ring {
+  animation: rotate-ring 10s linear infinite;
+}
+@utility animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+@utility orbit-1 { animation: orbit-3d 12s linear infinite; }
+@utility orbit-2 { animation: orbit-3d 15s linear infinite -3s; }
+@utility orbit-3 { animation: orbit-3d 18s linear infinite -6s; }
+@utility orbit-4 { animation: orbit-3d 20s linear infinite -9s; }
+@utility orbit-5 { animation: orbit-3d 22s linear infinite -12s; }
+

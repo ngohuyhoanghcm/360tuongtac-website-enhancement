@@ -3,7 +3,16 @@
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
-export default function ServicesFinalCTA() {
+interface FinalCTAProps {
+  productUrl?: string;
+  serviceSlug?: string;
+}
+
+export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAProps) {
+  const ctaUrl = productUrl 
+    ? `${productUrl}?utm_source=grow.360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=final_cta`
+    : "http://360tuongtac.com/auth/login";
+
   return (
     <section className="py-24 md:py-32 relative overflow-hidden">
       <div className="container-max px-6">
@@ -28,7 +37,7 @@ export default function ServicesFinalCTA() {
             </motion.div>
 
             <h2 className="font-h1 text-3xl md:text-6xl font-black text-white mb-8 leading-tight tracking-tight antialiased">
-              Không chắc dịch vụ nào <br className="hidden md:block" /> 
+              Cảm thấy dịch vụ <br className="hidden md:block" /> 
               <span className="text-gradient">phù hợp với bạn?</span>
             </h2>
             
@@ -40,19 +49,20 @@ export default function ServicesFinalCTA() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link 
-                  href="https://zalo.me/0388009669" 
+                  href={ctaUrl} 
                   className="px-12 py-5 rounded-2xl bg-white text-slate-950 font-black text-lg shadow-xl hover:bg-[#00E5FF] hover:text-white transition-all duration-300 antialiased block"
                 >
-                  Tư Vấn Qua Zalo
+                  Đặt Mua Ngay
                 </Link>
               </motion.div>
               
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link 
-                  href="/bang-gia" 
+                  href="https://zalo.me/0388009669" 
+                  target="_blank" rel="noopener noreferrer"
                   className="px-12 py-5 rounded-2xl glass-panel border border-white/10 text-white font-black text-lg hover:border-[#FF2E63]/40 transition-all duration-300 antialiased block"
                 >
-                  Xem Bảng Giá Tổng
+                  Tư Vấn Zalo
                 </Link>
               </motion.div>
             </div>

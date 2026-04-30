@@ -75,4 +75,6 @@ export interface LandingPage {
   metaTitle: string;
   metaDescription: string;
   content: LandingPageContent;
+  relatedServices?: string[];
+  relatedPosts?: string[];
 }

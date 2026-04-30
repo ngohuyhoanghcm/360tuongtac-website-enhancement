@@ -23,7 +23,9 @@ export const trafficWebsite: LandingPage = {
     },
     education: {
       title: 'Tác động của User Signals đối với thứ hạng tìm kiếm Google',
-      content: `Trong kỷ nguyên SEO hiện đại, Google không còn chỉ nhìn vào Backlink hay Content. "Tín hiệu người dùng" (User Signals) đã trở thành yếu tố quyết định hàng đầu. Google sử dụng dữ liệu từ Chrome và Analytics để đo lường: Có bao nhiêu người vào trang? Họ ở lại bao lâu? Họ có click vào các link khác không?\n\nDịch vụ tăng traffic website của 360TuongTac cung cấp nguồn visitor chất lượng cao, mô phỏng hành vi người dùng thật. Chúng tôi hỗ trợ Traffic từ Google Search (Người dùng gõ từ khóa rồi click vào web bạn) - đây là loại traffic quý giá nhất giúp từ khóa lên Top nhanh chóng. Ngoài ra, việc duy trì một lượng traffic đều đặn giúp Website tăng chỉ số Trust (Độ tin cậy), từ đó các bài viết mới của bạn sẽ được Google Index nhanh hơn và có thứ hạng khởi đầu tốt hơn.`
+      content: `Trong kỷ nguyên SEO hiện đại, Google không còn chỉ nhìn vào Backlink hay Content. "Tín hiệu người dùng" (User Signals) đã trở thành yếu tố quyết định hàng đầu. Google sử dụng dữ liệu từ Chrome và Analytics để đo lường: Có bao nhiêu người vào trang? Họ ở lại bao lâu? Họ có click vào các link khác không?
+
+Dịch vụ tăng traffic website của 360TuongTac cung cấp nguồn visitor chất lượng cao, mô phỏng hành vi người dùng thật. Chúng tôi hỗ trợ Traffic từ Google Search (Người dùng gõ từ khóa rồi click vào web bạn) - đây là loại traffic quý giá nhất giúp từ khóa lên Top nhanh chóng. Ngoài ra, việc duy trì một lượng traffic đều đặn giúp Website tăng chỉ số Trust (Độ tin cậy), từ đó các bài viết mới của bạn sẽ được Google Index nhanh hơn và có thứ hạng khởi đầu tốt hơn.`
     },
     solution: {
       title: 'Giải pháp Traffic đa kênh chuyên nghiệp',
@@ -37,9 +39,9 @@ export const trafficWebsite: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Traffic Website',
       packages: [
-        { id: 'web-traf-basic', name: 'Gói Khởi Động', price: 350000, duration: '30 ngày', features: ['300-500 Traffic/ngày', 'Time on site 90s', 'Nguồn Direct/Social'], productUrl: 'https://360tuongtac.com/product/tang-traffic-website' },
-        { id: 'web-traf-seo', name: 'Gói Đẩy Top SEO', price: 950000, duration: '30 ngày', features: ['1000 Traffic/ngày', 'Nguồn từ Google Search', 'Hỗ trợ đẩy từ khóa'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-traffic-website' },
-        { id: 'web-traf-vip', name: 'Gói Doanh Nghiệp', price: 2500000, duration: '30 ngày', features: ['5000+ Traffic/ngày', 'Đa quốc gia/Việt Nam', 'Tư vấn chiến lược SEO'], productUrl: 'https://360tuongtac.com/product/tang-traffic-website' }
+        { id: 'web-traf-basic', name: 'Gói Khởi Động', price: 350000, duration: '30 ngày', features: ['300-500 Traffic/ngày', 'Time on site 90s', 'Nguồn Direct/Social'], productUrl: 'https://360tuongtac.com/service/website/traffic' },
+        { id: 'web-traf-seo', name: 'Gói Đẩy Top SEO', price: 950000, duration: '30 ngày', features: ['1000 Traffic/ngày', 'Nguồn từ Google Search', 'Hỗ trợ đẩy từ khóa'], recommended: true, productUrl: 'https://360tuongtac.com/service/website/traffic' },
+        { id: 'web-traf-vip', name: 'Gói Doanh Nghiệp', price: 2500000, duration: '30 ngày', features: ['5000+ Traffic/ngày', 'Đa quốc gia/Việt Nam', 'Tư vấn chiến lược SEO'], productUrl: 'https://360tuongtac.com/service/website/traffic' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const trafficWebsite: LandingPage = {
         { question: 'Nạp tiền vào website như thế nào?', answer: 'Bạn có thể nạp tiền tự động qua Ngân hàng hoặc ví MoMo ngay trên trang 360TuongTac.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['tiktok-shop-moi-khong-co-don', 'tiktok-shop-moi-khong-co-don', 'cap-nhat-thuat-toan-tiktok-thang-4-2026'],
 };

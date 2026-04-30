@@ -23,7 +23,9 @@ export const seedingDanhGiaTiktokShop: LandingPage = {
     },
     education: {
       title: 'Tầm quan trọng của Đánh giá đối với doanh số TikTok Shop',
-      content: `Trong mô hình E-commerce trên TikTok, niềm tin là đơn vị tiền tệ quan trọng nhất. Khác với Facebook hay Website, khách hàng trên TikTok Shop quyết định mua hàng trong "khoảnh khắc cảm xúc". Nếu sản phẩm của bạn không có đánh giá, cảm xúc sẽ bị ngắt quãng bởi sự nghi ngờ (Cơ chế phòng vệ tâm lý).\n\nSeeding đánh giá tiktok shop không chỉ đơn thuần là tăng số lượng ngôi sao. Nó là việc cung cấp "Bằng chứng sử dụng" (Evidence of Usage). Một sản phẩm có 50 lượt mua và 20 đánh giá 5 sao kèm video bốc hộp sẽ có tỷ lệ chuyển đổi cao gấp 10 lần so với sản phẩm 0 lượt mua. 360TuongTac cung cấp giải pháp seeding đánh giá chuẩn "sạch", giúp shop của bạn nhanh chóng đạt mốc uy tín cần thiết để thuật toán TikTok Shop ưu tiên đề xuất sản phẩm vào mục "Khám phá" hoặc TAB "Cửa hàng". Đây là bước đệm không thể thiếu để xây dựng một gian hàng triệu đô trên nền tảng này.`
+      content: `Trong mô hình E-commerce trên TikTok, niềm tin là đơn vị tiền tệ quan trọng nhất. Khác với Facebook hay Website, khách hàng trên TikTok Shop quyết định mua hàng trong "khoảnh khắc cảm xúc". Nếu sản phẩm của bạn không có đánh giá, cảm xúc sẽ bị ngắt quãng bởi sự nghi ngờ (Cơ chế phòng vệ tâm lý).
+
+Seeding đánh giá tiktok shop không chỉ đơn thuần là tăng số lượng ngôi sao. Nó là việc cung cấp "Bằng chứng sử dụng" (Evidence of Usage). Một sản phẩm có 50 lượt mua và 20 đánh giá 5 sao kèm video bốc hộp sẽ có tỷ lệ chuyển đổi cao gấp 10 lần so với sản phẩm 0 lượt mua. 360TuongTac cung cấp giải pháp seeding đánh giá chuẩn "sạch", giúp shop của bạn nhanh chóng đạt mốc uy tín cần thiết để thuật toán TikTok Shop ưu tiên đề xuất sản phẩm vào mục "Khám phá" hoặc TAB "Cửa hàng". Đây là bước đệm không thể thiếu để xây dựng một gian hàng triệu đô trên nền tảng này.`
     },
     solution: {
       title: 'Giải pháp nâng tầm gian hàng TikTok Shop',
@@ -37,9 +39,9 @@ export const seedingDanhGiaTiktokShop: LandingPage = {
     pricing: {
       title: 'Bảng giá Seeding Đánh Giá TikTok Shop',
       packages: [
-        { id: 'shop-seed-basic', name: 'Gói Khởi Tạo', price: 150000, duration: 'Hoàn thành 2-3 ngày', features: ['10 Đánh giá 5 sao', 'Nội dung tùy chỉnh', 'Hỗ trợ nick Việt'], productUrl: 'https://360tuongtac.com/product/seeding-tiktok-shop' },
-        { id: 'shop-seed-pro', name: 'Gói Tăng Tốc', price: 400000, duration: 'Hoàn thành 5 ngày', features: ['30 Đánh giá kèm ảnh', 'Kịch bản viral', 'Cải thiện chỉ số Shop'], recommended: true, productUrl: 'https://360tuongtac.com/product/seeding-tiktok-shop' },
-        { id: 'shop-seed-vip', name: 'Gói Thống Lĩnh', price: 1200000, duration: 'Duy trì hàng tháng', features: ['100 Đánh giá VIP', 'Kèm video mở hộp', 'Tư vấn chiến lược Shop'], productUrl: 'https://360tuongtac.com/product/seeding-tiktok-shop' }
+        { id: 'shop-seed-basic', name: 'Gói Khởi Tạo', price: 150000, duration: 'Hoàn thành 2-3 ngày', features: ['10 Đánh giá 5 sao', 'Nội dung tùy chỉnh', 'Hỗ trợ nick Việt'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-likes' },
+        { id: 'shop-seed-pro', name: 'Gói Tăng Tốc', price: 400000, duration: 'Hoàn thành 5 ngày', features: ['30 Đánh giá kèm ảnh', 'Kịch bản viral', 'Cải thiện chỉ số Shop'], recommended: true, productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-likes' },
+        { id: 'shop-seed-vip', name: 'Gói Thống Lĩnh', price: 1200000, duration: 'Duy trì hàng tháng', features: ['100 Đánh giá VIP', 'Kèm video mở hộp', 'Tư vấn chiến lược Shop'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-likes' }
       ]
     },
     process: {
@@ -70,5 +72,7 @@ export const seedingDanhGiaTiktokShop: LandingPage = {
         { question: 'Làm sao để biết dịch vụ đã bắt đầu?', answer: 'Bạn sẽ thấy được các đơn hàng mới phát sinh trong quản trị Shop của mình theo đúng lộ trình đã thỏa thuận.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['seeding-la-gi', 'so-sanh-dich-vu-tang-viewer-tiktok', 'dich-vu-smm-nen-chon-loai-nao'],
 };

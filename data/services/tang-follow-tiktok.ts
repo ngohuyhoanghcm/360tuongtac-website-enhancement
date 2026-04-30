@@ -23,7 +23,11 @@ export const tangFollowTiktok: LandingPage = {
     },
     education: {
       title: 'Sức mạnh của Follower trong thuật toán TikTok',
-      content: `Trong hệ sinh thái TikTok, Follower không chỉ là một con số hiển thị. Nó là tín hiệu quan trọng nhất về "Độ tin cậy" (Authority) của kênh. Khi bạn đăng một video mới, TikTok sẽ ưu tiên phân phối video đó đến nhóm người theo dõi trước. Nếu nhóm này phản hồi tốt, video mới được đẩy ra phễu người lạ (FYP).\n\nĐặc biệt, TikTok thiết lập những "cột mốc quyền lực" dựa trên số lượng follow. Cột mốc 1,000 follow là quan trọng nhất vì nó mở cánh cửa cho Livestream và TikTok Shop. Cột mốc 10,000 follow mở ra cơ hội tham gia quỹ tác giả và tăng uy tín vượt trội cho các hợp đồng KOC/KOL.\n\nSử dụng dịch vụ tăng follow tiktok giúp bạn vượt qua giai đoạn "con số không" đầy khó khăn. Nó tạo ra hiệu ứng mồi, khiến những người dùng thật khi ghé thăm profile của bạn sẽ cảm thấy tin tưởng và dễ dàng nhấn nút "Theo dõi" hơn. Đây gọi là tâm lý học xác nhận xã hội. Theo thống kê, một profile có 5,000 follow có tỉ lệ chuyển đổi người theo dõi tự nhiên cao gấp 4 lần so với một profile chỉ có 50 follow.`
+      content: `Trong hệ sinh thái TikTok, Follower không chỉ là một con số hiển thị. Nó là tín hiệu quan trọng nhất về "Độ tin cậy" (Authority) của kênh. Khi bạn đăng một video mới, TikTok sẽ ưu tiên phân phối video đó đến nhóm người theo dõi trước. Nếu nhóm này phản hồi tốt, video mới được đẩy ra phễu người lạ (FYP).
+
+Đặc biệt, TikTok thiết lập những "cột mốc quyền lực" dựa trên số lượng follow. Cột mốc 1,000 follow là quan trọng nhất vì nó mở cánh cửa cho Livestream và TikTok Shop. Cột mốc 10,000 follow mở ra cơ hội tham gia quỹ tác giả và tăng uy tín vượt trội cho các hợp đồng KOC/KOL.
+
+Sử dụng dịch vụ tăng follow tiktok giúp bạn vượt qua giai đoạn "con số không" đầy khó khăn. Nó tạo ra hiệu ứng mồi, khiến những người dùng thật khi ghé thăm profile của bạn sẽ cảm thấy tin tưởng và dễ dàng nhấn nút "Theo dõi" hơn. Đây gọi là tâm lý học xác nhận xã hội. Theo thống kê, một profile có 5,000 follow có tỉ lệ chuyển đổi người theo dõi tự nhiên cao gấp 4 lần so với một profile chỉ có 50 follow.`
     },
     solution: {
       title: 'Giải pháp tăng trưởng Follow sạch và bền vững',
@@ -37,9 +41,9 @@ export const tangFollowTiktok: LandingPage = {
     pricing: {
       title: 'Giá cực hời cho hành trình vạn dặm',
       packages: [
-        { id: 'tt-fol-1k', name: 'Gói Bật Livestream', price: 150000, duration: '24-48h', features: ['1000 Follow tài khoản thật', 'Bù nếu tụt >10%', 'Thúc đẩy đề xuất kênh'], productUrl: 'https://360tuongtac.com/product/tang-follow-tiktok' },
-        { id: 'tt-fol-5k', name: 'Gói Shop Chuyên Nghiệp', price: 650000, duration: '3-5 ngày', features: ['5000 Follow chất lượng cao', 'Tặng 500 like video bất kỳ', 'Bảo hành 30 ngày'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-follow-tiktok' },
-        { id: 'tt-fol-10k', name: 'Gói KOL/KOC Branding', price: 1200000, duration: '7-10 ngày', features: ['10,000 Follow uy tín', 'Server ưu tiên cực VIP', 'Tăng tốc độ nhận profile'], productUrl: 'https://360tuongtac.com/product/tang-follow-tiktok' }
+        { id: 'tt-fol-1k', name: 'Gói Bật Livestream', price: 150000, duration: '24-48h', features: ['1000 Follow tài khoản thật', 'Bù nếu tụt >10%', 'Thúc đẩy đề xuất kênh'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-followers' },
+        { id: 'tt-fol-5k', name: 'Gói Shop Chuyên Nghiệp', price: 650000, duration: '3-5 ngày', features: ['5000 Follow chất lượng cao', 'Tặng 500 like video bất kỳ', 'Bảo hành 30 ngày'], recommended: true, productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-followers' },
+        { id: 'tt-fol-10k', name: 'Gói KOL/KOC Branding', price: 1200000, duration: '7-10 ngày', features: ['10,000 Follow uy tín', 'Server ưu tiên cực VIP', 'Tăng tốc độ nhận profile'], productUrl: 'https://360tuongtac.com/service/tiktok/tiktok-followers' }
       ]
     },
     process: {
@@ -70,5 +74,7 @@ export const tangFollowTiktok: LandingPage = {
         { question: 'Nếu đơn hàng không chạy thì sao?', answer: 'Hệ thống sẽ tự động hoàn trả tiền vào tài khoản website của bạn nếu sau 24h đơn hàng chưa được khởi tạo thành công.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['tiktok-shop-moi-khong-co-don', 'tai-sao-livestream-tiktok-it-nguoi-xem', 'viewer-that-vs-viewer-ao'],
 };

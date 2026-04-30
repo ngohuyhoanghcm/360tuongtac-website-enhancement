@@ -23,7 +23,9 @@ export const tangLikeFacebook: LandingPage = {
     },
     education: {
       title: 'Sự thật về Thuật toán EdgeRank và Reach trên Facebook',
-      content: `Thuật toán EdgeRank của Facebook hoạt động dựa trên 3 yếu tố: Affinity (Mối quan hệ), Weight (Trọng số tương tác) và Decay (Thời gian). Trong đó, "Weight" là yếu tố bạn có thể can thiệp được. Mỗi lượt Like trên bài viết là một tín hiệu cực mạnh báo cho Facebook biết nội dung này có giá trị.\n\nKhi một bài viết mới đăng có lượng Like tăng trưởng nhanh, Facebook sẽ tự động ưu tiên đẩy bài viết đó lên Newsfeed của Fan hiện tại và mở rộng đến bạn bè của họ. Đây chính là cách tăng Reach (lượt tiếp cận) tự nhiên hiệu quả nhất. Ngược lại, nếu bài viết không có tương tác, Facebook sẽ coi đó là nội dung rác và ngừng hiển thị. Dịch vụ tăng like facebook của 360TuongTac giúp bạn "mồi" chỉ số này, tạo vòng lặp tương tác: Có Like mồi -> Tăng Reach tự nhiên -> Có khách hàng thật -> Tăng Like thật. Đây là chiến thuật Organic Growth thông minh mà mọi Brand lớn đều sử dụng.`
+      content: `Thuật toán EdgeRank của Facebook hoạt động dựa trên 3 yếu tố: Affinity (Mối quan hệ), Weight (Trọng số tương tác) và Decay (Thời gian). Trong đó, "Weight" là yếu tố bạn có thể can thiệp được. Mỗi lượt Like trên bài viết là một tín hiệu cực mạnh báo cho Facebook biết nội dung này có giá trị.
+
+Khi một bài viết mới đăng có lượng Like tăng trưởng nhanh, Facebook sẽ tự động ưu tiên đẩy bài viết đó lên Newsfeed của Fan hiện tại và mở rộng đến bạn bè của họ. Đây chính là cách tăng Reach (lượt tiếp cận) tự nhiên hiệu quả nhất. Ngược lại, nếu bài viết không có tương tác, Facebook sẽ coi đó là nội dung rác và ngừng hiển thị. Dịch vụ tăng like facebook của 360TuongTac giúp bạn "mồi" chỉ số này, tạo vòng lặp tương tác: Có Like mồi -> Tăng Reach tự nhiên -> Có khách hàng thật -> Tăng Like thật. Đây là chiến thuật Organic Growth thông minh mà mọi Brand lớn đều sử dụng.`
     },
     solution: {
       title: 'Hệ thống tăng tương tác Facebook tự động',
@@ -37,9 +39,9 @@ export const tangLikeFacebook: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Like Facebook ưu đãi',
       packages: [
-        { id: 'fb-like-post', name: 'Gói Like Bài Viết', price: 15000, duration: 'Hoàn thành ngay', features: ['1000 Like cho bài viết', 'Nick Việt 100%', 'Bảo hành không tụt'], productUrl: 'https://360tuongtac.com/product/tang-like-facebook' },
-        { id: 'fb-like-page', name: 'Gói Like Fanpage', price: 250000, duration: 'Duy trì ổn định', features: ['1000 Like & Follow Fanpage', 'Tăng uy tín cho Shop', 'Hỗ trợ lên tích xanh'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-follow-fanpage' },
-        { id: 'fb-vip-month', name: 'Gói VIP Tháng', price: 500000, duration: '30 ngày', features: ['Tự động like mọi bài đăng', 'Giới hạn 5 bài/ngày', 'Hỗ trợ Reach cực mạnh'], productUrl: 'https://360tuongtac.com/product/vip-like-thang' }
+        { id: 'fb-like-post', name: 'Gói Like Bài Viết', price: 15000, duration: 'Hoàn thành ngay', features: ['1000 Like cho bài viết', 'Nick Việt 100%', 'Bảo hành không tụt'], productUrl: 'https://360tuongtac.com/service/facebook/tang-like' },
+        { id: 'fb-like-page', name: 'Gói Like Fanpage', price: 250000, duration: 'Duy trì ổn định', features: ['1000 Like & Follow Fanpage', 'Tăng uy tín cho Shop', 'Hỗ trợ lên tích xanh'], recommended: true, productUrl: 'https://360tuongtac.com/service/facebook/tang-like' },
+        { id: 'fb-vip-month', name: 'Gói VIP Tháng', price: 500000, duration: '30 ngày', features: ['Tự động like mọi bài đăng', 'Giới hạn 5 bài/ngày', 'Hỗ trợ Reach cực mạnh'], productUrl: 'https://360tuongtac.com/service/facebook/tang-like' }
       ]
     },
     process: {
@@ -69,5 +71,7 @@ export const tangLikeFacebook: LandingPage = {
         { question: 'Tôi có được hoàn tiền nếu hệ thống lỗi không?', answer: 'Có, số tiền sẽ được tự động hoàn trả vào tài khoản trên website của bạn nếu đơn hàng không thể triển khai.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['thuat-toan-tiktok-2025', 'case-study-tiktok-shop-thanh-cong', 'seeding-comment-tiktok-hieu-qua'],
 };

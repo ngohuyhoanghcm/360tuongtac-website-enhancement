@@ -23,7 +23,9 @@ export const tangSubYoutube: LandingPage = {
     },
     education: {
       title: 'Mối liên hệ giữa Subscribers và Phễu đề xuất của YouTube',
-      content: `Trong thuật toán của YouTube (Search & Discovery), lượt đăng ký (Subscriber) là tín hiệu mạnh nhất về "Sự trung thành của khán giả". Khi một kênh có lượng sub lớn, mỗi video mới đăng sẽ nhận được lượng view ban đầu từ thông báo và Newsfeed, tạo ra chỉ số CTR (Tỷ lệ click) và Watch Time (Giờ xem) quan trọng.\n\nĐặc biệt, hệ thống AI của YouTube rất chú trọng mốc 1,000 Subscribers. Đây không chỉ là điều kiện để bật kiếm tiền mà còn là mốc để YouTube bắt đầu coi kênh của bạn là một "Thực thể nội dung" chuyên nghiệp và đẩy video vào kệ đề xuất. Dịch vụ tăng sub youtube của 360TuongTac giúp bạn rút ngắn 90% thời gian chờ đợi. Việc có sẵn 1,000-2,000 sub sẽ tạo ra "Hiệu ứng tuyết lăn": Người xem mới lướt qua thấy kênh có nhiều fan sẽ có tâm thế tin tưởng và dễ dàng nhấn Subscribe hơn. Đây là chiến thuật tối ưu hóa Social Proof mà mọi YouTuber thành công đều áp dụng trong giai đoạn đầu xây kênh.`
+      content: `Trong thuật toán của YouTube (Search & Discovery), lượt đăng ký (Subscriber) là tín hiệu mạnh nhất về "Sự trung thành của khán giả". Khi một kênh có lượng sub lớn, mỗi video mới đăng sẽ nhận được lượng view ban đầu từ thông báo và Newsfeed, tạo ra chỉ số CTR (Tỷ lệ click) và Watch Time (Giờ xem) quan trọng.
+
+Đặc biệt, hệ thống AI của YouTube rất chú trọng mốc 1,000 Subscribers. Đây không chỉ là điều kiện để bật kiếm tiền mà còn là mốc để YouTube bắt đầu coi kênh của bạn là một "Thực thể nội dung" chuyên nghiệp và đẩy video vào kệ đề xuất. Dịch vụ tăng sub youtube của 360TuongTac giúp bạn rút ngắn 90% thời gian chờ đợi. Việc có sẵn 1,000-2,000 sub sẽ tạo ra "Hiệu ứng tuyết lăn": Người xem mới lướt qua thấy kênh có nhiều fan sẽ có tâm thế tin tưởng và dễ dàng nhấn Subscribe hơn. Đây là chiến thuật tối ưu hóa Social Proof mà mọi YouTuber thành công đều áp dụng trong giai đoạn đầu xây kênh.`
     },
     solution: {
       title: 'Giải pháp tăng trưởng Kênh YouTube chuyên nghiệp',
@@ -37,9 +39,9 @@ export const tangSubYoutube: LandingPage = {
     pricing: {
       title: 'Bảng giá Tăng Subscribe YouTube',
       packages: [
-        { id: 'yt-sub-100', name: 'Gói Khởi Đầu', price: 120000, duration: '2-3 ngày', features: ['100 Subscribe thật', 'Tăng ổn định', 'An toàn 100%'], productUrl: 'https://360tuongtac.com/product/tang-sub-youtube' },
-        { id: 'yt-sub-1k', name: 'Gói Kiếm Tiền', price: 950000, duration: '7-10 ngày', features: ['1000 Subscribe uy tín', 'Bảo hành vĩnh viễn', 'Đạt mốc bật kiếm tiền'], recommended: true, productUrl: 'https://360tuongtac.com/product/tang-sub-youtube' },
-        { id: 'yt-sub-5k', name: 'Gói Diamond Channel', price: 4200000, duration: '20-30 ngày', features: ['5000 Subscribe cao cấp', 'Ưu tiên server riêng', 'Tư vấn SEO Channel'], productUrl: 'https://360tuongtac.com/product/tang-sub-youtube' }
+        { id: 'yt-sub-100', name: 'Gói Khởi Đầu', price: 120000, duration: '2-3 ngày', features: ['100 Subscribe thật', 'Tăng ổn định', 'An toàn 100%'], productUrl: 'https://360tuongtac.com/service/youtube/youtube-subscribes' },
+        { id: 'yt-sub-1k', name: 'Gói Kiếm Tiền', price: 950000, duration: '7-10 ngày', features: ['1000 Subscribe uy tín', 'Bảo hành vĩnh viễn', 'Đạt mốc bật kiếm tiền'], recommended: true, productUrl: 'https://360tuongtac.com/service/youtube/youtube-subscribes' },
+        { id: 'yt-sub-5k', name: 'Gói Diamond Channel', price: 4200000, duration: '20-30 ngày', features: ['5000 Subscribe cao cấp', 'Ưu tiên server riêng', 'Tư vấn SEO Channel'], productUrl: 'https://360tuongtac.com/service/youtube/youtube-subscribes' }
       ]
     },
     process: {
@@ -70,5 +72,7 @@ export const tangSubYoutube: LandingPage = {
         { question: 'Nạp tiền vào hệ thống như thế nào?', answer: 'Bạn có thể nạp tiền tự động qua Chuyển khoản hoặc ví điện tử ngay trên website.' }
       ]
     }
-  }
+  },
+  relatedServices: [],
+  relatedPosts: ['so-sanh-dich-vu-tang-viewer-tiktok', 'so-sanh-dich-vu-tang-viewer-tiktok', 'chon-dich-vu-smm-uy-tin-khong-bi-lua'],
 };

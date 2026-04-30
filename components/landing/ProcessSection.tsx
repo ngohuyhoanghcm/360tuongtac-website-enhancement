@@ -139,9 +139,9 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-8 relative"
+          className={`grid grid-cols-1 ${displaySteps.length === 3 ? 'md:grid-cols-3 max-w-6xl mx-auto' : 'md:grid-cols-5 max-w-7xl mx-auto'} gap-6 lg:gap-8 relative`}
         >
-          {displaySteps.slice(0, 5).map((s, i) => (
+          {displaySteps.slice(0, 5).map((s, i, arr) => (
             <motion.div
               key={i}
               variants={itemVariants}
@@ -149,11 +149,11 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
               className="group relative"
             >
               {/* Connector line for desktop - hidden on mobile */}
-              {i < Math.min(displaySteps.length - 1, 4) && (
-                <div className="hidden lg:block absolute top-7 left-full w-full h-[2px] bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] opacity-10 -z-0"></div>
+              {i < arr.length - 1 && (
+                <div className="hidden md:block absolute top-[2.5rem] left-[50%] w-full h-[2px] bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] opacity-10 -z-0"></div>
               )}
               
-              <div className="glass-panel p-8 h-full rounded-[2.5rem] border border-white/5 hover:border-[#00E5FF]/30 transition-all duration-500 relative overflow-hidden bg-[#13121b]/40 backdrop-blur-2xl flex flex-col items-center text-center">
+              <div className="glass-panel w-full max-w-sm md:max-w-none mx-auto p-8 h-full rounded-[2.5rem] border border-white/5 hover:border-[#00E5FF]/30 transition-all duration-500 relative overflow-hidden bg-[#13121b]/40 backdrop-blur-2xl flex flex-col items-center text-center">
                 
                 {/* Step Number Badge */}
                 <motion.div 
