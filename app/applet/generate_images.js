@@ -27,7 +27,8 @@ async function generateImages() {
 
   for (const [slug, prompt] of Object.entries(prompts)) {
     const encodedPrompt = encodeURIComponent(prompt);
-    const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=630&nologo=true`;
+    // Request WebP format explicitly
+    const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1200&height=630&nologo=true&format=webp`;
     console.log(`Downloading ${slug}...`);
     try {
       const res = await fetch(url);
@@ -35,7 +36,14 @@ async function generateImages() {
       const buffer = await res.arrayBuffer();
       const filePath = path.join(dir, `${slug}.webp`);
       fs.writeFileSync(filePath, Buffer.from(buffer));
-      console.log(`Saved ${slug}.webp (${buffer.byteLength} bytes)`);
+      
+      // Verify it's actually WebP
+      const header = Buffer.from(buffer).slice(0, 4).toString('hex');
+      if (header === '52494646') {
+        console.log(`✅ Saved ${slug}.webp (${buffer.byteLength} bytes) - Valid WebP`);
+      } else {
+        console.log(`⚠️  Saved ${slug}.webp but header is ${header} (not WebP)`);
+      }
     } catch (err) {
       console.error(`Failed to download ${slug}:`, err.message);
     }
