@@ -136,52 +136,59 @@ export default async function BlogPostPage({ params }: Props) {
 
       <article className="bg-[#0a0a0f] min-h-screen pb-24">
         {/* Post Hero */}
-        <header className="relative pt-32 pb-20 overflow-hidden border-b border-white/5">
+        <header className="relative pt-32 pb-20 overflow-hidden">
+          <div className="absolute inset-0 bg-[#0a0a0f]" />
+          {/* Neon Glow Shadows */}
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#FF8C00]/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none -translate-y-1/2" />
+          <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-[#8B5CF6]/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none -translate-y-1/2" />
+          
           <div className="container-max px-6 relative z-10">
-            <NavigationBack href="/blog" label="← Quay lại Blog" />
-            <Breadcrumbs 
-              items={[
-                { label: 'Trang chủ', href: '/' },
-                { label: 'Blog', href: '/blog' },
-                { label: post.category, href: `/blog?category=${encodeURIComponent(post.category)}` },
-                { label: post.title }
-              ]} 
-            />
+            <div className="glass-panel border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_0_80px_rgba(255,46,99,0.1)]">
+              <NavigationBack href="/blog" label="← Quay lại Blog" />
+              <Breadcrumbs 
+                items={[
+                  { label: 'Trang chủ', href: '/' },
+                  { label: 'Blog', href: '/blog' },
+                  { label: post.category, href: `/blog?category=${encodeURIComponent(post.category)}` },
+                  { label: post.title }
+                ]} 
+              />
 
-            <div className="max-w-4xl mt-8">
-              <div className="flex items-center gap-3 mb-8">
-                <span className="px-4 py-1.5 bg-[#FF8C00]/10 border border-[#FF8C00]/30 text-[#FF8C00] text-[10px] font-black uppercase tracking-widest rounded-full">
-                  {post.category}
-                </span>
-                <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                  <Clock size={14} /> {post.readTime || '5 phút'} đọc
-                </span>
-              </div>
+              <div className="max-w-4xl mt-8">
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="px-4 py-1.5 bg-[#FF8C00]/10 border border-[#FF8C00]/30 text-[#FF8C00] text-[10px] font-black uppercase tracking-widest rounded-full">
+                    {post.category}
+                  </span>
+                  <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                    <Clock size={14} /> {post.readTime || '5 phút'} đọc
+                  </span>
+                </div>
 
-              <h1 className="font-h1 text-4xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight tracking-tight antialiased">
-                {post.title}
-              </h1>
+                <h1 className="font-h1 text-4xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight tracking-tight antialiased">
+                  {post.title}
+                </h1>
 
-              <div className="flex flex-wrap items-center gap-8 border-t border-white/5 pt-8">
-                <div className="flex items-center gap-3">
-                    <Image 
-                      src={post.authorImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop'} 
-                      alt={post.author} 
-                      width={48}
-                      height={48}
-                      referrerPolicy="no-referrer"
-                      className="w-12 h-12 rounded-full border border-white/10 object-cover"
-                    />
-                  <div>
-                    <p className="text-white font-black text-sm">{post.author}</p>
-                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Growth Expert</p>
+                <div className="flex flex-wrap items-center gap-8 border-t border-white/5 pt-8">
+                  <div className="flex items-center gap-3">
+                      <Image 
+                        src={post.authorImage || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop'} 
+                        alt={post.author} 
+                        width={48}
+                        height={48}
+                        referrerPolicy="no-referrer"
+                        className="w-12 h-12 rounded-full border border-white/10 object-cover"
+                      />
+                    <div>
+                      <p className="text-white font-black text-sm">{post.author}</p>
+                      <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Growth Expert</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 text-slate-500 font-bold text-sm">
-                  <Calendar size={16} className="text-[#FF2E63]" /> {post.date}
-                </div>
-                <div className="flex items-center gap-4 ml-auto">
-                  <SocialShare url={`https://360tuongtac.com/blog/${post.slug}`} title={post.title} />
+                  <div className="flex items-center gap-2 text-slate-500 font-bold text-sm">
+                    <Calendar size={16} className="text-[#FF2E63]" /> {post.date}
+                  </div>
+                  <div className="flex items-center gap-4 ml-auto">
+                    <SocialShare url={`https://360tuongtac.com/blog/${post.slug}`} title={post.title} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -339,7 +346,7 @@ export default async function BlogPostPage({ params }: Props) {
                   </div>
                   <div className="mt-6 flex justify-center">
                     <Link 
-                      href="http://360tuongtac.com/auth/login" 
+                      href="https://360tuongtac.com/auth/login" 
                       className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-black rounded-xl shadow-[0_0_20px_rgba(255,46,99,0.3)] hover:shadow-[0_0_30px_rgba(255,46,99,0.5)] hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-sm"
                     >
                       Bắt đầu ngay

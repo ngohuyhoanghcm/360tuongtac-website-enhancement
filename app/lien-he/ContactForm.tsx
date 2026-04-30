@@ -6,6 +6,7 @@ import { Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' });
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   
   const validateVietnamPhone = (phone: string) => {
     const rawPhone = phone.replace(/[\s\-\.]/g, '');
@@ -17,6 +18,7 @@ export default function ContactForm() {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: null, message: '' });
+    setFieldErrors({});
 
     const formData = new FormData(e.currentTarget);
     const data = {
@@ -27,20 +29,26 @@ export default function ContactForm() {
     };
 
     // Client-side Validation (Tăng trải nghiệm người dùng)
+    let newErrors: Record<string, string> = {};
     if (!data.name?.trim()) {
-      setStatus({ type: 'error', message: 'Vui lòng nhập họ và tên.' });
-      setLoading(false);
-      return;
+      newErrors.name = 'Vui lòng nhập họ và tên.';
     }
     
-    if (!validateVietnamPhone(data.phone)) {
-      setStatus({ type: 'error', message: 'Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.' });
-      setLoading(false);
-      return;
+    if (!data.phone?.trim()) {
+      newErrors.phone = 'Vui lòng nhập số điện thoại.';
+    } else if (!validateVietnamPhone(data.phone)) {
+      newErrors.phone = 'Số điện thoại không hợp lệ. Vui lòng kiểm tra lại.';
     }
 
-    if (data.message?.trim().length < 10) {
-      setStatus({ type: 'error', message: 'Mô tả cần chi tiết hơn (ít nhất 10 ký tự).' });
+    if (!data.message?.trim()) {
+      newErrors.message = 'Vui lòng nhập nội dung yêu cầu.';
+    } else if (data.message.trim().length < 10) {
+      newErrors.message = 'Mô tả cần chi tiết hơn (ít nhất 10 ký tự).';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setFieldErrors(newErrors);
+      setStatus({ type: 'error', message: 'Vui lòng kiểm tra lại các thông tin đã nhập.' });
       setLoading(false);
       return;
     }
@@ -60,6 +68,9 @@ export default function ContactForm() {
         setStatus({ type: 'success', message: 'Gửi thành công! Chuyên gia 360TuongTac sẽ liên hệ bạn ngay.' });
         (e.target as HTMLFormElement).reset();
       } else {
+        if (result.errors) {
+          setFieldErrors(result.errors);
+        }
         setStatus({ type: 'error', message: result.message || 'Hệ thống đang bận, vui lòng gửi lại sau ít phút hoặc liên hệ Hotline.' });
       }
     } catch (error) {
@@ -93,11 +104,13 @@ export default function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="group space-y-2">
               <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">HỌ VÀ TÊN *</label>
-              <input name="name" required type="text" placeholder="Nguyễn Văn A" className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600" />
+              <input name="name" type="text" placeholder="Nguyễn Văn A" className={`w-full bg-white/[0.03] border ${fieldErrors.name ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600`} />
+              {fieldErrors.name && <p className="text-red-500 text-sm mt-1 mx-2">{fieldErrors.name}</p>}
             </div>
             <div className="group space-y-2">
               <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">SỐ ĐIỆN THOẠI *</label>
-              <input name="phone" required type="tel" placeholder="09xx xxx xxx" className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600" />
+              <input name="phone" type="tel" placeholder="09xx xxx xxx" className={`w-full bg-white/[0.03] border ${fieldErrors.phone ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600`} />
+              {fieldErrors.phone && <p className="text-red-500 text-sm mt-1 mx-2">{fieldErrors.phone}</p>}
             </div>
           </div>
           <div className="group space-y-2">
@@ -119,7 +132,8 @@ export default function ContactForm() {
           </div>
           <div className="group space-y-2">
             <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">NỘI DUNG YÊU CẦU *</label>
-            <textarea name="message" required rows={4} placeholder="Mô tả ngắn gọn về tình trạng kênh hoặc website của bạn..." className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600 resize-none"></textarea>
+            <textarea name="message" rows={4} placeholder="Mô tả ngắn gọn về tình trạng kênh hoặc website của bạn..." className={`w-full bg-white/[0.03] border ${fieldErrors.message ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600 resize-none`}></textarea>
+            {fieldErrors.message && <p className="text-red-500 text-sm mt-1 mx-2">{fieldErrors.message}</p>}
           </div>
           <button disabled={loading} type="submit" className="relative w-full overflow-hidden rounded-2xl p-px group disabled:opacity-70 disabled:cursor-not-allowed mt-4">
             <span className="absolute inset-0 bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] transition-transform duration-500"></span>

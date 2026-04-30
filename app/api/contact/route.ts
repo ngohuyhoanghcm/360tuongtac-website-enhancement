@@ -8,6 +8,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     let { name, phone, service, message } = body;
 
+    let errors: Record<string, string> = {};
+
     // 1. Sanitize and validate inputs
     name = name?.trim() || '';
     phone = phone?.trim().replace(/[\s\-\.]/g, '') || ''; // Remove spaces, dashes, dots
@@ -15,40 +17,31 @@ export async function POST(req: Request) {
     message = message?.trim() || '';
 
     // Required fields check
-    if (!name || !phone || !message) {
-      return NextResponse.json({ 
-        success: false, 
-        message: 'Vui lòng điền đầy đủ các thông tin bắt buộc (Họ tên, Số điện thoại, Nội dung).' 
-      }, { status: 400 });
+    if (!name) {
+      errors.name = 'Vui lòng nhập họ và tên.';
+    } else if (name.length > 100) {
+      errors.name = 'Họ tên quá dài. Vui lòng nhập dưới 100 ký tự.';
     }
 
-    // Name length check
-    if (name.length > 100) {
-      return NextResponse.json({ 
-        success: false, 
-        message: 'Họ tên quá dài. Vui lòng nhập dưới 100 ký tự.' 
-      }, { status: 400 });
+    if (!phone) {
+      errors.phone = 'Vui lòng nhập số điện thoại.';
+    } else if (!PHONE_REGEX.test(phone)) {
+      errors.phone = 'Số điện thoại không hợp lệ. Vui lòng nhập đúng định dạng số Việt Nam.';
     }
 
-    // Phone format check
-    if (!PHONE_REGEX.test(phone)) {
-      return NextResponse.json({ 
-        success: false, 
-        message: 'Số điện thoại không hợp lệ. Vui lòng nhập đúng định dạng số điện thoại Việt Nam.' 
-      }, { status: 400 });
+    if (!message) {
+      errors.message = 'Vui lòng nhập nội dung yêu cầu.';
+    } else if (message.length < 10) {
+      errors.message = 'Nội dung quá ngắn. Vui lòng mô tả ít nhất 10 ký tự.';
+    } else if (message.length > 2000) {
+      errors.message = 'Nội dung quá dài. Vui lòng tóm tắt dưới 2000 ký tự.';
     }
 
-    // Message length check
-    if (message.length < 10) {
+    if (Object.keys(errors).length > 0) {
       return NextResponse.json({ 
         success: false, 
-        message: 'Nội dung quá ngắn. Vui lòng mô tả chi tiết hơn (ít nhất 10 ký tự).' 
-      }, { status: 400 });
-    }
-    if (message.length > 2000) {
-      return NextResponse.json({ 
-        success: false, 
-        message: 'Nội dung quá dài. Vui lòng tóm tắt dưới 2000 ký tự.' 
+        errors,
+        message: 'Vui lòng kiểm tra lại các thông tin đã nhập.' 
       }, { status: 400 });
     }
 
