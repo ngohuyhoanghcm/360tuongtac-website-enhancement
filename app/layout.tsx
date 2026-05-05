@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import BottomNav from '@/components/layout/BottomNav';
+import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
 
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ['400', '500', '600', '700', '800', '900'],
@@ -35,12 +36,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+
   return (
     <html lang="vi" className="dark scroll-smooth">
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </head>
       <body className={`${beVietnamPro.variable} ${inter.variable} ${spaceGrotesk.variable} font-body bg-background-dark text-white min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary`}>
+        {gaMeasurementId && <GoogleAnalytics measurementId={gaMeasurementId} />}
         <Header />
         <main className="flex-grow">
           {children}
