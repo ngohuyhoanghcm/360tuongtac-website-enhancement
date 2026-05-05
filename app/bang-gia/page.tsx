@@ -1,5 +1,14 @@
+import type { Metadata } from 'next';
 import { CheckCircle, ShieldCheck, Zap, Calculator, ShoppingCart, Rocket, Headphones } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Bảng Giá Dịch Vụ | 360TuongTac',
+  description: 'Khám phá bảng giá dịch vụ tăng tương tác mạng xã hội tốt nhất thị trường. TikTok, Facebook, Instagram, YouTube. Cam kết chất lượng thật, giá cạnh tranh.',
+  alternates: {
+    canonical: 'https://360tuongtac.com/bang-gia',
+  },
+};
 
 export default function Pricing() {
   return (

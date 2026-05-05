@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import HeroSection from '@/components/landing/HeroSection';
 import PainPointSection from '@/components/landing/PainPointSection';
 import EducationSection from '@/components/landing/EducationSection';
@@ -9,6 +10,14 @@ import PricingTable from '@/components/landing/PricingTable';
 import CaseStudyGrid from '@/components/landing/CaseStudyGrid';
 import FAQAccordion from '@/components/landing/FAQAccordion';
 import FinalCTA from '@/components/landing/FinalCTA';
+
+export const metadata: Metadata = {
+  title: '360 Tương Tác - Tăng Like, Follow, View Thật | TikTok, Facebook, Instagram',
+  description: 'Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam. Tăng like, follow, view thật cho Facebook, TikTok, Instagram, YouTube. 10K+ khách hàng tin dùng.',
+  alternates: {
+    canonical: 'https://360tuongtac.com',
+  },
+};
 
 export default function Home() {
   return (
