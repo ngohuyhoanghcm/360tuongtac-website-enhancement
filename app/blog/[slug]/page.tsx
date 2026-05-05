@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title} | Học Viện 360TuongTac`,
     description: post.excerpt,
     alternates: {
-      canonical: `https://360tuongtac.com/blog/${post.slug}`,
+      canonical: `https://grow.360tuongtac.com/blog/${post.slug}`,
     },
     openGraph: {
       title: post.title,
@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: Props) {
       name: '360TuongTac',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://360tuongtac.com/logo.png',
+        url: 'https://grow.360tuongtac.com/logo.png',
       },
     },
     wordCount: wordCount,
@@ -100,9 +100,9 @@ export default async function BlogPostPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: 'https://360tuongtac.com' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://360tuongtac.com/blog' },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `https://360tuongtac.com/blog/${post.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: 'https://grow.360tuongtac.com' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://grow.360tuongtac.com/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `https://grow.360tuongtac.com/blog/${post.slug}` },
     ],
   };
 
@@ -110,8 +110,8 @@ export default async function BlogPostPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: '360TuongTac',
-    url: 'https://360tuongtac.com',
-    logo: 'https://360tuongtac.com/logo.png',
+    url: 'https://grow.360tuongtac.com',
+    logo: 'https://grow.360tuongtac.com/logo.png',
     sameAs: [
       'https://www.facebook.com/360tuongtac',
       'https://www.tiktok.com/@360tuongtac'
@@ -193,7 +193,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <Calendar size={16} className="text-[#FF2E63]" /> {post.date}
                   </div>
                   <div className="flex items-center gap-4 ml-auto">
-                    <SocialShare url={`https://360tuongtac.com/blog/${post.slug}`} title={post.title} />
+                    <SocialShare url={`https://grow.360tuongtac.com/blog/${post.slug}`} title={post.title} />
                   </div>
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default async function BlogPostPage({ params }: Props) {
 
               {/* Author Box Footer */}
               <div className="mt-16 xl:hidden">
-                <SocialShare url={`https://360tuongtac.com/blog/${post.slug}`} title={post.title} className="justify-center flex" />
+                <SocialShare url={`https://grow.360tuongtac.com/blog/${post.slug}`} title={post.title} className="justify-center flex" />
               </div>
 
               <footer className="mt-16 pt-12 border-t border-white/5">
@@ -366,7 +366,7 @@ export default async function BlogPostPage({ params }: Props) {
 
               <TableOfContents />
               <div className="hidden xl:block sticky top-32">
-                <SocialShare url={`https://360tuongtac.com/blog/${post.slug}`} title={post.title} layout="vertical" />
+                <SocialShare url={`https://grow.360tuongtac.com/blog/${post.slug}`} title={post.title} layout="vertical" />
               </div>
             </aside>
           </div>
