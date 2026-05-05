@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { BLOG_POSTS } from '@/lib/constants/blog';
 import { ALL_SLUGS as SERVICE_SLUGS } from '@/data/services';
 
-const BASE_URL = 'https://360tuongtac.com';
+const BASE_URL = 'https://grow.360tuongtac.com';
 
 function parseDate(dateStr: string) {
   if (!dateStr) return new Date().toISOString().split('T')[0];

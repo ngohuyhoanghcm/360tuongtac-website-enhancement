@@ -6,12 +6,12 @@ export function generateLandingPageMetadata(page: LandingPage): Metadata {
     title: `${page.metaTitle} | 360TuongTac`,
     description: page.metaDescription,
     alternates: {
-      canonical: `https://360tuongtac.com/dich-vu/${page.slug}`,
+      canonical: `https://grow.360tuongtac.com/dich-vu/${page.slug}`,
     },
     openGraph: {
       title: page.metaTitle,
       description: page.metaDescription,
-      url: `https://360tuongtac.com/dich-vu/${page.slug}`,
+      url: `https://grow.360tuongtac.com/dich-vu/${page.slug}`,
       siteName: '360TuongTac',
       locale: 'vi_VN',
       type: 'website',
@@ -35,17 +35,17 @@ export function generateSchemas(page: LandingPage, slug: string) {
     "@type": "Service",
     "name": page.title,
     "description": page.metaDescription,
-    "mainEntityOfPage": `https://360tuongtac.com/dich-vu/${slug}`,
+    "mainEntityOfPage": `https://grow.360tuongtac.com/dich-vu/${slug}`,
     "provider": {
       "@type": "Organization",
       "name": "360TuongTac",
-      "url": "https://360tuongtac.com",
-      "logo": "https://360tuongtac.com/logo.png",
+      "url": "https://grow.360tuongtac.com",
+      "logo": "https://grow.360tuongtac.com/logo.png",
       "telephone": "+84-388-009-669",
       "sameAs": [
         "https://www.facebook.com/360tuongtac",
         "https://www.tiktok.com/@360tuongtac",
-        "https://360tuongtac.com"
+        "https://grow.360tuongtac.com"
       ]
     },
     "serviceType": "Social Media Marketing",
@@ -81,19 +81,19 @@ export function generateSchemas(page: LandingPage, slug: string) {
         "@type": "ListItem",
         "position": 1,
         "name": "Trang chủ",
-        "item": "https://360tuongtac.com"
+        "item": "https://grow.360tuongtac.com"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Dịch vụ",
-        "item": "https://360tuongtac.com/dich-vu"
+        "item": "https://grow.360tuongtac.com/dich-vu"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": page.title,
-        "item": `https://360tuongtac.com/dich-vu/${slug}`
+        "item": `https://grow.360tuongtac.com/dich-vu/${slug}`
       }
     ]
   };
@@ -102,13 +102,13 @@ export function generateSchemas(page: LandingPage, slug: string) {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "360 Tương Tác",
-    "url": "https://360tuongtac.com",
-    "logo": "https://360tuongtac.com/logo.png",
+    "url": "https://grow.360tuongtac.com",
+    "logo": "https://grow.360tuongtac.com/logo.png",
     "description": "Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam",
     "sameAs": [
       "https://www.facebook.com/360tuongtac",
       "https://www.tiktok.com/@360tuongtac",
-      "https://360tuongtac.com"
+      "https://grow.360tuongtac.com"
     ],
     "address": {
       "@type": "PostalAddress",
