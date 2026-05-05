@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://grow.360tuongtac.com/sitemap.xml',
+    sitemap: 'https://360tuongtac.com/sitemap.xml',
   };
 }

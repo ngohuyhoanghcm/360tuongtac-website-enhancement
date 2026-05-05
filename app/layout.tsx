@@ -29,7 +29,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://grow.360tuongtac.com'),
+  metadataBase: new URL('https://360tuongtac.com'),
   title: '360 Tương Tác - Tăng Like, Follow, View Thật | TikTok, Facebook, Instagram',
   description: 'Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam. Tăng like, follow, view thật cho Facebook, TikTok, Instagram, YouTube. 10K+ khách hàng tin dùng.',
 };

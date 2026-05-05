@@ -10,7 +10,7 @@ interface FinalCTAProps {
 
 export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAProps) {
   const ctaUrl = productUrl 
-    ? `${productUrl}?utm_source=grow.360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=final_cta`
+    ? `${productUrl}?utm_source=360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=final_cta`
     : "http://360tuongtac.com/auth/login";
 
   return (

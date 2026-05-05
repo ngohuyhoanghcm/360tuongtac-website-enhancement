@@ -52,7 +52,7 @@ export default function ServicesPage() {
             "provider": {
               "@type": "Organization",
               "name": "360TuongTac",
-              "url": "https://grow.360tuongtac.com"
+              "url": "https://360tuongtac.com"
             },
             "aggregateRating": {
               "@type": "AggregateRating",

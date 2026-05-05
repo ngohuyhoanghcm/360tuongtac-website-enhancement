@@ -129,7 +129,7 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
               </div>
 
               <Link 
-                href={`${tier.url}?utm_source=grow.360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceName || 'service'}&utm_content=pricing_tier_${index + 1}`} 
+                href={`${tier.url}?utm_source=360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceName || 'service'}&utm_content=pricing_tier_${index + 1}`} 
                 className={`w-full py-4 rounded-lg font-bold text-center transition-all duration-300 ${tier.popular ? 'bg-gradient-to-r from-accent to-primary text-white hover:shadow-lg hover:scale-105' : 'glass-modal text-white hover:bg-white/10 border border-white/20'}`}
               >
                 {tier.buttonText}
