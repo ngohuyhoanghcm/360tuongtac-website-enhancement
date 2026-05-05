@@ -20,6 +20,14 @@ RUN npm ci && npm cache clean --force
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Declare build arguments
+ARG NEXT_PUBLIC_GA_MEASUREMENT_ID
+ARG NEXT_PUBLIC_GTM_ID
+
+# Set environment variables for build
+ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
+ENV NEXT_PUBLIC_GTM_ID=${NEXT_PUBLIC_GTM_ID}
+
 # Copy deps from previous stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

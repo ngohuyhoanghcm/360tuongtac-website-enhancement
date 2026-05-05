@@ -91,6 +91,9 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
+          build-args: |
+            NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+            NEXT_PUBLIC_GTM_ID=${{ secrets.NEXT_PUBLIC_GTM_ID }}
 
   # ==========================================
   # Job 3: Deploy to VPS via SSH
