@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: Props) {
       name: '360TuongTac',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://ais-dev-pchhg6c65q2vymp7lrkg6k-381323899482.asia-east1.run.app/logo.png',
+        url: 'https://360tuongtac.com/logo.png',
       },
     },
     wordCount: wordCount,
@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: Props) {
     '@type': 'Organization',
     name: '360TuongTac',
     url: 'https://360tuongtac.com',
-    logo: 'https://ais-dev-pchhg6c65q2vymp7lrkg6k-381323899482.asia-east1.run.app/logo.png',
+    logo: 'https://360tuongtac.com/logo.png',
     sameAs: [
       'https://www.facebook.com/360tuongtac',
       'https://www.tiktok.com/@360tuongtac'
