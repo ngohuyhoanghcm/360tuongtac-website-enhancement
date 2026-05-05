@@ -1,4 +1,8 @@
 # syntax=docker.io/docker/dockerfile:1
+#
+# 360TuongTac Marketing Website — Production Dockerfile
+# Multi-stage build for Next.js 15 standalone output
+# Target: ghcr.io/ngohuyhoanghcm/360tuongtac-marketing
 
 # -----------------------------------------------
 # Stage 1: Dependencies
