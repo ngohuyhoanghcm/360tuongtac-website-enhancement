@@ -134,13 +134,21 @@ jobs:
             docker stop 360tuongtac-app 2>/dev/null || true
             docker rm 360tuongtac-app 2>/dev/null || true
 
-            # Run new container (SECURITY: localhost only binding)
+            # Run new container (SECURITY: localhost only + Traefik routing)
             echo "[4/6] Starting new container..."
             docker run -d \
               --name 360tuongtac-app \
               --network 360tuongtac-network \
+              --network dokploy-network \
               -p 127.0.0.1:3001:3000 \
+              --label "traefik.enable=true" \
+              --label "traefik.http.routers.360tuongtac.rule=Host(\`grow.360tuongtac.com\`)" \
+              --label "traefik.http.routers.360tuongtac.entrypoints=websecure" \
+              --label "traefik.http.routers.360tuongtac.tls=true" \
+              --label "traefik.http.routers.360tuongtac.tls.certresolver=letsencrypt" \
+              --label "traefik.http.services.360tuongtac.loadbalancer.server.port=3000" \
               --env-file /opt/360tuongtac/.env.production \
+              -e NEXT_PUBLIC_SITE_URL="${{ secrets.NEXT_PUBLIC_SITE_URL }}" \
               -e NEXT_PUBLIC_GA_MEASUREMENT_ID="${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}" \
               -e NEXT_PUBLIC_GTM_ID="${{ secrets.NEXT_PUBLIC_GTM_ID }}" \
               -e TELEGRAM_BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}" \
