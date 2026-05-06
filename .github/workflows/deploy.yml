@@ -134,12 +134,12 @@ jobs:
             docker stop 360tuongtac-app 2>/dev/null || true
             docker rm 360tuongtac-app 2>/dev/null || true
 
-            # Run new container
+            # Run new container (SECURITY: localhost only binding)
             echo "[4/6] Starting new container..."
             docker run -d \
               --name 360tuongtac-app \
               --network 360tuongtac-network \
-              -p 3001:3000 \
+              -p 127.0.0.1:3001:3000 \
               --env-file /opt/360tuongtac/.env.production \
               -e NEXT_PUBLIC_GA_MEASUREMENT_ID="${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}" \
               -e NEXT_PUBLIC_GTM_ID="${{ secrets.NEXT_PUBLIC_GTM_ID }}" \
@@ -186,7 +186,7 @@ jobs:
             docker ps --filter "name=360tuongtac-app" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
   # ==========================================
-  # Job 4: External Verification
+  # Job 4: Internal Verification (localhost only)
   # ==========================================
   verify:
     name: Verify Deployment
@@ -195,25 +195,34 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Test external endpoint
-        run: |
-          echo "Testing http://14.225.224.130:3001/ ..."
-          for i in $(seq 1 6); do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://14.225.224.130:3001/ || echo "000")
-            if [ "$STATUS" = "200" ] || [ "$STATUS" = "308" ]; then
-              echo "✅ Deployment verified! HTTP $STATUS"
-              exit 0
+      - name: Verify container is running on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            echo "Verifying container binding..."
+            PORTS=$(docker ps --filter 'name=360tuongtac-app' --format '{{.Ports}}')
+            echo "Container ports: $PORTS"
+            
+            # Check if binding is localhost only
+            if echo "$PORTS" | grep -q '127.0.0.1:3001'; then
+              echo "✅ Container is bound to localhost only (127.0.0.1:3001)"
+            elif echo "$PORTS" | grep -q '0.0.0.0:3001'; then
+              echo "❌ SECURITY ISSUE: Container is bound to 0.0.0.0 (public)"
+              exit 1
+            else
+              echo "⚠️  Unexpected port binding: $PORTS"
+              exit 1
             fi
-            echo "Attempt $i/6: HTTP $STATUS, retrying in 10s..."
-            sleep 10
-          done
-          echo "❌ External verification failed"
-          exit 1
-
-      - name: Test additional routes
-        run: |
-          echo "Testing critical routes..."
-          for route in /dich-vu/ /blog/ /bang-gia /lien-he /sitemap.xml /robots.txt; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://14.225.224.130:3001${route}" || echo "000")
-            echo "  $route -> HTTP $STATUS"
-          done
+            
+            # Test internal access
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:3001/ || echo "000")
+            if [ "$STATUS" = "200" ] || [ "$STATUS" = "308" ]; then
+              echo "✅ Internal access works! HTTP $STATUS"
+            else
+              echo "❌ Internal access failed: HTTP $STATUS"
+              exit 1
+            fi
