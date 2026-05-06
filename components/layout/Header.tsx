@@ -68,13 +68,13 @@ export default function Header() {
   
           <div className="flex items-center gap-4 flex-1 md:flex-none justify-end">
             <Link 
-              href="http://360tuongtac.com/auth/login" 
+              href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=header_mobile&utm_content=thu_ngay" 
               className="md:hidden bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-[0_0_15px_rgba(255,46,99,0.3)] active:scale-95 transition-all duration-300"
             >
               Thử ngay
             </Link>
             <Link 
-              href="http://360tuongtac.com/auth/login" 
+              href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=header_desktop&utm_content=bắt_đầu_ngay" 
               className="hidden md:inline-block bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white px-5 lg:px-7 py-2.5 lg:py-3 rounded-xl font-black text-[11px] lg:text-[12px] uppercase tracking-widest shadow-[0_0_20px_rgba(255,140,0,0.3)] hover:shadow-[0_0_30px_rgba(255,46,99,0.5)] hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Bắt đầu ngay

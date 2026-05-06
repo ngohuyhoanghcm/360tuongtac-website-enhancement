@@ -34,7 +34,7 @@ export default function Navbar() {
             )
           })}
         </div>
-        <a href="https://360tuongtac.com" className="bg-[#6C63FF] text-white px-6 py-2.5 rounded-lg font-bold text-sm hover:shadow-[0_0_15px_rgba(108,99,255,0.4)] transition-all scale-95 active:scale-90">
+        <a href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=navbar&utm_content=bắt_đầu_ngay" className="bg-[#6C63FF] text-white px-6 py-2.5 rounded-lg font-bold text-sm hover:shadow-[0_0_15px_rgba(108,99,255,0.4)] transition-all scale-95 active:scale-90">
           Bắt đầu ngay
         </a>
       </div>

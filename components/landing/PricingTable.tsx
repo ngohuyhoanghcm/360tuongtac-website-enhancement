@@ -72,12 +72,12 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
         price: pkg.price === 0 ? "Siêu ưu đãi" : `Từ ${pkg.price.toLocaleString('vi-VN')}Đ`,
         description: pkg.duration ? `Gói triển khai trong ${pkg.duration}` : "Giải pháp tiết kiệm nhất để tạo nền tảng ban đầu.",
         features: pkg.features,
-        buttonText: pkg.recommended ? "Đăng ký dịch vụ này" : "Xem bảng giá chi tiết",
+        buttonText: pkg.recommended ? "Đăng ký dịch vụ này" : "Tư vấn Zalo",
         popular: pkg.recommended || false,
         color: idx === 1 ? "accent" : idx === 2 ? "success" : "primary",
         url: pkg.productUrl
       }))
-    : tiers.map(t => ({ ...t, url: 'https://360tuongtac.com/home' }));
+    : tiers.map(t => ({ ...t, url: 'https://zalo.me/0388009669' }));
 
   return (
     <section className="py-16 md:py-24 px-6 border-t border-white/5 bg-background-dark/80" id="pricing">
@@ -129,9 +129,18 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
               </div>
 
               <Link 
-                href={`${tier.url}?utm_source=360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceName || 'service'}&utm_content=pricing_tier_${index + 1}`} 
-                className={`w-full py-4 rounded-lg font-bold text-center transition-all duration-300 ${tier.popular ? 'bg-gradient-to-r from-accent to-primary text-white hover:shadow-lg hover:scale-105' : 'glass-modal text-white hover:bg-white/10 border border-white/20'}`}
+                href={tier.buttonText === "Tư vấn Zalo" 
+                  ? "https://zalo.me/0388009669?utm_source=grow&utm_medium=pricing_table&utm_campaign=${serviceName || 'service'}&utm_content=pricing_tier_${index + 1}"
+                  : `${tier.url}?utm_source=grow&utm_medium=pricing_table&utm_campaign=${serviceName || 'service'}&utm_content=pricing_tier_${index + 1}`}
+                target={tier.buttonText === "Tư vấn Zalo" ? "_blank" : undefined}
+                rel={tier.buttonText === "Tư vấn Zalo" ? "noopener noreferrer" : undefined}
+                className={`w-full py-4 rounded-lg font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${tier.popular ? 'bg-gradient-to-r from-accent to-primary text-white hover:shadow-lg hover:scale-105' : tier.buttonText === "Tư vấn Zalo" ? 'glass-panel border border-white/20 text-white hover:bg-white/10 hover:border-[#00E5FF]/40 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)]' : 'glass-modal text-white hover:bg-white/10 border border-white/20'}`}
               >
+                {tier.buttonText === "Tư vấn Zalo" && (
+                  <svg className="w-5 h-5 text-[#00E5FF]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                  </svg>
+                )}
                 {tier.buttonText}
               </Link>
             </div>

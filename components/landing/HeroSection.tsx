@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import { trackCTAClick } from '@/lib/analytics';
 import dynamic from 'next/dynamic';
 import PromoBadge from './PromoBadge';
 
@@ -47,13 +48,19 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-5 flex-wrap">
-            <Link href="https://360tuongtac.com/home" className="btn-primary group">
+            <Link 
+              href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=homepage_primary&utm_content=hero_truy_cap_ngay" 
+              onClick={() => trackCTAClick('hero_truy_cap_ngay', 'homepage', 'https://360tuongtac.com/home')}
+              className="btn-primary group">
               <span className="flex items-center gap-2">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 Truy Cập Ngay
               </span>
             </Link>
-            <Link href="https://360tuongtac.com/home" className="btn-secondary">
+            <Link 
+              href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=homepage_primary&utm_content=hero_xem_dich_vu" 
+              onClick={() => trackCTAClick('hero_xem_dich_vu', 'homepage', 'https://360tuongtac.com/home')}
+              className="btn-secondary">
               <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
               Xem Dịch Vụ
             </Link>

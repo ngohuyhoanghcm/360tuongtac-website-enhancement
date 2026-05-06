@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Standardized data Extraction
+// Standardized data Extraction - Expanded to 30 profiles, 47 services
 const CUSTOMER_PROFILES = [
   { name: "Hoàng Minh Tuấn", type: "Cá nhân", avatar: "👤" },
   { name: "Nguyễn Thị Mai", type: "Cá nhân", avatar: "👤" },
@@ -13,15 +13,85 @@ const CUSTOMER_PROFILES = [
   { name: "Fashion Store VN", type: "Shop Online", avatar: "🛍️" },
   { name: "Beauty Blogger Linh", type: "Influencer", avatar: "💅" },
   { name: "Startup Công Nghệ", type: "Doanh nghiệp", avatar: "🚀" },
+  { name: "Shop Mẹ Và Bé", type: "Shop Online", avatar: "👶" },
+  { name: "Fitness Coach Hùng", type: "Influencer", avatar: "💪" },
+  { name: "Restaurant Sài Gòn", type: "Doanh nghiệp", avatar: "🍽️" },
+  { name: "Travel Blogger An", type: "Influencer", avatar: "✈️" },
+  { name: "Shop Mỹ Phẩm Hàn", type: "Shop Online", avatar: "💄" },
+  { name: "Gym Center HN", type: "Doanh nghiệp", avatar: "🏋️" },
+  { name: "Fashionista Linh", type: "Influencer", avatar: "👗" },
+  { name: "Shop Đồ Chơi", type: "Shop Online", avatar: "🎮" },
+  { name: "Marketing Agency", type: "Doanh nghiệp", avatar: "📊" },
+  { name: "Food Reviewer Nam", type: "Influencer", avatar: "🍜" },
+  { name: "Shop Giày Dép", type: "Shop Online", avatar: "👟" },
+  { name: "Yoga Instructor", type: "Influencer", avatar: "🧘" },
+  { name: "Shop Điện Thoại", type: "Shop Online", avatar: "📱" },
+  { name: "Coffee Shop HN", type: "Doanh nghiệp", avatar: "☕" },
+  { name: "Music Producer", type: "Influencer", avatar: "🎵" },
+  { name: "Shop Nội Thất", type: "Shop Online", avatar: "🛋️" },
+  { name: "Photographer Pro", type: "Influencer", avatar: "📸" },
+  { name: "Shop Phụ Kiện", type: "Shop Online", avatar: "💎" },
+  { name: "Dance Studio", type: "Doanh nghiệp", avatar: "💃" },
+  { name: "Gaming Streamer", type: "Influencer", avatar: "🎮" },
 ];
 
 const SERVICES = [
+  // TikTok Services (15)
   { text: "5K View Livestream TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
   { text: "10K Tim Video TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "2K Follow TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa mua" },
+  { text: "1K Comment TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa seeding" },
+  { text: "50K View Video TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "100 Like TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "Share Video TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa chia sẻ" },
+  { text: "Save Video TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa lưu" },
+  { text: "Tăng Mắt Live TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "Follow TikTok Việt", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "Like Comment TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "View Story TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa xem" },
+  { text: "Tương Tác TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa tăng" },
+  { text: "Booking KOC TikTok", platform: "tiktok", color: "#25F4EE", action: "vừa đặt" },
+  { text: "Seeding TikTok Shop", platform: "tiktok", color: "#25F4EE", action: "vừa seeding" },
+  
+  // Facebook Services (12)
   { text: "2K Like Page Facebook", platform: "facebook", color: "#1877F2", action: "vừa mua" },
+  { text: "5K Follow Facebook", platform: "facebook", color: "#1877F2", action: "vừa tăng" },
+  { text: "1K Comment Facebook", platform: "facebook", color: "#1877F2", action: "vừa seeding" },
+  { text: "10K View Reels Facebook", platform: "facebook", color: "#1877F2", action: "vừa tăng" },
+  { text: "Like Bài Viết FB", platform: "facebook", color: "#1877F2", action: "vừa thích" },
+  { text: "Share Bài Viết FB", platform: "facebook", color: "#1877F2", action: "vừa chia sẻ" },
+  { text: "Member Group Facebook", platform: "facebook", color: "#1877F2", action: "vừa tham gia" },
+  { text: "Follow Profile FB", platform: "facebook", color: "#1877F2", action: "vừa theo dõi" },
+  { text: "View Video Facebook", platform: "facebook", color: "#1877F2", action: "vừa xem" },
+  { text: "Reaction Facebook", platform: "facebook", color: "#1877F2", action: "vừa thả tim" },
+  { text: "Check-in Facebook", platform: "facebook", color: "#1877F2", action: "vừa check-in" },
+  { text: "Event Facebook", platform: "facebook", color: "#1877F2", action: "vừa tham gia" },
+  
+  // Instagram Services (8)
   { text: "5K Follower Instagram", platform: "instagram", color: "#E1306C", action: "vừa tăng" },
-  { text: "Tài khoản ChatGPT Plus", platform: "chatgpt", color: "#10A37F", action: "vừa mua" },
+  { text: "10K Like Instagram", platform: "instagram", color: "#E1306C", action: "vừa tăng" },
+  { text: "1K Comment Instagram", platform: "instagram", color: "#E1306C", action: "vừa seeding" },
+  { text: "View Story Instagram", platform: "instagram", color: "#E1306C", action: "vừa xem" },
+  { text: "View Reels Instagram", platform: "instagram", color: "#E1306C", action: "vừa tăng" },
+  { text: "Save Post Instagram", platform: "instagram", color: "#E1306C", action: "vừa lưu" },
+  { text: "Share Instagram", platform: "instagram", color: "#E1306C", action: "vừa chia sẻ" },
+  { text: "Instagram Impressions", platform: "instagram", color: "#E1306C", action: "vừa tăng" },
+  
+  // YouTube Services (7)
   { text: "1K Subscribe YouTube", platform: "youtube", color: "#FF0000", action: "vừa tăng" },
+  { text: "10K View Video YouTube", platform: "youtube", color: "#FF0000", action: "vừa tăng" },
+  { text: "1K Like YouTube", platform: "youtube", color: "#FF0000", action: "vừa thích" },
+  { text: "Comment YouTube", platform: "youtube", color: "#FF0000", action: "vừa bình luận" },
+  { text: "Share Video YouTube", platform: "youtube", color: "#FF0000", action: "vừa chia sẻ" },
+  { text: "Watch Time YouTube", platform: "youtube", color: "#FF0000", action: "vừa tăng" },
+  { text: "Live View YouTube", platform: "youtube", color: "#FF0000", action: "vừa xem" },
+  
+  // Other Services (5)
+  { text: "Tài khoản ChatGPT Plus", platform: "chatgpt", color: "#10A37F", action: "vừa mua" },
+  { text: "Netflix Premium", platform: "chatgpt", color: "#10A37F", action: "vừa mua" },
+  { text: "Spotify Premium", platform: "chatgpt", color: "#10A37F", action: "vừa mua" },
+  { text: "Canva Pro", platform: "chatgpt", color: "#10A37F", action: "vừa mua" },
+  { text: "Proxy Cao Cấp", platform: "chatgpt", color: "#10A37F", action: "vừa mua" },
 ];
 
 const TIME_OPTIONS = ["Vừa xong", "1 phút trước", "2 phút trước", "5 phút trước"];

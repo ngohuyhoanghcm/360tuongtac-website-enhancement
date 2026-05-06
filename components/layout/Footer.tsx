@@ -8,7 +8,7 @@ const FOOTER_LINKS = {
     title: "DỊCH VỤ",
     links: [
       { name: "Tăng tương tác MXH", href: "https://360tuongtac.com/home" },
-      { name: "Tài khoản Premium", href: "https://360tuongtac.com/service/all" },
+      { name: "Tài khoản Premium", href: "https://360tuongtac.com/product/all" },
       { name: "Proxy & Server", href: "https://360tuongtac.com/proxy/proxy-v4-static" },
       { name: "Bảng giá dịch vụ", href: "/bang-gia" },
       { name: "CTV - Đại lý", href: "https://360tuongtac.com/upgrade" }
@@ -17,11 +17,11 @@ const FOOTER_LINKS = {
   accounts: {
     title: "TÀI KHOẢN HOT",
     links: [
-      { name: "ChatGPT Plus", href: "https://360tuongtac.com/service/all" },
-      { name: "Netflix Premium", href: "https://360tuongtac.com/service/all" },
-      { name: "Spotify Premium", href: "https://360tuongtac.com/service/all" },
-      { name: "Canva Pro", href: "https://360tuongtac.com/service/all" },
-      { name: "Microsoft 365", href: "https://360tuongtac.com/service/all" }
+      { name: "ChatGPT Plus", href: "https://360tuongtac.com/product/all" },
+      { name: "Netflix Premium", href: "https://360tuongtac.com/product/all" },
+      { name: "Spotify Premium", href: "https://360tuongtac.com/product/all" },
+      { name: "Canva Pro", href: "https://360tuongtac.com/product/all" },
+      { name: "Microsoft 365", href: "https://360tuongtac.com/product/all" }
     ]
   }
 };
@@ -102,7 +102,7 @@ export default function Footer() {
                 Nạp tiền
               </Link>
               <Link 
-                href="https://360tuongtac.com/api-docs" 
+                href="https://360tuongtac.com/docs-api-v2" 
                 className="bg-white/5 border border-white/10 text-white text-[12px] font-bold px-5 py-2.5 rounded-xl hover:bg-white/10 transition-colors"
               >
                 API Docs
@@ -133,11 +133,11 @@ export default function Footer() {
             <Link href="https://360tuongtac.com/rule" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
               Điều khoản
             </Link>
-            <Link href="https://360tuongtac.com/policy" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
+            <Link href="https://360tuongtac.com/rule" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
               Bảo mật
             </Link>
-            <Link href="https://360tuongtac.com/guide" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
-              Hướng dẫn
+            <Link href="https://zalo.me/0388009669" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
+              Hỗ trợ Zalo
             </Link>
           </div>
 

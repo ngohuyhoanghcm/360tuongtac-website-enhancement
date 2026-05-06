@@ -11,7 +11,7 @@ interface FinalCTAProps {
 export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAProps) {
   const ctaUrl = productUrl 
     ? `${productUrl}?utm_source=360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=final_cta`
-    : "http://360tuongtac.com/auth/login";
+    : "https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=final_cta&utm_content=dat_mua_ngay";
 
   return (
     <section className="py-24 md:py-32 relative overflow-hidden">
@@ -49,20 +49,20 @@ export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAPr
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link 
-                  href={ctaUrl} 
+                  href="https://zalo.me/0388009669" 
+                  target="_blank" rel="noopener noreferrer"
                   className="px-12 py-5 rounded-2xl bg-white text-slate-950 font-black text-lg shadow-xl hover:bg-[#00E5FF] hover:text-white transition-all duration-300 antialiased block"
                 >
-                  Đặt Mua Ngay
+                  Tư Vấn Zalo
                 </Link>
               </motion.div>
               
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link 
-                  href="https://zalo.me/0388009669" 
-                  target="_blank" rel="noopener noreferrer"
+                  href={ctaUrl} 
                   className="px-12 py-5 rounded-2xl glass-panel border border-white/10 text-white font-black text-lg hover:border-[#FF2E63]/40 transition-all duration-300 antialiased block"
                 >
-                  Tư Vấn Zalo
+                  Đặt Mua Ngay
                 </Link>
               </motion.div>
             </div>

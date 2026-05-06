@@ -15,7 +15,7 @@ interface ServiceHeroProps {
 export default function ServiceHero({ badge, title, description, productUrl, serviceSlug }: ServiceHeroProps) {
   const ctaUrl = productUrl 
     ? `${productUrl}?utm_source=360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=hero_cta`
-    : "http://360tuongtac.com/auth/login";
+    : "https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=service_hero&utm_content=hero_cta";
 
   return (
     <section className="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden border-b border-white/5">

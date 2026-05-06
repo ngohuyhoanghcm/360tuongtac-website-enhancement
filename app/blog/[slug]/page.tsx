@@ -355,7 +355,7 @@ export default async function BlogPostPage({ params }: Props) {
                   </div>
                   <div className="mt-6 flex justify-center">
                     <Link 
-                      href="https://360tuongtac.com/auth/login" 
+                      href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=blog_sidebar&utm_content=bắt_đầu_ngay" 
                       className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-black rounded-xl shadow-[0_0_20px_rgba(255,46,99,0.3)] hover:shadow-[0_0_30px_rgba(255,46,99,0.5)] hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-sm"
                     >
                       Bắt đầu ngay

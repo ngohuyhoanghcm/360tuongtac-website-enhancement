@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import BottomNav from '@/components/layout/BottomNav';
 import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
+import { ZaloFloatWidget } from '@/components/shared/ZaloFloatWidget';
 
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ['400', '500', '600', '700', '800', '900'],
@@ -33,6 +34,16 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://grow.360tuongtac.com'),
   title: '360 Tương Tác - Tăng Like, Follow, View Thật | TikTok, Facebook, Instagram',
   description: 'Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam. Tăng like, follow, view thật cho Facebook, TikTok, Instagram, YouTube. 10K+ khách hàng tin dùng.',
+  icons: {
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/logo.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -51,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <BottomNav />
+        <ZaloFloatWidget />
       </body>
     </html>
   );

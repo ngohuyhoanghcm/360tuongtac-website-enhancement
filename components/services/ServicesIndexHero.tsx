@@ -40,12 +40,20 @@ export default function ServicesIndexHero() {
               </Link>
             </motion.div>
             
-            <Link 
-               href="/bang-gia" 
-               className="px-10 py-5 rounded-2xl glass-panel border border-white/10 text-white font-black text-lg hover:bg-white/5 transition-all duration-300 antialiased"
-            >
-              Xem bảng giá
-            </Link>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <Link 
+                 href="https://zalo.me/0388009669"
+                 target="_blank" rel="noopener noreferrer"
+                 className="px-10 py-5 rounded-2xl glass-panel border border-white/20 text-white font-black text-lg 
+                            hover:bg-white/10 hover:border-[#00E5FF]/40 hover:shadow-[0_0_30px_rgba(0,229,255,0.3)]
+                            transition-all duration-300 antialiased flex items-center gap-3 group"
+              >
+                <svg className="w-6 h-6 text-[#00E5FF] group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                </svg>
+                <span>Tư vấn Zalo</span>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>

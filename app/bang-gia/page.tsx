@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Bảng Giá Dịch Vụ | 360TuongTac',
   description: 'Khám phá bảng giá dịch vụ tăng tương tác mạng xã hội tốt nhất thị trường. TikTok, Facebook, Instagram, YouTube. Cam kết chất lượng thật, giá cạnh tranh.',
   alternates: {
-    canonical: 'https://360tuongtac.com/bang-gia',
+    canonical: 'https://grow.360tuongtac.com/bang-gia',
   },
 };
 
@@ -65,8 +65,11 @@ export default function Pricing() {
                     <p className="font-stat text-xs font-semibold text-[#00E5FF] tracking-wider">ƯU ĐÃI KHÁCH MỚI</p>
                   </div>
                 </div>
-                <Link href="https://360tuongtac.com/service/tiktok/tiktok-views" className="w-full bg-[#6C63FF] hover:bg-[#5a52d3] text-white py-4 rounded-xl font-h1 font-bold flex items-center justify-center gap-2 transition-all neon-glow">
-                  <ShoppingCart size={20} /> Đặt hàng ngay
+                <Link href="https://zalo.me/0388009669?utm_source=grow&utm_medium=cta&utm_campaign=pricing_page&utm_content=tuvan_zalo" target="_blank" rel="noopener noreferrer" className="w-full bg-[#0068FF] hover:bg-[#0056cc] text-white py-4 rounded-xl font-h1 font-bold flex items-center justify-center gap-2 transition-all neon-glow">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                  </svg>
+                  Tư vấn Zalo
                 </Link>
               </div>
             </div>

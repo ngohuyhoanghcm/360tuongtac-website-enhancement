@@ -170,7 +170,7 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
             <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] rounded-2xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 animate-pulse"></div>
             
             <Link 
-              href={productUrl ? `${productUrl}?utm_source=360tuongtac.com&utm_medium=landing_page&utm_campaign=${serviceSlug}&utm_content=solution_section_cta` : "https://360tuongtac.com/auth/login"} 
+              href={productUrl ? `${productUrl}?utm_source=grow&utm_medium=cta&utm_campaign=${serviceSlug}&utm_content=solution_section_cta` : "https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=solution_section&utm_content=su_dung_giai_phap"}
               className="relative block px-12 py-6 rounded-2xl bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-black text-xl shadow-[0_0_30px_rgba(255,140,0,0.5)] overflow-hidden antialiased"
             >
               {/* Shimmer Sweep Effect */}

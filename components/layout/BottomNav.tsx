@@ -9,7 +9,7 @@ import { useScrollDirection } from '@/lib/hooks/useScrollDirection';
 const NAV_ITEMS = [
   { name: 'Trang chủ', href: '/', icon: Home },
   { name: 'Dịch vụ', href: '/dich-vu', icon: Layers },
-  { name: 'Action', href: 'http://360tuongtac.com/auth/login', icon: Zap, isAction: true },
+  { name: 'Action', href: 'https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=bottom_nav&utm_content=action_button', icon: Zap, isAction: true },
   { name: 'Blog', href: '/blog', icon: BookOpen },
   { name: 'Liên hệ', href: '/lien-he', icon: MessageCircle },
 ];
