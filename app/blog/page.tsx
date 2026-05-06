@@ -32,10 +32,7 @@ export default function BlogAcademy() {
     });
   }, [searchQuery, selectedCategory]);
 
-  // Reset to first page when filtering
-  useMemo(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedCategory]);
+
 
   const featuredPost = BLOG_POSTS.find(p => p.featured) || BLOG_POSTS[0];
   const otherPosts = filteredPosts.filter(p => p.id !== featuredPost.id);
@@ -68,7 +65,7 @@ export default function BlogAcademy() {
                   type="text" 
                   placeholder="Tìm kiếm bài viết, chủ đề..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
                   className="bg-transparent border-none outline-none text-white w-full font-medium placeholder:text-slate-600"
                 />
               </div>
@@ -158,7 +155,7 @@ export default function BlogAcademy() {
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => { setSelectedCategory(cat); setCurrentPage(1); }}
                 className={`whitespace-nowrap px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all ${
                   selectedCategory === cat 
                     ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white shadow-lg shadow-[#FF2E63]/20' 

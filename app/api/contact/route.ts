@@ -46,27 +46,15 @@ export async function POST(req: Request) {
     }
 
     // 2. Prepare Telegram Data
-    const token = process.env.TELEGRAM_BOT_TOKEN || '8329752735:AAEQ9VwcII0fJHkrMMNopDeJuAkDPAXB9fA';
-    let chatId = process.env.TELEGRAM_CHAT_ID;
-
-    // Auto-discover chat ID if not set
-    if (!chatId) {
-      try {
-        const updateRes = await fetch(`https://api.telegram.org/bot${token}/getUpdates`);
-        const updateData = await updateRes.json();
-        if (updateData.ok && updateData.result.length > 0) {
-          chatId = updateData.result[updateData.result.length - 1].message?.chat?.id;
-        }
-      } catch (e) {
-        console.error("Failed to fetch updates for chat id auto-discovery");
-      }
-    }
-
-    if (!chatId) {
-      return NextResponse.json({ 
-        success: false, 
-        message: 'Chưa cấu hình Telegram Chat ID. Quản trị viên cần nhắn tin cho Bot ít nhất 1 lần để hệ thống tự nhận diện.'
-      }, { status: 400 });
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    
+    if (!token || !chatId) {
+      console.error('Missing Telegram configuration: BOT_TOKEN=' + !!token + ', CHAT_ID=' + !!chatId);
+      return NextResponse.json({
+        success: false,
+        message: 'Hệ thống thông báo chưa được cấu hình. Vui lòng liên hệ trực tiếp qua Zalo.'
+      }, { status: 500 });
     }
 
     // 3. Escape HTML special characters to prevent injection/formatting breaks in Telegram

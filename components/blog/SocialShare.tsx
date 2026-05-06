@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Facebook, Link as LinkIcon, Share2, Check } from 'lucide-react';
 
@@ -11,16 +11,34 @@ interface SocialShareProps {
   className?: string;
 }
 
+interface IconButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  active?: boolean;
+}
+
+function IconButton({ children, onClick, active = false }: IconButtonProps) {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(255,140,0,0.3)' }}
+      whileTap={{ scale: 0.9 }}
+      onClick={onClick}
+      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors border ${active ? 'bg-[#00E5FF]/20 border-[#00E5FF] text-[#00E5FF]' : 'bg-white/[0.03] backdrop-blur-md border-white/10 text-slate-400 hover:text-white hover:border-white/30'}`}
+      aria-label="Share action"
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+function getCanNativeShare() {
+  return typeof navigator !== 'undefined' && !!navigator.share;
+}
+
 export default function SocialShare({ url, title, layout = 'horizontal', className = '' }: SocialShareProps) {
   const [isCopied, setIsCopied] = useState(false);
-  const [canNativeShare, setCanNativeShare] = useState(false);
+  const [canNativeShare] = useState(getCanNativeShare);
   const [showToast, setShowToast] = useState(false);
-
-  useEffect(() => {
-    if (typeof navigator !== 'undefined' && !!navigator.share) {
-      setCanNativeShare(true);
-    }
-  }, []);
 
   const handleCopyLink = async () => {
     try {
@@ -52,21 +70,9 @@ export default function SocialShare({ url, title, layout = 'horizontal', classNa
     window.open(fbUrl, '_blank', 'width=600,height=400');
   };
 
-  const containerClasses = layout === 'horizontal' 
-    ? "flex items-center gap-3" 
+  const containerClasses = layout === 'horizontal'
+    ? "flex items-center gap-3"
     : "flex flex-col items-center gap-3";
-
-  const IconButton = ({ children, onClick, active = false }: { children: React.ReactNode, onClick: () => void, active?: boolean }) => (
-    <motion.button
-      whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(255,140,0,0.3)' }}
-      whileTap={{ scale: 0.9 }}
-      onClick={onClick}
-      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors border ${active ? 'bg-[#00E5FF]/20 border-[#00E5FF] text-[#00E5FF]' : 'bg-white/[0.03] backdrop-blur-md border-white/10 text-slate-400 hover:text-white hover:border-white/30'}`}
-      aria-label="Share action"
-    >
-      {children}
-    </motion.button>
-  );
 
   return (
     <div className={`relative ${className}`}>

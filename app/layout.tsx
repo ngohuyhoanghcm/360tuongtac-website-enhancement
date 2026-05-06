@@ -52,7 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi" className="dark scroll-smooth">
       <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional" />
       </head>
       <body className={`${beVietnamPro.variable} ${inter.variable} ${spaceGrotesk.variable} font-body bg-background-dark text-white min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary`}>
         {gaMeasurementId && <GoogleAnalytics measurementId={gaMeasurementId} />}
