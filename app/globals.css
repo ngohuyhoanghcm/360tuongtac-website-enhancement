@@ -57,6 +57,23 @@
   --glass-shadow: none;
 }
 
+/* Dark mode enhanced orbit animation */
+.dark .orbit-1,
+.dark .orbit-2,
+.dark .orbit-3,
+.dark .orbit-4,
+.dark .orbit-5 {
+  animation-name: orbit-3d-dark;
+}
+
+@keyframes orbit-3d-dark {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5)); }
+  25% { transform: translate(120px, -30px) scale(0.85); opacity: 0.8; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)); }
+  50% { transform: translate(0, -60px) scale(0.75); opacity: 0.65; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.25)); }
+  75% { transform: translate(-120px, -30px) scale(0.85); opacity: 0.8; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)); }
+  100% { transform: translate(0, 0) scale(1); opacity: 1; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5)); }
+}
+
 /* ============================================
  * BODY DEFAULTS
  * ============================================ */
@@ -199,11 +216,11 @@ body {
 }
 
 @keyframes orbit-3d {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  25% { transform: translate(120px, -30px) scale(0.8); opacity: 0.6; }
-  50% { transform: translate(0, -60px) scale(0.6); opacity: 0.4; }
-  75% { transform: translate(-120px, -30px) scale(0.8); opacity: 0.6; }
-  100% { transform: translate(0, 0) scale(1); opacity: 1; }
+  0% { transform: translate(0, 0) scale(1); opacity: 1; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); }
+  25% { transform: translate(120px, -30px) scale(0.85); opacity: 0.75; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2)); }
+  50% { transform: translate(0, -60px) scale(0.75); opacity: 0.6; filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.15)); }
+  75% { transform: translate(-120px, -30px) scale(0.85); opacity: 0.75; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2)); }
+  100% { transform: translate(0, 0) scale(1); opacity: 1; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); }
 }
 
 @keyframes float-orb {
