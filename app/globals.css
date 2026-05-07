@@ -2,25 +2,13 @@
 @plugin "@tailwindcss/typography";
 
 /* ============================================
- * THEME TOKENS
+ * THEME TOKENS — Static values only
  * ============================================ */
 @theme {
   /* Brand colors — immutable both modes */
   --color-primary: #FF8C00;
   --color-accent: #FF2E63;
   --color-violet: #8B5CF6;
-
-  /* Semantic tokens — resolved via CSS vars */
-  --color-bg: var(--bg);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-surface: var(--surface);
-  --color-surface-hover: var(--surface-hover);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-border: var(--border);
-  --color-border-hover: var(--border-hover);
-  --color-border-subtle: var(--border-subtle);
 
   /* Fonts */
   --font-h: var(--font-be-vietnam);
