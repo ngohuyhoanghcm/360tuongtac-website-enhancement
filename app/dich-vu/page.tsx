@@ -18,7 +18,7 @@ export default function ServicesPage() {
     : SERVICES_DATA.filter((s) => s.platform === activePlatform);
 
   return (
-    <main className="bg-[#0D0D1A] min-h-screen">
+    <main className="min-h-screen">
       {/* Services Discovery Hero */}
       <ServicesIndexHero />
 

@@ -41,7 +41,7 @@ export default function BlogAcademy() {
   const currentPosts = otherPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
 
   return (
-    <div className="bg-[#0a0a0f] min-h-screen pb-32">
+    <div className="min-h-screen pb-32">
       <div className="container-max px-6">
         {/* Blog Hero & Search */}
         <div className="text-center pt-20 pb-16 relative">
@@ -50,23 +50,23 @@ export default function BlogAcademy() {
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10"
           >
-            <h1 className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight tracking-tight text-white antialiased">
+            <h1 className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight tracking-tight text-gray-900 antialiased">
               Học Viện <span className="bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent">360TuongTac</span>
             </h1>
-            <p className="font-body text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-12">
+            <p className="font-body text-gray-600 text-lg md:text-xl max-w-2xl mx-auto mb-12">
               Chia sẻ bí quyết tăng trưởng, thuật toán mạng xã hội và case study thực chiến.
             </p>
 
             <div className="max-w-2xl mx-auto relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-[#FF8C00]/20 to-[#FF2E63]/20 blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative glass-panel border border-white/10 rounded-2xl flex items-center px-6 py-4 shadow-2xl">
-                <Search size={20} className="text-slate-500 mr-4" />
+              <div className="relative bg-white border border-gray-200 rounded-2xl flex items-center px-6 py-4 shadow-md">
+                <Search size={20} className="text-gray-400 mr-4" />
                 <input 
                   type="text" 
                   placeholder="Tìm kiếm bài viết, chủ đề..."
                   value={searchQuery}
                   onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                  className="bg-transparent border-none outline-none text-white w-full font-medium placeholder:text-slate-600"
+                  className="bg-transparent border-none outline-none text-gray-900 w-full font-medium placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -88,7 +88,7 @@ export default function BlogAcademy() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#13121b] shadow-2xl"
+              className="group relative overflow-hidden rounded-[2.5rem] border border-gray-200 bg-white shadow-xl"
             >
               <div className="grid md:grid-cols-2 gap-0 overflow-hidden">
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
@@ -101,23 +101,23 @@ export default function BlogAcademy() {
                     referrerPolicy="no-referrer"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f] to-transparent md:block hidden"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-transparent md:block hidden"></div>
                 </div>
                 <div className="p-8 md:p-12 flex flex-col justify-center relative z-10">
                   <div className="flex items-center gap-3 mb-6">
                     <span className="px-3 py-1 bg-[#FF2E63]/10 border border-[#FF2E63]/30 text-[#FF2E63] text-[10px] font-black uppercase tracking-widest rounded-full">
                       Pillar Content
                     </span>
-                    <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+                    <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
                       <Clock size={12} /> {featuredPost.readTime || '8 phút'} đọc
                     </span>
                   </div>
-                  <h2 className="font-h1 text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight tracking-tight antialiased">
+                  <h2 className="font-h1 text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight tracking-tight antialiased">
                     <Link href={`/blog/${featuredPost.slug}`} className="hover:text-[#FF8C00] transition-colors">
                       {featuredPost.title}
                     </Link>
                   </h2>
-                  <p className="text-slate-400 text-lg mb-8 leading-relaxed font-medium">
+                  <p className="text-gray-600 text-lg mb-8 leading-relaxed font-medium">
                     {featuredPost.excerpt}
                   </p>
                   <div className="flex items-center justify-between mt-auto">
@@ -132,13 +132,13 @@ export default function BlogAcademy() {
                         className="w-10 h-10 rounded-full border border-white/10 object-cover" 
                       />
                       <div>
-                        <p className="text-white font-bold text-sm">{featuredPost.author}</p>
-                        <p className="text-slate-500 text-xs">{featuredPost.date}</p>
+                        <p className="text-gray-900 font-bold text-sm">{featuredPost.author}</p>
+                        <p className="text-gray-500 text-xs">{featuredPost.date}</p>
                       </div>
                     </div>
                     <Link 
                       href={`/blog/${featuredPost.slug}`}
-                      className="flex items-center gap-2 text-white font-black text-sm uppercase tracking-widest group/link"
+                      className="flex items-center gap-2 text-gray-900 font-black text-sm uppercase tracking-widest group/link"
                     >
                       Đọc tiếp <ChevronRight size={16} className="transition-transform group-hover/link:translate-x-1" />
                     </Link>
@@ -150,7 +150,7 @@ export default function BlogAcademy() {
         )}
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12 border-b border-white/5 pb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12 border-b border-gray-200 pb-8">
           <div className="flex items-center gap-4 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
             {CATEGORIES.map((cat) => (
               <button
@@ -159,14 +159,14 @@ export default function BlogAcademy() {
                 className={`whitespace-nowrap px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all ${
                   selectedCategory === cat 
                     ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white shadow-lg shadow-[#FF2E63]/20' 
-                    : 'text-slate-500 hover:text-white bg-white/5 border border-white/5'
+                    : 'text-gray-500 hover:text-gray-900 bg-gray-50 border border-gray-200'
                 }`}
               >
                 {cat}
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-gray-500 font-bold text-[10px] uppercase tracking-widest">
             <Filter size={14} /> {filteredPosts.length} Bài viết
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function BlogAcademy() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="group glass-panel border border-white/10 rounded-[2rem] overflow-hidden hover:border-[#FF2E63]/30 hover:shadow-[0_0_40px_rgba(255,46,99,0.15)] transition-all flex flex-col"
+                className="group bg-white border border-gray-200 rounded-[2rem] overflow-hidden hover:border-[#FF2E63]/30 hover:shadow-lg transition-all flex flex-col"
               >
                 <div className="relative w-full aspect-[16/9] overflow-hidden">
                   <Image  
@@ -197,20 +197,20 @@ export default function BlogAcademy() {
                   </div>
                 </div>
                 <div className="p-8 flex flex-col flex-1">
-                  <div className="flex items-center gap-4 text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+                  <div className="flex items-center gap-4 text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                     <span>{post.date}</span>
-                    <span className="w-1 h-1 rounded-full bg-slate-700"></span>
+                    <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                     <span>{post.readTime || '5 phút'} ĐỌC</span>
                   </div>
-                  <h3 className="font-h1 text-xl font-black text-white mb-4 group-hover:text-[#FF8C00] transition-colors leading-tight antialiased">
+                  <h3 className="font-h1 text-xl font-black text-gray-900 mb-4 group-hover:text-[#FF8C00] transition-colors leading-tight antialiased">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
-                  <p className="text-slate-400 text-sm mb-6 line-clamp-3 font-medium leading-relaxed">
+                  <p className="text-gray-600 text-sm mb-6 line-clamp-3 font-medium leading-relaxed">
                     {post.excerpt}
                   </p>
-                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-white/5">
-                    <span className="text-white text-xs font-bold">{post.author}</span>
-                    <Link href={`/blog/${post.slug}`} className="p-2 bg-white/5 rounded-lg text-white hover:bg-[#FF2E63] transition-colors">
+                  <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-200">
+                    <span className="text-gray-900 text-xs font-bold">{post.author}</span>
+                    <Link href={`/blog/${post.slug}`} className="p-2 bg-gray-50 rounded-lg text-gray-700 hover:bg-[#FF2E63] hover:text-white transition-colors">
                       <ChevronRight size={18} />
                     </Link>
                   </div>
@@ -226,7 +226,7 @@ export default function BlogAcademy() {
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="p-3 rounded-xl bg-white/5 border border-white/10 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+              className="p-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
             >
               <ChevronRight size={18} className="rotate-180" />
             </button>
@@ -238,7 +238,7 @@ export default function BlogAcademy() {
                   className={`w-10 h-10 rounded-xl font-bold flex items-center justify-center transition-all ${
                     currentPage === i + 1 
                       ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white shadow-lg shadow-[#FF2E63]/20' 
-                      : 'bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
+                      : 'bg-gray-50 border border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                   }`}
                 >
                   {i + 1}
@@ -248,7 +248,7 @@ export default function BlogAcademy() {
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="p-3 rounded-xl bg-white/5 border border-white/10 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+              className="p-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
             >
               <ChevronRight size={18} />
             </button>
@@ -257,7 +257,7 @@ export default function BlogAcademy() {
 
         {filteredPosts.length === 0 && (
           <div className="text-center py-32">
-            <p className="text-slate-500 font-h1 text-xl">Không tìm thấy bài viết nào phù hợp.</p>
+            <p className="text-gray-500 font-h1 text-xl">Không tìm thấy bài viết nào phù hợp.</p>
           </div>
         )}
       </div>
