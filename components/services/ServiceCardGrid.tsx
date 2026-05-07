@@ -48,7 +48,8 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="h-full bg-[var(--surface)] p-8 md:p-10 rounded-[2.5rem] border border-[var(--border)] hover:border-[#FF2E63]/30 transition-all duration-500 flex flex-col relative overflow-hidden group-hover:shadow-xl">
+              <Link href={`/dich-vu/${service.slug}`} className="block h-full group">
+                <div className="h-full bg-[var(--surface)] p-8 md:p-10 rounded-[2.5rem] border border-[var(--border)] hover:border-[#FF2E63]/30 transition-all duration-500 flex flex-col relative overflow-hidden group-hover:shadow-xl cursor-pointer">
                 {/* Popular Badge */}
                 {service.popular && (
                   <div className="absolute top-6 right-6 z-10">
@@ -81,12 +82,9 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
                       <p className="text-[var(--text-primary)] font-black text-xl md:text-2xl">{service.startingPrice}</p>
                    </div>
                    
-                   <Link 
-                      href={`/dich-vu/${service.slug}`} 
-                      className="w-12 h-12 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:bg-gradient-to-r hover:from-[#FF8C00] hover:to-[#FF2E63] hover:border-transparent hover:text-white transition-all duration-300"
-                    >
+                   <div className="w-12 h-12 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] group-hover:bg-gradient-to-r group-hover:from-[#FF8C00] group-hover:to-[#FF2E63] group-hover:border-transparent group-hover:text-white transition-all duration-300">
                       <ArrowRight size={20} />
-                   </Link>
+                   </div>
                 </div>
 
                 {/* Glow Effect */}
@@ -97,6 +95,7 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
                   <Icon size={180} />
                 </div>
               </div>
+              </Link>
             </motion.div>
           );
         })}

@@ -54,7 +54,8 @@ export default function BlogGrid({ posts }: BlogGridProps) {
                 whileHover={{ y: -8 }}
                 className="group"
               >
-                <div className="glass-panel rounded-[2rem] overflow-hidden flex flex-col h-full hover:border-[#FF2E63]/30 hover:shadow-lg transition-all duration-500 relative">
+                <Link href={`/blog/${post.slug}`} className="block h-full group">
+                  <div className="glass-panel rounded-[2rem] overflow-hidden flex flex-col h-full hover:border-[#FF2E63]/30 hover:shadow-lg transition-all duration-500 relative cursor-pointer">
                   {/* Image with Zoom Effect */}
                   <div className="relative h-60 overflow-hidden">
                     <Image
@@ -81,11 +82,9 @@ export default function BlogGrid({ posts }: BlogGridProps) {
                       <span>{post.date}</span>
                     </div>
 
-                    <Link href={`/blog/${post.slug}`}>
-                      <h3 className="font-h1 text-xl md:text-2xl font-black text-[var(--text-primary)] mb-4 leading-tight group-hover:text-[#FF8C00] transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                    </Link>
+                    <h3 className="font-h1 text-xl md:text-2xl font-black text-[var(--text-primary)] mb-4 leading-tight group-hover:text-[#FF8C00] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
 
                     <p className="font-body text-[var(--text-secondary)] text-sm md:text-base mb-8 line-clamp-3 leading-relaxed font-medium">
                       {post.excerpt}
@@ -99,13 +98,14 @@ export default function BlogGrid({ posts }: BlogGridProps) {
                         <span className="text-[var(--text-muted)] text-[11px] font-black uppercase tracking-widest">{post.author}</span>
                       </div>
                       
-                      <Link href={`/blog/${post.slug}`} className="group/link inline-flex items-center gap-2 text-[var(--text-primary)] font-black text-[11px] tracking-widest uppercase hover:text-[#FF8C00] transition-colors">
+                      <div className="inline-flex items-center gap-2 text-[var(--text-primary)] font-black text-[11px] tracking-widest uppercase group-hover:text-[#FF8C00] transition-colors">
                         Chi tiết 
-                        <ArrowRight size={16} className="text-[#FF8C00] transform group-hover/link:translate-x-1 transition-transform" />
-                      </Link>
+                        <ArrowRight size={16} className="text-[#FF8C00] transform group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
                   </div>
                 </div>
+                </Link>
               </motion.div>
             );
           })}
