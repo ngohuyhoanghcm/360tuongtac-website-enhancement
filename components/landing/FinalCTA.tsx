@@ -45,7 +45,7 @@ export default function FinalCTA() {
   const spotOpacity = useTransform(smoothX, [0, 400], [0, 1]); // Dummy transform to show it reacts
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden bg-[#0a0a0f]">
+    <section className="py-20 md:py-32 relative overflow-hidden bg-gray-50">
       {/* Dynamic Background Aura */}
       <motion.div 
         animate={{ 
@@ -67,7 +67,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-[#0D0D1A] rounded-[2.5rem] p-10 md:p-24 text-center relative overflow-hidden border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.6)]"
+          className="bg-white rounded-[2.5rem] p-10 md:p-24 text-center relative overflow-hidden border border-gray-200 shadow-xl"
         >
           {/* Interactive Mouse Follow Spot */}
           <motion.div 
@@ -88,10 +88,10 @@ export default function FinalCTA() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-block mb-10 px-6 py-2 rounded-full bg-white/5 backdrop-blur-3xl border border-white/20 relative group"
+              className="inline-block mb-10 px-6 py-2 rounded-full bg-gray-50 backdrop-blur-3xl border border-gray-200 relative group"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-500"></div>
-              <span className="text-[11px] font-black tracking-[0.3em] uppercase text-white flex items-center gap-2">
+              <span className="text-[11px] font-black tracking-[0.3em] uppercase text-gray-900 flex items-center gap-2">
                 <motion.span 
                   animate={{ opacity: [1, 0.5, 1], scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -108,13 +108,13 @@ export default function FinalCTA() {
               <span className="block bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent pb-4 drop-shadow-sm">
                 {finalCtaContent.headline.gradient}
               </span>
-              <span className="block text-white">
+              <span className="block text-gray-900">
                 {finalCtaContent.headline.white}
               </span>
             </h2>
 
             {/* Description */}
-            <p className="font-body text-slate-400 text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed opacity-90">
+            <p className="font-body text-gray-600 text-lg md:text-xl max-w-3xl mx-auto mb-16 leading-relaxed">
               {finalCtaContent.description}
             </p>
 
@@ -142,7 +142,7 @@ export default function FinalCTA() {
               >
                 <Link 
                   href={finalCtaContent.links.secondary} 
-                  className="px-12 py-6 rounded-2xl bg-white/[0.04] backdrop-blur-md border border-white/10 text-white font-black text-xl hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 antialiased block"
+                  className="px-12 py-6 rounded-2xl bg-gray-50 backdrop-blur-md border border-gray-200 text-gray-900 font-black text-xl hover:bg-gray-100 hover:border-gray-300 transition-all duration-300 antialiased block"
                 >
                   Tư Vấn Ngay
                 </Link>
@@ -151,13 +151,13 @@ export default function FinalCTA() {
 
             {/* Neon Trust Indicators */}
             <div className="relative pt-16">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0">
                 {finalCtaContent.stats.map((stat, i) => (
                   <motion.div 
                     key={i} 
-                    className={`flex flex-col items-center px-10 ${i !== 0 ? 'md:border-l border-white/5' : ''}`}
+                    className={`flex flex-col items-center px-10 ${i !== 0 ? 'md:border-l border-gray-200' : ''}`}
                     whileHover={{ y: -5 }}
                   >
                     <span 
@@ -166,7 +166,7 @@ export default function FinalCTA() {
                     >
                       {stat.value}
                     </span>
-                    <span className="text-[11px] font-black tracking-[0.3em] uppercase text-slate-500 group-hover:text-slate-400 transition-colors">
+                    <span className="text-[11px] font-black tracking-[0.3em] uppercase text-gray-500 group-hover:text-gray-600 transition-colors">
                       {stat.label}
                     </span>
                   </motion.div>

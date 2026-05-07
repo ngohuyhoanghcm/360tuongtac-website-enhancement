@@ -15,7 +15,7 @@ export default function HeroSection() {
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Starfield */}
-        <div className="absolute inset-0 opacity-15 animate-starfield" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
+        <div className="absolute inset-0 opacity-[0.03] animate-starfield" style={{ backgroundImage: 'radial-gradient(circle, #111827 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
       </div>
       
       {/* Dynamic Gradient Orbs */}
@@ -24,7 +24,7 @@ export default function HeroSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(108,99,255,0.12),transparent_70%)] pointer-events-none"></div>
       
       {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
       {/* Floating Badges */}
       <DynamicBadges />
@@ -39,11 +39,11 @@ export default function HeroSection() {
           {/* Main Headline */}
           <h1 className="font-h text-3xl md:text-5xl lg:text-7xl mb-6 leading-tight">
             <span className="block bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent font-black tracking-tight drop-shadow-sm">Tăng Trưởng Mạng Xã Hội</span>
-            <span className="block text-white font-black tracking-tight mt-2 drop-shadow-lg">Đa Nền Tảng & Hiệu Quả</span>
+            <span className="block text-gray-900 font-black tracking-tight mt-2">Đa Nền Tảng & Hiệu Quả</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="font-body text-base md:text-xl text-on-surface-variant/80 max-w-2xl md:max-w-3xl mx-auto mb-10 md:mb-14 leading-relaxed">
+          <p className="font-body text-base md:text-xl text-gray-600 max-w-2xl md:max-w-3xl mx-auto mb-10 md:mb-14 leading-relaxed">
             Giải pháp marketing 360° giúp thương hiệu của bạn bứt phá trên Facebook, TikTok, Instagram, YouTube. Tăng tương tác thật, tiếp cận khách hàng tiềm năng và thúc đẩy doanh số.
           </p>
 
@@ -62,11 +62,11 @@ export default function HeroSection() {
               href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=homepage_primary&utm_content=hero_xem_dich_vu" 
               onClick={() => trackCTAClick('hero_xem_dich_vu', 'homepage', 'https://360tuongtac.com/home')}
               className="btn-secondary">
-              <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              <svg className="w-5 h-5 text-cyan-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
               Xem Dịch Vụ
             </Link>
             <Link href="https://zalo.me/0388009669" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-              <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/></svg>
+              <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/></svg>
               Tư Vấn Zalo
             </Link>
           </div>

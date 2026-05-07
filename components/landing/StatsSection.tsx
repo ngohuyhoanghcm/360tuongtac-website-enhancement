@@ -84,9 +84,9 @@ function Counter({ value, suffix = '', secondarySuffix = '' }: { value: number; 
 
 export default function StatsSection() {
   return (
-    <section className="py-20 md:py-32 bg-[#0a0a0f] relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-white relative overflow-hidden">
       {/* Subtle Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
       
       <div className="container-max relative z-10">
         {/* Social Icons Row */}
@@ -97,9 +97,9 @@ export default function StatsSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.1 }}
-              className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center hover:bg-white/[0.08] hover:border-white/20 transition-all cursor-pointer group"
+              className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center hover:bg-gray-100 hover:border-gray-300 transition-all cursor-pointer group"
             >
-              <div className="group-hover:scale-110 transition-transform text-white/90">
+              <div className="group-hover:scale-110 transition-transform text-gray-700">
                 {brand.icon}
               </div>
             </motion.div>
@@ -107,24 +107,24 @@ export default function StatsSection() {
         </div>
 
         {/* Stats Panel */}
-        <div className="bg-[#13121b] border border-white/10 rounded-[2rem] p-8 md:p-12 lg:p-16 max-w-5xl mx-auto shadow-2xl relative overflow-hidden md:before:absolute md:before:inset-0 md:before:bg-gradient-to-br md:before:from-white/5 md:before:to-transparent md:before:opacity-50">
+        <div className="bg-white border border-gray-200 rounded-[2rem] p-8 md:p-12 lg:p-16 max-w-5xl mx-auto shadow-lg relative overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0 relative">
             {STATS.map((stat, i) => (
               <div 
                 key={i} 
                 className={`text-center space-y-3 px-4 ${
-                  i !== 0 ? 'lg:border-l border-white/10' : ''
+                  i !== 0 ? 'lg:border-l border-gray-200' : ''
                 } ${
-                  i % 2 !== 0 ? 'sm:border-l lg:border-l border-white/10' : ''
+                  i % 2 !== 0 ? 'sm:border-l lg:border-l border-gray-200' : ''
                 } ${
-                  i === 2 ? 'sm:border-l-0 lg:border-l border-white/10' : ''
+                  i === 2 ? 'sm:border-l-0 lg:border-l border-gray-200' : ''
                 }`}
                 // Combined logic for responsive dividers
               >
                 <div className="flex justify-center items-baseline">
                    <Counter value={stat.value} suffix={stat.suffix} secondarySuffix={stat.secondarySuffix} />
                 </div>
-                <div className="text-[#9CA3AF] font-body text-sm md:text-base font-medium uppercase tracking-widest opacity-80 pt-1">
+                <div className="text-gray-500 font-body text-sm md:text-base font-medium uppercase tracking-widest pt-1">
                   {stat.label}
                 </div>
               </div>

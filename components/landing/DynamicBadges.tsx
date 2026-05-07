@@ -213,21 +213,21 @@ function BadgeComponent({ badge, side }: { badge: Badge, side: 'left' | 'right' 
         stiffness: 100,
         opacity: { duration: 0.6 }
       }}
-      className="glass-panel rounded-2xl p-4 w-[260px] shadow-2xl border border-white/10"
+      className="bg-white rounded-2xl p-4 w-[260px] shadow-lg border border-gray-200"
     >
       <div className="flex items-start gap-3">
-        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${PLATFORM_GRADIENTS[badge.service.platform]} flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg border border-white/20`}>
+        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${PLATFORM_GRADIENTS[badge.service.platform]} flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md border border-white/30`}>
           <span className="text-white text-xs font-black drop-shadow-sm">{PLATFORM_ICONS[badge.service.platform]}</span>
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-[12px] font-bold text-white truncate mb-0.5 uppercase tracking-wide">
+          <div className="text-[12px] font-bold text-gray-900 truncate mb-0.5 uppercase tracking-wide">
             {badge.customer.name}
           </div>
-          <div className="text-[11px] text-slate-300 leading-[1.4]">
+          <div className="text-[11px] text-gray-600 leading-[1.4]">
             {badge.service.action} <span className="font-bold underline decoration-2 underline-offset-2" style={{ color: badge.service.color, textUnderlineOffset: '3px', textDecorationColor: `${badge.service.color}40` }}>{badge.service.text}</span>
           </div>
-          <div className="text-[10px] text-slate-500 mt-2 font-medium flex items-center gap-1.5">
-            <span className="w-1 h-1 rounded-full bg-slate-600"></span>
+          <div className="text-[10px] text-gray-500 mt-2 font-medium flex items-center gap-1.5">
+            <span className="w-1 h-1 rounded-full bg-gray-400"></span>
             {badge.time}
           </div>
         </div>

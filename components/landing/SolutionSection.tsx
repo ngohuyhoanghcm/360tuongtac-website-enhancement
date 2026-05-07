@@ -77,10 +77,10 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
     : solutionsData;
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-[#0D0D1A]" id="giai-phap">
+    <section className="py-24 md:py-32 relative overflow-hidden bg-gray-50" id="giai-phap">
       {/* Background Decorative Orbs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-900/5 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-900/5 rounded-full blur-[140px] translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-200/20 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-200/20 rounded-full blur-[140px] translate-y-1/2 -translate-x-1/2"></div>
 
       <div className="container-max relative z-10">
         <div className="text-center mb-20 md:mb-28">
@@ -88,9 +88,9 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block mb-6 px-4 py-1.5 rounded-full border border-green-500/30 bg-green-500/10 backdrop-blur-md"
+            className="inline-block mb-6 px-4 py-1.5 rounded-full border border-green-300 bg-green-50 backdrop-blur-md"
           >
-            <span className="text-[10px] font-black tracking-[0.3em] text-green-400 uppercase antialiased">Giải pháp bứt phá</span>
+            <span className="text-[10px] font-black tracking-[0.3em] text-green-600 uppercase antialiased">Giải pháp bứt phá</span>
           </motion.div>
           
           <motion.h2 
@@ -98,7 +98,7 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 tracking-tight text-white leading-[1.1] drop-shadow-2xl antialiased"
+            className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 tracking-tight text-gray-900 leading-[1.1] antialiased"
           >
             {displayTitle === "Bệ phóng tăng trưởng từ 360TuongTac" ? (
               <>Bệ phóng tăng trưởng <br className="hidden md:block" /> <span className="bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent">từ 360TuongTac</span></>
@@ -110,7 +110,7 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="font-body text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium opacity-80 antialiased"
+            className="font-body text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium antialiased"
           >
             Chúng tôi cung cấp hệ sinh thái mồi tương tác thông minh giúp bạn bẻ khóa thuật toán 
             và xây dựng cộng đồng khách hàng trung thành.
@@ -131,22 +131,22 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="glass-panel p-10 h-full rounded-[2.5rem] border border-white/10 hover:border-white/20 hover:bg-white/[0.07] transition-all duration-500 relative overflow-hidden text-center flex flex-col items-center">
+              <div className="bg-white p-10 h-full rounded-[2.5rem] border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-500 relative overflow-hidden text-center flex flex-col items-center shadow-md hover:shadow-lg">
                 {/* Icon with Neon Glow */}
                 <div className="relative mb-10 w-20 h-20 flex items-center justify-center">
                   <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${sol.grad} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`}></div>
                   <motion.div 
                     whileHover={{ scale: 1.1 }}
-                    className={`w-full h-full rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center relative z-10 transition-all duration-300 group-hover:bg-white/[0.08] ${sol.glow}`}
+                    className={`w-full h-full rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center relative z-10 transition-all duration-300 group-hover:bg-gray-100 ${sol.glow}`}
                   >
                     <sol.icon className="w-10 h-10" style={{ color: sol.color }} />
                   </motion.div>
                 </div>
 
-                <h3 className="font-h text-2xl font-bold mb-5 text-white tracking-tight">
+                <h3 className="font-h text-2xl font-bold mb-5 text-gray-900 tracking-tight">
                   {sol.title}
                 </h3>
-                <p className="font-body text-slate-400 text-base md:text-lg leading-relaxed">
+                <p className="font-body text-gray-600 text-base md:text-lg leading-relaxed">
                   {sol.desc}
                 </p>
               </div>

@@ -18,7 +18,7 @@ export default function ServiceHero({ badge, title, description, productUrl, ser
     : "https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=service_hero&utm_content=hero_cta";
 
   return (
-    <section className="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden border-b border-white/5">
+    <section className="relative pt-8 pb-16 md:pt-12 md:pb-24 overflow-hidden border-b border-gray-200 bg-white">
       {/* Background Orbs */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#FF8C00]/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#FF2E63]/10 rounded-full blur-[120px] -z-10 animate-pulse delay-700"></div>
@@ -28,10 +28,10 @@ export default function ServiceHero({ badge, title, description, productUrl, ser
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-white/10 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-200 mb-8 shadow-sm"
           >
             <span className="flex h-2 w-2 rounded-full bg-[#FF2E63] animate-ping"></span>
-            <span className="font-stat text-[10px] font-black tracking-[0.3em] uppercase text-slate-300">{badge}</span>
+            <span className="font-stat text-[10px] font-black tracking-[0.3em] uppercase text-gray-600">{badge}</span>
           </motion.div>
 
           <motion.h1
@@ -46,7 +46,7 @@ export default function ServiceHero({ badge, title, description, productUrl, ser
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="font-body text-slate-400 text-lg md:text-xl mb-12 leading-relaxed opacity-90 mx-auto max-w-3xl font-medium"
+            className="font-body text-gray-600 text-lg md:text-xl mb-12 leading-relaxed mx-auto max-w-3xl font-medium"
           >
             {description}
           </motion.p>
@@ -64,7 +64,7 @@ export default function ServiceHero({ badge, title, description, productUrl, ser
             <Link 
                href="https://zalo.me/0388009669" 
                target="_blank" rel="noopener noreferrer"
-               className="px-12 py-5 rounded-2xl glass-panel border border-white/10 text-white font-black text-xl hover:bg-white/5 transition-all duration-300 antialiased flex items-center gap-3"
+               className="px-12 py-5 rounded-2xl bg-white border border-gray-200 text-gray-900 font-black text-xl hover:bg-gray-50 transition-all duration-300 antialiased flex items-center gap-3 shadow-sm"
             >
               <MessageSquare size={24} className="text-[#00E5FF]" />
               Tư Vấn Zalo
@@ -77,15 +77,15 @@ export default function ServiceHero({ badge, title, description, productUrl, ser
             transition={{ delay: 0.6 }}
             className="flex flex-wrap items-center justify-center gap-8 md:gap-12"
           >
-            <div className="flex items-center gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
+            <div className="flex items-center gap-2 text-gray-500 font-bold uppercase text-[10px] tracking-widest">
               <CheckCircle size={16} className="text-emerald-500" />
               10K+ Đơn hàng thành công
             </div>
-            <div className="flex items-center gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
+            <div className="flex items-center gap-2 text-gray-500 font-bold uppercase text-[10px] tracking-widest">
               <Shield size={16} className="text-emerald-500" />
               Bảo mật tài khoản 100%
             </div>
-            <div className="flex items-center gap-2 text-white/60 font-bold uppercase text-[10px] tracking-widest">
+            <div className="flex items-center gap-2 text-gray-500 font-bold uppercase text-[10px] tracking-widest">
               <Award size={16} className="text-[#FF8C00]" />
               Cam kết hoàn tiền
             </div>
