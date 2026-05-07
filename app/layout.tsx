@@ -7,11 +7,6 @@ import BottomNav from '@/components/layout/BottomNav';
 import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
 import { ZaloFloatWidget } from '@/components/shared/ZaloFloatWidget';
 
-// Feature flag: NEXT_PUBLIC_LIGHT_MODE controls default theme
-// Default = 'true' (light mode)
-// Set to 'false' in .env.production to instantly rollback
-const isLightMode = process.env.NEXT_PUBLIC_LIGHT_MODE !== 'false';
-
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['vietnamese', 'latin'],
@@ -57,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="vi"
-      className={`${isLightMode ? '' : 'dark'} scroll-smooth`}
+      className="scroll-smooth"
       suppressHydrationWarning
     >
       <head>

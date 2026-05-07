@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { useScrollDirection } from '@/lib/hooks/useScrollDirection';
+import ThemeToggle from '@/components/ui/ThemeToggle';
 
 export default function Header() {
   const pathname = usePathname();
@@ -66,7 +67,12 @@ export default function Header() {
             })}
           </nav>
   
-          <div className="flex items-center gap-4 flex-1 md:flex-none justify-end">
+          <div className="flex items-center gap-3 md:gap-4 flex-1 md:flex-none justify-end">
+            {/* Theme Toggle - Desktop */}
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
+            
             <Link 
               href="https://360tuongtac.com/home?utm_source=grow&utm_medium=cta&utm_campaign=header_mobile&utm_content=thu_ngay" 
               className="md:hidden bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white px-3 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-[0_0_15px_rgba(255,46,99,0.3)] active:scale-95 transition-all duration-300"
