@@ -6,20 +6,40 @@ import { useState } from 'react';
 
 const FAQS = [
   {
-    q: "Hệ thống có yêu cầu mật khẩu tài khoản không?",
-    a: "Tuyệt đối KHÔNG. Chúng tôi chỉ yêu cầu link bài viết hoặc ID kênh để triển khai dịch vụ. Quyền riêng tư của bạn là ưu tiên hàng đầu."
+    q: "Dịch vụ buff view TikTok có an toàn không?",
+    a: "Hoàn toàn an toàn. Chúng tôi sử dụng hệ thống tài khoản thật, có đầy đủ avatar và hoạt động bình thường. Không yêu cầu mật khẩu tài khoản, chỉ cần link livestream hoặc ID kênh. Hệ thống hoạt động 24/7 với cơ chế bảo mật đa lớp, đảm bảo an toàn tuyệt đối cho tài khoản của bạn. Đã có hơn 10,000 khách hàng tin tưởng sử dụng dịch vụ buff view TikTok tại 360TuongTac."
   },
   {
-    q: "Thời gian bắt đầu triển khai là bao lâu?",
-    a: "Hệ thống hoạt động tự động 24/7. Thông thường dịch vụ sẽ được kích hoạt sau 5-15 phút kể từ khi bạn hoàn tất đặt hàng."
+    q: "Làm thế nào để tăng viewer cho livestream TikTok?",
+    a: "Để tăng viewer livestream TikTok rất đơn giản: (1) Đăng ký tài khoản tại 360TuongTac.com, (2) Nạp tiền vào tài khoản với số tiền tối thiểu 50K, (3) Chọn gói buff view phù hợp, (4) Dán link livestream và nhấn kích hoạt. Hệ thống sẽ tự động tăng viewer trong 5-15 phút, giúp livestream của bạn được TikTok đề xuất đến hàng nghìn người xem tiềm năng."
   },
   {
-    q: "Viewer/Follower có phải là tài khoản thật không?",
-    a: "Chúng tôi sử dụng hệ thống tài khoản chất lượng cao, có đầy đủ avatar và hoạt động, đảm bảo an toàn tuyệt đối và duy trì tương tác tự nhiên."
+    q: "Giá dịch vụ tăng tương tác mạng xã hội bao nhiêu tiền?",
+    a: "Giá dịch vụ tăng tương tác bắt đầu từ 50,000 VND cho các gói cơ bản. Chúng tôi cung cấp nhiều gói dịch vụ khác nhau: gói buff view TikTok từ 50K, gói buff follow Facebook từ 100K, gói buff like Instagram từ 80K. Tất cả dịch vụ đều có chính sách hoàn tiền 100% nếu không hoàn thành đúng cam kết. Bạn có thể thanh toán qua chuyển khoản, MoMo, ZaloPay hoặc thẻ cào."
   },
   {
-    q: "Nếu đơn hàng không hoàn thành thì sao?",
-    a: "Hệ thống có cơ chế tự động theo dõi. Nếu sau thời gian quy định đơn hàng chưa hoàn thành, chúng tôi sẽ tự động hoàn tiền vào số dư tài khoản của bạn."
+    q: "Buff follow Facebook có ảnh hưởng xấu đến page không?",
+    a: "Không ảnh hưởng tiêu cực nhé bạn. Follow được tăng từ tài khoản thật, chất lượng cao, giúp tăng độ trust cho page. Page có nhiều follow sẽ được Facebook đánh giá cao hơn, dễ dàng chạy Ads và tiếp cận khách hàng tiềm năng. Nhiều khách hàng của chúng tôi đã tăng từ 500 lên 15,000 follow an toàn và hiệu quả."
+  },
+  {
+    q: "Thời gian bắt đầu triển khai dịch vụ tăng tương tác là bao lâu?",
+    a: "Hệ thống của chúng tôi hoạt động tự động 24/7, không cần chờ đợi. Thông thường dịch vụ sẽ được kích hoạt sau 5-15 phút kể từ khi bạn hoàn tất đặt hàng. Tốc độ triển khai phụ thuộc vào gói dịch vụ bạn chọn, các gói VIP sẽ có tốc độ nhanh hơn. Bạn có thể theo dõi tiến độ trực tiếp trên dashboard tài khoản."
+  },
+  {
+    q: "Nếu đơn hàng không hoàn thành thì có được hoàn tiền không?",
+    a: "Có chứ! Hệ thống có cơ chế tự động theo dõi đơn hàng 24/7. Nếu sau thời gian quy định đơn hàng chưa hoàn thành, chúng tôi sẽ tự động hoàn tiền 100% vào số dư tài khoản của bạn. Bạn có thể sử dụng số dư này để đặt đơn hàng mới hoặc rút về tài khoản ngân hàng bất cứ lúc nào."
+  },
+  {
+    q: "Tài khoản buff view có bị drop không?",
+    a: "Tài khoản buff view tại 360TuongTac có độ ổn định cao, tỷ lệ drop dưới 5%. Chúng tôi sử dụng nguồn tài khoản chất lượng cao, được tuyển chọn kỹ lưỡng. Trong trường hợp có drop, hệ thống sẽ tự động bù đắp trong thời gian bảo hành. Gói VIP có chính sách bảo hành lên đến 30 ngày."
+  },
+  {
+    q: "Có thể buff tương tác cho Instagram Reels không?",
+    a: "Có, chúng tôi hỗ trợ buff tương tác cho Instagram Reels. Dịch vụ bao gồm: buff view, buff like, buff comment và buff follow. Nhiều khách hàng đã thành công với việc buff Reels từ vài trăm view đạt mốc 100K+ view, thậm chí trở thành xu hướng trên Instagram."
+  },
+  {
+    q: "Dịch vụ buff view TikTok có hỗ trợ cho YouTube không?",
+    a: "Hiện tại chúng tôi hỗ trợ buff tương tác cho 4 nền tảng chính: TikTok, Facebook, Instagram và YouTube. Với YouTube, chúng tôi cung cấp dịch vụ buff view video, buff subscriber, buff like và buff comment. Tất cả đều sử dụng tài khoản thật, an toàn và hiệu quả."
   }
 ];
 

@@ -15,6 +15,7 @@ import ContextualSectionCTA from '@/components/landing/ContextualSectionCTA';
 import ScrollTriggeredCTA from '@/components/landing/ScrollTriggeredCTA';
 import ExitIntentPopup from '@/components/landing/ExitIntentPopup';
 import { HomepageSchemas } from '@/components/seo/HomepageSchemas';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: '360 Tương Tác - Tăng Like, Follow, View Thật | TikTok, Facebook, Instagram',
@@ -83,6 +84,16 @@ export default function Home() {
     <>
       <HomepageSchemas />
       <ExitIntentPopup />
+      
+      {/* Breadcrumb Navigation for SEO */}
+      <div className="container-max px-6 pt-24 md:pt-28">
+        <Breadcrumbs 
+          items={[
+            { label: 'Trang chủ', href: '/' }
+          ]} 
+        />
+      </div>
+      
       <HeroSection />
       <PainPointSection />
       <ContextualSectionCTA 
@@ -93,7 +104,7 @@ export default function Home() {
       />
       <EducationSection data={{
         title: 'Bí mật của những Livestream nghìn đơn',
-        content: 'Bạn có bao giờ thắc mắc tại sao một số shop vừa lên live đã có hàng nghìn người xem, trong khi bạn chuẩn bị kỹ lưỡng nhưng chỉ lèo tèo vài mắt? \n\nCâu trả lời nằm ở "Mồi tương tác". Thuật toán TikTok và Facebook ưu tiên đề xuất những nội dung đang sôi nổi. Khi hệ thống nhận diện lượng người xem lớn và bình luận liên tục ngay từ đầu, nó sẽ tự động đẩy luồng livestream đến hàng chục nghìn người dùng tiềm năng.'
+        content: 'Bạn có bao giờ thắc mắc tại sao một số shop vừa lên live đã có hàng nghìn người xem, trong khi bạn chuẩn bị kỹ lưỡng nhưng chỉ lèo tèo vài mắt? \n\nCâu trả lời nằm ở "Mồi tương tác". Thuật toán TikTok và Facebook ưu tiên đề xuất những nội dung đang sôi nổi. Khi hệ thống nhận diện lượng người xem lớn và bình luận liên tục ngay từ đầu, nó sẽ tự động đẩy luồng livestream đến hàng chục nghìn người dùng tiềm năng.\n\nKhám phá dịch vụ buff view TikTok và buff follow Facebook để tăng trưởng bền vững.'
       }} />
       <SolutionSection />
       <ContextualSectionCTA 

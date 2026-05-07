@@ -34,6 +34,28 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://grow.360tuongtac.com'),
   title: '360 Tương Tác - Tăng Like, Follow, View Thật | TikTok, Facebook, Instagram',
   description: 'Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam. Tăng like, follow, view thật cho Facebook, TikTok, Instagram, YouTube. 10K+ khách hàng tin dùng.',
+  alternates: {
+    canonical: 'https://grow.360tuongtac.com',
+  },
+  openGraph: {
+    title: '360 Tương Tác - Tăng Like, Follow, View Thật',
+    description: 'Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam. Dịch vụ buff view TikTok, buff follow Facebook, buff like Instagram an toàn, hiệu quả.',
+    url: 'https://grow.360tuongtac.com',
+    siteName: '360 Tương Tác',
+    locale: 'vi_VN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '360 Tương Tác - Tăng Like, Follow, View Thật',
+    description: 'Nền tảng tăng trưởng mạng xã hội số 1 Việt Nam',
+  },
+  other: {
+    'geo.region': 'VN',
+    'geo.placename': 'Vietnam',
+    'geo.country': 'VN',
+    'google-site-verification': '', // Add your Google Search Console verification code here
+  },
   icons: {
     icon: [
       { url: '/logo.png', sizes: '32x32', type: 'image/png' },
