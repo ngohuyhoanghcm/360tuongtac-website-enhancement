@@ -76,7 +76,7 @@ export default function PromoBadge() {
         <Link 
           href="https://360tuongtac.com/user/recharge?utm_source=grow&utm_medium=badge&utm_campaign=promo_recharge&utm_content=promo_badge"
           className="block relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.03] group"
-          style={{ width: '360px' }}
+          style={{ width: '400px' }}
         >
           {/* Abstract Tech Background Pattern */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
@@ -99,8 +99,8 @@ export default function PromoBadge() {
           {/* Neon border glow */}
           <div className={`absolute inset-0 rounded-2xl transition-all duration-500 ${
             promo.isActive 
-              ? 'shadow-[0_0_60px_rgba(255,140,0,0.3),inset_0_0_60px_rgba(255,140,0,0.1)] border border-[#FF8C00]/60' 
-              : 'shadow-[0_0_40px_rgba(255,140,0,0.15),inset_0_0_40px_rgba(255,140,0,0.05)] border border-[#FF8C00]/40'
+              ? 'shadow-[0_0_45px_rgba(255,140,0,0.2),inset_0_0_45px_rgba(255,140,0,0.06)] border border-[#FF8C00]/45' 
+              : 'shadow-[0_0_30px_rgba(255,140,0,0.1),inset_0_0_30px_rgba(255,140,0,0.03)] border border-[#FF8C00]/30'
           }`} />
           
           {/* Active state pulse overlay */}
@@ -112,77 +112,71 @@ export default function PromoBadge() {
             />
           )}
           
-          {/* Content */}
-          <div className="relative px-5 py-4 flex items-center gap-4">
-            {/* 3D Isometric Coin Icon Container */}
+          {/* Content - No bottom section, all in one row */}
+          <div className="relative px-6 py-5 flex items-center justify-between gap-4">
+            {/* LEFT: Enlarged 3D Isometric Coin Icon */}
             <div className="flex-shrink-0">
-              <div className={`relative w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-500 ${
+              <div className={`relative w-[72px] h-[72px] rounded-full flex items-center justify-center transition-all duration-500 ${
                 promo.isActive 
-                  ? 'shadow-[0_0_30px_rgba(255,140,0,0.6),0_8px_32px_rgba(0,0,0,0.4)]' 
-                  : 'shadow-[0_0_20px_rgba(255,140,0,0.4),0_4px_20px_rgba(0,0,0,0.3)]'
+                  ? 'shadow-[0_0_30px_rgba(255,140,0,0.55),0_8px_28px_rgba(0,0,0,0.4)]' 
+                  : 'shadow-[0_0_22px_rgba(255,140,0,0.4),0_5px_18px_rgba(0,0,0,0.3)]'
               }`}>
                 {/* Glassmorphism background */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FF8C00]/20 via-[#FFD700]/10 to-[#FF2E63]/20 backdrop-blur-md border border-white/20" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF8C00]/20 via-[#FFD700]/10 to-[#FF2E63]/20 backdrop-blur-md border border-white/20" />
                 
-                {/* 3D Coin with neon gradient */}
-                <div className={`relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
+                {/* 3D Coin with neon gradient - ENLARGED */}
+                <div className={`relative w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 ${
                   promo.isActive
-                    ? 'bg-gradient-to-br from-[#FFD700] via-[#FF8C00] to-[#FF2E63] shadow-[0_0_20px_rgba(255,140,0,0.8),inset_0_-2px_8px_rgba(0,0,0,0.3),inset_0_2px_8px_rgba(255,255,255,0.3)]'
-                    : 'bg-gradient-to-br from-[#FFD700]/90 via-[#FF8C00]/90 to-[#FF2E63]/90 shadow-[0_0_15px_rgba(255,140,0,0.6),inset_0_-2px_8px_rgba(0,0,0,0.2),inset_0_2px_8px_rgba(255,255,255,0.2)]'
+                    ? 'bg-gradient-to-br from-[#FFD700] via-[#FF8C00] to-[#FF2E63] shadow-[0_0_22px_rgba(255,140,0,0.75),inset_0_-2px_8px_rgba(0,0,0,0.3),inset_0_2px_8px_rgba(255,255,255,0.3)]'
+                    : 'bg-gradient-to-br from-[#FFD700]/90 via-[#FF8C00]/90 to-[#FF2E63]/90 shadow-[0_0_16px_rgba(255,140,0,0.55),inset_0_-2px_8px_rgba(0,0,0,0.2),inset_0_2px_8px_rgba(255,255,255,0.2)]'
                 }`}>
                   {/* Coin inner ring */}
-                  <div className="absolute inset-1 rounded-full border-2 border-white/30" />
+                  <div className="absolute inset-2 rounded-full border-2 border-white/30" />
                   
                   {/* Dollar sign */}
-                  <svg className="w-6 h-6 text-white relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-7 h-7 text-white relative z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
               </div>
             </div>
             
-            {/* Text Content */}
-            <div className="flex-1 min-w-0">
+            {/* CENTER: Text Content */}
+            <div className="flex-1 min-w-0 text-center">
               {/* Title with neon gradient */}
-              <h3 className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FF2E63] uppercase tracking-wide mb-1.5 drop-shadow-[0_2px_8px_rgba(255,140,0,0.4)]">
+              <h3 className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FF2E63] uppercase tracking-wide mb-2 drop-shadow-[0_2px_8px_rgba(255,140,0,0.5)]">
                 Thưởng Nạp 10%
               </h3>
               
               {/* Time note with vector clock icon */}
-              <div className="flex items-center gap-1.5 mb-2">
-                <div className="flex-shrink-0 w-3.5 h-3.5 text-[#FF8C00]">
+              <div className="flex items-center justify-center gap-2">
+                <div className="flex-shrink-0 w-4 h-4 text-[#FF8C00]">
                   <Clock className="w-full h-full" strokeWidth={2.5} />
                 </div>
-                <p className="text-[11px] text-white/90 font-medium leading-relaxed">
+                <p className="text-xs text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FF2E63] font-semibold leading-tight">
                   {promo.periodLabel}
                 </p>
               </div>
-              
-              {/* Interactive CTA Button */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-block"
-              >
-                <div className={`relative px-4 py-2 rounded-lg font-bold text-[11px] uppercase tracking-wider overflow-hidden transition-all duration-300 ${
-                  promo.isActive
-                    ? 'bg-gradient-to-r from-[#FF8C00] via-[#FFD700] to-[#FF2E63] text-white shadow-[0_0_25px_rgba(255,140,0,0.6),0_4px_16px_rgba(0,0,0,0.3)] hover:shadow-[0_0_35px_rgba(255,140,0,0.8),0_6px_24px_rgba(0,0,0,0.4)]'
-                    : 'bg-gradient-to-r from-[#FF8C00]/80 via-[#FFD700]/80 to-[#FF2E63]/80 text-white shadow-[0_0_20px_rgba(255,140,0,0.4),0_2px_12px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(255,140,0,0.6),0_4px_16px_rgba(0,0,0,0.3)]'
-                }`}>
-                  {/* Button shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                  <span className="relative z-10">{promo.ctaLabel}</span>
-                </div>
-              </motion.div>
-              
-              {/* Divider with neon glow */}
-              <div className="mt-2.5 mb-2 h-px bg-gradient-to-r from-transparent via-[#FF8C00]/60 to-transparent shadow-[0_0_8px_rgba(255,140,0,0.4)]" />
-              
-              {/* Disclaimer text */}
-              <p className="text-[9px] text-slate-300/80 font-medium tracking-wide">
-                {promo.allDates}
-              </p>
             </div>
+            
+            {/* RIGHT: Enlarged Square CTA Button */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-shrink-0"
+            >
+              <div className={`relative w-[72px] h-[72px] rounded-2xl flex items-center justify-center overflow-hidden transition-all duration-300 ${
+                promo.isActive
+                  ? 'bg-gradient-to-br from-[#FFD700] via-[#FF8C00] to-[#FF2E63] shadow-[0_0_32px_rgba(255,140,0,0.7),0_6px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_0_45px_rgba(255,140,0,0.9),0_8px_28px_rgba(0,0,0,0.4)]'
+                  : 'bg-gradient-to-br from-[#FFD700]/90 via-[#FF8C00]/90 to-[#FF2E63]/90 shadow-[0_0_24px_rgba(255,140,0,0.5),0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_0_36px_rgba(255,140,0,0.7),0_6px_20px_rgba(0,0,0,0.3)]'
+              }`}>
+                {/* Button shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative z-10 text-[9px] font-black text-white uppercase tracking-tight text-center leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                  {promo.ctaLabel}
+                </span>
+              </div>
+            </motion.div>
           </div>
         </Link>
       </motion.div>
