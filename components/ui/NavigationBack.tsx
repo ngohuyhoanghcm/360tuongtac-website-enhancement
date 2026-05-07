@@ -12,7 +12,7 @@ interface NavigationBackProps {
 export default function NavigationBack({ href, label }: NavigationBackProps) {
   return (
     <div className="pb-4">
-      <Link href={href} className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors group py-3 pr-6 -ml-2 pl-2 rounded-lg hover:bg-gray-100 font-medium text-sm sm:text-base antialiased">
+      <Link href={href} className="inline-flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors group py-3 pr-6 -ml-2 pl-2 rounded-lg hover:bg-[var(--bg-secondary)] font-medium text-sm sm:text-base antialiased">
         <motion.div
           initial={{ x: 0 }}
           whileHover={{ x: -4 }}

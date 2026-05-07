@@ -48,7 +48,7 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="h-full bg-white p-8 md:p-10 rounded-[2.5rem] border border-gray-200 hover:border-[#FF2E63]/30 transition-all duration-500 flex flex-col relative overflow-hidden group-hover:shadow-xl">
+              <div className="h-full bg-[var(--surface)] p-8 md:p-10 rounded-[2.5rem] border border-[var(--border)] hover:border-[#FF2E63]/30 transition-all duration-500 flex flex-col relative overflow-hidden group-hover:shadow-xl">
                 {/* Popular Badge */}
                 {service.popular && (
                   <div className="absolute top-6 right-6 z-10">
@@ -62,28 +62,28 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF8C00] to-[#FF2E63] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500">
                     <Icon size={32} className="text-white" />
                   </div>
-                  <span className="text-gray-500 text-[10px] font-black uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-lg border border-gray-200">
+                  <span className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest bg-[var(--bg-secondary)] px-3 py-1 rounded-lg border border-[var(--border)]">
                     {service.platform}
                   </span>
                 </div>
 
-                <h3 className="font-h1 text-2xl font-black text-gray-900 mb-4 leading-tight tracking-tight group-hover:text-[#FF8C00] transition-colors">
+                <h3 className="font-h1 text-2xl font-black text-[var(--text-primary)] mb-4 leading-tight tracking-tight group-hover:text-[#FF8C00] transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="font-body text-gray-600 text-sm md:text-base mb-10 leading-relaxed font-medium line-clamp-3">
+                <p className="font-body text-[var(--text-secondary)] text-sm md:text-base mb-10 leading-relaxed font-medium line-clamp-3">
                   {service.description}
                 </p>
 
-                <div className="mt-auto pt-8 border-t border-gray-200 flex items-center justify-between">
+                <div className="mt-auto pt-8 border-t border-[var(--border)] flex items-center justify-between">
                    <div>
-                      <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Giá khởi điểm</p>
-                      <p className="text-gray-900 font-black text-xl md:text-2xl">{service.startingPrice}</p>
+                      <p className="text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest mb-1">Giá khởi điểm</p>
+                      <p className="text-[var(--text-primary)] font-black text-xl md:text-2xl">{service.startingPrice}</p>
                    </div>
                    
                    <Link 
                       href={`/dich-vu/${service.slug}`} 
-                      className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gradient-to-r hover:from-[#FF8C00] hover:to-[#FF2E63] hover:border-transparent hover:text-white transition-all duration-300"
+                      className="w-12 h-12 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:bg-gradient-to-r hover:from-[#FF8C00] hover:to-[#FF2E63] hover:border-transparent hover:text-white transition-all duration-300"
                     >
                       <ArrowRight size={20} />
                    </Link>

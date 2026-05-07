@@ -77,7 +77,7 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
     : solutionsData;
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-gray-50" id="giai-phap">
+    <section className="py-24 md:py-32 relative overflow-hidden bg-[var(--bg-secondary)]" id="giai-phap">
       {/* Background Decorative Orbs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-200/20 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-200/20 rounded-full blur-[140px] translate-y-1/2 -translate-x-1/2"></div>
@@ -98,7 +98,7 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 tracking-tight text-gray-900 leading-[1.1] antialiased"
+            className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 tracking-tight text-[var(--text-primary)] leading-[1.1] antialiased"
           >
             {displayTitle === "Bệ phóng tăng trưởng từ 360TuongTac" ? (
               <>Bệ phóng tăng trưởng <br className="hidden md:block" /> <span className="bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent">từ 360TuongTac</span></>
@@ -110,7 +110,7 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="font-body text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium antialiased"
+            className="font-body text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed font-medium antialiased"
           >
             Chúng tôi cung cấp hệ sinh thái mồi tương tác thông minh giúp bạn bẻ khóa thuật toán 
             và xây dựng cộng đồng khách hàng trung thành.
@@ -131,22 +131,22 @@ export default function SolutionSection({ data, productUrl, serviceSlug }: Solut
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="bg-white p-10 h-full rounded-[2.5rem] border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-500 relative overflow-hidden text-center flex flex-col items-center shadow-md hover:shadow-lg">
+              <div className="bg-[var(--surface)] p-10 h-full rounded-[2.5rem] border border-[var(--border)] hover:border-[var(--border-hover)] hover:bg-[var(--surface-hover)] transition-all duration-500 relative overflow-hidden text-center flex flex-col items-center shadow-md hover:shadow-lg">
                 {/* Icon with Neon Glow */}
                 <div className="relative mb-10 w-20 h-20 flex items-center justify-center">
                   <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${sol.grad} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`}></div>
                   <motion.div 
                     whileHover={{ scale: 1.1 }}
-                    className={`w-full h-full rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center relative z-10 transition-all duration-300 group-hover:bg-gray-100 ${sol.glow}`}
+                    className={`w-full h-full rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border)] flex items-center justify-center relative z-10 transition-all duration-300 group-hover:bg-[var(--surface-hover)] ${sol.glow}`}
                   >
                     <sol.icon className="w-10 h-10" style={{ color: sol.color }} />
                   </motion.div>
                 </div>
 
-                <h3 className="font-h text-2xl font-bold mb-5 text-gray-900 tracking-tight">
+                <h3 className="font-h text-2xl font-bold mb-5 text-[var(--text-primary)] tracking-tight">
                   {sol.title}
                 </h3>
-                <p className="font-body text-gray-600 text-base md:text-lg leading-relaxed">
+                <p className="font-body text-[var(--text-secondary)] text-base md:text-lg leading-relaxed">
                   {sol.desc}
                 </p>
               </div>

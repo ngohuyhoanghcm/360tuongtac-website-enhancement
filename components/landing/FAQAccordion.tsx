@@ -42,10 +42,10 @@ export default function FAQAccordion({ data }: FAQAccordionProps) {
     : FAQS;
 
   return (
-    <section className="py-24 border-t border-gray-200 bg-gray-50">
+    <section className="py-24 border-t border-[var(--border)] bg-[var(--bg-secondary)]">
       <div className="container-max px-6">
         <div className="text-center mb-16">
-          <h2 className="font-h1 text-3xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight antialiased">
+          <h2 className="font-h1 text-3xl md:text-5xl font-black text-[var(--text-primary)] mb-6 uppercase tracking-tight antialiased">
             {displayTitle.includes('thường gặp') ? (
               <>Câu hỏi <span className="text-gradient">thường gặp</span></>
             ) : displayTitle}
@@ -60,7 +60,7 @@ export default function FAQAccordion({ data }: FAQAccordionProps) {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 transition-colors shadow-sm"
+              className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl overflow-hidden hover:border-[var(--border-hover)] transition-colors shadow-sm"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -68,11 +68,11 @@ export default function FAQAccordion({ data }: FAQAccordionProps) {
               >
                 <div className="flex items-center gap-4">
                   <HelpCircle size={20} className="text-[#FF8C00] group-hover:scale-110 transition-transform" />
-                  <span className="font-h1 text-lg font-bold text-gray-900 antialiased">{faq.q}</span>
+                  <span className="font-h1 text-lg font-bold text-[var(--text-primary)] antialiased">{faq.q}</span>
                 </div>
                 <ChevronDown 
                    size={20} 
-                   className={`text-gray-500 transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} 
+                   className={`text-[var(--text-muted)] transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} 
                 />
               </button>
               
@@ -82,7 +82,7 @@ export default function FAQAccordion({ data }: FAQAccordionProps) {
                   animate={{ height: 'auto', opacity: 1 }}
                   className="px-6 pb-6"
                 >
-                  <p className="font-body text-gray-600 leading-relaxed font-medium pt-2 border-t border-gray-200">
+                  <p className="font-body text-[var(--text-secondary)] leading-relaxed font-medium pt-2 border-t border-[var(--border)]">
                     {faq.a}
                   </p>
                 </motion.div>

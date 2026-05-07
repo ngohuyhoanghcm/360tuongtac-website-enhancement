@@ -101,27 +101,27 @@ export default async function LandingPageFactory({ params }: { params: Promise<{
       <FAQAccordion data={page.content.faq} />
 
       {/* Mobile Share Section */}
-      <div className="xl:hidden container-max px-6 py-12 border-t border-gray-200 flex flex-col items-center">
-        <h4 className="font-h1 text-sm font-black text-gray-900 mb-6 uppercase tracking-widest text-center">Chia sẻ dịch vụ</h4>
+      <div className="xl:hidden container-max px-6 py-12 border-t border-[var(--border)] flex flex-col items-center">
+        <h4 className="font-h1 text-sm font-black text-[var(--text-primary)] mb-6 uppercase tracking-widest text-center">Chia sẻ dịch vụ</h4>
         <SocialShare url={`https://360tuongtac.com/dich-vu/${slug}`} title={page.title || page.content.hero.title} />
       </div>
 
       {/* Floating Desktop Share */}
       <div className="hidden xl:block fixed right-6 top-[40%] z-50">
-        <div className="p-4 bg-white border border-gray-200 rounded-2xl shadow-lg">
+        <div className="p-4 glass-panel rounded-2xl shadow-lg">
           <SocialShare url={`https://360tuongtac.com/dich-vu/${slug}`} title={page.title || page.content.hero.title} layout="vertical" />
         </div>
       </div>
 
       {/* Internal Link Sync: Related Posts */}
       {page.relatedPosts && page.relatedPosts.length > 0 && (
-        <section className="py-24 bg-gray-50 border-t border-gray-200">
+        <section className="py-24 bg-[var(--bg-secondary)] border-t border-[var(--border)]">
           <div className="container-max px-6">
-            <h2 className="font-h1 text-3xl font-black text-gray-900 mb-12 text-center">Kiến Thức Chuyên Môn</h2>
+            <h2 className="font-h1 text-3xl font-black text-[var(--text-primary)] mb-12 text-center">Kiến Thức Chuyên Môn</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                {page.relatedPosts.map(postSlug => (
-                  <a key={postSlug} href={`/blog/${postSlug}`} className="group p-6 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors shadow-sm">
-                    <h3 className="font-bold text-gray-900 mb-3 group-hover:text-[#FF8C00] transition-colors">{postSlug.replace(/-/g, ' ')}</h3>
+                  <a key={postSlug} href={`/blog/${postSlug}`} className="group p-6 glass-panel rounded-2xl hover:bg-[var(--surface-hover)] transition-colors shadow-sm">
+                    <h3 className="font-bold text-[var(--text-primary)] mb-3 group-hover:text-[#FF8C00] transition-colors">{postSlug.replace(/-/g, ' ')}</h3>
                     <div className="text-[#FF2E63] font-bold text-sm tracking-widest uppercase flex items-center gap-2">Tìm hiểu thêm <span className="group-hover:translate-x-1 transition-transform">→</span></div>
                   </a>
                ))}

@@ -80,7 +80,7 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
     : tiers.map(t => ({ ...t, url: 'https://zalo.me/0388009669' }));
 
   return (
-    <section className="py-16 md:py-24 px-6 border-t border-gray-200 bg-gray-50" id="pricing">
+    <section className="py-16 md:py-24 px-6 border-t border-[var(--border)] bg-[var(--bg-secondary)]" id="pricing">
       <div className="container-max">
         <div className="text-center mb-16">
           <div className="inline-block mb-4 px-4 py-2 rounded-full border border-primary/20 bg-primary/10">
@@ -98,7 +98,7 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
           {displayPackages.map((tier, index) => (
             <div 
               key={index} 
-              className={`bg-white rounded-2xl p-8 relative flex flex-col ${tier.popular ? 'border-[#FF2E63] shadow-xl shadow-[#FF2E63]/10 transform md:-translate-y-4' : 'border-gray-200 shadow-md'}`}
+              className={`bg-[var(--surface)] rounded-2xl p-8 relative flex flex-col ${tier.popular ? 'border-[#FF2E63] shadow-xl shadow-[#FF2E63]/10 transform md:-translate-y-4' : 'border-[var(--border)] shadow-md'}`}
             >
               {tier.popular && (
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-accent to-primary text-white text-xs font-bold uppercase tracking-widest py-1.5 px-4 rounded-full">
@@ -110,9 +110,9 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
                 <p className={`text-sm font-bold uppercase tracking-wider mb-2 ${tier.color === 'accent' ? 'text-accent' : tier.color === 'success' ? 'text-green-400' : 'text-primary'}`}>
                   {tier.target}
                 </p>
-                <h3 className="font-h text-2xl font-bold text-gray-900 mb-4">{tier.name}</h3>
+                <h3 className="font-h text-2xl font-bold text-[var(--text-primary)] mb-4">{tier.name}</h3>
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="font-h text-3xl font-extrabold text-gray-900">{tier.price}</span>
+                  <span className="font-h text-3xl font-extrabold text-[var(--text-primary)]">{tier.price}</span>
                 </div>
                 <p className="font-body text-text-secondary min-h-[48px]">{tier.description}</p>
               </div>
@@ -134,7 +134,7 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
                   : `${tier.url}?utm_source=grow&utm_medium=pricing_table&utm_campaign=${serviceName || 'service'}&utm_content=pricing_tier_${index + 1}`}
                 target={tier.buttonText === "Tư vấn Zalo" ? "_blank" : undefined}
                 rel={tier.buttonText === "Tư vấn Zalo" ? "noopener noreferrer" : undefined}
-                className={`w-full py-4 rounded-lg font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${tier.popular ? 'bg-gradient-to-r from-[#FF2E63] to-[#FF8C00] text-white hover:shadow-lg hover:scale-105' : tier.buttonText === "Tư vấn Zalo" ? 'bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 hover:border-cyan-300 hover:shadow-md' : 'bg-white text-gray-900 hover:bg-gray-50 border border-gray-200 hover:shadow-md'}`}
+                className={`w-full py-4 rounded-lg font-bold text-center transition-all duration-300 flex items-center justify-center gap-2 ${tier.popular ? 'bg-gradient-to-r from-[#FF2E63] to-[#FF8C00] text-white hover:shadow-lg hover:scale-105' : tier.buttonText === "Tư vấn Zalo" ? 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)] hover:bg-[var(--surface-hover)] hover:border-cyan-300 hover:shadow-md' : 'bg-[var(--surface)] text-[var(--text-primary)] hover:bg-[var(--surface-hover)] border border-[var(--border)] hover:shadow-md'}`}
               >
                 {tier.buttonText === "Tư vấn Zalo" && (
                   <svg className="w-5 h-5 text-[#00E5FF]" viewBox="0 0 24 24" fill="currentColor">
@@ -147,7 +147,7 @@ export default function PricingTable({ data, serviceName }: PricingTableProps) {
           ))}
         </div>
         
-        <div className="mt-12 flex items-center justify-center gap-2 text-gray-600 text-sm">
+        <div className="mt-12 flex items-center justify-center gap-2 text-[var(--text-secondary)] text-sm">
           <Info className="w-4 h-4" />
           <span>Bảng giá chi tiết cho từng loại dịch vụ (Facebook, TikTok, SP Premium...) có sẵn sau khi đăng nhập.</span>
         </div>

@@ -31,7 +31,7 @@ export default function PromoBadge() {
     <div className="absolute left-1/2 -translate-x-1/2 bottom-8 z-20 hidden md:block">
       <Link 
         href="https://360tuongtac.com/user/recharge?utm_source=grow&utm_medium=badge&utm_campaign=promo_recharge&utm_content=promo_badge"
-        className="block glass-panel rounded-xl p-3 max-w-[280px] notification-fade notification-fade-delay-1 border border-[#FF8C00]/30 hover:border-[#FF8C00]/60 hover:scale-105 transition-all duration-300 cursor-pointer"
+        className="block glass-panel rounded-xl p-3 max-w-[280px] notification-fade notification-fade-delay-1 border border-[var(--border)] hover:border-[#FF8C00]/60 hover:scale-105 transition-all duration-300 cursor-pointer"
       >
         <div className="flex items-center gap-2">
           {/* Coin Icon */}
@@ -43,9 +43,9 @@ export default function PromoBadge() {
           
           {/* Text Content */}
           <div>
-            <div className="text-xs font-bold text-white">💰 THƯỞNG NẠP 10%</div>
-            <div className="text-[10px] text-slate-300">
-              Ngày <span className="text-[#FFD700] font-bold">8, 18, 28</span> hàng tháng
+            <div className="text-xs font-bold text-[var(--text-primary)]">💰 THƯỞNG NẠP 10%</div>
+            <div className="text-[10px] text-[var(--text-muted)]">
+              Ngày <span className="text-[#FF8C00] font-bold">8, 18, 28</span> hàng tháng
             </div>
           </div>
         </div>

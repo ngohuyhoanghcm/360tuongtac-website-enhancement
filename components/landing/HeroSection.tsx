@@ -39,11 +39,11 @@ export default function HeroSection() {
           {/* Main Headline */}
           <h1 className="font-h text-3xl md:text-5xl lg:text-7xl mb-6 leading-tight">
             <span className="block bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent font-black tracking-tight drop-shadow-sm">Tăng Trưởng Mạng Xã Hội</span>
-            <span className="block text-gray-900 font-black tracking-tight mt-2">Đa Nền Tảng & Hiệu Quả</span>
+            <span className="block text-[var(--text-primary)] font-black tracking-tight mt-2">Đa Nền Tảng & Hiệu Quả</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="font-body text-base md:text-xl text-gray-600 max-w-2xl md:max-w-3xl mx-auto mb-10 md:mb-14 leading-relaxed">
+          <p className="font-body text-base md:text-xl text-[var(--text-secondary)] max-w-2xl md:max-w-3xl mx-auto mb-10 md:mb-14 leading-relaxed">
             Giải pháp marketing 360° giúp thương hiệu của bạn bứt phá trên Facebook, TikTok, Instagram, YouTube. Tăng tương tác thật, tiếp cận khách hàng tiềm năng và thúc đẩy doanh số.
           </p>
 

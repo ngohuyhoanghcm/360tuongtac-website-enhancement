@@ -49,8 +49,8 @@ export default function TableOfContents() {
 
   return (
     <nav className="hidden xl:block sticky top-32 max-h-[calc(100vh-160px)] overflow-y-auto">
-      <div className="pl-8 border-l border-gray-200">
-        <h4 className="font-h1 text-xs font-black text-gray-500 uppercase tracking-widest mb-6">
+      <div className="pl-8 border-l border-[var(--border)]">
+        <h4 className="font-h1 text-xs font-black text-[var(--text-muted)] uppercase tracking-widest mb-6">
           Nội dung chính
         </h4>
         <ul className="space-y-4">
@@ -64,7 +64,7 @@ export default function TableOfContents() {
                 className={`block text-sm transition-all duration-300 font-medium leading-relaxed ${
                   activeId === heading.id 
                     ? 'text-[#FF2E63] font-bold' 
-                    : 'text-gray-600 hover:text-gray-900'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
                 onClick={(e) => {
                   e.preventDefault();

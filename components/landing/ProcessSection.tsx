@@ -95,7 +95,7 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
     : STEPS;
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-gray-50" id="quy-trinh">
+    <section className="py-24 md:py-32 relative overflow-hidden bg-[var(--bg-secondary)]" id="quy-trinh">
       {/* Background Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-200/20 rounded-full blur-[120px] pointer-events-none"></div>
       
@@ -105,7 +105,7 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-white border border-gray-200 mb-6 shadow-sm"
+            className="inline-flex items-center px-4 py-2 rounded-full bg-[var(--surface)] border border-[var(--border)] mb-6 shadow-sm"
           >
             <span className="flex h-2 w-2 rounded-full bg-[#00E5FF] animate-pulse mr-2"></span>
             <span className="font-stat text-[10px] font-black tracking-[0.2em] uppercase text-[#00E5FF]">Hệ thống tự động 24/7</span>
@@ -116,7 +116,7 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 leading-tight tracking-tight text-gray-900 antialiased"
+            className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 leading-tight tracking-tight text-[var(--text-primary)] antialiased"
           >
             {displayTitle === "Quy trình làm việc tối ưu" ? (
               <>Quy trình làm việc <span className="text-gradient">tối ưu</span></>
@@ -128,7 +128,7 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="font-body text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium antialiased"
+            className="font-body text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed font-medium antialiased"
           >
             Trải nghiệm sự đột phá với hệ thống vận hành 100% tự động, đảm bảo tốc độ tăng trưởng thần tốc và an toàn tuyệt đối cho tài khoản của bạn.
           </motion.p>
@@ -153,7 +153,7 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
                 <div className="hidden md:block absolute top-[2.5rem] left-[50%] w-full h-[2px] bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] opacity-20 -z-0"></div>
               )}
               
-              <div className="bg-white w-full max-w-sm md:max-w-none mx-auto p-8 h-full rounded-[2.5rem] border border-gray-200 hover:border-cyan-300 transition-all duration-500 relative overflow-hidden backdrop-blur-2xl flex flex-col items-center text-center shadow-md hover:shadow-lg">
+              <div className="bg-[var(--surface)] w-full max-w-sm md:max-w-none mx-auto p-8 h-full rounded-[2.5rem] border border-[var(--border)] hover:border-cyan-300 transition-all duration-500 relative overflow-hidden backdrop-blur-2xl flex flex-col items-center text-center shadow-md hover:shadow-lg">
                 
                 {/* Step Number Badge */}
                 <motion.div 
@@ -164,14 +164,14 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
                 </motion.div>
 
                 {/* Icon Container */}
-                <div className="mb-6 p-4 rounded-full bg-gray-50 border border-gray-200 group-hover:bg-cyan-50 group-hover:border-cyan-300 transition-all duration-500">
+                <div className="mb-6 p-4 rounded-full bg-[var(--bg-secondary)] border border-[var(--border)] group-hover:bg-cyan-50 group-hover:border-cyan-300 transition-all duration-500">
                   <s.icon size={32} className="text-[#00E5FF] group-hover:scale-110 transition-transform duration-500" />
                 </div>
 
-                <h3 className="font-h1 text-xl font-bold text-gray-900 mb-4 tracking-tight group-hover:text-cyan-600 transition-colors">
+                <h3 className="font-h1 text-xl font-bold text-[var(--text-primary)] mb-4 tracking-tight group-hover:text-cyan-600 transition-colors">
                   {s.title}
                 </h3>
-                <p className="font-body text-gray-600 text-sm leading-relaxed font-medium">
+                <p className="font-body text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
                   {s.desc}
                 </p>
 
@@ -190,13 +190,13 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
            transition={{ delay: 0.8 }}
            className="mt-24"
         >
-          <div className="bg-white p-10 md:p-16 rounded-[3rem] border border-gray-200 relative overflow-hidden backdrop-blur-3xl shadow-lg">
+          <div className="bg-[var(--surface)] p-10 md:p-16 rounded-[3rem] border border-[var(--border)] relative overflow-hidden backdrop-blur-3xl shadow-lg">
             <div className="absolute right-0 bottom-0 w-96 h-96 bg-[#00E5FF]/5 blur-[120px] rounded-full pointer-events-none opacity-50"></div>
             
             <div className="text-center mb-16 max-w-2xl mx-auto relative z-10">
-              <h2 className="font-h1 text-3xl md:text-4xl font-black text-gray-900 mb-4 antialiased uppercase tracking-wide">Cam kết chất lượng</h2>
+              <h2 className="font-h1 text-3xl md:text-4xl font-black text-[var(--text-primary)] mb-4 antialiased uppercase tracking-wide">Cam kết chất lượng</h2>
               <div className="h-1.5 w-24 bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] mx-auto rounded-full mb-6"></div>
-              <p className="font-body text-gray-600 font-medium">Uy tín và sự thành công của khách hàng là kim chỉ nam cho mọi hoạt động của hệ thống.</p>
+              <p className="font-body text-[var(--text-secondary)] font-medium">Uy tín và sự thành công của khách hàng là kim chỉ nam cho mọi hoạt động của hệ thống.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
@@ -204,24 +204,24 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
                 <div className="w-20 h-20 rounded-3xl bg-[#00E5FF]/5 border border-[#00E5FF]/10 flex items-center justify-center mb-6 text-[#00E5FF] group-hover:bg-[#00E5FF]/10 group-hover:shadow-[0_0_30px_rgba(0,229,255,0.3)] group-hover:-translate-y-2 transition-all duration-500">
                   <ShieldCheck size={40} />
                 </div>
-                <h4 className="font-h1 text-xl font-bold text-gray-900 mb-3 tracking-tight">100% Secure</h4>
-                <p className="font-body text-gray-600 text-sm leading-relaxed">Hệ thống bảo mật đa tầng, cam kết không lộ danh tính khách hàng.</p>
+                <h4 className="font-h1 text-xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">100% Secure</h4>
+                <p className="font-body text-[var(--text-secondary)] text-sm leading-relaxed">Hệ thống bảo mật đa tầng, cam kết không lộ danh tính khách hàng.</p>
               </div>
 
               <div className="flex flex-col items-center text-center group">
                 <div className="w-20 h-20 rounded-3xl bg-[#6C63FF]/5 border border-[#6C63FF]/10 flex items-center justify-center mb-6 text-[#6C63FF] group-hover:bg-[#6C63FF]/10 group-hover:shadow-[0_0_30px_rgba(108,99,255,0.3)] group-hover:-translate-y-2 transition-all duration-500">
                   <LineChart size={40} />
                 </div>
-                <h4 className="font-h1 text-xl font-bold text-gray-900 mb-3 tracking-tight">Real Growth</h4>
-                <p className="font-body text-gray-600 text-sm leading-relaxed">Tương tác từ tài khoản thật và chất lượng cao, giúp kênh phát triển bền vững.</p>
+                <h4 className="font-h1 text-xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">Real Growth</h4>
+                <p className="font-body text-[var(--text-secondary)] text-sm leading-relaxed">Tương tác từ tài khoản thật và chất lượng cao, giúp kênh phát triển bền vững.</p>
               </div>
 
               <div className="flex flex-col items-center text-center group">
                 <div className="w-20 h-20 rounded-3xl bg-[#FF2E63]/5 border border-[#FF2E63]/10 flex items-center justify-center mb-6 text-[#FF2E63] group-hover:bg-[#FF2E63]/10 group-hover:shadow-[0_0_30px_rgba(255,46,99,0.3)] group-hover:-translate-y-2 transition-all duration-500">
                   <Wallet size={40} />
                 </div>
-                <h4 className="font-h1 text-xl font-bold text-gray-900 mb-3 tracking-tight">Tối ưu Chi phí</h4>
-                <p className="font-body text-gray-600 text-sm leading-relaxed">Bảng giá cạnh tranh cùng nhiều ưu đãi đặc quyền cho đại lý và KOC.</p>
+                <h4 className="font-h1 text-xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">Tối ưu Chi phí</h4>
+                <p className="font-body text-[var(--text-secondary)] text-sm leading-relaxed">Bảng giá cạnh tranh cùng nhiều ưu đãi đặc quyền cho đại lý và KOC.</p>
               </div>
             </div>
           </div>

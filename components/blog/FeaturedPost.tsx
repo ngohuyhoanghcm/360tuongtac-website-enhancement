@@ -26,13 +26,13 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
       transition={{ duration: 1 }}
       className="mb-20 md:mb-32"
     >
-      <div className="bg-white p-4 md:p-6 rounded-[2.5rem] border border-gray-200 relative overflow-hidden group shadow-md">
+      <div className="glass-panel p-4 md:p-6 rounded-[2.5rem] relative overflow-hidden group shadow-md">
         {/* Glow Aura */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-[#FF2E63]/10 to-transparent opacity-50 pointer-events-none"></div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Image Container */}
-          <div className="relative aspect-[16/10] lg:aspect-auto h-full min-h-[300px] md:min-h-[450px] rounded-3xl overflow-hidden shadow-lg border border-gray-200">
+          <div className="relative aspect-[16/10] lg:aspect-auto h-full min-h-[300px] md:min-h-[450px] rounded-3xl overflow-hidden shadow-lg border border-[var(--border)]">
             <Image
               src={post.image}
               alt={post.title}
@@ -47,7 +47,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
               </span>
             </div>
             {/* Edge Glow */}
-            <div className="absolute inset-0 border border-gray-200 rounded-3xl pointer-events-none"></div>
+            <div className="absolute inset-0 border border-[var(--border)] rounded-3xl pointer-events-none"></div>
           </div>
 
           {/* Content Container */}
@@ -57,36 +57,36 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
                 {post.category}
               </span>
               <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
-              <div className="flex items-center gap-2 text-gray-600 text-sm font-medium">
+              <div className="flex items-center gap-2 text-[var(--text-secondary)] text-sm font-medium">
                 <Calendar size={14} className="text-[#FF2E63]" />
                 <span>{post.date}</span>
               </div>
             </div>
 
             <Link href={`/blog/${post.slug}`}>
-              <h2 className="font-h1 text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-[1.1] md:leading-tight group-hover:bg-gradient-to-r group-hover:from-[#FF8C00] group-hover:to-[#FF2E63] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+              <h2 className="font-h1 text-3xl md:text-4xl lg:text-5xl font-black text-[var(--text-primary)] mb-6 leading-[1.1] md:leading-tight group-hover:bg-gradient-to-r group-hover:from-[#FF8C00] group-hover:to-[#FF2E63] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                 {post.title}
               </h2>
             </Link>
 
-            <p className="font-body text-gray-600 text-lg md:text-xl mb-10 leading-relaxed font-normal">
+            <p className="font-body text-[var(--text-secondary)] text-lg md:text-xl mb-10 leading-relaxed font-normal">
               {post.excerpt}
             </p>
 
-            <div className="flex items-center justify-between pt-8 border-t border-gray-200">
+            <div className="flex items-center justify-between pt-8 border-t border-[var(--border)]">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center p-0.5 overflow-hidden">
-                  <div className="w-full h-full bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
+                <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center p-0.5 overflow-hidden">
+                  <div className="w-full h-full bg-[var(--surface-hover)] rounded-xl flex items-center justify-center text-[var(--text-muted)]">
                     <User size={20} />
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-gray-900 font-bold text-base">{post.author}</h4>
-                  <p className="text-gray-500 text-xs uppercase tracking-widest font-black">Biên tập viên</p>
+                  <h4 className="text-[var(--text-primary)] font-bold text-base">{post.author}</h4>
+                  <p className="text-[var(--text-muted)] text-xs uppercase tracking-widest font-black">Biên tập viên</p>
                 </div>
               </div>
 
-              <Link href={`/blog/${post.slug}`} className="group/btn flex items-center gap-3 text-gray-900 font-black text-sm tracking-widest uppercase hover:text-[#FF8C00] transition-colors relative overflow-hidden">
+              <Link href={`/blog/${post.slug}`} className="group/btn flex items-center gap-3 text-[var(--text-primary)] font-black text-sm tracking-widest uppercase hover:text-[#FF8C00] transition-colors relative overflow-hidden">
                 Đọc tiếp
                 <motion.div
                   animate={{ x: [0, 5, 0] }}

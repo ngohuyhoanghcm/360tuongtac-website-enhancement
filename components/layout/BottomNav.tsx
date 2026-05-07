@@ -27,7 +27,7 @@ export default function BottomNav() {
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="fixed bottom-0 left-0 right-0 z-[100] md:hidden pb-safe pointer-events-none"
     >
-      <div className="mx-4 mb-4 bg-white/95 backdrop-blur-2xl border border-gray-200 rounded-2xl flex items-center justify-around py-3 px-1 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] pointer-events-auto">
+      <div className="mx-4 mb-4 glass-panel rounded-2xl flex items-center justify-around py-3 px-1 pointer-events-auto">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
@@ -42,7 +42,7 @@ export default function BottomNav() {
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="relative p-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] rounded-full shadow-[0_0_20px_rgba(255,46,99,0.5)] border border-white/20"
+                  className="relative p-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] rounded-full shadow-[0_0_20px_rgba(255,46,99,0.5)]"
                 >
                   <Icon size={24} className="text-white" />
                   <motion.div
@@ -82,13 +82,13 @@ export default function BottomNav() {
                 <Icon
                   size={20}
                   className={`relative z-10 transition-colors duration-300 ${
-                    isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'
+                    isActive ? 'text-white' : 'text-[var(--text-muted)] group-hover:text-[var(--text-secondary)]'
                   }`}
                 />
               </motion.div>
               <span
                 className={`text-[8px] font-bold tracking-tight transition-colors duration-300 uppercase ${
-                  isActive ? 'text-gray-900' : 'text-gray-500 group-hover:text-gray-700'
+                  isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)] group-hover:text-[var(--text-secondary)]'
                 }`}
               >
                 {item.name}

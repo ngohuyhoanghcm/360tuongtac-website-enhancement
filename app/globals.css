@@ -137,6 +137,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  /* Light mode: solid surface | Dark mode: glassmorphism */
   background-color: var(--surface);
   color: var(--text-primary);
   border: 1px solid var(--border);
@@ -145,6 +146,20 @@ body {
   font-weight: 700;
   font-size: 1rem;
   transition: all 0.3s ease;
+}
+
+/* Dark mode override for btn-secondary — glassmorphism style */
+.dark .btn-secondary {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.dark .btn-secondary:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-hover);
 }
 
 /* gradient text — unchanged both modes */

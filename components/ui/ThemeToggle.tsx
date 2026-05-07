@@ -87,7 +87,7 @@ export default function ThemeToggle() {
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="relative p-2.5 rounded-xl bg-gray-100 border border-gray-200 text-gray-600 hover:bg-gray-200 dark:bg-white/10 dark:border-white/20 dark:text-gray-300 dark:hover:bg-white/20 transition-all duration-300"
+      className="relative p-2.5 rounded-xl glass-panel text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] transition-all duration-300"
     >
       <AnimatePresence mode="wait">
         {isDark ? (

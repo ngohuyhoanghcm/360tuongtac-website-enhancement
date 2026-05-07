@@ -31,7 +31,7 @@ export default function Header() {
           className={`pointer-events-auto transition-all duration-500 rounded-none md:rounded-2xl flex justify-between items-center w-full py-4 px-6 md:px-8 ${
             isAtTop 
               ? 'bg-transparent border-transparent' 
-              : 'bg-white/90 backdrop-blur-md border border-gray-200 shadow-sm'
+              : 'glass-panel'
           }`}
         >
           {/* Logo */}
@@ -52,7 +52,7 @@ export default function Header() {
               return (
                 <Link 
                   key={link.href} 
-                  className={`relative px-2 py-1 transition-all group ${isActive ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'}`} 
+                  className={`relative px-2 py-1 transition-all group ${isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`} 
                   href={link.href}
                 >
                   {link.name}

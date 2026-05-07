@@ -66,14 +66,14 @@ export default function InteractiveChart({
 
   return (
     <div 
-      className="my-10 p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-xl relative"
+      className="my-10 p-6 sm:p-8 rounded-3xl glass-panel backdrop-blur-xl relative"
       role="region"
       aria-label={title || "Biểu đồ dữ liệu"}
     >
       {(title || description) && (
         <div className="mb-8 relative z-10">
-          {title && <h3 className="text-xl font-black text-white mb-2" id={`chart-title-${title.replace(/\s+/g, '-')}`}>{title}</h3>}
-          {description && <p className="text-white/60 text-sm">{description}</p>}
+          {title && <h3 className="text-xl font-black text-[var(--text-primary)] mb-2" id={`chart-title-${title.replace(/\s+/g, '-')}`}>{title}</h3>}
+          {description && <p className="text-[var(--text-muted)] text-sm">{description}</p>}
         </div>
       )}
 
@@ -113,7 +113,7 @@ export default function InteractiveChart({
                <div className="w-8 bg-[#FF8C00]/20 rounded-t-sm h-full"></div>
                <div className="w-8 bg-[#FF8C00]/20 rounded-t-sm h-1/2"></div>
             </div>
-            <p className="text-white/40 text-sm mt-4 font-medium tracking-wide hidden sm:block">Đang tải dữ liệu biểu đồ...</p>
+            <p className="text-[var(--text-muted)] text-sm mt-4 font-medium tracking-wide hidden sm:block">Đang tải dữ liệu biểu đồ...</p>
           </div>
         ) : (
           <ResponsiveContainer width="100%" height="100%" className="animate-in fade-in duration-700">
