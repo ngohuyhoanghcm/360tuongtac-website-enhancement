@@ -15,9 +15,9 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#13121b]/80 backdrop-blur-md border-b border-white/10 shadow-[0_0_20px_rgba(108,99,255,0.15)] font-h1 text-sm tracking-wide flex justify-between items-center h-20 px-6 lg:px-12">
+    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm font-h1 text-sm tracking-wide flex justify-between items-center h-20 px-6 lg:px-12">
       <div className="flex w-full justify-between items-center max-w-[1440px] mx-auto">
-        <Link href="/" className="text-xl font-black text-white bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-400">
+        <Link href="/" className="text-xl font-black bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent">
           360 Tương Tác
         </Link>
         <div className="hidden md:flex items-center gap-8">
@@ -27,7 +27,7 @@ export default function Navbar() {
               <Link 
                 key={link.href} 
                 href={link.href}
-                className={`${isActive ? 'text-indigo-400 font-bold border-b-2 border-indigo-500 pb-1' : 'text-slate-400 hover:text-white'} hover:bg-white/10 rounded-lg px-3 py-2 transition-all duration-300`}
+                className={`${isActive ? 'text-[#FF8C00] font-bold border-b-2 border-[#FF8C00] pb-1' : 'text-gray-600 hover:text-gray-900'} hover:bg-gray-100 rounded-lg px-3 py-2 transition-all duration-300`}
               >
                 {link.name}
               </Link>
