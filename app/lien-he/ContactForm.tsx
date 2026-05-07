@@ -82,9 +82,9 @@ export default function ContactForm() {
 
   return (
     <div className="relative h-full flex flex-col justify-center">
-      <div className="bg-[#13121b]/40 backdrop-blur-md rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-        <h2 className="font-h1 text-3xl font-bold text-white mb-3">Sẵn sàng cất cánh?</h2>
-        <p className="font-body text-slate-400 mb-8 font-medium">Để lại thông tin, chuyên gia của chúng tôi sẽ phân tích và đưa ra chiến lược phù hợp nhất cho bạn.</p>
+      <div className="bg-white backdrop-blur-md rounded-3xl p-6 sm:p-8 lg:p-12 border border-gray-200 shadow-lg">
+        <h2 className="font-h1 text-3xl font-bold text-gray-900 mb-3">Sẵn sàng cất cánh?</h2>
+        <p className="font-body text-gray-600 mb-8 font-medium">Để lại thông tin, chuyên gia của chúng tôi sẽ phân tích và đưa ra chiến lược phù hợp nhất cho bạn.</p>
         
         {status.type === 'success' && (
           <div className="mb-8 p-5 rounded-2xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center gap-4 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
@@ -103,25 +103,25 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="group space-y-2">
-              <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">HỌ VÀ TÊN *</label>
-              <input name="name" type="text" placeholder="Nguyễn Văn A" className={`w-full bg-white/[0.03] border ${fieldErrors.name ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600`} />
+              <label className="font-stat text-xs font-bold text-gray-500 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">HỌ VÀ TÊN *</label>
+              <input name="name" type="text" placeholder="Nguyễn Văn A" className={`w-full bg-white border ${fieldErrors.name ? 'border-red-500' : 'border-gray-200'} rounded-2xl px-5 py-4 text-gray-900 focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00]/20 transition-all font-body placeholder:text-gray-400`} />
               {fieldErrors.name && <p className="text-red-500 text-sm mt-1 mx-2">{fieldErrors.name}</p>}
             </div>
             <div className="group space-y-2">
-              <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">SỐ ĐIỆN THOẠI *</label>
-              <input name="phone" type="tel" placeholder="09xx xxx xxx" className={`w-full bg-white/[0.03] border ${fieldErrors.phone ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600`} />
+              <label className="font-stat text-xs font-bold text-gray-500 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">SỐ ĐIỆN THOẠI *</label>
+              <input name="phone" type="tel" placeholder="09xx xxx xxx" className={`w-full bg-white border ${fieldErrors.phone ? 'border-red-500' : 'border-gray-200'} rounded-2xl px-5 py-4 text-gray-900 focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00]/20 transition-all font-body placeholder:text-gray-400`} />
               {fieldErrors.phone && <p className="text-red-500 text-sm mt-1 mx-2">{fieldErrors.phone}</p>}
             </div>
           </div>
           <div className="group space-y-2">
-            <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">DỊCH VỤ QUAN TÂM</label>
+            <label className="font-stat text-xs font-bold text-gray-500 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">DỊCH VỤ QUAN TÂM</label>
             <div className="relative">
-              <select name="service" className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body appearance-none relative z-10 cursor-pointer">
-                <option value="Tăng Tương Tác TikTok" className="bg-[#13121b]">Tăng Tương Tác TikTok</option>
-                <option value="Seeding Comment" className="bg-[#13121b]">Seeding Comment</option>
-                <option value="Dịch vụ Facebook" className="bg-[#13121b]">Dịch vụ Facebook</option>
-                <option value="Traffic Website" className="bg-[#13121b]">Traffic Website</option>
-                <option value="Khác" className="bg-[#13121b]">Khác</option>
+              <select name="service" className="w-full bg-white border border-gray-200 rounded-2xl px-5 py-4 text-gray-900 focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00]/20 transition-all font-body appearance-none relative z-10 cursor-pointer">
+                <option value="Tăng Tương Tác TikTok" className="bg-white">Tăng Tương Tác TikTok</option>
+                <option value="Seeding Comment" className="bg-white">Seeding Comment</option>
+                <option value="Dịch vụ Facebook" className="bg-white">Dịch vụ Facebook</option>
+                <option value="Traffic Website" className="bg-white">Traffic Website</option>
+                <option value="Khác" className="bg-white">Khác</option>
               </select>
               <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none z-20">
                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,8 +131,8 @@ export default function ContactForm() {
             </div>
           </div>
           <div className="group space-y-2">
-            <label className="font-stat text-xs font-bold text-slate-400 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">NỘI DUNG YÊU CẦU *</label>
-            <textarea name="message" rows={4} placeholder="Mô tả ngắn gọn về tình trạng kênh hoặc website của bạn..." className={`w-full bg-white/[0.03] border ${fieldErrors.message ? 'border-red-500' : 'border-white/10'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-[#FF2E63] focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(255,46,99,0.2)] transition-all font-body placeholder:text-slate-600 resize-none`}></textarea>
+            <label className="font-stat text-xs font-bold text-gray-500 tracking-widest uppercase transition-colors group-focus-within:text-[#FF2E63]">NỘI DUNG YÊU CẦU *</label>
+            <textarea name="message" rows={4} placeholder="Mô tả ngắn gọn về tình trạng kênh hoặc website của bạn..." className={`w-full bg-white border ${fieldErrors.message ? 'border-red-500' : 'border-gray-200'} rounded-2xl px-5 py-4 text-gray-900 focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00]/20 transition-all font-body placeholder:text-gray-400 resize-none`}></textarea>
             {fieldErrors.message && <p className="text-red-500 text-sm mt-1 mx-2">{fieldErrors.message}</p>}
           </div>
           <button disabled={loading} type="submit" className="relative w-full overflow-hidden rounded-2xl p-px group disabled:opacity-70 disabled:cursor-not-allowed mt-4">

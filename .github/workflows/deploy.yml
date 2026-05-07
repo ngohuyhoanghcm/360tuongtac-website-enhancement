@@ -130,12 +130,27 @@ jobs:
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             # Stop and remove old container
-            echo "[3/6] Stopping old container..."
+            echo "[3/7] Stopping old container..."
             docker stop 360tuongtac-app 2>/dev/null || true
             docker rm 360tuongtac-app 2>/dev/null || true
 
+            # SECURITY: Remove any Dokploy-generated Traefik config that could conflict
+            echo "[4/7] Cleaning up Dokploy routing config (prevent conflicts)..."
+            DOKPLOY_TRAEFIK_DIR="/opt/dokploy/data/traefik/dynamic"
+            DOKPLOY_CONFIG="${DOKPLOY_TRAEFIK_DIR}/grow-360tuongtac.yml"
+            if [ -f "$DOKPLOY_CONFIG" ]; then
+              echo "  ⚠️  Found Dokploy config: $DOKPLOY_CONFIG"
+              echo "  🗑️  Removing it to prevent routing conflicts..."
+              rm -f "$DOKPLOY_CONFIG"
+              echo "  ✅ Dokploy config removed"
+            else
+              echo "  ✅ No Dokploy config found (good!)"
+            fi
+            # Also check inside Traefik container volume mount
+            docker exec dokploy-proxy rm -f /etc/traefik/dynamic/grow-360tuongtac.yml 2>/dev/null && echo "  ✅ Removed from Traefik container" || echo "  ✅ Not in Traefik container"
+
             # Run new container (SECURITY: localhost only + Traefik routing)
-            echo "[4/6] Starting new container..."
+            echo "[5/7] Starting new container..."
             docker run -d \
               --name 360tuongtac-app \
               --network 360tuongtac-network \
@@ -157,11 +172,11 @@ jobs:
               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             # Wait for container to initialize
-            echo "[5/6] Waiting for container to start..."
+            echo "[6/7] Waiting for container to start..."
             sleep 5
 
             # Health check loop
-            echo "[6/6] Running health check..."
+            echo "[7/7] Running health check..."
             HEALTHY=false
             for i in $(seq 1 10); do
               STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3001/ || echo "000")
@@ -185,6 +200,27 @@ jobs:
             echo ""
             echo "🧹 Cleaning up old images..."
             docker image prune -f
+
+            # Verify Traefik routing (ensure only Docker-based route exists)
+            echo ""
+            echo "🔍 Verifying Traefik routing configuration..."
+            ROUTE_COUNT=$(docker exec dokploy-proxy wget -qO- http://localhost:8080/api/http/routers 2>/dev/null | grep -o '360tuongtac' | wc -l)
+            DOKPLOY_ROUTE=$(docker exec dokploy-proxy wget -qO- http://localhost:8080/api/http/routers 2>/dev/null | grep -o 'grow-360' | wc -l)
+            
+            if [ "$DOKPLOY_ROUTE" -gt 0 ]; then
+              echo "  ❌ CRITICAL: Dokploy route still exists ($DOKPLOY_ROUTE found)"
+              echo "  🗑️  Force removing Dokploy route..."
+              docker exec dokploy-proxy rm -f /etc/traefik/dynamic/grow-360tuongtac.yml 2>/dev/null || true
+              echo "  ⚠️  Please restart Traefik manually: docker restart dokploy-proxy"
+            else
+              echo "  ✅ No Dokploy routes found (good!)"
+            fi
+            
+            if [ "$ROUTE_COUNT" -ge 3 ]; then
+              echo "  ✅ Docker-based Traefik route is active ($ROUTE_COUNT references)"
+            else
+              echo "  ⚠️  Unexpected route count: $ROUTE_COUNT"
+            fi
 
             # Show final status
             echo ""
