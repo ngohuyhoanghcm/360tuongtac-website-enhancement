@@ -1,0 +1,225 @@
+{
+  "total": 31,
+  "passed": 24,
+  "failed": 4,
+  "warnings": 3,
+  "tests": [
+    {
+      "category": "Build",
+      "name": "File exists: lib/admin/publishing-workflow.ts",
+      "status": "PASS",
+      "details": "13.39 KB",
+      "timestamp": "2026-05-07T18:21:38.856Z"
+    },
+    {
+      "category": "Build",
+      "name": "File exists: lib/admin/seo-audit.ts",
+      "status": "PASS",
+      "details": "21.29 KB",
+      "timestamp": "2026-05-07T18:21:38.856Z"
+    },
+    {
+      "category": "Build",
+      "name": "File exists: lib/admin/content-utils.ts",
+      "status": "PASS",
+      "details": "15.11 KB",
+      "timestamp": "2026-05-07T18:21:38.857Z"
+    },
+    {
+      "category": "Build",
+      "name": "File exists: lib/admin/monitoring.ts",
+      "status": "PASS",
+      "details": "11.73 KB",
+      "timestamp": "2026-05-07T18:21:38.857Z"
+    },
+    {
+      "category": "Build",
+      "name": "File exists: app/admin/seo-audit/page.tsx",
+      "status": "PASS",
+      "details": "6.49 KB",
+      "timestamp": "2026-05-07T18:21:38.857Z"
+    },
+    {
+      "category": "Build",
+      "name": "Build output directory exists",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.858Z"
+    },
+    {
+      "category": "Build",
+      "name": "Static assets compiled",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.858Z"
+    },
+    {
+      "category": "Workflow",
+      "name": "Module loading",
+      "status": "FAIL",
+      "details": "Cannot find module './lib/admin/publishing-workflow'\nRequire stack:\n- D:\\Project-Nâng cấp website 360TuongTac\\360tuongtac-website-enhancement\\scripts\\qa-test-phase3.js",
+      "timestamp": "2026-05-07T18:21:38.858Z"
+    },
+    {
+      "category": "SEO Audit",
+      "name": "Module loading",
+      "status": "FAIL",
+      "details": "Cannot find module './lib/admin/seo-audit'\nRequire stack:\n- D:\\Project-Nâng cấp website 360TuongTac\\360tuongtac-website-enhancement\\scripts\\qa-test-phase3.js",
+      "timestamp": "2026-05-07T18:21:38.859Z"
+    },
+    {
+      "category": "Content Utils",
+      "name": "Module loading",
+      "status": "FAIL",
+      "details": "Cannot find module './lib/admin/content-utils'\nRequire stack:\n- D:\\Project-Nâng cấp website 360TuongTac\\360tuongtac-website-enhancement\\scripts\\qa-test-phase3.js",
+      "timestamp": "2026-05-07T18:21:38.859Z"
+    },
+    {
+      "category": "Monitoring",
+      "name": "Module loading",
+      "status": "FAIL",
+      "details": "Cannot find module './lib/admin/monitoring'\nRequire stack:\n- D:\\Project-Nâng cấp website 360TuongTac\\360tuongtac-website-enhancement\\scripts\\qa-test-phase3.js",
+      "timestamp": "2026-05-07T18:21:38.860Z"
+    },
+    {
+      "category": "API Routes",
+      "name": "POST handler: app/api/admin/blog/save/route.ts",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.860Z"
+    },
+    {
+      "category": "API Routes",
+      "name": "Auth check: app/api/admin/blog/save/route.ts",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.860Z"
+    },
+    {
+      "category": "API Routes",
+      "name": "POST handler: app/api/admin/service/save/route.ts",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.861Z"
+    },
+    {
+      "category": "API Routes",
+      "name": "Auth check: app/api/admin/service/save/route.ts",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.861Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/layout.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.862Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Layout children prop: app/admin/layout.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.862Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.862Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/blog/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.863Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/blog/new/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.863Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/blog/edit/[slug]/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.863Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/services/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.863Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/services/edit/[slug]/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.863Z"
+    },
+    {
+      "category": "Admin UI",
+      "name": "Page export: app/admin/seo-audit/page.tsx",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.864Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Directory exists: lib/constants",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.864Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Directory exists: data/services",
+      "status": "PASS",
+      "details": "",
+      "timestamp": "2026-05-07T18:21:38.864Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Directory exists: data/workflow",
+      "status": "WARN",
+      "details": "Will be created on first use",
+      "timestamp": "2026-05-07T18:21:38.864Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Directory exists: data/audit",
+      "status": "WARN",
+      "details": "Will be created on first use",
+      "timestamp": "2026-05-07T18:21:38.864Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Directory exists: data/analytics",
+      "status": "WARN",
+      "details": "Will be created on first use",
+      "timestamp": "2026-05-07T18:21:38.864Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Blog post files",
+      "status": "PASS",
+      "details": "0 files",
+      "timestamp": "2026-05-07T18:21:38.865Z"
+    },
+    {
+      "category": "Data Integrity",
+      "name": "Service files",
+      "status": "PASS",
+      "details": "12 files",
+      "timestamp": "2026-05-07T18:21:38.865Z"
+    }
+  ]
+}

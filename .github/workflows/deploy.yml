@@ -94,6 +94,10 @@ jobs:
           build-args: |
             NEXT_PUBLIC_GA_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
             NEXT_PUBLIC_GTM_ID=${{ secrets.NEXT_PUBLIC_GTM_ID }}
+            NEXT_ADMIN_PASSWORD_HASH=${{ secrets.NEXT_ADMIN_PASSWORD_HASH }}
+            NEXT_ADMIN_2FA_SECRET=${{ secrets.NEXT_ADMIN_2FA_SECRET }}
+            NEXT_ADMIN_2FA_BACKUP_CODES=${{ secrets.NEXT_ADMIN_2FA_BACKUP_CODES }}
+            NEXT_ADMIN_SESSION_TIMEOUT=${{ secrets.NEXT_ADMIN_SESSION_TIMEOUT }}
 
   # ==========================================
   # Job 3: Deploy to VPS via SSH
@@ -168,6 +172,10 @@ jobs:
               -e NEXT_PUBLIC_GTM_ID="${{ secrets.NEXT_PUBLIC_GTM_ID }}" \
               -e TELEGRAM_BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}" \
               -e TELEGRAM_CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}" \
+              -e NEXT_ADMIN_PASSWORD_HASH="${{ secrets.NEXT_ADMIN_PASSWORD_HASH }}" \
+              -e NEXT_ADMIN_2FA_SECRET="${{ secrets.NEXT_ADMIN_2FA_SECRET }}" \
+              -e NEXT_ADMIN_2FA_BACKUP_CODES="${{ secrets.NEXT_ADMIN_2FA_BACKUP_CODES }}" \
+              -e NEXT_ADMIN_SESSION_TIMEOUT="${{ secrets.NEXT_ADMIN_SESSION_TIMEOUT }}" \
               --restart unless-stopped \
               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 

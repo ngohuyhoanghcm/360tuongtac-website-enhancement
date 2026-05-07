@@ -76,33 +76,33 @@ export default function HeroSection() {
         <div className="relative mt-24 h-40 max-w-lg mx-auto pointer-events-none overflow-visible">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full flex justify-around items-center">
             <div className="orbit-1">
-              <div className="w-14 h-14 rounded-xl bg-[#1877F2] flex items-center justify-center shadow-lg border border-white/20 dark:border-white/30 hover:scale-110 transition-transform duration-300">
-                <ThumbsUp className="w-6 h-6 text-white drop-shadow-md" />
+              <div className="w-14 h-14 rounded-xl bg-[#1877F2] flex items-center justify-center shadow-[0_0_20px_rgba(24,119,242,0.6)] border-2 border-[#1877F2]/50">
+                <ThumbsUp className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="orbit-2">
-              <div className="w-14 h-14 rounded-xl bg-[#0866FF] flex items-center justify-center shadow-lg border border-white/20 dark:border-white/30 hover:scale-110 transition-transform duration-300 p-3">
-                <svg className="w-full h-full text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor">
+              <div className="w-14 h-14 rounded-xl bg-[#0866FF] flex items-center justify-center shadow-[0_0_20px_rgba(8,102,255,0.6)] border-2 border-[#0866FF]/50 p-3">
+                <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9a3 3 0 0 1 3-3h3v3h-3v3h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z"/>
                 </svg>
               </div>
             </div>
             <div className="orbit-3">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center shadow-lg border border-white/20 dark:border-white/30 hover:scale-110 transition-transform duration-300">
-                <Camera className="w-6 h-6 text-white drop-shadow-md" />
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center shadow-[0_0_20px_rgba(238,42,123,0.6)] border-2 border-[#ee2a7b]/50">
+                <Camera className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="orbit-4">
-              <div className="w-14 h-14 rounded-xl bg-[#FF0000] flex items-center justify-center shadow-lg border border-white/20 dark:border-white/30 hover:scale-110 transition-transform duration-300 p-3">
-                <svg className="w-full h-full text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor">
+              <div className="w-14 h-14 rounded-xl bg-[#FF0000] flex items-center justify-center shadow-[0_0_20px_rgba(255,0,0,0.6)] border-2 border-[#FF0000]/50 p-3">
+                <svg className="w-full h-full text-white" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </div>
             </div>
             <div className="orbit-5">
-              <div className="w-14 h-14 rounded-xl bg-[#000000] dark:bg-[#18181B] flex items-center justify-center shadow-lg border border-white/20 dark:border-white/30 hover:scale-110 transition-transform duration-300 overflow-hidden relative">
+              <div className="w-14 h-14 rounded-xl bg-black flex items-center justify-center shadow-[0_0_20px_rgba(255,0,80,0.6)] border-2 border-[#FE2C55]/50 overflow-hidden relative">
                 <div style={{ position: 'absolute', inset: 2, background: '#000', borderRadius: 10, display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center' }}>
-                  <svg className="w-7 h-7 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                  <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
                 </div>
               </div>
             </div>
