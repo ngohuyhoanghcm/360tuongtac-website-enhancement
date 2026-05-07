@@ -34,9 +34,7 @@ interface PromoContext {
 }
 
 export default function PromoBadge() {
-  const [promo, setPromo] = useState<PromoContext | null>(null);
-
-  useEffect(() => {
+  const [promo] = useState<PromoContext | null>(() => {
     const today = new Date();
     const dayOfMonth = today.getDate();
 
@@ -47,11 +45,11 @@ export default function PromoBadge() {
     ];
 
     const period = periods.find((p) => p.pre === dayOfMonth || p.active === dayOfMonth);
-    if (!period) return;
+    if (!period) return null;
 
     const isActive = dayOfMonth === period.active;
 
-    setPromo({
+    return {
       isActive,
       promoDay: period.active,
       periodLabel: isActive 
@@ -59,8 +57,8 @@ export default function PromoBadge() {
         : `Sắp diễn ra vào ngày ${period.active}`,
       ctaLabel: isActive ? 'NẠP NGAY HÔM NAY' : 'CHUẨN BỊ SẴN SÀNG',
       allDates: 'Áp dụng: Ngày 8, 18, 28 hàng tháng',
-    });
-  }, []);
+    };
+  });
 
   if (!promo) return null;
 

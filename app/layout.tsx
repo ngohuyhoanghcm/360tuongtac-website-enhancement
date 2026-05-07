@@ -7,6 +7,11 @@ import BottomNav from '@/components/layout/BottomNav';
 import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
 import { ZaloFloatWidget } from '@/components/shared/ZaloFloatWidget';
 
+// Feature flag: NEXT_PUBLIC_LIGHT_MODE controls default theme
+// Default = 'true' (light mode)
+// Set to 'false' in .env.production to instantly rollback
+const isLightMode = process.env.NEXT_PUBLIC_LIGHT_MODE !== 'false';
+
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['vietnamese', 'latin'],
@@ -27,7 +32,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#13121b'
+  themeColor: '#FFFFFF'
 };
 
 export const metadata: Metadata = {
@@ -50,12 +55,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
   return (
-    <html lang="vi" className="dark scroll-smooth">
+    <html
+      lang="vi"
+      className={`${isLightMode ? '' : 'dark'} scroll-smooth`}
+      suppressHydrationWarning
+    >
       <head>
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional" />
       </head>
-      <body className={`${beVietnamPro.variable} ${inter.variable} ${spaceGrotesk.variable} font-body bg-background-dark text-white min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary`}>
+      <body className={`${beVietnamPro.variable} ${inter.variable} ${spaceGrotesk.variable} font-body min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary`}>
         {gaMeasurementId && <GoogleAnalytics measurementId={gaMeasurementId} />}
         <Header />
         <main className="flex-grow">
