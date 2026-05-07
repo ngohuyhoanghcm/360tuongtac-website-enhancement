@@ -11,9 +11,6 @@ import CaseStudyGrid from '@/components/landing/CaseStudyGrid';
 import FAQAccordion from '@/components/landing/FAQAccordion';
 import FinalCTA from '@/components/landing/FinalCTA';
 import StickyBottomCTA from '@/components/landing/StickyBottomCTA';
-import ContextualSectionCTA from '@/components/landing/ContextualSectionCTA';
-import ScrollTriggeredCTA from '@/components/landing/ScrollTriggeredCTA';
-import ExitIntentPopup from '@/components/landing/ExitIntentPopup';
 import { HomepageSchemas } from '@/components/seo/HomepageSchemas';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
@@ -83,7 +80,6 @@ export default function Home() {
   return (
     <>
       <HomepageSchemas />
-      <ExitIntentPopup />
       
       {/* Breadcrumb Navigation for SEO */}
       <div className="container-max px-6 pt-24 md:pt-28">
@@ -96,41 +92,16 @@ export default function Home() {
       
       <HeroSection />
       <PainPointSection />
-      <ContextualSectionCTA 
-        text="Xem giải pháp"
-        href="#giai-phap"
-        variant="secondary"
-        delay={500}
-      />
       <EducationSection data={{
         title: 'Bí mật của những Livestream nghìn đơn',
         content: 'Bạn có bao giờ thắc mắc tại sao một số shop vừa lên live đã có hàng nghìn người xem, trong khi bạn chuẩn bị kỹ lưỡng nhưng chỉ lèo tèo vài mắt? \n\nCâu trả lời nằm ở "Mồi tương tác". Thuật toán TikTok và Facebook ưu tiên đề xuất những nội dung đang sôi nổi. Khi hệ thống nhận diện lượng người xem lớn và bình luận liên tục ngay từ đầu, nó sẽ tự động đẩy luồng livestream đến hàng chục nghìn người dùng tiềm năng.\n\nKhám phá dịch vụ buff view TikTok và buff follow Facebook để tăng trưởng bền vững.'
       }} />
       <SolutionSection />
-      <ContextualSectionCTA 
-        text="Đăng ký ngay"
-        href="https://360tuongtac.com/home?utm_source=grow&utm_medium=contextual_cta&utm_campaign=homepage&utm_content=after_solution"
-        variant="primary"
-        delay={300}
-      />
       <StatsSection />
-      <ContextualSectionCTA 
-        text="Tham gia 10K+ khách hàng"
-        href="https://360tuongtac.com/home?utm_source=grow&utm_medium=contextual_cta&utm_campaign=homepage&utm_content=after_stats"
-        variant="secondary"
-        delay={300}
-      />
       <ServicesGrid />
       <ProcessSection />
       <PricingTable />
-      <ContextualSectionCTA 
-        text="Chọn gói phù hợp"
-        href="https://360tuongtac.com/home?utm_source=grow&utm_medium=contextual_cta&utm_campaign=homepage&utm_content=after_pricing"
-        variant="primary"
-        delay={300}
-      />
       <CaseStudyGrid />
-      <ScrollTriggeredCTA />
       <FAQAccordion />
       <FinalCTA />
       <StickyBottomCTA />
