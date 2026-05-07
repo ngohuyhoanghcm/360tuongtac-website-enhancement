@@ -10,6 +10,7 @@ import PricingTable from '@/components/landing/PricingTable';
 import CaseStudyGrid from '@/components/landing/CaseStudyGrid';
 import FAQAccordion from '@/components/landing/FAQAccordion';
 import FinalCTA from '@/components/landing/FinalCTA';
+import StickyBottomCTA from '@/components/landing/StickyBottomCTA';
 import { HomepageSchemas } from '@/components/seo/HomepageSchemas';
 
 export const metadata: Metadata = {
@@ -82,7 +83,7 @@ export default function Home() {
       <PainPointSection />
       <EducationSection data={{
         title: 'Bí mật của những Livestream nghìn đơn',
-        content: 'Bạn có bao giờ thắc mắc tại sao một số shop vừa lên live đã có hàng nghìn người xem, trong khi bạn chuẩn bị kỹ lưỡng nhưng chỉ lèo tèo vài mắt? \n\nCâu trả lời nằm ở "Mồi tương tác". Thuật toán TikTok và Facebook luôn ưu tiên đề xuất những nội dung đang có sự sôi nổi. Khi hệ thống nhận diện được lượng người xem lớn và bình luận liên tục ngay từ đầu, nó sẽ tự động đẩy luồng livestream của bạn đến hàng chục nghìn người dùng tiềm năng khác.'
+        content: 'Bạn có bao giờ thắc mắc tại sao một số shop vừa lên live đã có hàng nghìn người xem, trong khi bạn chuẩn bị kỹ lưỡng nhưng chỉ lèo tèo vài mắt? \n\nCâu trả lời nằm ở "Mồi tương tác". Thuật toán TikTok và Facebook ưu tiên đề xuất những nội dung đang sôi nổi. Khi hệ thống nhận diện lượng người xem lớn và bình luận liên tục ngay từ đầu, nó sẽ tự động đẩy luồng livestream đến hàng chục nghìn người dùng tiềm năng.'
       }} />
       <SolutionSection />
       <StatsSection />
@@ -92,6 +93,7 @@ export default function Home() {
       <CaseStudyGrid />
       <FAQAccordion />
       <FinalCTA />
+      <StickyBottomCTA />
     </>
   );
 }

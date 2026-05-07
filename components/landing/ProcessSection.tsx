@@ -24,24 +24,15 @@ const STEPS = [
   },
   { 
     step: '03', 
-    icon: Layers,
-    title: 'Khám phá dịch vụ', 
-    desc: 'Lựa chọn những giải pháp tăng trưởng được thiết kế riêng để tối ưu cho kênh của bạn.',
+    icon: Rocket,
+    title: 'Chọn dịch vụ & Kích hoạt', 
+    desc: 'Lựa chọn giải pháp phù hợp và kích hoạt chỉ với một chạm - hệ thống tự động triển khai ngay lập tức.',
     color: "#00E5FF",
     glow: "shadow-[0_0_30px_rgba(0,229,255,0.4)]",
     grad: "from-[#6C63FF] to-[#00E5FF]"
   },
   { 
     step: '04', 
-    icon: Rocket,
-    title: 'Kích hoạt chạy dịch vụ', 
-    desc: 'Chỉ với một chạm, hệ thống thông minh sẽ thay bạn triển khai chiến dịch bùng nổ tức thì.',
-    color: "#00E5FF",
-    glow: "shadow-[0_0_30px_rgba(0,229,255,0.4)]",
-    grad: "from-[#6C63FF] to-[#00E5FF]"
-  },
-  { 
-    step: '05', 
     icon: LineChart,
     title: 'Đo lường thành công', 
     desc: 'Theo dõi kết quả thực tế qua bảng điều khiển minh bạch, giúp bạn hoàn toàn an tâm về hiệu quả.',
@@ -87,7 +78,7 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
   const displaySteps = data?.steps 
     ? data.steps.map((s, i) => ({
         ...s,
-        icon: (i === 0 ? ShieldCheck : i === 1 ? Wallet : i === 2 ? Layers : i === 3 ? Rocket : LineChart) as any,
+        icon: (i === 0 ? ShieldCheck : i === 1 ? Wallet : i === 2 ? Rocket : LineChart) as any,
         color: STEPS[i % STEPS.length].color,
         glow: STEPS[i % STEPS.length].glow,
         grad: STEPS[i % STEPS.length].grad,
@@ -139,9 +130,9 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className={`grid grid-cols-1 ${displaySteps.length === 3 ? 'md:grid-cols-3 max-w-6xl mx-auto' : 'md:grid-cols-5 max-w-7xl mx-auto'} gap-6 lg:gap-8 relative`}
+          className={`grid grid-cols-1 ${displaySteps.length === 3 ? 'md:grid-cols-3 max-w-6xl mx-auto' : displaySteps.length === 4 ? 'md:grid-cols-4 max-w-7xl mx-auto' : 'md:grid-cols-5 max-w-7xl mx-auto'} gap-6 lg:gap-8 relative`}
         >
-          {displaySteps.slice(0, 5).map((s, i, arr) => (
+          {displaySteps.slice(0, 4).map((s, i, arr) => (
             <motion.div
               key={i}
               variants={itemVariants}

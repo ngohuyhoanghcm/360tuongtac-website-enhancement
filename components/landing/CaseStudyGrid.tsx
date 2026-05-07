@@ -18,15 +18,6 @@ const caseStudies = [
     result: "+Tăng độ Trust",
     description: "Xây dựng Profile chuyên nghiệp để chạy Ads hiệu quả hơn. Khách hàng tin tưởng Inbox mua các sản phẩm công nghệ giá trị cao.",
     icon: Users
-  },
-  {
-    name: "Linh Lan Boutique",
-    platform: "Instagram Reels",
-    initialState: "Video lẹt đẹt vài trăm view",
-    finalState: "Đạt mốc 100K+ View",
-    result: "Trở thành Xu hướng",
-    description: "Buff lượng đẩy (Push) giai đoạn đầu giúp Reel phá vỡ rào cản thuật toán, thu hút lượng lớn Reach tự nhiên từ Explore.",
-    icon: TrendingUp
   }
 ];
 
