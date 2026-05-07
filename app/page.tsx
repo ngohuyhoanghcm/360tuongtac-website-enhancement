@@ -12,7 +12,6 @@ import FAQAccordion from '@/components/landing/FAQAccordion';
 import FinalCTA from '@/components/landing/FinalCTA';
 import StickyBottomCTA from '@/components/landing/StickyBottomCTA';
 import { HomepageSchemas } from '@/components/seo/HomepageSchemas';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 export const metadata: Metadata = {
   title: '360 Tương Tác - Tăng Like, Follow, View Thật | TikTok, Facebook, Instagram',
@@ -80,15 +79,6 @@ export default function Home() {
   return (
     <>
       <HomepageSchemas />
-      
-      {/* Breadcrumb Navigation for SEO */}
-      <div className="container-max px-6 pt-24 md:pt-28">
-        <Breadcrumbs 
-          items={[
-            { label: 'Trang chủ', href: '/' }
-          ]} 
-        />
-      </div>
       
       <HeroSection />
       <PainPointSection />
