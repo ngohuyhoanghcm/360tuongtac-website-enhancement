@@ -20,7 +20,7 @@ export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAPr
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="bg-[#13121b] border border-white/10 rounded-[4rem] p-12 md:p-24 text-center shadow-2xl relative overflow-hidden group"
+          className="bg-white border border-gray-200 rounded-[4rem] p-12 md:p-24 text-center shadow-xl relative overflow-hidden group"
         >
           {/* Animated Glows */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF8C00]/5 blur-[120px] rounded-full group-hover:bg-[#FF8C00]/10 transition-colors duration-1000"></div>
@@ -31,17 +31,17 @@ export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAPr
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block mb-8 px-6 py-2 rounded-full glass-panel border border-white/10"
+              className="inline-block mb-8 px-6 py-2 rounded-full bg-gray-50 border border-gray-200"
             >
               <span className="font-stat text-xs font-black tracking-[0.3em] uppercase text-[#FF8C00]">Liên hệ ngay</span>
             </motion.div>
 
-            <h2 className="font-h1 text-3xl md:text-6xl font-black text-white mb-8 leading-tight tracking-tight antialiased">
+            <h2 className="font-h1 text-3xl md:text-6xl font-black text-gray-900 mb-8 leading-tight tracking-tight antialiased">
               Cảm thấy dịch vụ <br className="hidden md:block" /> 
               <span className="text-gradient">phù hợp với bạn?</span>
             </h2>
             
-            <p className="font-body text-slate-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed opacity-80">
+            <p className="font-body text-gray-600 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
               Đừng lo lắng, các chuyên gia của chúng tôi luôn sẵn sàng hỗ trợ bạn lựa chọn chiến lược 
               tăng trưởng tối ưu nhất cho kênh và ngân sách của bạn.
             </p>
@@ -51,7 +51,7 @@ export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAPr
                 <Link 
                   href="https://zalo.me/0388009669" 
                   target="_blank" rel="noopener noreferrer"
-                  className="px-12 py-5 rounded-2xl bg-white text-slate-950 font-black text-lg shadow-xl hover:bg-[#00E5FF] hover:text-white transition-all duration-300 antialiased block"
+                  className="px-12 py-5 rounded-2xl bg-gray-900 text-white font-black text-lg shadow-xl hover:bg-[#00E5FF] transition-all duration-300 antialiased block"
                 >
                   Tư Vấn Zalo
                 </Link>
@@ -60,7 +60,7 @@ export default function ServicesFinalCTA({ productUrl, serviceSlug }: FinalCTAPr
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link 
                   href={ctaUrl} 
-                  className="px-12 py-5 rounded-2xl glass-panel border border-white/10 text-white font-black text-lg hover:border-[#FF2E63]/40 transition-all duration-300 antialiased block"
+                  className="px-12 py-5 rounded-2xl bg-gray-50 border border-gray-200 text-gray-900 font-black text-lg hover:border-[#FF2E63]/40 hover:bg-gray-100 transition-all duration-300 antialiased block"
                 >
                   Đặt Mua Ngay
                 </Link>

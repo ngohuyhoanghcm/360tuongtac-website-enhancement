@@ -18,11 +18,11 @@ const ICONS: Record<string, any> = {
 };
 
 const PLATFORM_COLORS: Record<string, string> = {
-  TikTok: 'text-cyan-400',
-  Facebook: 'text-blue-500',
-  Instagram: 'text-pink-500',
-  YouTube: 'text-red-500',
-  Website: 'text-orange-500',
+  TikTok: 'text-cyan-600',
+  Facebook: 'text-blue-600',
+  Instagram: 'text-pink-600',
+  YouTube: 'text-red-600',
+  Website: 'text-orange-600',
   'Khác': 'text-[#FF8C00]'
 };
 
@@ -48,7 +48,7 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
               whileHover={{ y: -10 }}
               className="group"
             >
-              <div className="h-full glass-panel p-8 md:p-10 rounded-[2.5rem] border border-white/5 hover:border-[#FF2E63]/30 transition-all duration-500 flex flex-col relative overflow-hidden bg-[#13121b]/40 backdrop-blur-2xl group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+              <div className="h-full bg-white p-8 md:p-10 rounded-[2.5rem] border border-gray-200 hover:border-[#FF2E63]/30 transition-all duration-500 flex flex-col relative overflow-hidden group-hover:shadow-xl">
                 {/* Popular Badge */}
                 {service.popular && (
                   <div className="absolute top-6 right-6 z-10">
@@ -62,35 +62,35 @@ export default function ServiceCardGrid({ services }: ServiceCardGridProps) {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF8C00] to-[#FF2E63] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500">
                     <Icon size={32} className="text-white" />
                   </div>
-                  <span className="text-slate-500 text-[10px] font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-lg border border-white/5">
+                  <span className="text-gray-500 text-[10px] font-black uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-lg border border-gray-200">
                     {service.platform}
                   </span>
                 </div>
 
-                <h3 className="font-h1 text-2xl font-black text-white mb-4 leading-tight tracking-tight group-hover:text-[#FF8C00] transition-colors">
+                <h3 className="font-h1 text-2xl font-black text-gray-900 mb-4 leading-tight tracking-tight group-hover:text-[#FF8C00] transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="font-body text-slate-400 text-sm md:text-base mb-10 leading-relaxed font-medium line-clamp-3">
+                <p className="font-body text-gray-600 text-sm md:text-base mb-10 leading-relaxed font-medium line-clamp-3">
                   {service.description}
                 </p>
 
-                <div className="mt-auto pt-8 border-t border-white/5 flex items-center justify-between">
+                <div className="mt-auto pt-8 border-t border-gray-200 flex items-center justify-between">
                    <div>
-                      <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-1">Giá khởi điểm</p>
-                      <p className="text-white font-black text-xl md:text-2xl">{service.startingPrice}</p>
+                      <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Giá khởi điểm</p>
+                      <p className="text-gray-900 font-black text-xl md:text-2xl">{service.startingPrice}</p>
                    </div>
                    
                    <Link 
                       href={`/dich-vu/${service.slug}`} 
-                      className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-[#FF8C00] hover:to-[#FF2E63] hover:border-transparent transition-all duration-300"
+                      className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gradient-to-r hover:from-[#FF8C00] hover:to-[#FF2E63] hover:border-transparent hover:text-white transition-all duration-300"
                     >
                       <ArrowRight size={20} />
                    </Link>
                 </div>
 
                 {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#FF2E63]/0 to-[#FF2E63]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-[#FF2E63]/0 to-[#FF2E63]/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
                 {/* Background Icon */}
                 <div className={`absolute -bottom-10 -right-10 opacity-[0.02] group-hover:opacity-[0.06] group-hover:scale-110 transition-all duration-700 pointer-events-none ${PLATFORM_COLORS[service.platform] || 'text-white'}`}>

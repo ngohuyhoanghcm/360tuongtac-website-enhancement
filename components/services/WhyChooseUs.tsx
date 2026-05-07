@@ -40,11 +40,11 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-h1 text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tight antialiased">
+            <h2 className="font-h1 text-3xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight antialiased">
               Tại sao chọn <span className="text-gradient">360TuongTac?</span>
             </h2>
             <div className="h-1.5 w-24 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] mx-auto rounded-full mb-8"></div>
-            <p className="font-body text-slate-400 max-w-2xl mx-auto font-medium text-lg leading-relaxed">
+            <p className="font-body text-gray-600 max-w-2xl mx-auto font-medium text-lg leading-relaxed">
               Chúng tôi không chỉ cung cấp dịch vụ, chúng tôi cung cấp giải pháp bứt phá an toàn và bền vững.
             </p>
           </motion.div>
@@ -58,17 +58,17 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-panel p-10 rounded-[2.5rem] border border-white/5 relative overflow-hidden group hover:border-white/20 transition-all duration-500 text-center"
+              className="bg-white p-10 rounded-[2.5rem] border border-gray-200 relative overflow-hidden group hover:border-gray-300 transition-all duration-500 text-center shadow-md hover:shadow-lg"
             >
               <div className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${pillar.color} flex items-center justify-center mb-8 mx-auto shadow-2xl group-hover:-translate-y-2 transition-transform duration-500`}>
                 <pillar.icon size={40} className="text-white" />
               </div>
               
-              <h3 className="font-h1 text-xl font-bold text-white mb-4 tracking-tight group-hover:text-[#FF8C00] transition-colors antialiased">
+              <h3 className="font-h1 text-xl font-bold text-gray-900 mb-4 tracking-tight group-hover:text-[#FF8C00] transition-colors antialiased">
                 {pillar.title}
               </h3>
               
-              <p className="font-body text-slate-400 text-sm leading-relaxed font-medium">
+              <p className="font-body text-gray-600 text-sm leading-relaxed font-medium">
                 {pillar.desc}
               </p>
               

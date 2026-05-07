@@ -15,17 +15,17 @@ export default function ServicesIndexHero() {
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full glass-panel border border-white/10 shadow-lg">
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-md">
             <span className="flex h-2 w-2 rounded-full bg-[#FF8C00] animate-pulse"></span>
-            <span className="font-stat text-[10px] font-black tracking-[0.2em] uppercase text-slate-300">HUB TIẾP THỊ 360</span>
+            <span className="font-stat text-[10px] font-black tracking-[0.2em] uppercase text-gray-600">HUB TIẾP THỊ 360</span>
           </div>
 
-          <h1 className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight text-white antialiased">
+          <h1 className="font-h1 text-4xl md:text-5xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight text-gray-900 antialiased">
             Dịch Vụ Tăng Trưởng <br className="hidden md:block" /> 
             <span className="bg-gradient-to-r from-[#FF8C00] via-[#FF2E63] to-[#8B5CF6] bg-clip-text text-transparent italic">Mạng Xã Hội Toàn Diện</span>
           </h1>
           
-          <p className="font-body text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-12 font-medium opacity-90">
+          <p className="font-body text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
             Giải pháp &quot;bẻ khóa&quot; thuật toán hàng đầu Việt Nam. Tăng trưởng an toàn, 
             kích hoạt đề xuất tự nhiên và tối ưu hóa chuyển đổi cho mọi chiến dịch của bạn.
           </p>
@@ -44,8 +44,8 @@ export default function ServicesIndexHero() {
               <Link 
                  href="https://zalo.me/0388009669"
                  target="_blank" rel="noopener noreferrer"
-                 className="px-10 py-5 rounded-2xl glass-panel border border-white/20 text-white font-black text-lg 
-                            hover:bg-white/10 hover:border-[#00E5FF]/40 hover:shadow-[0_0_30px_rgba(0,229,255,0.3)]
+                 className="px-10 py-5 rounded-2xl bg-white border border-gray-200 text-gray-900 font-black text-lg 
+                            hover:bg-gray-50 hover:border-cyan-300 hover:shadow-lg
                             transition-all duration-300 antialiased flex items-center gap-3 group"
               >
                 <svg className="w-6 h-6 text-[#00E5FF] group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor">
