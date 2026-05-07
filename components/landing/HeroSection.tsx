@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import { ThumbsUp, Camera } from 'lucide-react';
 import { trackCTAClick } from '@/lib/analytics';
 import dynamic from 'next/dynamic';
 import PromoBadge from './PromoBadge';
@@ -76,7 +77,7 @@ export default function HeroSection() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full flex justify-around items-center">
             <div className="orbit-1">
               <div className="w-14 h-14 rounded-xl bg-[#1877F2] flex items-center justify-center shadow-[0_0_20px_rgba(24,119,242,0.6)] border-2 border-[#1877F2]/50">
-                <span className="material-symbols-outlined text-white text-2xl">thumb_up</span>
+                <ThumbsUp className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="orbit-2">
@@ -88,7 +89,7 @@ export default function HeroSection() {
             </div>
             <div className="orbit-3">
               <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] flex items-center justify-center shadow-[0_0_20px_rgba(238,42,123,0.6)] border-2 border-[#ee2a7b]/50">
-                <span className="material-symbols-outlined text-white text-2xl">photo_camera</span>
+                <Camera className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="orbit-4">
