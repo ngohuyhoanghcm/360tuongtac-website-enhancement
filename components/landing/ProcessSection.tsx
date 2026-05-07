@@ -164,19 +164,19 @@ export default function ProcessSection({ data }: ProcessSectionProps) {
                 </motion.div>
 
                 {/* Icon Container */}
-                <div className="mb-6 p-4 rounded-full bg-[var(--bg-secondary)] border border-[var(--border)] group-hover:bg-cyan-50 group-hover:border-cyan-300 transition-all duration-500">
+                <div className="mb-6 p-4 rounded-full bg-[var(--bg-secondary)] border border-[var(--border)] group-hover:bg-[var(--surface-hover)] group-hover:border-[#00E5FF]/30 transition-all duration-500">
                   <s.icon size={32} className="text-[#00E5FF] group-hover:scale-110 transition-transform duration-500" />
                 </div>
 
-                <h3 className="font-h1 text-xl font-bold text-[var(--text-primary)] mb-4 tracking-tight group-hover:text-cyan-600 transition-colors">
+                <h3 className="font-h1 text-xl font-bold text-[var(--text-primary)] mb-4 tracking-tight group-hover:text-[#FF8C00] transition-colors">
                   {s.title}
                 </h3>
-                <p className="font-body text-[var(--text-secondary)] text-sm leading-relaxed font-medium">
+                <p className="font-body text-[var(--text-secondary)] text-sm leading-relaxed font-medium group-hover:text-[var(--text-primary)] transition-colors">
                   {s.desc}
                 </p>
 
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-cyan-50/0 to-cyan-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                {/* Hover Glow Effect - Subtle, maintains readability */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--surface-hover)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </div>
             </motion.div>
           ))}
