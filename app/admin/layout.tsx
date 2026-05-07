@@ -3,11 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, FileText, Settings, LogOut, Menu, X } from 'lucide-react';
-
-// Simple admin authentication (Phase 1)
-// In production, use proper auth system (NextAuth, etc.)
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'admin123';
+import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key } from 'lucide-react';
 
 export default function AdminLayout({
   children,
@@ -16,36 +12,157 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  
+  // Auth states
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
+  
+  // Login step 1: Password
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Login step 2: 2FA
+  const [show2FA, setShow2FA] = useState(false);
+  const [totpCode, setTotpCode] = useState('');
+  const [totpError, setTotpError] = useState('');
+  const [useBackupCode, setUseBackupCode] = useState(false);
+  const [backupCode, setBackupCode] = useState('');
+  
+  // UI states
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [rateLimitInfo, setRateLimitInfo] = useState<{remaining: number, retryAfter?: number} | null>(null);
 
+  // Check existing session on mount
   useEffect(() => {
-    // Check if already authenticated
-    const authStatus = sessionStorage.getItem('admin_auth');
-    if (authStatus === 'true') {
-      setIsAuthenticated(true);
+    const sessionId = sessionStorage.getItem('admin_session_id');
+    const csrfToken = sessionStorage.getItem('admin_csrf_token');
+    
+    if (sessionId && csrfToken) {
+      // Verify session is still valid by checking a protected resource
+      verifySession(sessionId).then(valid => {
+        if (valid) {
+          setIsAuthenticated(true);
+        } else {
+          // Session expired, clear storage
+          sessionStorage.removeItem('admin_session_id');
+          sessionStorage.removeItem('admin_csrf_token');
+        }
+        setIsChecking(false);
+      });
+    } else {
+      setIsChecking(false);
     }
-    setIsChecking(false);
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem('admin_auth', 'true');
-      setIsAuthenticated(true);
-      setError('');
-    } else {
-      setError('Sai mật khẩu!');
+  const verifySession = async (sessionId: string): Promise<boolean> => {
+    try {
+      const response = await fetch('/api/admin/blog', {
+        headers: {
+          'Cookie': `admin_session=${sessionId}`
+        }
+      });
+      return response.ok;
+    } catch {
+      return false;
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('admin_auth');
-    setIsAuthenticated(false);
-    router.push('/admin');
+  // Step 1: Submit password
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordError('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+
+      const data = await response.json();
+
+      if (response.status === 429) {
+        // Rate limited
+        setRateLimitInfo({
+          remaining: 0,
+          retryAfter: data.retryAfter
+        });
+        setPasswordError(`Quá nhiều lần thử. Vui lòng đợi ${Math.ceil(data.retryAfter / 1000)} giây.`);
+      } else if (data.requires2FA) {
+        // Password correct, need 2FA
+        setShow2FA(true);
+        setPasswordError('');
+      } else if (data.success) {
+        // Login successful (2FA disabled)
+        sessionStorage.setItem('admin_session_id', data.sessionId);
+        sessionStorage.setItem('admin_csrf_token', data.csrfToken);
+        setIsAuthenticated(true);
+      } else {
+        // Password incorrect
+        setPasswordError(data.error || 'Sai mật khẩu!');
+        if (data.remainingAttempts !== undefined) {
+          setRateLimitInfo({ remaining: data.remainingAttempts });
+        }
+      }
+    } catch (error) {
+      setPasswordError('Lỗi kết nối. Vui lòng thử lại.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Step 2: Submit 2FA code
+  const handle2FASubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setTotpError('');
+    setIsLoading(true);
+
+    const code = useBackupCode ? backupCode : totpCode;
+
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          password, // Re-send password for verification
+          totpCode: useBackupCode ? undefined : totpCode,
+          backupCode: useBackupCode ? backupCode : undefined,
+          useBackupCode
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        sessionStorage.setItem('admin_session_id', data.sessionId);
+        sessionStorage.setItem('admin_csrf_token', data.csrfToken);
+        setIsAuthenticated(true);
+      } else {
+        setTotpError(data.error || 'Mã 2FA không đúng!');
+      }
+    } catch (error) {
+      setTotpError('Lỗi kết nối. Vui lòng thử lại.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      sessionStorage.removeItem('admin_session_id');
+      sessionStorage.removeItem('admin_csrf_token');
+      setIsAuthenticated(false);
+      setShow2FA(false);
+      setPassword('');
+      setTotpCode('');
+      router.push('/admin');
+    }
   };
 
   // Show login form if not authenticated
@@ -59,33 +176,148 @@ export default function AdminLayout({
                 360 Tương Tác
               </h1>
               <p className="text-[var(--text-secondary)] text-sm">Admin Panel</p>
+              {show2FA && (
+                <div className="mt-2 flex items-center justify-center gap-2 text-[#FF2E63]">
+                  <Shield size={16} />
+                  <span className="text-xs font-semibold">2FA Enabled</span>
+                </div>
+              )}
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-                  Mật khẩu admin
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
-                  placeholder="Nhập mật khẩu..."
-                  autoFocus
-                />
-                {error && (
-                  <p className="mt-2 text-sm text-red-500">{error}</p>
-                )}
-              </div>
+            {!show2FA ? (
+              // Step 1: Password form
+              <form onSubmit={handlePasswordSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
+                    Mật khẩu admin
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
+                    placeholder="Nhập mật khẩu..."
+                    autoFocus
+                    disabled={isLoading}
+                  />
+                  {passwordError && (
+                    <p className="mt-2 text-sm text-red-500">{passwordError}</p>
+                  )}
+                  {rateLimitInfo && rateLimitInfo.remaining < 3 && (
+                    <p className="mt-1 text-xs text-orange-500">
+                      Còn {rateLimitInfo.remaining} lần thử
+                    </p>
+                  )}
+                </div>
 
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold py-3 rounded-xl hover:opacity-90 transition-opacity"
-              >
-                Đăng nhập
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  disabled={isLoading || !password}
+                  className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                      Đang xác thực...
+                    </>
+                  ) : (
+                    <>
+                      <Key size={18} />
+                      Đăng nhập
+                    </>
+                  )}
+                </button>
+              </form>
+            ) : (
+              // Step 2: 2FA form
+              <form onSubmit={handle2FASubmit} className="space-y-6">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-semibold text-[var(--text-primary)]">
+                      Mã xác thực 2FA
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setUseBackupCode(!useBackupCode)}
+                      className="text-xs text-[#FF2E63] hover:underline"
+                    >
+                      {useBackupCode ? 'Dùng TOTP code' : 'Dùng backup code'}
+                    </button>
+                  </div>
+                  
+                  {!useBackupCode ? (
+                    <>
+                      <input
+                        type="text"
+                        value={totpCode}
+                        onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                        className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-center text-2xl tracking-widest focus:outline-none focus:border-[#FF2E63] transition-colors"
+                        placeholder="000000"
+                        maxLength={6}
+                        autoFocus
+                        disabled={isLoading}
+                      />
+                      <p className="mt-2 text-xs text-[var(--text-muted)] text-center">
+                        Nhập 6 số từ Google Authenticator
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        type="text"
+                        value={backupCode}
+                        onChange={(e) => setBackupCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8))}
+                        className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-center text-xl tracking-widest focus:outline-none focus:border-[#FF2E63] transition-colors"
+                        placeholder="XXXXXXXX"
+                        maxLength={8}
+                        autoFocus
+                        disabled={isLoading}
+                      />
+                      <p className="mt-2 text-xs text-[var(--text-muted)] text-center">
+                        Nhập 1 trong 10 backup codes đã lưu
+                      </p>
+                    </>
+                  )}
+                  
+                  {totpError && (
+                    <p className="mt-2 text-sm text-red-500">{totpError}</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isLoading || (!useBackupCode && totpCode.length !== 6) || (useBackupCode && backupCode.length !== 8)}
+                  className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                      Đang xác thực...
+                    </>
+                  ) : (
+                    <>
+                      <Shield size={18} />
+                      Xác thực 2FA
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShow2FA(false);
+                    setPassword('');
+                    setTotpCode('');
+                    setBackupCode('');
+                    setUseBackupCode(false);
+                    setTotpError('');
+                  }}
+                  className="w-full text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors py-2"
+                >
+                  ← Quay lại nhập mật khẩu
+                </button>
+              </form>
+            )}
 
             <div className="mt-6 text-center">
               <Link
