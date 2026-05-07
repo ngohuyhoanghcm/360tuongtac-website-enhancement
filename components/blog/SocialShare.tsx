@@ -23,7 +23,7 @@ function IconButton({ children, onClick, active = false }: IconButtonProps) {
       whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(255,140,0,0.3)' }}
       whileTap={{ scale: 0.9 }}
       onClick={onClick}
-      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors border ${active ? 'bg-[#00E5FF]/20 border-[#00E5FF] text-[#00E5FF]' : 'bg-white/[0.03] backdrop-blur-md border-white/10 text-slate-400 hover:text-white hover:border-white/30'}`}
+      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors border ${active ? 'bg-[#00E5FF]/20 border-[#00E5FF] text-[#00E5FF]' : 'bg-gray-50 backdrop-blur-md border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-300'}`}
       aria-label="Share action"
     >
       {children}
@@ -77,7 +77,7 @@ export default function SocialShare({ url, title, layout = 'horizontal', classNa
   return (
     <div className={`relative ${className}`}>
       <div className={containerClasses}>
-        <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-1 lg:mb-0 lg:hidden">
+        <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-1 lg:mb-0 lg:hidden">
           Chia sẻ
         </div>
         
@@ -102,7 +102,7 @@ export default function SocialShare({ url, title, layout = 'horizontal', classNa
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.9 }}
-            className={`absolute ${layout === 'horizontal' ? 'bottom-full left-1/2 -translate-x-1/2 mb-3' : 'left-full top-1/2 -translate-y-1/2 ml-3'} whitespace-nowrap bg-white/10 backdrop-blur-xl border border-white/20 text-white text-xs font-medium px-4 py-2 rounded-lg shadow-lg z-50`}
+            className={`absolute ${layout === 'horizontal' ? 'bottom-full left-1/2 -translate-x-1/2 mb-3' : 'left-full top-1/2 -translate-y-1/2 ml-3'} whitespace-nowrap bg-gray-900 text-white text-xs font-medium px-4 py-2 rounded-lg shadow-lg z-50`}
           >
             Đã sao chép liên kết! 🚀
           </motion.div>

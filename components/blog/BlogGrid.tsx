@@ -54,7 +54,7 @@ export default function BlogGrid({ posts }: BlogGridProps) {
                 whileHover={{ y: -8 }}
                 className="group"
               >
-                <div className="bg-[#13121b] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col h-full hover:border-[#FF2E63]/30 hover:shadow-[0_0_40px_rgba(255,46,99,0.15)] transition-all duration-500 relative">
+                <div className="bg-white border border-gray-200 rounded-[2rem] overflow-hidden flex flex-col h-full hover:border-[#FF2E63]/30 hover:shadow-lg transition-all duration-500 relative">
                   {/* Image with Zoom Effect */}
                   <div className="relative h-60 overflow-hidden">
                     <Image
@@ -71,35 +71,35 @@ export default function BlogGrid({ posts }: BlogGridProps) {
                       </span>
                     </div>
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#13121b] via-transparent to-transparent opacity-60"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60"></div>
                   </div>
 
                   {/* Content */}
                   <div className="p-8 flex flex-col flex-grow relative">
-                    <div className="flex items-center gap-2 text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+                    <div className="flex items-center gap-2 text-gray-500 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                       <Calendar size={12} className="text-[#FF2E63]" />
                       <span>{post.date}</span>
                     </div>
 
                     <Link href={`/blog/${post.slug}`}>
-                      <h3 className="font-h1 text-xl md:text-2xl font-black text-white mb-4 leading-tight group-hover:text-[#FF8C00] transition-colors line-clamp-2">
+                      <h3 className="font-h1 text-xl md:text-2xl font-black text-gray-900 mb-4 leading-tight group-hover:text-[#FF8C00] transition-colors line-clamp-2">
                         {post.title}
                       </h3>
                     </Link>
 
-                    <p className="font-body text-slate-400 text-sm md:text-base mb-8 line-clamp-3 leading-relaxed font-medium">
+                    <p className="font-body text-gray-600 text-sm md:text-base mb-8 line-clamp-3 leading-relaxed font-medium">
                       {post.excerpt}
                     </p>
 
-                    <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+                    <div className="mt-auto pt-6 border-t border-gray-200 flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50">
+                        <div className="w-8 h-8 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center text-gray-400">
                           <User size={14} />
                         </div>
-                        <span className="text-slate-500 text-[11px] font-black uppercase tracking-widest">{post.author}</span>
+                        <span className="text-gray-500 text-[11px] font-black uppercase tracking-widest">{post.author}</span>
                       </div>
                       
-                      <Link href={`/blog/${post.slug}`} className="group/link inline-flex items-center gap-2 text-white font-black text-[11px] tracking-widest uppercase hover:text-[#FF8C00] transition-colors">
+                      <Link href={`/blog/${post.slug}`} className="group/link inline-flex items-center gap-2 text-gray-900 font-black text-[11px] tracking-widest uppercase hover:text-[#FF8C00] transition-colors">
                         Chi tiết 
                         <ArrowRight size={16} className="text-[#FF8C00] transform group-hover/link:translate-x-1 transition-transform" />
                       </Link>
@@ -118,7 +118,7 @@ export default function BlogGrid({ posts }: BlogGridProps) {
           <button
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+            className="p-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
           >
             <ChevronRight size={18} className="rotate-180" />
           </button>
@@ -130,7 +130,7 @@ export default function BlogGrid({ posts }: BlogGridProps) {
                 className={`w-10 h-10 rounded-xl font-bold flex items-center justify-center transition-all ${
                   currentPage === i + 1 
                     ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white shadow-lg shadow-[#FF2E63]/20' 
-                    : 'bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
+                    : 'bg-gray-50 border border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 {i + 1}
@@ -140,7 +140,7 @@ export default function BlogGrid({ posts }: BlogGridProps) {
           <button
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-colors"
+            className="p-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-100 transition-colors"
           >
             <ChevronRight size={18} />
           </button>
