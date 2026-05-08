@@ -9,6 +9,13 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { password, totpCode, backupCode, useBackupCode } = body;
 
+    // Debug: Log environment variables (only in development)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[LOGIN API] Checking environment variables...');
+      console.log('[LOGIN API] NEXT_ADMIN_PASSWORD_HASH exists:', !!process.env.NEXT_ADMIN_PASSWORD_HASH);
+      console.log('[LOGIN API] NEXT_ADMIN_2FA_SECRET exists:', !!process.env.NEXT_ADMIN_2FA_SECRET);
+    }
+
     // Get client IP for rate limiting
     const ip = request.headers.get('x-forwarded-for') || 'unknown';
     const rateLimitKey = `login_${ip}`;
@@ -29,6 +36,8 @@ export async function POST(request: NextRequest) {
     // Verify password
     const passwordHash = process.env.NEXT_ADMIN_PASSWORD_HASH;
     if (!passwordHash) {
+      console.error('[LOGIN API] CRITICAL: NEXT_ADMIN_PASSWORD_HASH is not set!');
+      console.error('[LOGIN API] Check .env.local file exists and contains the variable');
       return NextResponse.json(
         { success: false, error: 'Server configuration error' },
         { status: 500 }
@@ -52,28 +61,7 @@ export async function POST(request: NextRequest) {
     const requires2FA = !!twoFASecret;
 
     if (requires2FA) {
-      if (useBackupCode) {
-        // Verify backup code
-        const backupCodesStr = process.env.NEXT_ADMIN_2FA_BACKUP_CODES;
-        if (!backupCodesStr) {
-          return NextResponse.json(
-            { success: false, error: 'Backup codes not configured' },
-            { status: 500 }
-          );
-        }
-
-        const backupCodes = backupCodesStr.split(',');
-        const verification = verifyBackupCode(backupCodes, backupCode);
-
-        if (!verification.valid) {
-          return NextResponse.json(
-            { success: false, error: 'Invalid backup code' },
-            { status: 401 }
-          );
-        }
-
-        // Note: In production, update backup codes in database/env
-      } else if (totpCode) {
+      if (totpCode) {
         // Verify TOTP code
         const isValid = verifyTOTP(twoFASecret, totpCode);
         if (!isValid) {

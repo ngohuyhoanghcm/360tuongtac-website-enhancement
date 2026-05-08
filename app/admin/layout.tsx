@@ -26,8 +26,6 @@ export default function AdminLayout({
   const [show2FA, setShow2FA] = useState(false);
   const [totpCode, setTotpCode] = useState('');
   const [totpError, setTotpError] = useState('');
-  const [useBackupCode, setUseBackupCode] = useState(false);
-  const [backupCode, setBackupCode] = useState('');
   
   // UI states
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -119,17 +117,13 @@ export default function AdminLayout({
     setTotpError('');
     setIsLoading(true);
 
-    const code = useBackupCode ? backupCode : totpCode;
-
     try {
       const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          password, // Re-send password for verification
-          totpCode: useBackupCode ? undefined : totpCode,
-          backupCode: useBackupCode ? backupCode : undefined,
-          useBackupCode
+          password,
+          totpCode
         })
       });
 
@@ -232,52 +226,23 @@ export default function AdminLayout({
               // Step 2: 2FA form
               <form onSubmit={handle2FASubmit} className="space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="block text-sm font-semibold text-[var(--text-primary)]">
-                      Mã xác thực 2FA
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => setUseBackupCode(!useBackupCode)}
-                      className="text-xs text-[#FF2E63] hover:underline"
-                    >
-                      {useBackupCode ? 'Dùng TOTP code' : 'Dùng backup code'}
-                    </button>
-                  </div>
+                  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
+                    Mã xác thực 2FA
+                  </label>
                   
-                  {!useBackupCode ? (
-                    <>
-                      <input
-                        type="text"
-                        value={totpCode}
-                        onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                        className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-center text-2xl tracking-widest focus:outline-none focus:border-[#FF2E63] transition-colors"
-                        placeholder="000000"
-                        maxLength={6}
-                        autoFocus
-                        disabled={isLoading}
-                      />
-                      <p className="mt-2 text-xs text-[var(--text-muted)] text-center">
-                        Nhập 6 số từ Google Authenticator
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        type="text"
-                        value={backupCode}
-                        onChange={(e) => setBackupCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8))}
-                        className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-center text-xl tracking-widest focus:outline-none focus:border-[#FF2E63] transition-colors"
-                        placeholder="XXXXXXXX"
-                        maxLength={8}
-                        autoFocus
-                        disabled={isLoading}
-                      />
-                      <p className="mt-2 text-xs text-[var(--text-muted)] text-center">
-                        Nhập 1 trong 10 backup codes đã lưu
-                      </p>
-                    </>
-                  )}
+                  <input
+                    type="text"
+                    value={totpCode}
+                    onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] text-center text-2xl tracking-widest focus:outline-none focus:border-[#FF2E63] transition-colors"
+                    placeholder="000000"
+                    maxLength={6}
+                    autoFocus
+                    disabled={isLoading}
+                  />
+                  <p className="mt-2 text-xs text-[var(--text-muted)] text-center">
+                    Nhập 6 số từ Google Authenticator
+                  </p>
                   
                   {totpError && (
                     <p className="mt-2 text-sm text-red-500">{totpError}</p>
@@ -286,7 +251,7 @@ export default function AdminLayout({
 
                 <button
                   type="submit"
-                  disabled={isLoading || (!useBackupCode && totpCode.length !== 6) || (useBackupCode && backupCode.length !== 8)}
+                  disabled={isLoading || totpCode.length !== 6}
                   className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
@@ -308,8 +273,6 @@ export default function AdminLayout({
                     setShow2FA(false);
                     setPassword('');
                     setTotpCode('');
-                    setBackupCode('');
-                    setUseBackupCode(false);
                     setTotpError('');
                   }}
                   className="w-full text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors py-2"
