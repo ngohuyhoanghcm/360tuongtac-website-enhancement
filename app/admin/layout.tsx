@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key, Sparkles, FileCheck } from 'lucide-react';
 
 export default function AdminLayout({
   children,
@@ -370,6 +370,38 @@ export default function AdminLayout({
           >
             <Settings size={18} />
             Services
+          </Link>
+
+          {/* Divider */}
+          <div className="my-4 border-t border-[var(--border)]"></div>
+
+          {/* AI Features */}
+          <div className="px-4 py-2 text-xs font-semibold text-[var(--text-muted)] uppercase">
+            AI Tools
+          </div>
+
+          <Link
+            href="/admin/ai-content"
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
+              pathname.startsWith('/admin/ai-content')
+                ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white'
+                : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <Sparkles size={18} />
+            AI Content Hub
+          </Link>
+
+          <Link
+            href="/admin/drafts"
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
+              pathname.startsWith('/admin/drafts')
+                ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white'
+                : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <FileCheck size={18} />
+            Draft Approval
           </Link>
         </nav>
 

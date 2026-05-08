@@ -13,6 +13,9 @@ export default function EditService() {
   
   const [loading, setLoading] = useState(true);
   const [service, setService] = useState<any>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     // Find the service by slug
@@ -23,14 +26,54 @@ export default function EditService() {
     setLoading(false);
   }, [slug]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // TODO: Implement save to file
-    alert('✅ Dịch vụ đã được cập nhật!\n\nTính năng save to file sẽ được implement trong Phase 2.');
-    
-    // Redirect to services list
-    router.push('/admin/services');
+    setIsSaving(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/admin/service/save', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: service.id,
+          name: service.title,
+          slug: service.slug,
+          shortDescription: service.description?.substring(0, 200) || '',
+          description: service.description,
+          platform: service.platform,
+          category: service.category,
+          price: service.startingPrice,
+          features: service.features || [],
+          benefits: service.benefits || [],
+          suitableFor: service.suitableFor || [],
+          icon: service.icon || 'Sparkles',
+          gradient: service.gradient || 'from-blue-500 to-cyan-500',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to update service');
+      }
+
+      setSuccess(true);
+      
+      // Redirect to services list after 1 second
+      setTimeout(() => {
+        router.push('/admin/services');
+      }, 1000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Đã có lỗi xảy ra');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   if (loading) {
@@ -87,17 +130,42 @@ export default function EditService() {
             Xem dịch vụ
           </Link>
           <button
-            onClick={handleSubmit}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity"
+            type="submit"
+            disabled={isSaving}
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Save size={18} />
-            Lưu thay đổi
+            {isSaving ? (
+              <>
+                <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+                Đang lưu...
+              </>
+            ) : (
+              <>
+                <Save size={18} />
+                Lưu thay đổi
+              </>
+            )}
           </button>
         </div>
       </div>
 
+      {/* Success/Error Messages */}
+      {success && (
+        <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-4">
+          <p className="text-green-500 font-semibold">✅ Dịch vụ đã được cập nhật thành công!</p>
+          <p className="text-sm text-green-500/80 mt-1">Đang chuyển về danh sách...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4">
+          <p className="text-red-500 font-semibold">❌ Lỗi: {error}</p>
+          <p className="text-sm text-red-500/80 mt-1">Vui lòng kiểm tra lại thông tin</p>
+        </div>
+      )}
+
       {/* Edit Form */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
+      <form onSubmit={handleSubmit} className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -161,15 +229,9 @@ export default function EditService() {
             </div>
           </div>
         </div>
-      </div>
+      </form>
 
-      {/* Notice */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-        <h3 className="font-bold text-blue-500 mb-2">ℹ️ Phase 2 Feature</h3>
-        <p className="text-sm text-[var(--text-secondary)]">
-          Form chỉnh sửa đầy đủ với pricing table editor, FAQ editor, và validation sẽ được implement trong Phase 2.
-        </p>
-      </div>
+
     </div>
   );
 }

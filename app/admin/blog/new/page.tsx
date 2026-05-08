@@ -24,6 +24,9 @@ export default function NewBlogPost() {
 
   const [seoScore, setSeoScore] = useState(0);
   const [seoIssues, setSeoIssues] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const categories = ['Thuật toán', 'Seeding', 'TikTok Shop', 'Case Study'];
 
@@ -97,7 +100,7 @@ export default function NewBlogPost() {
     setSeoIssues(issues);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (seoScore < 50) {
@@ -106,11 +109,50 @@ export default function NewBlogPost() {
       }
     }
 
-    // TODO: Implement save to file
-    alert('✅ Bài viết đã được lưu!\n\nTính năng save to file sẽ được implement trong Phase 2.');
-    
-    // Redirect to blog list
-    router.push('/admin/blog');
+    setIsLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/admin/blog/save', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: formData.title,
+          slug: formData.slug,
+          excerpt: formData.excerpt,
+          content: formData.content,
+          category: formData.category,
+          tags: formData.tags.split(',').map(t => t.trim()),
+          author: formData.author,
+          date: formData.date,
+          imageUrl: formData.featuredImage,
+          imageAlt: formData.alt,
+          metaTitle: formData.metaTitle || `${formData.title} | Blog - 360TuongTac`,
+          metaDescription: formData.metaDescription || formData.excerpt,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to save blog post');
+      }
+
+      setSuccess(true);
+      
+      // Redirect to blog list after 1 second
+      setTimeout(() => {
+        router.push('/admin/blog');
+      }, 1000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Đã có lỗi xảy ra');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -186,6 +228,21 @@ export default function NewBlogPost() {
           </div>
         )}
       </div>
+
+      {/* Success/Error Messages */}
+      {success && (
+        <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-4">
+          <p className="text-green-500 font-semibold">✅ Bài viết đã được lưu thành công!</p>
+          <p className="text-sm text-green-500/80 mt-1">Đang chuyển về danh sách...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4">
+          <p className="text-red-500 font-semibold">❌ Lỗi: {error}</p>
+          <p className="text-sm text-red-500/80 mt-1">Vui lòng kiểm tra lại thông tin</p>
+        </div>
+      )}
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -417,10 +474,20 @@ export default function NewBlogPost() {
           </Link>
           <button
             type="submit"
-            className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity"
+            disabled={isLoading}
+            className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Save size={18} />
-            Lưu bài viết
+            {isLoading ? (
+              <>
+                <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+                Đang lưu...
+              </>
+            ) : (
+              <>
+                <Save size={18} />
+                Lưu bài viết
+              </>
+            )}
           </button>
         </div>
       </form>

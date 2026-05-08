@@ -1,19 +1,62 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FileText, Settings, TrendingUp, Users, Plus, ArrowRight } from 'lucide-react';
-import { BLOG_POSTS } from '@/lib/constants/blog';
-import { SERVICES_DATA } from '@/data/services';
 
 export default function AdminDashboard() {
-  const totalPosts = BLOG_POSTS.length;
-  const totalServices = SERVICES_DATA.length;
+  const [dashboardData, setDashboardData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Calculate average SEO score (mock data for now)
-  const avgSEOScore = 85;
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const response = await fetch('/api/admin/dashboard', {
+          headers: {
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          },
+        });
 
-  // Get recent posts (last 5)
-  const recentPosts = BLOG_POSTS.slice(-5).reverse();
+        if (!response.ok) {
+          throw new Error('Failed to fetch dashboard data');
+        }
+
+        const data = await response.json();
+        setDashboardData(data.data);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        // Fallback to default values
+        setDashboardData({
+          overview: {
+            totalBlogPosts: 0,
+            totalServices: 0,
+            avgSEOScore: 0,
+            publishedThisMonth: 0,
+          },
+          contentActivity: {
+            recentPosts: [],
+          }
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin w-8 h-8 border-4 border-[#FF2E63] border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+
+  const totalPosts = dashboardData?.overview?.totalBlogPosts || 0;
+  const totalServices = dashboardData?.overview?.totalServices || 0;
+  const avgSEOScore = dashboardData?.overview?.avgSEOScore || 0;
+  const recentPosts = dashboardData?.contentActivity?.recentPosts || [];
 
   return (
     <div className="space-y-8">
@@ -86,11 +129,11 @@ export default function AdminDashboard() {
               <Users className="w-6 h-6 text-orange-500" />
             </div>
             <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
-              Tuần này
+              Tháng này
             </span>
           </div>
           <div className="text-3xl font-black text-[var(--text-primary)] mb-1">
-            0
+            {dashboardData?.overview?.publishedThisMonth || 0}
           </div>
           <div className="text-sm text-[var(--text-secondary)]">
             Bài mới
@@ -152,33 +195,35 @@ export default function AdminDashboard() {
         </div>
 
         <div className="space-y-4">
-          {recentPosts.map((post) => (
-            <div
-              key={post.id}
-              className="flex items-center justify-between p-4 bg-[var(--bg-secondary)] rounded-xl hover:bg-[var(--surface-hover)] transition-colors"
-            >
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-[var(--text-primary)] truncate">
-                  {post.title}
-                </h3>
-                <div className="flex items-center gap-3 mt-1">
-                  <span className="text-xs text-[var(--text-muted)]">
-                    {post.category}
-                  </span>
-                  <span className="text-xs text-[var(--text-muted)]">•</span>
-                  <span className="text-xs text-[var(--text-muted)]">
-                    {post.date}
-                  </span>
-                </div>
-              </div>
-              <Link
-                href={`/admin/blog/edit/${post.slug}`}
-                className="ml-4 px-4 py-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[#FF2E63]/30 transition-colors whitespace-nowrap"
+          {recentPosts.length > 0 ? (
+            recentPosts.map((post: any) => (
+              <div
+                key={post.slug}
+                className="flex items-center justify-between p-4 bg-[var(--bg-secondary)] rounded-xl hover:bg-[var(--surface-hover)] transition-colors"
               >
-                Chỉnh sửa
-              </Link>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-[var(--text-primary)] truncate">
+                    {post.title}
+                  </h3>
+                  <div className="flex items-center gap-3 mt-1">
+                    <span className="text-xs text-[var(--text-muted)]">
+                      {post.date}
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  href={`/admin/blog/edit/${post.slug}`}
+                  className="ml-4 px-4 py-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[#FF2E63]/30 transition-colors whitespace-nowrap"
+                >
+                  Chỉnh sửa
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-[var(--text-muted)]">Chưa có bài viết nào</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
 

@@ -8,6 +8,7 @@ import { BLOG_POSTS } from '@/lib/constants/blog';
 export default function BlogList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
+  const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
 
   const categories = ['Tất cả', ...Array.from(new Set(BLOG_POSTS.map(p => p.category)))];
 
@@ -17,6 +18,41 @@ export default function BlogList() {
     const matchesCategory = selectedCategory === 'Tất cả' || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const handleDelete = async (slug: string, title: string) => {
+    if (!confirm(`Bạn có chắc muốn xóa bài viết "${title}"?`)) {
+      return;
+    }
+
+    setDeletingSlug(slug);
+
+    try {
+      const response = await fetch('/api/admin/blog/delete', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ slug }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(`❌ Lỗi: ${data.message}`);
+        return;
+      }
+
+      alert('✅ Bài viết đã được xóa thành công!');
+      
+      // Reload page to refresh the list
+      window.location.reload();
+    } catch (error) {
+      alert('❌ Đã có lỗi xảy ra khi xóa bài viết');
+    } finally {
+      setDeletingSlug(null);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -144,16 +180,16 @@ export default function BlogList() {
                         <Edit size={18} />
                       </Link>
                       <button
-                        className="p-2 text-[var(--text-muted)] hover:text-red-500 transition-colors"
+                        className="p-2 text-[var(--text-muted)] hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         title="Xóa"
-                        onClick={() => {
-                          if (confirm('Bạn có chắc muốn xóa bài viết này?')) {
-                            // TODO: Implement delete
-                            alert('Tính năng xóa sẽ được implement trong Phase 2');
-                          }
-                        }}
+                        disabled={deletingSlug === post.slug}
+                        onClick={() => handleDelete(post.slug, post.title)}
                       >
-                        <Trash2 size={18} />
+                        {deletingSlug === post.slug ? (
+                          <div className="animate-spin w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full"></div>
+                        ) : (
+                          <Trash2 size={18} />
+                        )}
                       </button>
                     </div>
                   </td>

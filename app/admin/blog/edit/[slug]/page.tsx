@@ -13,6 +13,9 @@ export default function EditBlogPost() {
   
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState<any>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     // Find the blog post by slug
@@ -23,14 +26,54 @@ export default function EditBlogPost() {
     setLoading(false);
   }, [slug]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // TODO: Implement save to file
-    alert('✅ Bài viết đã được cập nhật!\n\nTính năng save to file sẽ được implement trong Phase 2.');
-    
-    // Redirect to blog list
-    router.push('/admin/blog');
+    setIsSaving(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/admin/blog/save', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: formData.id,
+          title: formData.title,
+          slug: formData.slug,
+          excerpt: formData.excerpt || '',
+          content: formData.content,
+          category: formData.category || '',
+          tags: Array.isArray(formData.tags) ? formData.tags : formData.tags.split(',').map((t: string) => t.trim()),
+          author: formData.author || '360TuongTac Team',
+          date: formData.date || new Date().toISOString().split('T')[0],
+          imageUrl: formData.imageUrl || formData.featuredImage || '/images/blog/default.jpg',
+          imageAlt: formData.imageAlt || formData.alt || formData.title,
+          metaTitle: formData.metaTitle || `${formData.title} | Blog - 360TuongTac`,
+          metaDescription: formData.metaDescription || formData.excerpt || '',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to update blog post');
+      }
+
+      setSuccess(true);
+      
+      // Redirect to blog list after 1 second
+      setTimeout(() => {
+        router.push('/admin/blog');
+      }, 1000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Đã có lỗi xảy ra');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   if (loading) {
@@ -87,17 +130,42 @@ export default function EditBlogPost() {
             Xem bài viết
           </Link>
           <button
-            onClick={handleSubmit}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity"
+            type="submit"
+            disabled={isSaving}
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Save size={18} />
-            Lưu thay đổi
+            {isSaving ? (
+              <>
+                <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+                Đang lưu...
+              </>
+            ) : (
+              <>
+                <Save size={18} />
+                Lưu thay đổi
+              </>
+            )}
           </button>
         </div>
       </div>
 
-      {/* Edit Form (Similar to new post form) */}
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
+      {/* Success/Error Messages */}
+      {success && (
+        <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-4">
+          <p className="text-green-500 font-semibold">✅ Bài viết đã được cập nhật thành công!</p>
+          <p className="text-sm text-green-500/80 mt-1">Đang chuyển về danh sách...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4">
+          <p className="text-red-500 font-semibold">❌ Lỗi: {error}</p>
+          <p className="text-sm text-red-500/80 mt-1">Vui lòng kiểm tra lại thông tin</p>
+        </div>
+      )}
+
+      {/* Edit Form */}
+      <form onSubmit={handleSubmit} className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
         <div className="space-y-6">
           <div>
             <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
@@ -123,16 +191,9 @@ export default function EditBlogPost() {
             />
           </div>
         </div>
-      </div>
+      </form>
 
-      {/* Notice */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-        <h3 className="font-bold text-blue-500 mb-2">ℹ️ Phase 2 Feature</h3>
-        <p className="text-sm text-[var(--text-secondary)]">
-          Form chỉnh sửa đầy đủ với validation, SEO score, và auto-save sẽ được implement trong Phase 2.
-          Hiện tại bạn có thể xem thông tin bài viết và structure của form.
-        </p>
-      </div>
+
     </div>
   );
 }

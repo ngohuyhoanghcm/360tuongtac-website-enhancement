@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, Edit, Eye, Filter } from 'lucide-react';
+import { Search, Edit, Eye, Filter, Plus } from 'lucide-react';
 import { SERVICES_DATA } from '@/data/services';
 
 export default function ServicesList() {
@@ -21,13 +21,22 @@ export default function ServicesList() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="font-h1 text-3xl font-black text-[var(--text-primary)] mb-2">
-          Dịch vụ
-        </h1>
-        <p className="text-[var(--text-secondary)]">
-          Quản lý tất cả dịch vụ ({SERVICES_DATA.length} dịch vụ)
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-h1 text-3xl font-black text-[var(--text-primary)] mb-2">
+            Dịch vụ
+          </h1>
+          <p className="text-[var(--text-secondary)]">
+            Quản lý tất cả dịch vụ ({SERVICES_DATA.length} dịch vụ)
+          </p>
+        </div>
+        <Link
+          href="/admin/services/new"
+          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity"
+        >
+          <Plus size={18} />
+          Thêm dịch vụ mới
+        </Link>
       </div>
 
       {/* Filters */}
@@ -124,13 +133,7 @@ export default function ServicesList() {
         </div>
       )}
 
-      {/* Notice */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-        <h3 className="font-bold text-blue-500 mb-2">ℹ️ Phase 2 Feature</h3>
-        <p className="text-sm text-[var(--text-secondary)]">
-          Tính năng thêm dịch vụ mới sẽ được implement trong Phase 2. Hiện tại bạn có thể xem và chỉnh sửa các dịch vụ hiện có.
-        </p>
-      </div>
+
     </div>
   );
 }

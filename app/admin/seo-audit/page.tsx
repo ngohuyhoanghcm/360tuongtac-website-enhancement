@@ -26,21 +26,28 @@ export default function SEOAuditPage() {
   const [filter, setFilter] = useState<'all' | 'critical' | 'warning'>('all');
 
   useEffect(() => {
-    // In production, fetch from API
-    // For now, mock data
-    setTimeout(() => {
-      setAuditReport({
-        overallScore: 78,
-        blogPosts: [
-          { slug: 'test-post', title: 'Test Post', score: { overall: 85, issues: [] } },
-          { slug: 'another-post', title: 'Another Post', score: { overall: 65, issues: [] } }
-        ],
-        services: [],
-        criticalIssues: 3,
-        warnings: 7
-      });
-      setLoading(false);
-    }, 500);
+    const fetchSEOAudit = async () => {
+      try {
+        const response = await fetch('/api/admin/seo-audit', {
+          headers: {
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch SEO audit data');
+        }
+
+        const data = await response.json();
+        setAuditReport(data);
+      } catch (error) {
+        console.error('Error fetching SEO audit:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSEOAudit();
   }, []);
 
   if (loading) {
