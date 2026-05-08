@@ -20,21 +20,14 @@ RUN npm ci && npm cache clean --force
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Declare build arguments
+# Declare build arguments (only NEXT_PUBLIC_* needed at build time)
+# Admin vars (NEXT_ADMIN_*) are injected at runtime via .env.prod on VPS
 ARG NEXT_PUBLIC_GA_MEASUREMENT_ID
 ARG NEXT_PUBLIC_GTM_ID
-ARG NEXT_ADMIN_PASSWORD_HASH
-ARG NEXT_ADMIN_2FA_SECRET
-ARG NEXT_ADMIN_2FA_BACKUP_CODES
-ARG NEXT_ADMIN_SESSION_TIMEOUT
 
-# Set environment variables for build
+# Set environment variables for build (only public vars)
 ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
 ENV NEXT_PUBLIC_GTM_ID=${NEXT_PUBLIC_GTM_ID}
-ENV NEXT_ADMIN_PASSWORD_HASH=${NEXT_ADMIN_PASSWORD_HASH}
-ENV NEXT_ADMIN_2FA_SECRET=${NEXT_ADMIN_2FA_SECRET}
-ENV NEXT_ADMIN_2FA_BACKUP_CODES=${NEXT_ADMIN_2FA_BACKUP_CODES}
-ENV NEXT_ADMIN_SESSION_TIMEOUT=${NEXT_ADMIN_SESSION_TIMEOUT}
 
 # Copy deps from previous stage
 COPY --from=deps /app/node_modules ./node_modules
