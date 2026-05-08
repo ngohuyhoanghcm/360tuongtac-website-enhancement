@@ -10,7 +10,9 @@ export async function GET(request: NextRequest) {
   try {
     // Check authentication
     const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
+    const expectedSecret = process.env.ADMIN_API_SECRET || process.env.NEXT_PUBLIC_ADMIN_API_SECRET;
+    
+    if (!expectedSecret || authHeader !== `Bearer ${expectedSecret}`) {
       return NextResponse.json(
         { success: false, message: 'Unauthorized' },
         { status: 401 }
