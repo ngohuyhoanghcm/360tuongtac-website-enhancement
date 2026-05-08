@@ -57,7 +57,8 @@ export class TelegramBot {
 
   constructor() {
     this.botToken = process.env.TELEGRAM_BOT_TOKEN || '';
-    this.adminChatId = parseInt(process.env.TELEGRAM_ADMIN_CHAT_ID || '0');
+    // Support both TELEGRAM_ADMIN_CHAT_ID and TELEGRAM_CHAT_ID for backwards compatibility
+    this.adminChatId = parseInt(process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.TELEGRAM_CHAT_ID || '0');
     this.enabled = process.env.TELEGRAM_BOT_ENABLED === 'true';
     this.baseUrl = `https://api.telegram.org/bot${this.botToken}`;
   }
