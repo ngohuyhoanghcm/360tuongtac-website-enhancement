@@ -29,7 +29,12 @@ export const BlogPostSchema = z.object({
   tags: z.array(z.string())
     .min(3, 'Phải có ít nhất 3 tags')
     .max(10, 'Không được vượt quá 10 tags'),
-  imageUrl: z.string().url('ImageUrl phải là URL hợp lệ'),
+  imageUrl: z.string()
+    .min(1, 'ImageUrl là bắt buộc')
+    .refine((val) => {
+      // Allow both URLs and local paths
+      return val.startsWith('http') || val.startsWith('/') || val.startsWith('./');
+    }, 'ImageUrl phải là URL hoặc path hợp lệ'),
   imageAlt: z.string()
     .min(15, 'ImageAlt phải có ít nhất 15 ký tự')
     .max(125, 'ImageAlt không được vượt quá 125 ký tự'),
@@ -101,6 +106,10 @@ export function validateBlogPost(post: Partial<BlogPostData>): ValidationResult 
   // Validate with Zod
   const zodResult = BlogPostSchema.safeParse(post);
   if (!zodResult.success) {
+    console.log('[Zod Validation] Failed - Issues:');
+    zodResult.error.issues.forEach((issue: any, index: number) => {
+      console.log(`  ${index + 1}. Path: ${issue.path?.join('.')}, Code: ${issue.code}, Message: ${issue.message}`);
+    });
     errors.push(...zodResult.error.issues.map((e: any) => e.message));
   }
 

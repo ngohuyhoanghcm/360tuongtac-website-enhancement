@@ -7,18 +7,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { 
   getContentByStatus
 } from '@/lib/admin/publishing-workflow';
+import { authenticateAdminRequest } from '@/lib/admin/dev-auth-bypass';
 
 // GET /api/admin/drafts?status=pending
 export async function GET(request: NextRequest) {
   try {
-    // Authentication
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // Authentication (with dev bypass support)
+    const authResult = authenticateAdminRequest(request);
+    if (authResult) return authResult;
 
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status') || 'review'; // review = pending

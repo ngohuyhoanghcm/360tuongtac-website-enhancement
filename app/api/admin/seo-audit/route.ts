@@ -7,17 +7,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { BLOG_POSTS } from '@/lib/constants/blog';
 import { SERVICES_DATA } from '@/data/services';
 import { auditBlogSEO } from '@/lib/admin/seo-audit';
+import { authenticateAdminRequest } from '@/lib/admin/dev-auth-bypass';
 
 export async function GET(request: NextRequest) {
   try {
-    // Check authentication
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // Check authentication (with dev bypass support)
+    const authResult = authenticateAdminRequest(request);
+    if (authResult) return authResult;
 
     // Audit all blog posts
     const blogAudits = BLOG_POSTS.map(post => {

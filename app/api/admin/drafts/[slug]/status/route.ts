@@ -9,6 +9,7 @@ import {
   changeContentStatus,
   deleteContentWorkflow
 } from '@/lib/admin/publishing-workflow';
+import { authenticateAdminRequest } from '@/lib/admin/dev-auth-bypass';
 
 // POST /api/admin/drafts/[slug]/status
 export async function POST(
@@ -16,14 +17,9 @@ export async function POST(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    // Authentication
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // Authentication (with dev bypass support)
+    const authResult = authenticateAdminRequest(request);
+    if (authResult) return authResult;
 
     const { slug } = await params;
     const body = await request.json();
@@ -81,14 +77,9 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    // Authentication
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // Authentication (with dev bypass support)
+    const authResult = authenticateAdminRequest(request);
+    if (authResult) return authResult;
 
     const { slug } = await params;
     const { searchParams } = new URL(request.url);

@@ -40,18 +40,24 @@ export interface ContentExport {
  */
 export function searchBlogPosts(filters: SearchFilters = {}): BlogPostData[] {
   try {
-    const blogDir = path.join(process.cwd(), 'lib', 'constants');
-    const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.ts') && f !== 'blog.ts');
+    const blogDir = path.join(process.cwd(), 'data', 'blog');
+    
+    if (!fs.existsSync(blogDir)) {
+      console.warn('[searchBlogPosts] Blog directory not found:', blogDir);
+      return [];
+    }
+    
+    const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.ts'));
     
     const posts: BlogPostData[] = [];
 
     for (const file of files) {
       try {
         const filePath = path.join(blogDir, file);
-        const content = fs.readFileSync(filePath, 'utf-8');
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
         
-        // Simple parsing (in production, use AST or import)
-        const post = parseBlogPostFromFile(content);
+        // Parse TypeScript export to extract blog post data
+        const post = parseBlogPostFromTSFile(fileContent);
         if (post && matchesFilters(post, filters)) {
           posts.push(post);
         }
@@ -73,6 +79,12 @@ export function searchBlogPosts(filters: SearchFilters = {}): BlogPostData[] {
 export function searchServices(filters: SearchFilters = {}): ServiceData[] {
   try {
     const serviceDir = path.join(process.cwd(), 'data', 'services');
+    
+    if (!fs.existsSync(serviceDir)) {
+      console.warn('[searchServices] Services directory not found:', serviceDir);
+      return [];
+    }
+    
     const files = fs.readdirSync(serviceDir).filter(f => f.endsWith('.ts') && f !== 'index.ts');
     
     const services: ServiceData[] = [];
@@ -382,6 +394,60 @@ export function getContentStats(): {
 }
 
 // Helper functions
+
+/**
+ * Parse blog post from TypeScript export file (data/blog/*.ts)
+ */
+function parseBlogPostFromTSFile(content: string): BlogPostData | null {
+  try {
+    const extractField = (field: string): string => {
+      // Try single quotes first, then double quotes
+      const matchSingle = content.match(new RegExp(`${field}:\\s*'([^']*)'`));
+      if (matchSingle) return matchSingle[1];
+      const matchDouble = content.match(new RegExp(`${field}:\\s*"([^"]*)"`));
+      return matchDouble ? matchDouble[1] : '';
+    };
+
+    const extractArray = (field: string): string[] => {
+      const match = content.match(new RegExp(`${field}:\\s*\\[([^\\]]*)\\]`));
+      if (!match) return [];
+      return match[1].match(/"([^"]*)"|'([^']*)'/g)?.map(s => s.replace(/"/g, '').replace(/'/g, '')) || [];
+    };
+
+    // Extract date - handle DD/MM/YYYY format
+    const dateStr = extractField('date');
+    let parsedDate = dateStr;
+    if (dateStr && dateStr.includes('/')) {
+      // Convert DD/MM/YYYY to ISO format for sorting
+      const parts = dateStr.split('/');
+      if (parts.length === 3) {
+        parsedDate = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
+    }
+
+    return {
+      id: extractField('id'),
+      slug: extractField('slug'),
+      title: extractField('title'),
+      excerpt: extractField('excerpt'),
+      content: '', // Will be populated from content field if needed
+      author: extractField('author'),
+      date: dateStr, // Keep original DD/MM/YYYY format for display
+      readTime: extractField('readTime'),
+      category: extractField('category'),
+      tags: extractArray('tags'),
+      imageUrl: extractField('featuredImage') || extractField('imageUrl'),
+      imageAlt: extractField('alt') || extractField('imageAlt'),
+      metaTitle: extractField('metaTitle'),
+      metaDescription: extractField('metaDescription'),
+      featured: content.includes('featured: true'),
+      seoScore: 0 // Will be calculated by auditBlogSEO
+    };
+  } catch (error) {
+    console.error('Error parsing blog post from TS file:', error);
+    return null;
+  }
+}
 
 function parseBlogPostFromFile(content: string): BlogPostData | null {
   try {

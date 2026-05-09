@@ -5,19 +5,15 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { saveBlogPost, BlogPostData } from '@/lib/admin/file-writer';
+import { authenticateAdminRequest } from '@/lib/admin/dev-auth-bypass';
 import { validateBlogPost, generateSlug, estimateReadTime } from '@/lib/admin/validation';
 import { generateBlogSEO } from '@/lib/admin/seo-generator';
 
 export async function POST(request: NextRequest) {
   try {
-    // Check authentication
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // Check authentication (with dev bypass support)
+    const authResult = authenticateAdminRequest(request);
+    if (authResult) return authResult;
 
     const body = await request.json();
 

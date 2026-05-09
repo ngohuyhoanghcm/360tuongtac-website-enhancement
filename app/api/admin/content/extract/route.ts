@@ -7,17 +7,13 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { extractContentFromURL } from '@/lib/admin/content-extractor';
+import { authenticateAdminRequest } from '@/lib/admin/dev-auth-bypass';
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Authentication
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.ADMIN_API_SECRET || 'secret123'}`) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // 1. Authentication (with dev bypass support)
+    const authResult = authenticateAdminRequest(request);
+    if (authResult) return authResult;
 
     // 2. Parse request
     const body = await request.json();

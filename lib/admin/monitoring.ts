@@ -207,7 +207,9 @@ export function generateDashboardData(): DashboardData {
     overview: {
       totalBlogPosts: stats.totalBlogPosts,
       totalServices: stats.totalServices,
-      avgSEOScore: stats.avgSEOScore,
+      avgSEOScore: seoScores.length > 0 
+        ? Math.round(seoScores.reduce((sum, s) => sum + s.score.overall, 0) / seoScores.length)
+        : 0,
       publishedThisMonth: stats.recentPosts,
       scheduledCount: 0, // Would need workflow data
       draftCount: 0 // Would need workflow data

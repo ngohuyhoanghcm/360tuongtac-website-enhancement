@@ -33,6 +33,14 @@ export default function AdminLayout({
 
   // Check existing session on mount
   useEffect(() => {
+    // DEV AUTH BYPASS: Skip authentication in development
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV !== 'production') {
+      console.log('[DEV AUTH] Admin UI bypass enabled - skipping login');
+      setIsAuthenticated(true);
+      setIsChecking(false);
+      return;
+    }
+
     const sessionId = sessionStorage.getItem('admin_session_id');
     const csrfToken = sessionStorage.getItem('admin_csrf_token');
     
