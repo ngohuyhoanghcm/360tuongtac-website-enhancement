@@ -1,0 +1,38 @@
+# Traefik Dynamic Configuration for 360TuongTac
+# Location: /etc/dokploy/traefik/dynamic/360tuongtac-traefik-config.yml
+# 
+# IMPORTANT: This file uses Docker DNS (not hardcoded IP)
+# Container name: 360tuongtac-app
+# Domain: grow.360tuongtac.com
+
+http:
+  routers:
+    360tuongtac-router:
+      rule: "Host(`grow.360tuongtac.com`)"
+      entryPoints:
+        - websecure
+      service: 360tuongtac-service
+      tls:
+        certResolver: letsencrypt
+      middlewares:
+        - security-headers
+  
+  services:
+    360tuongtac-service:
+      loadBalancer:
+        servers:
+          - url: "http://360tuongtac-app:3000"  # Docker DNS - NOT hardcoded IP!
+        passHostHeader: true
+  
+  middlewares:
+    security-headers:
+      headers:
+        sslRedirect: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"

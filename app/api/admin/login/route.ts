@@ -99,9 +99,9 @@ export async function POST(request: NextRequest) {
     response.cookies.set('admin_session', session.sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'lax', // Changed from 'strict' to 'lax' for better compatibility
       maxAge: 60 * 60, // 1 hour
-      path: '/admin'
+      path: '/' // Changed from '/admin' to '/' to cover all admin routes including /api/admin/*
     });
 
     return response;

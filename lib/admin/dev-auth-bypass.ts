@@ -9,9 +9,14 @@
  * - Logs all bypass usage for audit trail
  * - Can be disabled via DEV_AUTH_BYPASS=false even in dev mode
  * - Never exposed to production builds
+ * 
+ * PRODUCTION AUTHENTICATION:
+ * - Validates session cookie (admin_session) from login flow
+ * - Falls back to Bearer token (ADMIN_API_SECRET) for API-to-API calls
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { validateSession } from './session-manager';
 
 /**
  * Check if development auth bypass is enabled
@@ -36,14 +41,13 @@ export function isDevAuthBypassEnabled(): boolean {
  * Validate admin authentication with dev bypass support
  * 
  * In development: Allows bypass if DEV_AUTH_BYPASS=true
- * In production: Always requires valid ADMIN_API_SECRET
+ * In production: Validates session cookie (admin_session) from login
+ *               Falls back to Bearer token (ADMIN_API_SECRET) for API calls
  * 
  * @param request - The Next.js request object
  * @returns true if authentication passes, false otherwise
  */
 export function validateAdminAuth(request: NextRequest): boolean {
-  const authHeader = request.headers.get('authorization');
-  
   // Development bypass
   if (isDevAuthBypassEnabled()) {
     console.log('[DEV AUTH] Authentication bypass enabled for development');
@@ -51,19 +55,39 @@ export function validateAdminAuth(request: NextRequest): boolean {
   }
 
   // Production authentication
-  const expectedSecret = process.env.ADMIN_API_SECRET || process.env.NEXT_PUBLIC_ADMIN_API_SECRET;
+  // Priority 1: Check session cookie (from login flow)
+  const sessionCookie = request.cookies.get('admin_session')?.value;
   
-  if (!expectedSecret) {
-    console.error('[AUTH] No ADMIN_API_SECRET configured');
-    return false;
+  if (sessionCookie) {
+    const sessionValidation = validateSession(sessionCookie);
+    
+    if (sessionValidation.valid) {
+      console.log('[AUTH] Session validated successfully');
+      return true;
+    } else {
+      console.warn('[AUTH] Invalid or expired session:', sessionValidation.expired ? 'expired' : 'not found');
+    }
   }
 
-  if (authHeader !== `Bearer ${expectedSecret}`) {
-    console.warn('[AUTH] Invalid authentication attempt');
-    return false;
+  // Priority 2: Check Bearer token (for API-to-API calls)
+  const authHeader = request.headers.get('authorization');
+  const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_API_SECRET || process.env.ADMIN_API_SECRET;
+  
+  if (authHeader && expectedSecret) {
+    if (authHeader === `Bearer ${expectedSecret}`) {
+      console.log('[AUTH] Bearer token validated successfully');
+      return true;
+    } else {
+      console.warn('[AUTH] Invalid Bearer token');
+    }
   }
 
-  return true;
+  // If no session and no valid Bearer token
+  if (!sessionCookie && !authHeader) {
+    console.warn('[AUTH] No authentication credentials provided');
+  }
+
+  return false;
 }
 
 /**
