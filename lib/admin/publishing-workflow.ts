@@ -89,6 +89,27 @@ export function saveBlogPostWorkflow(post: BlogPostWorkflow): { success: boolean
   try {
     const filePath = path.join(BLOG_WORKFLOW_DIR, `${post.slug}.json`);
     
+    // Create DEEP COPY of post for snapshot to avoid circular reference
+    const snapshotContent = {
+      id: post.id,
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content,
+      author: post.author,
+      date: post.date,
+      readTime: post.readTime,
+      category: post.category,
+      tags: post.tags,
+      imageUrl: post.imageUrl,
+      imageAlt: post.imageAlt,
+      metaTitle: post.metaTitle,
+      metaDescription: post.metaDescription,
+      featured: post.featured,
+      seoScore: post.seoScore,
+      status: post.status,
+    };
+    
     // Create version history entry
     const version: VersionHistory = {
       version: post.currentVersion,
@@ -96,16 +117,42 @@ export function saveBlogPostWorkflow(post: BlogPostWorkflow): { success: boolean
       author: post.author,
       action: post.currentVersion === 1 ? 'created' : 'updated',
       changes: `Version ${post.currentVersion}`,
-      contentSnapshot: { ...post }
+      contentSnapshot: snapshotContent // Use clean snapshot, not full post object
     };
 
     post.versionHistory.push(version);
 
-    // Save workflow file
-    fs.writeFileSync(filePath, JSON.stringify(post, null, 2), 'utf-8');
+    // Save workflow file - create another clean copy without circular ref
+    const cleanPost = {
+      ...post,
+      versionHistory: post.versionHistory.map(v => ({
+        ...v,
+        contentSnapshot: {
+          id: v.contentSnapshot.id,
+          slug: v.contentSnapshot.slug,
+          title: v.contentSnapshot.title,
+          excerpt: v.contentSnapshot.excerpt,
+          content: v.contentSnapshot.content,
+          author: v.contentSnapshot.author,
+          date: v.contentSnapshot.date,
+          readTime: v.contentSnapshot.readTime,
+          category: v.contentSnapshot.category,
+          tags: v.contentSnapshot.tags,
+          imageUrl: v.contentSnapshot.imageUrl,
+          imageAlt: v.contentSnapshot.imageAlt,
+          metaTitle: v.contentSnapshot.metaTitle,
+          metaDescription: v.contentSnapshot.metaDescription,
+          featured: v.contentSnapshot.featured,
+          seoScore: v.contentSnapshot.seoScore,
+          status: v.contentSnapshot.status,
+        }
+      }))
+    };
+    
+    fs.writeFileSync(filePath, JSON.stringify(cleanPost, null, 2), 'utf-8');
 
     // Save version snapshot
-    saveVersionSnapshot('blog', post.slug, post.currentVersion, post);
+    saveVersionSnapshot('blog', post.slug, post.currentVersion, cleanPost);
 
     return {
       success: true,
@@ -127,19 +174,61 @@ export function saveServiceWorkflow(service: ServiceWorkflow): { success: boolea
   try {
     const filePath = path.join(SERVICE_WORKFLOW_DIR, `${service.slug}.json`);
     
+    // Create DEEP COPY for snapshot to avoid circular reference
+    const snapshotContent = {
+      id: service.id,
+      slug: service.slug,
+      name: service.name,
+      shortDescription: service.shortDescription,
+      description: service.description,
+      icon: service.icon,
+      gradient: service.gradient,
+      price: service.price,
+      features: service.features,
+      benefits: service.benefits,
+      suitableFor: service.suitableFor,
+      metaTitle: service.metaTitle,
+      metaDescription: service.metaDescription,
+      status: service.status,
+    };
+    
     const version: VersionHistory = {
       version: service.currentVersion,
       timestamp: new Date().toISOString(),
       author: service.name,
       action: service.currentVersion === 1 ? 'created' : 'updated',
       changes: `Version ${service.currentVersion}`,
-      contentSnapshot: { ...service }
+      contentSnapshot: snapshotContent
     };
 
     service.versionHistory.push(version);
 
-    fs.writeFileSync(filePath, JSON.stringify(service, null, 2), 'utf-8');
-    saveVersionSnapshot('service', service.slug, service.currentVersion, service);
+    // Save workflow file - create clean copy
+    const cleanService = {
+      ...service,
+      versionHistory: service.versionHistory.map(v => ({
+        ...v,
+        contentSnapshot: {
+          id: v.contentSnapshot.id,
+          slug: v.contentSnapshot.slug,
+          name: v.contentSnapshot.name,
+          shortDescription: v.contentSnapshot.shortDescription,
+          description: v.contentSnapshot.description,
+          icon: v.contentSnapshot.icon,
+          gradient: v.contentSnapshot.gradient,
+          price: v.contentSnapshot.price,
+          features: v.contentSnapshot.features,
+          benefits: v.contentSnapshot.benefits,
+          suitableFor: v.contentSnapshot.suitableFor,
+          metaTitle: v.contentSnapshot.metaTitle,
+          metaDescription: v.contentSnapshot.metaDescription,
+          status: v.contentSnapshot.status,
+        }
+      }))
+    };
+    
+    fs.writeFileSync(filePath, JSON.stringify(cleanService, null, 2), 'utf-8');
+    saveVersionSnapshot('service', service.slug, service.currentVersion, cleanService);
 
     return {
       success: true,
@@ -189,13 +278,15 @@ export function changeContentStatus(
     }
 
     // Add version history
+    // IMPORTANT: Don't include versionHistory in snapshot to avoid circular reference
+    const { versionHistory, ...contentWithoutHistory } = content;
     const version: VersionHistory = {
       version: content.currentVersion,
       timestamp: new Date().toISOString(),
       author,
       action: newStatus === 'published' ? 'published' : newStatus === 'draft' ? 'unpublished' : 'updated',
       changes: `Status changed: ${oldStatus} → ${newStatus}`,
-      contentSnapshot: { ...content }
+      contentSnapshot: { ...contentWithoutHistory }  // Exclude versionHistory to prevent circular ref
     };
 
     content.versionHistory.push(version);

@@ -9,3 +9,14 @@ coverage/
 # Admin auth config - DO NOT commit production credentials
 lib/admin/auth-config.ts
 !lib/admin/auth-config.ts.example
+
+# Security: Prevent committing API keys and secrets
+# Google API keys
+AIzaSy*
+# OpenAI API keys
+sk-proj-*
+sk-*
+# Telegram bot tokens
+*[0-9]:AA*
+# AWS keys
+AKIA*

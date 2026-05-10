@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, Plus, Edit, Trash2, Eye, Filter } from 'lucide-react';
 import { BLOG_POSTS } from '@/lib/constants/blog';
@@ -9,6 +9,37 @@ export default function BlogList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
   const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
+  const [seoScores, setSeoScores] = useState<Record<string, number>>({});
+  const [loadingScores, setLoadingScores] = useState(true);
+
+  // Fetch SEO scores from API
+  useEffect(() => {
+    const fetchSeoScores = async () => {
+      try {
+        const response = await fetch('/api/admin/seo-audit', {
+          headers: {
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Map slug to score
+          const scores: Record<string, number> = {};
+          data.blogPosts?.forEach((post: any) => {
+            scores[post.slug] = post.score.overall;
+          });
+          setSeoScores(scores);
+        }
+      } catch (error) {
+        console.error('Error fetching SEO scores:', error);
+      } finally {
+        setLoadingScores(false);
+      }
+    };
+
+    fetchSeoScores();
+  }, []);
 
   const categories = ['Tất cả', ...Array.from(new Set(BLOG_POSTS.map(p => p.category)))];
 
@@ -151,15 +182,35 @@ export default function BlogList() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <div className="w-16 h-2 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"
-                          style={{ width: '85%' }}
-                        />
-                      </div>
-                      <span className="text-sm font-semibold text-green-500">
-                        85
-                      </span>
+                      {loadingScores ? (
+                        <div className="animate-spin w-4 h-4 border-2 border-gray-300 border-t-green-500 rounded-full"></div>
+                      ) : (
+                        <>
+                          {(() => {
+                            const score = seoScores[post.slug] || 0;
+                            const scoreColor = score >= 80 ? 'text-green-500' :
+                                              score >= 70 ? 'text-yellow-500' :
+                                              'text-red-500';
+                            const barColor = score >= 80 ? 'from-green-500 to-emerald-500' :
+                                            score >= 70 ? 'from-yellow-500 to-orange-500' :
+                                            'from-red-500 to-pink-500';
+                            
+                            return (
+                              <>
+                                <div className="w-16 h-2 bg-[var(--bg-secondary)] rounded-full overflow-hidden">
+                                  <div
+                                    className={`h-full bg-gradient-to-r ${barColor} rounded-full`}
+                                    style={{ width: `${score}%` }}
+                                  />
+                                </div>
+                                <span className={`text-sm font-semibold ${scoreColor}`}>
+                                  {score}
+                                </span>
+                              </>
+                            );
+                          })()}
+                        </>
+                      )}
                     </div>
                   </td>
                   <td className="px-6 py-4">

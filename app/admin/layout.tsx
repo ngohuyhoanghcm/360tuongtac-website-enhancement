@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key, Sparkles, FileCheck } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key, Sparkles, FileCheck, Search } from 'lucide-react';
 
 export default function AdminLayout({
   children,
@@ -410,6 +410,18 @@ export default function AdminLayout({
           >
             <FileCheck size={18} />
             Draft Approval
+          </Link>
+
+          <Link
+            href="/admin/seo-audit"
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
+              pathname.startsWith('/admin/seo-audit')
+                ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white'
+                : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <Search size={18} />
+            SEO Audit
           </Link>
         </nav>
 

@@ -106,7 +106,7 @@ Google Gemini API error: You exceeded your current quota, please check your plan
 ```
 
 **Nguyên nhân:**
-- API key `AIzaSyCiMIiwOSWnwZX1Vt8asXLbuRhu-K9mX9Y` đã hết quota free tier
+- API key `AIzaSyCiMI...[REDACTED]...9Y` đã hết quota free tier
 - Google Gemini free tier: 0 requests (đã bị disable hoặc expired)
 
 **Impact:**
@@ -130,7 +130,7 @@ Google Gemini API error: You exceeded your current quota, please check your plan
 # 1. Truy cập https://aistudio.google.com/app/apikey
 # 2. Tạo API key mới với billing enabled
 # 3. Cập nhật .env.local
-GOOGLE_GEMINI_API_KEY=AIzaSy...  # Key mới có quota
+GOOGLE_GEMINI_API_KEY=AIzaSyCiMI...[REDACTED]...9Y  # Key mới có quota
 ```
 
 **Option 2: Switch to OpenAI**

@@ -73,30 +73,28 @@ export default function DraftApproval() {
       const draft = drafts.find(d => d.id === draftId);
       if (!draft) return;
 
-      const response = await fetch(`/api/admin/drafts/${draft.slug}/status`, {
+      // Call publish API instead of status API
+      const response = await fetch(`/api/admin/drafts/${draft.slug}/publish`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          action: 'approve',
-          type: draft.type,
-        }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        // Refresh drafts list
-        fetchDrafts();
-        alert('Đã duyệt bài viết!');
+        // Show success message first
+        alert(`✅ Đã publish bài viết: ${draft.title}`);
+        
+        // Then refresh drafts list to show updated state
+        await fetchDrafts();
       } else {
         throw new Error(data.message);
       }
     } catch (error) {
-      console.error('Error approving draft:', error);
-      alert('Có lỗi xảy ra khi duyệt bài viết');
+      console.error('Error publishing draft:', error);
+      alert('Có lỗi xảy ra khi publish bài viết');
     }
   };
 
@@ -121,8 +119,11 @@ export default function DraftApproval() {
       const data = await response.json();
 
       if (data.success) {
-        fetchDrafts();
+        // Show success message first
         alert('Đã từ chối bài viết');
+        
+        // Then refresh drafts list to show updated state
+        await fetchDrafts();
       } else {
         throw new Error(data.message);
       }
@@ -380,7 +381,7 @@ export default function DraftApproval() {
                         )}
                         
                         <button
-                          onClick={() => router.push(`/admin/blog/edit/${draft.id}`)}
+                          onClick={() => router.push(`/admin/blog/edit/${draft.slug}`)}
                           className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                           title="Chỉnh sửa"
                         >
@@ -422,7 +423,7 @@ export default function DraftApproval() {
           onReject={() => handleReject(selectedDraft.id)}
           onEdit={() => {
             setShowPreview(false);
-            router.push(`/admin/blog/edit/${selectedDraft.id}`);
+            router.push(`/admin/blog/edit/${selectedDraft.slug}`);
           }}
         />
       )}

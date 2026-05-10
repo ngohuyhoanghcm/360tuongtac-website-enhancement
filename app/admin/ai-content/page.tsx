@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Globe, FileText, Lightbulb, Video, Sparkles, Loader2, CheckCircle, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import Link from 'next/link';
 
 interface GeneratedContent {
   title: string;
@@ -10,8 +11,10 @@ interface GeneratedContent {
   content: string;
   tags: string[];
   category: string;
-  seoScore?: number;
+  seoScore: number;
   suggestions?: string[];
+  imageUrl?: string;
+  imageAlt?: string;
 }
 
 export default function AIContentHub() {
@@ -19,8 +22,10 @@ export default function AIContentHub() {
   const [activeTab, setActiveTab] = useState<'url' | 'topic' | 'text'>('url');
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [progressStage, setProgressStage] = useState<string>('');
   const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); // Success toast message
 
   // Form states
   const [url, setUrl] = useState('');
@@ -52,6 +57,7 @@ export default function AIContentHub() {
   const handleGenerate = async () => {
     setIsGenerating(true);
     setProgress(0);
+    setProgressStage('analyzing');
     setError(null);
     setGeneratedContent(null);
 
@@ -64,14 +70,14 @@ export default function AIContentHub() {
     }
 
     try {
-      // Simulate progress
+      // Simulate progress with stages
       const progressInterval = setInterval(() => {
         setProgress(prev => {
-          if (prev >= 90) {
+          if (prev >= 85) {
             clearInterval(progressInterval);
-            return 90;
+            return 85;
           }
-          return prev + 10;
+          return prev + 5;
         });
       }, 500);
 
@@ -95,8 +101,7 @@ export default function AIContentHub() {
       });
 
       clearInterval(progressInterval);
-      setProgress(100);
-
+      
       if (!response.ok) {
         throw new Error('Failed to generate content');
       }
@@ -104,6 +109,15 @@ export default function AIContentHub() {
       const data = await response.json();
 
       if (data.success && data.blogPost) {
+        // Update progress based on whether image was generated
+        if (generateImage && data.blogPost.imageUrl) {
+          setProgress(100);
+          setProgressStage('complete_with_image');
+        } else {
+          setProgress(100);
+          setProgressStage('complete');
+        }
+
         setGeneratedContent({
           title: data.blogPost.title || '',
           excerpt: data.blogPost.excerpt || '',
@@ -112,13 +126,24 @@ export default function AIContentHub() {
           category: data.blogPost.category || category,
           seoScore: data.seoScore || 0,
           suggestions: data.suggestions || [],
+          imageUrl: data.blogPost.imageUrl || data.blogPost.featuredImage || '',
+          imageAlt: data.blogPost.imageAlt || data.blogPost.title || '',
         });
 
-        // If auto-saved, redirect to edit page
+        // If auto-saved as DRAFT, show success message and redirect to drafts page
         if (autoSave && data.slug) {
+          // Show success toast
+          setSuccessMessage('✅ Draft saved successfully! Redirecting to drafts...');
+          
+          // Wait 5 seconds to let user see the success page with image preview
           setTimeout(() => {
-            router.push(`/admin/blog/edit/${data.slug}`);
-          }, 2000);
+            // Check if saved as draft (has status field) or published
+            if (data.status === 'review') {
+              router.push(`/admin/drafts`);
+            } else {
+              router.push(`/admin/blog/edit/${data.slug}`);
+            }
+          }, 5000); // Increased from 2s to 5s to show image preview
         }
       } else {
         setError(data.errors?.[0] || 'Failed to generate content');
@@ -132,6 +157,16 @@ export default function AIContentHub() {
 
   return (
     <div className="space-y-6">
+      {/* Success Toast Notification */}
+      {successMessage && (
+        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 animate-slide-in">
+          <CheckCircle className="w-6 h-6" />
+          <div>
+            <p className="font-semibold">{successMessage}</p>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -141,6 +176,13 @@ export default function AIContentHub() {
           </h1>
           <p className="text-gray-600 mt-1">Tạo nội dung blog tự động với AI</p>
         </div>
+        <Link
+          href="/admin/ai-content/batch"
+          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+        >
+          <Sparkles className="w-4 h-4" />
+          Tạo hàng loạt
+        </Link>
       </div>
 
       {/* Tabs */}
@@ -313,15 +355,20 @@ export default function AIContentHub() {
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+              className={`h-2 rounded-full transition-all duration-500 ${
+                progressStage === 'generating_image' ? 'bg-purple-600' : 'bg-blue-600'
+              }`}
               style={{ width: `${progress}%` }}
             />
           </div>
           <p className="text-sm text-gray-500 mt-2">
-            {progress < 30 && 'Đang phân tích yêu cầu...'}
-            {progress >= 30 && progress < 60 && 'Đang tạo nội dung...'}
-            {progress >= 60 && progress < 90 && 'Đang tối ưu SEO...'}
-            {progress >= 90 && 'Hoàn tất...'}
+            {progress < 30 && '📊 Đang phân tích yêu cầu...'}
+            {progress >= 30 && progress < 60 && '✍️ Đang tạo nội dung...'}
+            {progress >= 60 && progress < 85 && '🔍 Đang tối ưu SEO...'}
+            {progress >= 85 && progress < 95 && generateImage && '🎨 Đang tạo ảnh minh họa...'}
+            {progress >= 95 && progress < 100 && '💾 Đang lưu draft...'}
+            {progress === 100 && progressStage === 'complete_with_image' && '✅ Hoàn tất (có ảnh minh họa)!'}
+            {progress === 100 && progressStage === 'complete' && '✅ Hoàn tất!'}
           </p>
         </div>
       )}
@@ -387,6 +434,26 @@ export default function AIContentHub() {
                   style={{ width: `${generatedContent.seoScore}%` }}
                 />
               </div>
+            </div>
+          )}
+
+          {/* Generated Image Preview */}
+          {generatedContent.imageUrl && (
+            <div className="mb-6 p-4 bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-lg">
+              <div className="flex items-center gap-2 mb-3">
+                <ImageIcon className="w-5 h-5 text-purple-600" />
+                <h3 className="font-semibold text-purple-900">Ảnh minh họa đã tạo</h3>
+              </div>
+              <div className="relative rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={generatedContent.imageUrl}
+                  alt={generatedContent.imageAlt || generatedContent.title}
+                  className="w-full h-auto max-h-96 object-cover"
+                />
+              </div>
+              <p className="text-xs text-purple-700 mt-2 italic">
+                {generatedContent.imageAlt || 'AI-generated featured image'}
+              </p>
             </div>
           )}
 

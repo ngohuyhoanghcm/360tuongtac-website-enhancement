@@ -2,8 +2,9 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Save, Eye } from 'lucide-react';
+import { ArrowLeft, Save, Eye, RefreshCw, ImageIcon } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BLOG_POSTS } from '@/lib/constants/blog';
 
 export default function EditBlogPost() {
@@ -16,15 +17,101 @@ export default function EditBlogPost() {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [isRegeneratingImage, setIsRegeneratingImage] = useState(false);
+  const [imageRegenSuccess, setImageRegenSuccess] = useState(false);
 
   useEffect(() => {
-    // Find the blog post by slug
-    const post = BLOG_POSTS.find(p => p.slug === slug);
-    if (post) {
-      setFormData(post);
-    }
-    setLoading(false);
+    const loadPost = async () => {
+      setLoading(true);
+      
+      // First, try to find in published posts
+      const publishedPost = BLOG_POSTS.find(p => p.slug === slug);
+      if (publishedPost) {
+        setFormData(publishedPost);
+        setLoading(false);
+        return;
+      }
+
+      // If not found, try to fetch from drafts
+      try {
+        const response = await fetch(`/api/admin/drafts/${slug}/preview`, {
+          headers: {
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.content) {
+            // Convert draft format to form data format
+            const draftContent = data.content;
+            setFormData({
+              ...draftContent,
+              imageUrl: draftContent.imageUrl || draftContent.featuredImage || '/images/blog/default.jpg',
+              imageAlt: draftContent.imageAlt || draftContent.alt || draftContent.title,
+            });
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to load draft, showing not found:', error);
+      }
+      
+      setLoading(false);
+    };
+
+    loadPost();
   }, [slug]);
+
+  const handleRegenerateImage = async () => {
+    setIsRegeneratingImage(true);
+    setImageRegenSuccess(false);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/admin/image/generate', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          slug: formData.slug, // Pass slug for consistent file naming (e.g., 'cach-tang-tuong-tac-tiktok-hieu-qua.webp')
+          title: formData.title,
+          content: formData.content,
+          category: formData.category || 'General',
+          size: '1792x1024',
+          style: 'photographic',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.imageUrl) {
+        // Update form data with new image
+        setFormData({
+          ...formData,
+          imageUrl: data.imageUrl,
+          imageAlt: data.alt || formData.title,
+        });
+        setImageRegenSuccess(true);
+        
+        // Show alert with cache status
+        const cacheMsg = data.cached 
+          ? '⚡ Ảnh đã được tải từ cache (nhanh hơn!)' 
+          : '✅ Đã tạo ảnh mới thành công!';
+        alert(`${cacheMsg}\n\nẢnh đã được cập nhật trong form bên dưới.`);
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => setImageRegenSuccess(false), 5000);
+      } else {
+        throw new Error(data.message || 'Failed to regenerate image');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Đã có lỗi xảy ra khi tạo ảnh');
+    } finally {
+      setIsRegeneratingImage(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -167,6 +254,61 @@ export default function EditBlogPost() {
       {/* Edit Form */}
       <form onSubmit={handleSubmit} className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
         <div className="space-y-6">
+          {/* Image Section with Regenerate Button */}
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <ImageIcon className="w-5 h-5 text-purple-600" />
+                <h3 className="font-semibold text-purple-900">Ảnh minh họa</h3>
+              </div>
+              <button
+                type="button"
+                onClick={handleRegenerateImage}
+                disabled={isRegeneratingImage}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white text-sm font-medium rounded-lg transition-colors"
+              >
+                {isRegeneratingImage ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    Đang tạo...
+                  </>
+                ) : (
+                  <>
+                    <RefreshCw className="w-4 h-4" />
+                    Tạo lại ảnh
+                  </>
+                )}
+              </button>
+            </div>
+
+            {formData.imageUrl ? (
+              <div className="relative rounded-lg overflow-hidden shadow-md bg-white">
+                <img
+                  src={formData.imageUrl}
+                  alt={formData.imageAlt || formData.title}
+                  className="w-full h-auto max-h-64 object-cover"
+                />
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-48 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300">
+                <div className="text-center">
+                  <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-500">Chưa có ảnh minh họa</p>
+                </div>
+              </div>
+            )}
+
+            {imageRegenSuccess && (
+              <div className="mt-3 p-2 bg-green-100 border border-green-300 rounded-lg">
+                <p className="text-sm text-green-700">✅ Đã tạo ảnh mới thành công!</p>
+              </div>
+            )}
+
+            <p className="text-xs text-purple-700 mt-3 italic">
+              {formData.imageAlt || 'Click "Tạo lại ảnh" để tạo ảnh minh họa bằng AI'}
+            </p>
+          </div>
+
           <div>
             <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
               Title

@@ -81,9 +81,20 @@ export async function saveBlogPost(post: BlogPostData): Promise<{ success: boole
  * Generate TypeScript file content for blog post
  */
 function generateBlogPostFile(post: BlogPostData): string {
+  // Generate safe variable name from slug
+  let safeId = post.id;
+  
+  // If ID starts with number, prefix with 'post_'
+  if (/^[0-9]/.test(safeId)) {
+    safeId = 'post_' + safeId;
+  }
+  
+  // Remove any invalid characters for TypeScript identifiers
+  safeId = safeId.replace(/[^a-zA-Z0-9_]/g, '');
+  
   return `import { BlogPost } from './blog';
 
-export const ${post.id}: BlogPost = {
+export const ${safeId}: BlogPost = {
   id: "${post.id}",
   slug: "${post.slug}",
   title: "${escapeString(post.title)}",
@@ -113,17 +124,37 @@ async function updateBlogIndex(): Promise<void> {
     const files = fs.readdirSync(BLOG_DATA_DIR)
       .filter(file => file.endsWith('.ts') && file !== 'blog.ts' && !file.startsWith('_'));
     
-    // Generate import statements
+    // Generate import statements with SAFE variable names
     const imports = files.map(file => {
       const slug = file.replace('.ts', '');
-      const id = slug.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+      // Convert slug to valid TypeScript identifier:
+      // 1. Remove leading numbers (add 'post_' prefix if starts with number)
+      // 2. Convert kebab-case to camelCase
+      // 3. Remove any remaining invalid characters
+      let id = slug.replace(/-([a-z0-9])/g, (match, letter) => letter.toUpperCase());
+      
+      // If starts with number, prefix with 'post_'
+      if (/^[0-9]/.test(id)) {
+        id = 'post_' + id;
+      }
+      
+      // Remove any remaining invalid characters (keep only alphanumeric and underscore)
+      id = id.replace(/[^a-zA-Z0-9_]/g, '');
+      
       return `import { ${id} } from './${slug}';`;
     }).join('\n');
     
-    // Generate array
+    // Generate array with same safe IDs
     const postIds = files.map(file => {
       const slug = file.replace('.ts', '');
-      const id = slug.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+      let id = slug.replace(/-([a-z0-9])/g, (match, letter) => letter.toUpperCase());
+      
+      if (/^[0-9]/.test(id)) {
+        id = 'post_' + id;
+      }
+      
+      id = id.replace(/[^a-zA-Z0-9_]/g, '');
+      
       return `  ${id}`;
     }).join(',\n');
     

@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse request
     const body = await request.json();
-    const { prompt, title, content, category, size, style } = body;
+    const { prompt, slug, title, content, category, size, style } = body;
 
     // Either prompt or (title + content) is required
     if (!prompt && (!title || !content)) {
@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
     // 3. Generate image
     const result = await generateImage({
       prompt: imagePrompt,
+      slug: slug, // Pass slug for consistent file naming
       size: size || '1792x1024',
       style: style || 'photographic'
     });
@@ -49,7 +50,8 @@ export async function POST(request: NextRequest) {
         success: true,
         imageUrl: result.imageUrl,
         alt: result.alt,
-        message: 'Image generated successfully'
+        cached: result.cached || false, // Return cache status
+        message: result.cached ? 'Image loaded from cache' : 'Image generated successfully'
       });
     } else {
       return NextResponse.json(
