@@ -1,0 +1,26 @@
+/**
+ * Admin Authentication Configuration Template
+ * 
+ * Copy this file to auth-config.ts and fill in your credentials.
+ * 
+ * GENERATE PASSWORD HASH:
+ * npx tsx scripts/generate-hash.ts <your-secure-password>
+ * 
+ * GENERATE 2FA SECRET:
+ * npx tsx scripts/setup-2fa.ts
+ */
+
+export const ADMIN_AUTH_CONFIG = {
+  // Password hash (bcrypt, 12 rounds)
+  PASSWORD_HASH: 'REPLACE_WITH_GENERATED_HASH',
+  
+  // 2FA Configuration
+  TWO_FACTOR_ENABLED: true,
+  TWO_FACTOR_SECRET: 'REPLACE_WITH_GENERATED_SECRET',
+  
+  // Session Configuration
+  SESSION_TIMEOUT_SECONDS: 86400, // 24 hours
+  
+  // API Security
+  API_SECRET: 'REPLACE_WITH_SECURE_RANDOM_STRING',
+} as const;

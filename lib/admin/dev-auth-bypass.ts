@@ -17,6 +17,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { validateSession } from './session-manager';
+import { ADMIN_AUTH_CONFIG } from './auth-config';
 
 /**
  * Check if development auth bypass is enabled
@@ -71,7 +72,7 @@ export function validateAdminAuth(request: NextRequest): boolean {
 
   // Priority 2: Check Bearer token (for API-to-API calls)
   const authHeader = request.headers.get('authorization');
-  const expectedSecret = process.env.NEXT_PUBLIC_ADMIN_API_SECRET || process.env.ADMIN_API_SECRET;
+  const expectedSecret = ADMIN_AUTH_CONFIG.API_SECRET;
   
   if (authHeader && expectedSecret) {
     if (authHeader === `Bearer ${expectedSecret}`) {

@@ -3,6 +3,7 @@ import { verifyPassword } from '@/lib/admin/password-utils';
 import { verifyTOTP, verifyBackupCode } from '@/lib/admin/two-factor-auth';
 import { checkRateLimit } from '@/lib/admin/rate-limiter';
 import { createSession } from '@/lib/admin/session-manager';
+import { ADMIN_AUTH_CONFIG } from '@/lib/admin/auth-config';
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,10 +35,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify password
-    const passwordHash = process.env.NEXT_ADMIN_PASSWORD_HASH;
+    const passwordHash = ADMIN_AUTH_CONFIG.PASSWORD_HASH;
     if (!passwordHash) {
-      console.error('[LOGIN API] CRITICAL: NEXT_ADMIN_PASSWORD_HASH is not set!');
-      console.error('[LOGIN API] Check .env.local file exists and contains the variable');
+      console.error('[LOGIN API] CRITICAL: PASSWORD_HASH is not configured!');
       return NextResponse.json(
         { success: false, error: 'Server configuration error' },
         { status: 500 }
@@ -57,8 +57,8 @@ export async function POST(request: NextRequest) {
     }
 
     // If 2FA is enabled, verify TOTP or backup code
-    const twoFASecret = process.env.NEXT_ADMIN_2FA_SECRET;
-    const requires2FA = !!twoFASecret;
+    const twoFASecret = ADMIN_AUTH_CONFIG.TWO_FACTOR_SECRET;
+    const requires2FA = ADMIN_AUTH_CONFIG.TWO_FACTOR_ENABLED;
 
     if (requires2FA) {
       if (totpCode) {

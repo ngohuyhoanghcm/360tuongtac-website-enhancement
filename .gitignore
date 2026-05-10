@@ -5,3 +5,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Admin auth config - DO NOT commit production credentials
+lib/admin/auth-config.ts
+!lib/admin/auth-config.ts.example
