@@ -20,3 +20,8 @@ sk-*
 *[0-9]:AA*
 # AWS keys
 AKIA*
+
+# Prevent committing documentation with exposed API keys
+QUICK_START_GEMINI_TEST.md
+*API_KEY_LEAK*.md
+SECURITY_INCIDENT*.md
