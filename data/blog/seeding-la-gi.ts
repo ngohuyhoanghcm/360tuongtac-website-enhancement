@@ -1,4 +1,4 @@
-import { BlogPost } from '@/lib/constants/blog';
+import type { BlogPost } from './index';
 
 export const seedingLaGi: BlogPost = {
   id: 'seeding-la-gi',

@@ -40,7 +40,7 @@
 - ✅ Testing continued during key rotation
 
 ### **2.5. Received New Gemini API Key**
-- ✅ **NEW KEY:** `AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE`
+- ✅ **NEW KEY:** `[REDACTED - Get new key from Google AI Studio]`
 - ✅ Updated `.env.local` with new key
 - ✅ Updated `.env.production` template
 - ✅ Switched back to: `AI_PROVIDER=google_gemini`
@@ -128,7 +128,7 @@ https://aistudio.google.com/app/apikey
 ```env
 # .env.local
 AI_PROVIDER=google_gemini
-GOOGLE_GEMINI_API_KEY=AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE
+GOOGLE_GEMINI_API_KEY=your_new_api_key_here
 ```
 
 ### **Step 4: Restart Dev Server**
@@ -149,14 +149,14 @@ npm run dev
 ### **Development Environment (Local)**
 - ✅ **Status:** WORKING
 - ✅ **Provider:** Google Gemini (NEW KEY)
-- ✅ **API Key:** AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE
+- ✅ **API Key:** [REDACTED - Configure in .env.local]
 - ✅ **AI Content Hub:** Functional
 - ✅ **Testable:** Yes
 
 ### **Production Environment**
 - ✅ **Status:** CONFIGURED
 - ✅ **Provider:** Google Gemini
-- ✅ **API Key:** AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE
+- ✅ **API Key:** [REDACTED - Configure in .env.local]
 - ✅ **Action Required:** Deploy with new .env.production
 
 ---

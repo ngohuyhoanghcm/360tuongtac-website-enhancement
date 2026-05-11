@@ -1,4 +1,4 @@
-import { BlogPost } from '@/lib/constants/blog';
+import type { BlogPost } from './index';
 
 export const viewerThatVsViewerAo: BlogPost = {
   id: 'viewer-that-vs-viewer-ao',

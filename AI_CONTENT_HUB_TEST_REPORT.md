@@ -206,7 +206,7 @@ if (options?.generateImage && result.success && result.blogPost?.title && result
 2. ✅ **API key configured:**
    ```
    Provider: Google Gemini
-   Key: AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE
+   Key: [REDACTED - Configure in .env.local]
    ```
 
 3. ✅ **Access URL:**
@@ -465,7 +465,7 @@ Tab: Từ Text
 
 2. Verify .env.local:
    AI_PROVIDER=google_gemini
-   GOOGLE_GEMINI_API_KEY=AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE
+   GOOGLE_GEMINI_API_KEY=your_api_key_here
 
 3. Restart dev server:
    Ctrl+C → npm run dev
@@ -479,7 +479,7 @@ Tab: Từ Text
 
 2. Verify image provider:
    IMAGE_PROVIDER=google_imagen
-   GOOGLE_IMAGEN_API_KEY=AIzaSyBUmhsfoGIEW7Pl9BQNIlriLfV68zbCfoE
+   GOOGLE_IMAGEN_API_KEY=your_api_key_here
 
 3. Check if image saved:
    ls public/images/blog/ai-*.png

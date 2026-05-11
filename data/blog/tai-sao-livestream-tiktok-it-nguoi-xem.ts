@@ -1,4 +1,4 @@
-import { BlogPost } from '@/lib/constants/blog';
+import type { BlogPost } from './index';
 
 export const taiSaoLivestreamTiktokItNguoiXem: BlogPost = {
   id: 'tai-sao-livestream-tiktok-it-nguoi-xem',

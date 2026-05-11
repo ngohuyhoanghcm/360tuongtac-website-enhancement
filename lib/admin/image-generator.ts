@@ -55,7 +55,7 @@ export async function generateImage(request: ImageGenerationRequest): Promise<Im
   // Not in cache, try providers in priority order
   const primaryProvider = (process.env.IMAGE_PROVIDER as string) || 'chatgpt_image_2';
   
-  let result: ImageGenerationResponse;
+  let result: ImageGenerationResponse | undefined;
   
   // Priority 1: ChatGPT Image 2.0
   if (primaryProvider === 'chatgpt_image_2' && process.env.OPENAI_API_KEY) {

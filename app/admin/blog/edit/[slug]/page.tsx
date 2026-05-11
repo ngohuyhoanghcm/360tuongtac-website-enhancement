@@ -121,6 +121,34 @@ export default function EditBlogPost() {
     setSuccess(false);
 
     try {
+      // Normalize date format: Convert DD/MM/YYYY to YYYY-MM-DD if needed
+      let normalizedDate = formData.date || new Date().toISOString().split('T')[0];
+      if (/^\d{2}\/\d{2}\/\d{4}$/.test(normalizedDate)) {
+        const [day, month, year] = normalizedDate.split('/');
+        normalizedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+      }
+      
+      // Truncate imageAlt to max 125 chars
+      let normalizedImageAlt = formData.imageAlt || formData.alt || formData.title;
+      if (normalizedImageAlt.length > 125) {
+        normalizedImageAlt = normalizedImageAlt.substring(0, 122) + '...';
+      }
+      
+      // Truncate metaTitle to max 60 chars
+      let normalizedMetaTitle = formData.metaTitle || `${formData.title} | Blog - 360TuongTac`;
+      if (normalizedMetaTitle.length > 60) {
+        normalizedMetaTitle = normalizedMetaTitle.substring(0, 57) + '...';
+      }
+      
+      // Ensure metaDescription is 120-155 chars
+      let normalizedMetaDescription = formData.metaDescription || formData.excerpt || '';
+      if (normalizedMetaDescription.length < 120) {
+        normalizedMetaDescription = normalizedMetaDescription.padEnd(120, '.');
+      }
+      if (normalizedMetaDescription.length > 155) {
+        normalizedMetaDescription = normalizedMetaDescription.substring(0, 152) + '...';
+      }
+      
       const response = await fetch('/api/admin/blog/save', {
         method: 'POST',
         headers: {
@@ -136,11 +164,11 @@ export default function EditBlogPost() {
           category: formData.category || '',
           tags: Array.isArray(formData.tags) ? formData.tags : formData.tags.split(',').map((t: string) => t.trim()),
           author: formData.author || '360TuongTac Team',
-          date: formData.date || new Date().toISOString().split('T')[0],
+          date: normalizedDate,
           imageUrl: formData.imageUrl || formData.featuredImage || '/images/blog/default.jpg',
-          imageAlt: formData.imageAlt || formData.alt || formData.title,
-          metaTitle: formData.metaTitle || `${formData.title} | Blog - 360TuongTac`,
-          metaDescription: formData.metaDescription || formData.excerpt || '',
+          imageAlt: normalizedImageAlt,
+          metaTitle: normalizedMetaTitle,
+          metaDescription: normalizedMetaDescription,
         }),
       });
 
@@ -216,23 +244,6 @@ export default function EditBlogPost() {
             <Eye size={18} />
             Xem bài viết
           </Link>
-          <button
-            type="submit"
-            disabled={isSaving}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSaving ? (
-              <>
-                <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
-                Đang lưu...
-              </>
-            ) : (
-              <>
-                <Save size={18} />
-                Lưu thay đổi
-              </>
-            )}
-          </button>
         </div>
       </div>
 
@@ -253,6 +264,28 @@ export default function EditBlogPost() {
 
       {/* Edit Form */}
       <form onSubmit={handleSubmit} className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
+        {/* Form Header with Save Button */}
+        <div className="flex items-center justify-between mb-6 pb-6 border-b border-[var(--border)]">
+          <h2 className="text-xl font-bold text-[var(--text-primary)]">Nội dung bài viết</h2>
+          <button
+            type="submit"
+            disabled={isSaving}
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSaving ? (
+              <>
+                <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+                Đang lưu...
+              </>
+            ) : (
+              <>
+                <Save size={18} />
+                Lưu thay đổi
+              </>
+            )}
+          </button>
+        </div>
+        
         <div className="space-y-6">
           {/* Image Section with Regenerate Button */}
           <div className="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-6">
