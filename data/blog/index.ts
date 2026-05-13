@@ -103,3 +103,4 @@ export const allBlogPosts: BlogPost[] = [
 export const BLOG_POSTS: typeof allBlogPosts = allBlogPosts;
 
 export default allBlogPosts;
+
