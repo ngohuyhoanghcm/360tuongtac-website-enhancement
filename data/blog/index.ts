@@ -63,7 +63,9 @@ export interface BlogPost {
 
 
 
-import { biKipTangTuongTacTiktokChongMatBatMiThuatToanVaChien } from './bi-kip-tang-tuong-tac-tiktok-chong-mat-bat-mi-thuat-toan-va-chien';
+
+
+
 import { cachTangTuongTacTiktokHieuQua } from './cach-tang-tuong-tac-tiktok-hieu-qua';
 import { capNhatThuatToanTiktokThang42026 } from './cap-nhat-thuat-toan-tiktok-thang-4-2026';
 import { caseStudyTangViewerTiktok } from './case-study-tang-viewer-tiktok';
@@ -81,7 +83,6 @@ import { tinHieuTiktokLaGi } from './tin-hieu-tiktok-la-gi';
 import { viewerThatVsViewerAo } from './viewer-that-vs-viewer-ao';
 
 export const allBlogPosts: BlogPost[] = [
-  biKipTangTuongTacTiktokChongMatBatMiThuatToanVaChien,
   cachTangTuongTacTiktokHieuQua,
   capNhatThuatToanTiktokThang42026,
   caseStudyTangViewerTiktok,
@@ -103,4 +104,3 @@ export const allBlogPosts: BlogPost[] = [
 export const BLOG_POSTS: typeof allBlogPosts = allBlogPosts;
 
 export default allBlogPosts;
-
