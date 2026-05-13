@@ -9,9 +9,9 @@ import path from 'path';
 
 // Base paths
 const PROJECT_ROOT = process.cwd();
-const BLOG_DATA_DIR = path.join(PROJECT_ROOT, 'lib', 'constants');
+const BLOG_DATA_DIR = path.join(PROJECT_ROOT, 'data', 'blog');
 const SERVICES_DATA_DIR = path.join(PROJECT_ROOT, 'data', 'services');
-const BLOG_INDEX_FILE = path.join(BLOG_DATA_DIR, 'blog.ts');
+const BLOG_INDEX_FILE = path.join(BLOG_DATA_DIR, 'index.ts');
 const SERVICES_INDEX_FILE = path.join(SERVICES_DATA_DIR, 'index.ts');
 
 export interface BlogPostData {
@@ -25,12 +25,17 @@ export interface BlogPostData {
   readTime: string;
   category: string;
   tags: string[];
-  imageUrl: string;
-  imageAlt: string;
+  imageUrl: string;        // Legacy field - for backwards compatibility
+  imageAlt: string;        // Legacy field - for backwards compatibility
+  featuredImage?: string;  // New field - preferred
+  alt?: string;            // New field - preferred
   metaTitle?: string;
   metaDescription?: string;
   featured?: boolean;
+  published?: boolean;     // Publish status - true = published, false = unpublished/draft
   seoScore?: number;
+  relatedServices?: string[]; // Phase 3 - Related services slugs
+  relatedPosts?: string[];    // Phase 3 - Related blog post slugs
 }
 
 export interface ServiceData {
@@ -81,8 +86,8 @@ export async function saveBlogPost(post: BlogPostData): Promise<{ success: boole
  * Generate TypeScript file content for blog post
  */
 function generateBlogPostFile(post: BlogPostData): string {
-  // Generate safe variable name from slug
-  let safeId = post.id;
+  // Generate safe variable name from slug (must match updateBlogIndex logic)
+  let safeId = post.slug.replace(/-([a-z0-9])/g, (match, letter) => letter.toUpperCase());
   
   // If ID starts with number, prefix with 'post_'
   if (/^[0-9]/.test(safeId)) {
@@ -92,7 +97,7 @@ function generateBlogPostFile(post: BlogPostData): string {
   // Remove any invalid characters for TypeScript identifiers
   safeId = safeId.replace(/[^a-zA-Z0-9_]/g, '');
   
-  return `import { BlogPost } from './blog';
+  return `import { BlogPost } from './index';
 
 export const ${safeId}: BlogPost = {
   id: "${post.id}",
@@ -105,11 +110,14 @@ export const ${safeId}: BlogPost = {
   readTime: "${post.readTime}",
   category: "${post.category}",
   tags: [${post.tags.map(tag => `"${tag}"`).join(', ')}],
-  imageUrl: "${post.imageUrl}",
-  imageAlt: "${escapeString(post.imageAlt)}",
+  featuredImage: "${post.featuredImage || post.imageUrl}",
+  alt: "${escapeString(post.alt || post.imageAlt)}",
   metaTitle: "${escapeString(post.metaTitle || post.title)}",
   metaDescription: "${escapeString(post.metaDescription || post.excerpt)}",
+  relatedServices: [${(post.relatedServices || []).map((s: string) => `"${s}"`).join(', ')}],
+  relatedPosts: [${(post.relatedPosts || []).map((p: string) => `"${p}"`).join(', ')}],
   featured: ${post.featured || false},
+  published: ${post.published !== undefined ? post.published : true},
   seoScore: ${post.seoScore || 0}
 };
 `;
@@ -122,7 +130,7 @@ async function updateBlogIndex(): Promise<void> {
   try {
     // Read all blog post files
     const files = fs.readdirSync(BLOG_DATA_DIR)
-      .filter(file => file.endsWith('.ts') && file !== 'blog.ts' && !file.startsWith('_'));
+      .filter(file => file.endsWith('.ts') && file !== 'index.ts' && !file.startsWith('_'));
     
     // Generate import statements with SAFE variable names
     const imports = files.map(file => {
@@ -171,6 +179,11 @@ ${imports}
 export const allBlogPosts: BlogPost[] = [
 ${postIds}
 ];
+
+// Alias for backwards compatibility
+export const BLOG_POSTS: typeof allBlogPosts = allBlogPosts;
+
+export default allBlogPosts;
 `;
     
     fs.writeFileSync(BLOG_INDEX_FILE, newContent, 'utf-8');
@@ -293,8 +306,17 @@ export async function deleteBlogPost(slug: string): Promise<{ success: boolean; 
       };
     }
     
+    // Delete the blog post file
     fs.unlinkSync(filePath);
-    await updateBlogIndex();
+    
+    // Update index file - handle errors gracefully
+    try {
+      await updateBlogIndex();
+    } catch (indexError) {
+      console.error('Error updating blog index after deletion:', indexError);
+      // Don't fail the entire operation if index update fails
+      // The file was already deleted successfully
+    }
     
     return {
       success: true,
@@ -323,8 +345,17 @@ export async function deleteService(slug: string): Promise<{ success: boolean; m
       };
     }
     
+    // Delete the service file
     fs.unlinkSync(filePath);
-    await updateServicesIndex();
+    
+    // Update index file - handle errors gracefully
+    try {
+      await updateServicesIndex();
+    } catch (indexError) {
+      console.error('Error updating services index after deletion:', indexError);
+      // Don't fail the entire operation if index update fails
+      // The file was already deleted successfully
+    }
     
     return {
       success: true,
@@ -335,6 +366,56 @@ export async function deleteService(slug: string): Promise<{ success: boolean; m
     return {
       success: false,
       message: `Failed to delete service: ${error instanceof Error ? error.message : 'Unknown error'}`
+    };
+  }
+}
+
+/**
+ * Toggle publish status for blog post
+ */
+export async function toggleBlogPostPublish(slug: string, published: boolean): Promise<{ success: boolean; message: string }> {
+  try {
+    const filePath = path.join(BLOG_DATA_DIR, `${slug}.ts`);
+    
+    if (!fs.existsSync(filePath)) {
+      return {
+        success: false,
+        message: `Blog post "${slug}" not found`
+      };
+    }
+    
+    // Read current file content
+    let content = fs.readFileSync(filePath, 'utf-8');
+    
+    // Update published field using regex
+    const publishedRegex = /published:\s*(true|false)/;
+    if (publishedRegex.test(content)) {
+      content = content.replace(publishedRegex, `published: ${published}`);
+    } else {
+      // If published field doesn't exist, add it before seoScore
+      const seoScoreRegex = /(seoScore:\s*\d+)/;
+      content = content.replace(seoScoreRegex, `published: ${published},\n  $1`);
+    }
+    
+    // Write updated content
+    fs.writeFileSync(filePath, content, 'utf-8');
+    
+    // Update index file
+    try {
+      await updateBlogIndex();
+    } catch (indexError) {
+      console.error('Error updating blog index after publish toggle:', indexError);
+    }
+    
+    return {
+      success: true,
+      message: `Blog post "${slug}" ${published ? 'published' : 'unpublished'} successfully`
+    };
+  } catch (error) {
+    console.error('Error toggling publish status:', error);
+    return {
+      success: false,
+      message: `Failed to toggle publish status: ${error instanceof Error ? error.message : 'Unknown error'}`
     };
   }
 }
@@ -366,7 +447,7 @@ function escapeTemplateString(str: string): string {
 export function getAllBlogPosts(): BlogPostData[] {
   try {
     const files = fs.readdirSync(BLOG_DATA_DIR)
-      .filter(file => file.endsWith('.ts') && file !== 'blog.ts' && !file.startsWith('_'));
+      .filter(file => file.endsWith('.ts') && file !== 'index.ts' && !file.startsWith('_'));
     
     const posts: BlogPostData[] = [];
     

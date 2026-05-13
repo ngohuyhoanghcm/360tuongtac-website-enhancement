@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FileText, Settings, TrendingUp, Users, Plus, ArrowRight } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function AdminDashboard() {
   const [dashboardData, setDashboardData] = useState<any>(null);
@@ -140,6 +141,46 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* SEO Performance Chart */}
+      {dashboardData?.seoPerformance?.topPerformers && dashboardData.seoPerformance.topPerformers.length > 0 && (
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6">
+          <h2 className="text-xl font-black text-[var(--text-primary)] mb-6">
+            Top Bài Viết SEO Tốt Nhất
+          </h2>
+          <div className="h-[300px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={dashboardData.seoPerformance.topPerformers} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <XAxis 
+                  dataKey="title" 
+                  tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                  axisLine={{ stroke: 'var(--border)' }}
+                  tickFormatter={(value) => value.length > 20 ? `${value.substring(0, 20)}...` : value}
+                />
+                <YAxis 
+                  domain={[0, 100]} 
+                  tick={{ fill: 'var(--text-secondary)', fontSize: 12 }}
+                  axisLine={{ stroke: 'var(--border)' }}
+                  tickLine={false}
+                />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: '8px', color: 'var(--text-primary)' }}
+                  itemStyle={{ color: '#FF2E63', fontWeight: 'bold' }}
+                  cursor={{ fill: 'var(--bg-secondary)' }}
+                />
+                <Bar 
+                  dataKey="score" 
+                  name="SEO Score" 
+                  fill="#FF2E63" 
+                  radius={[4, 4, 0, 0]} 
+                  barSize={40}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Save, Eye } from 'lucide-react';
 import Link from 'next/link';
+import ImageUploader from '@/components/ui/ImageUploader';
+import ContentPreviewModal from '@/components/ui/ContentPreviewModal';
 
 export default function NewBlogPost() {
   const router = useRouter();
@@ -27,6 +29,7 @@ export default function NewBlogPost() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   const categories = ['Thuật toán', 'Seeding', 'TikTok Shop', 'Case Study'];
 
@@ -178,7 +181,7 @@ export default function NewBlogPost() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => alert('Preview feature coming in Phase 2')}
+            onClick={() => setIsPreviewOpen(true)}
             className="flex items-center gap-2 px-6 py-3 bg-[var(--surface)] border border-[var(--border)] rounded-xl font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
             <Eye size={18} />
@@ -429,19 +432,14 @@ export default function NewBlogPost() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-                Featured Image URL *
-              </label>
-              <input
-                type="url"
+              <ImageUploader
                 value={formData.featuredImage}
-                onChange={(e) => {
-                  setFormData({ ...formData, featuredImage: e.target.value });
-                  calculateSEOScore({ ...formData, featuredImage: e.target.value });
+                onChange={(url) => {
+                  setFormData({ ...formData, featuredImage: url });
+                  calculateSEOScore({ ...formData, featuredImage: url });
                 }}
-                className="w-full px-4 py-3 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
-                placeholder="https://example.com/image.jpg"
-                required
+                label="Featured Image *"
+                helpText="Kéo thả ảnh, tải lên từ máy, hoặc tạo bằng AI"
               />
             </div>
 
@@ -491,6 +489,21 @@ export default function NewBlogPost() {
           </button>
         </div>
       </form>
+
+      <ContentPreviewModal
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        content={{
+          title: formData.title || 'Chưa có tiêu đề',
+          excerpt: formData.excerpt,
+          content: formData.content || 'Chưa có nội dung',
+          category: formData.category,
+          tags: formData.tags.split(',').map(t => t.trim()),
+          imageUrl: formData.featuredImage,
+          seoScore: seoScore
+        }}
+        mode="preview"
+      />
     </div>
   );
 }

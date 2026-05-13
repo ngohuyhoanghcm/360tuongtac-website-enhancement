@@ -1,8 +1,8 @@
 /**
  * AI Image Generator
  * Generate images using prioritized providers:
- * 1. ChatGPT Image 2.0 (Primary - Best Quality)
- * 2. Gemini API - Nano Banana Model (Secondary - Fast)
+ * 1. Gemini API - Flash Models (Primary - Best Performance)
+ * 2. ChatGPT Image 2.0 (Backup - High Quality)
  * 3. DALL-E 3 (Fallback - Reliable)
  * 4. Google Imagen (Legacy Fallback)
  * 
@@ -12,6 +12,7 @@
  * - Auto WebP conversion
  * - SEO-optimized alt text
  * - Smart fallback chain
+ * - Exponential backoff retry logic
  */
 
 import * as fs from 'fs';
@@ -53,29 +54,30 @@ export async function generateImage(request: ImageGenerationRequest): Promise<Im
   }
 
   // Not in cache, try providers in priority order
-  const primaryProvider = (process.env.IMAGE_PROVIDER as string) || 'chatgpt_image_2';
+  // Priority chain is FIXED: Gemini > ChatGPT > DALL-E 3 > Imagen
+  // Environment variable IMAGE_PROVIDER is now deprecated for priority control
   
   let result: ImageGenerationResponse | undefined;
   
-  // Priority 1: ChatGPT Image 2.0
-  if (primaryProvider === 'chatgpt_image_2' && process.env.OPENAI_API_KEY) {
-    console.log('[Image Generator] Trying ChatGPT Image 2.0 (Priority 1)');
-    result = await generateWithChatGPTImage2(request);
-    if (result.success) {
-      console.log('[Image Generator] ✅ ChatGPT Image 2.0 succeeded');
-    } else {
-      console.warn('[Image Generator] ⚠️ ChatGPT Image 2.0 failed, trying next provider');
-    }
-  }
-  
-  // Priority 2: Gemini API - Nano Banana Model
-  if (!result?.success && (primaryProvider === 'gemini_nano_banana' || primaryProvider === 'chatgpt_image_2') && process.env.GOOGLE_GEMINI_API_KEY) {
-    console.log('[Image Generator] Trying Gemini Nano Banana (Priority 2)');
+  // Priority 1: Gemini API (PRIMARY PROVIDER - Always try first)
+  if (process.env.GOOGLE_GEMINI_API_KEY) {
+    console.log('[Image Generator] Trying Gemini Nano Banana (Priority 1 - Primary)');
     result = await generateWithGeminiNanoBanana(request);
     if (result.success) {
       console.log('[Image Generator] ✅ Gemini Nano Banana succeeded');
     } else {
       console.warn('[Image Generator] ⚠️ Gemini Nano Banana failed, trying next provider');
+    }
+  }
+  
+  // Priority 2: ChatGPT Image 2.0 (BACKUP PROVIDER - Always try second)
+  if (!result?.success && process.env.OPENAI_API_KEY) {
+    console.log('[Image Generator] Trying ChatGPT Image 2.0 (Priority 2 - Backup)');
+    result = await generateWithChatGPTImage2(request);
+    if (result.success) {
+      console.log('[Image Generator] ✅ ChatGPT Image 2.0 succeeded');
+    } else {
+      console.warn('[Image Generator] ⚠️ ChatGPT Image 2.0 failed, trying next provider');
     }
   }
   
@@ -135,7 +137,7 @@ async function generateWithChatGPTImage2(request: ImageGenerationRequest): Promi
       model: "gpt-image-1", // ChatGPT Image 2.0 model
       prompt: request.prompt,
       n: 1,
-      size: "1792x1024", // Get high-res, then resize
+      size: "1024x1024", // FIXED: Changed from unsupported "1792x1024" to supported "1024x1024"
       quality: "high" // gpt-image-1 uses 'high' not 'hd'
       // Removed: response_format - not supported by gpt-image-1
     });
@@ -192,8 +194,13 @@ async function generateWithChatGPTImage2(request: ImageGenerationRequest): Promi
  * Generate image using Gemini API - Nano Banana Model
  * Fast generation with good quality
  * Converts to WebP format and optimizes to 1200x630
+ * 
+ * UPDATED: Priority provider with retry logic and model verification
  */
-async function generateWithGeminiNanoBanana(request: ImageGenerationRequest): Promise<ImageGenerationResponse> {
+async function generateWithGeminiNanoBanana(request: ImageGenerationRequest, retryCount: number = 0): Promise<ImageGenerationResponse> {
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY_BASE = 1000; // 1 second base delay
+  
   try {
     const { GoogleGenAI } = await import('@google/genai');
     const sharp = (await import('sharp')).default;
@@ -202,10 +209,12 @@ async function generateWithGeminiNanoBanana(request: ImageGenerationRequest): Pr
 
     const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API_KEY });
 
-    // Try Nano Banana model (fast generation)
+    // UPDATED: Verified active Gemini models (as of May 2026)
+    // Priority: Flash Image Generation > Flash > Flash Lite
     const models = [
-      'gemini-2.0-flash-exp-image-generation', // Nano Banana - fast
-      'gemini-2.0-flash', // Fallback
+      'gemini-2.0-flash-exp-image-generation', // Primary - Image generation capable
+      'gemini-2.0-flash', // Secondary - Fast general purpose
+      'gemini-2.0-flash-lite', // Tertiary - Lightweight fallback
     ];
 
     let lastError: any;
@@ -271,6 +280,16 @@ async function generateWithGeminiNanoBanana(request: ImageGenerationRequest): Pr
           continue;
         }
         
+        // For rate limiting or server errors, retry with exponential backoff
+        if ((modelError.status === 429 || modelError.status >= 500) && retryCount < MAX_RETRIES) {
+          const delay = RETRY_DELAY_BASE * Math.pow(2, retryCount); // Exponential: 1s, 2s, 4s
+          console.log(`[Gemini Nano Banana] Rate limited/server error, retrying in ${delay}ms (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          
+          // Retry the entire function
+          return generateWithGeminiNanoBanana(request, retryCount + 1);
+        }
+        
         // For other errors, throw immediately
         throw modelError;
       }
@@ -285,6 +304,18 @@ async function generateWithGeminiNanoBanana(request: ImageGenerationRequest): Pr
 
   } catch (error) {
     console.error('[Gemini Nano Banana] Error:', error);
+    
+    // Retry on transient errors
+    if (retryCount < MAX_RETRIES && error instanceof Error) {
+      const errorMessage = error.message.toLowerCase();
+      if (errorMessage.includes('timeout') || errorMessage.includes('network') || errorMessage.includes('503')) {
+        const delay = RETRY_DELAY_BASE * Math.pow(2, retryCount);
+        console.log(`[Gemini Nano Banana] Transient error, retrying in ${delay}ms (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return generateWithGeminiNanoBanana(request, retryCount + 1);
+      }
+    }
+    
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to generate with Gemini Nano Banana'

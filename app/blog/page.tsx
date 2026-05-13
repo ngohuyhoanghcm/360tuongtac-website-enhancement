@@ -25,6 +25,11 @@ export default function BlogAcademy() {
 
   const filteredPosts = useMemo(() => {
     return BLOG_POSTS.filter(post => {
+      // CRITICAL: Only show published posts on public blog page
+      // published !== false means: published is true OR undefined (default to published)
+      const isPublished = post.published !== false;
+      if (!isPublished) return false;
+      
       const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                            post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'Tất cả' || post.category === selectedCategory;

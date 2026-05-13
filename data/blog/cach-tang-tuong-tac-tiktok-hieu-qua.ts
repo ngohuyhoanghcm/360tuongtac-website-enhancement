@@ -1,9 +1,10 @@
-import type { BlogPost } from './index';
+import { BlogPost } from './index';
 
 export const cachTangTuongTacTiktokHieuQua: BlogPost = {
-  id: 'cach-tang-tuong-tac-tiktok-hieu-qua',
-  title: '10 Cách Tăng Tương Tác TikTok Hiệu Quả (X3 Tỷ Lệ Lên Xu Hướng)',
-  excerpt: 'Sở hữu hàng triệu view không khó nếu bạn nắm vững nghệ thuật điều hướng người dùng. Hướng dẫn sử dụng thủ thuật content và công cụ tăng trưởng tối ưu.',
+  id: "cach-tang-tuong-tac-tiktok-hieu-qua",
+  slug: "cach-tang-tuong-tac-tiktok-hieu-qua",
+  title: "10 Cách Tăng Tương Tác TikTok Hiệu Quả (X3 Tỷ Lệ Lên Xu Hướng)",
+  excerpt: "Sở hữu hàng triệu view không khó nếu bạn nắm vững nghệ thuật điều hướng người dùng. Hướng dẫn sử dụng thủ thuật content và công cụ tăng trưởng tối ưu.",
   content: `
     <p>Một video có nội dung xuất sắc nhưng bị bỏ qua vì thiếu lượt tương tác ban đầu là rào cản chí mạng. Tương tác (Like, Comment, Share, Save) chính là nhiên liệu để bộ máy AI của TikTok đẩy video vào guồng quay viral. Bằng việc phân tích hành vi của hàng triệu người dùng, 360TuongTac tổng hợp 10 cách tăng tương tác TikTok hiệu quả và bền vững nhất hiện nay.</p>
 
@@ -30,28 +31,18 @@ export const cachTangTuongTacTiktokHieuQua: BlogPost = {
     <h2 id="ket-luan">Tổng Kết</h2>
     <p>Tăng tương tác hiệu quả là sự kết hợp tinh tế giữa việc thấu hiểu tâm lý hành vi người dùng và khả năng chớp lấy cơ hội thuật toán. Bằng cách cài cắm lời kêu gọi hành động sắc bén và tận dụng công cụ đòn bẩy thông minh ngay khi xuất bản nội dung, 360TuongTac tin rằng bạn sẽ x3, x5 tốc độ tăng trưởng kênh nhanh hơn bao giờ hết.</p>
   `,
-  category: 'Thuật toán',
-  date: '22/04/2026',
-  author: '360TuongTac Team',
-  authorImage: '/logo.png',
-  featuredImage: '/images/blog/cach-tang-tuong-tac-tiktok-hieu-qua.webp',
-  alt: 'Hình ảnh 3D Isometric tên lửa cất cánh trên nền biểu đồ cột neon - 10 Cách Tăng Tương Tác TikTok Hiệu Quả (X3 Tỷ Lệ Lên Xu Hướng) - 360TuongTac',
-  slug: 'cach-tang-tuong-tac-tiktok-hieu-qua',
-  readTime: '9 phút',
-  tags: ['Tương tác', 'Lên xu hướng', 'Comment', 'Seeding'],
-  relatedServices: ['seeding-comment-tiktok', 'tang-sub-youtube'],
-  relatedPosts: ['case-study-tiktok-shop-thanh-cong', 'thuat-toan-tiktok-2025', 'case-study-tang-viewer-tiktok'],
-  chart: {
-    type: 'Bar',
-    title: 'Hiệu Quả Tăng Tương Tác Theo Chiến Thuật',
-    description: 'Số liệu đo lường mức độ cải thiện Engagement khi áp dụng từng chiến thuật.',
-    dataKey: 'uplift',
-    xAxisKey: 'tactic',
-    data: [
-      { tactic: 'Seeding mồi', uplift: 45.2 },
-      { tactic: 'Trend Music', uplift: 22.1 },
-      { tactic: 'Hashtag Niche', uplift: 15.8 },
-      { tactic: 'Call to Action', uplift: 16.9 }
-    ]
-  },
+  author: "360TuongTac Team",
+  date: "2026-04-22",
+  readTime: "4 phút",
+  category: "Thuật toán",
+  tags: ["Tương tác", "Lên xu hướng", "Comment", "Seeding"],
+  featuredImage: "/images/blog/cach-tang-tuong-tac-tiktok-hieu-qua.webp",
+  alt: "Hình ảnh 3D Isometric tên lửa cất cánh trên nền biểu đồ cột neon - 10 Cách Tăng Tương Tác TikTok Hiệu Quả (X3 Tỷ Lệ Lên Xu...",
+  metaTitle: "10 Cách Tăng Tương Tác TikTok Hiệu Quả (X3 Tỷ Lệ Lên Xu H...",
+  metaDescription: "Sở hữu hàng triệu view không khó nếu bạn nắm vững nghệ thuật điều hướng người dùng. Hướng dẫn sử dụng thủ thuật content và công cụ tăng trưởng tối ưu.",
+  relatedServices: [],
+  relatedPosts: [],
+  featured: false,
+  published: true,
+  seoScore: 100
 };

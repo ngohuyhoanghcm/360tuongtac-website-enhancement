@@ -14,6 +14,8 @@ import { saveBlogPost, BlogPostData } from '@/lib/admin/file-writer';
 import { saveBlogPostWorkflow, type BlogPostWorkflow, type ContentStatus } from '@/lib/admin/publishing-workflow';
 import { authenticateAdminRequest } from '@/lib/admin/dev-auth-bypass';
 import { generateImage, generateImagePromptFromContent } from '@/lib/admin/image-generator';
+import { parseAIResponse } from '@/lib/admin/content-parser';
+import { validateBlogPostContent, normalizeBlogPostData } from '@/lib/admin/content-validator';
 
 // Generation job storage (in-memory for now, should use Redis in production)
 const generationJobs = new Map<string, any>();

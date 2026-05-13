@@ -155,10 +155,20 @@ export function generateDashboardData(): DashboardData {
 
   // Get all blog posts and audit SEO
   const blogPosts = searchAllBlogPosts();
-  const seoScores = blogPosts.map(post => ({
+  const seoScores = blogPosts.map((post: any) => ({
     slug: post.slug,
     title: post.title,
-    score: auditBlogSEO(post)
+    score: auditBlogSEO({
+      ...post,
+      id: post.id ? post.id.toString() : '',
+      readTime: post.readTime || '5 phút',
+      tags: post.tags || [],
+      imageUrl: post.featuredImage || post.imageUrl,
+      imageAlt: post.alt || post.imageAlt,
+      metaTitle: post.metaTitle || `${post.title} | Blog - 360TuongTac`,
+      metaDescription: post.metaDescription || post.excerpt,
+      featured: post.featured || false,
+    })
   }));
 
   // Categorize by score
@@ -345,10 +355,20 @@ export function generateSEOAuditReport(): {
   const blogPosts = searchAllBlogPosts();
   const services = searchAllServices();
 
-  const blogScores = blogPosts.map(post => ({
+  const blogScores = blogPosts.map((post: any) => ({
     slug: post.slug,
     title: post.title,
-    score: auditBlogSEO(post)
+    score: auditBlogSEO({
+      ...post,
+      id: post.id ? post.id.toString() : '',
+      readTime: post.readTime || '5 phút',
+      tags: post.tags || [],
+      imageUrl: post.featuredImage || post.imageUrl,
+      imageAlt: post.alt || post.imageAlt,
+      metaTitle: post.metaTitle || `${post.title} | Blog - 360TuongTac`,
+      metaDescription: post.metaDescription || post.excerpt,
+      featured: post.featured || false,
+    })
   }));
 
   const serviceScores = services.map(service => ({

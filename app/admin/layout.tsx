@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key, Sparkles, FileCheck, Search } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, LogOut, Menu, X, Shield, Key, Sparkles, FileCheck, Search, Bot } from 'lucide-react';
 
 export default function AdminLayout({
   children,
@@ -422,6 +422,18 @@ export default function AdminLayout({
           >
             <Search size={18} />
             SEO Audit
+          </Link>
+
+          <Link
+            href="/admin/telegram"
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
+              pathname.startsWith('/admin/telegram')
+                ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white'
+                : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <Bot size={18} />
+            Telegram Bot
           </Link>
         </nav>
 

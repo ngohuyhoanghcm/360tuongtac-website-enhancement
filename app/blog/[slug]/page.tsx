@@ -48,7 +48,11 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
-  if (!post) notFound();
+  // Check if post exists AND is published
+  // published !== false means: published is true OR undefined (default to published)
+  if (!post || post.published === false) {
+    notFound();
+  }
 
   const bPost = post;
   

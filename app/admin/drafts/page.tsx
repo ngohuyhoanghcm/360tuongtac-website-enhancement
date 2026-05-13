@@ -206,8 +206,8 @@ export default function DraftApproval() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">Đang tải drafts...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF2E63] mx-auto mb-4" />
+          <p className="text-[var(--text-muted)]">Đang tải drafts...</p>
         </div>
       </div>
     );
@@ -218,33 +218,33 @@ export default function DraftApproval() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-            <FileText className="w-8 h-8 text-blue-600" />
+          <h1 className="font-h1 text-3xl font-black text-[var(--text-primary)] flex items-center gap-2">
+            <FileText className="w-8 h-8 text-[#FF8C00]" />
             Draft Approval
           </h1>
-          <p className="text-gray-600 mt-1">Quản lý và duyệt bài viết AI-generated</p>
+          <p className="text-[var(--text-secondary)] mt-1">Quản lý và duyệt bài viết AI-generated</p>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-          <div className="text-sm text-gray-600">Total Drafts</div>
-          <div className="text-2xl font-bold text-gray-900">{drafts.length}</div>
+        <div className="bg-[var(--surface)] p-4 rounded-2xl border border-[var(--border)]">
+          <div className="text-sm text-[var(--text-muted)]">Total Drafts</div>
+          <div className="text-2xl font-bold text-[var(--text-primary)]">{drafts.length}</div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-[var(--surface)] p-4 rounded-2xl border border-[var(--border)]">
           <div className="text-sm text-yellow-600">Pending</div>
           <div className="text-2xl font-bold text-yellow-600">
             {drafts.filter(d => d.status === 'pending').length}
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-[var(--surface)] p-4 rounded-2xl border border-[var(--border)]">
           <div className="text-sm text-green-600">Approved</div>
           <div className="text-2xl font-bold text-green-600">
             {drafts.filter(d => d.status === 'approved').length}
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-[var(--surface)] p-4 rounded-2xl border border-[var(--border)]">
           <div className="text-sm text-red-600">Rejected</div>
           <div className="text-2xl font-bold text-red-600">
             {drafts.filter(d => d.status === 'rejected').length}
@@ -253,10 +253,10 @@ export default function DraftApproval() {
       </div>
 
       {/* Filter */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="bg-[var(--surface)] rounded-2xl border border-[var(--border)] p-4">
         <div className="flex items-center gap-2">
-          <Filter className="w-5 h-5 text-gray-600" />
-          <span className="text-sm font-medium text-gray-700">Filter:</span>
+          <Filter className="w-5 h-5 text-[var(--text-muted)]" />
+          <span className="text-sm font-medium text-[var(--text-primary)]">Filter:</span>
           <div className="flex gap-2">
             {(['all', 'pending', 'approved', 'rejected'] as const).map((f) => (
               <button
@@ -264,8 +264,8 @@ export default function DraftApproval() {
                 onClick={() => setFilter(f)}
                 className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                   filter === f
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] text-white'
+                    : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 {f === 'all' ? 'Tất cả' : f === 'pending' ? 'Chờ duyệt' : f === 'approved' ? 'Đã duyệt' : 'Đã từ chối'}
@@ -276,44 +276,44 @@ export default function DraftApproval() {
       </div>
 
       {/* Drafts List */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="bg-[var(--surface)] rounded-2xl border border-[var(--border)]">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-[var(--bg-secondary)] border-b border-[var(--border)]">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase">
                   Bài viết
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase">
                   Danh mục
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase">
                   SEO Score
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase">
                   Trạng thái
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase">
                   Ngày tạo
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+                <th className="px-6 py-3 text-right text-xs font-medium text-[var(--text-muted)] uppercase">
                   Thao tác
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-[var(--border)]">
               {filteredDrafts.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan={6} className="px-6 py-12 text-center text-[var(--text-muted)]">
                     Không có drafts nào
                   </td>
                 </tr>
               ) : (
                 filteredDrafts.map((draft) => (
-                  <tr key={draft.id} className="hover:bg-gray-50">
+                  <tr key={draft.id} className="hover:bg-[var(--bg-secondary)] transition-colors">
                     <td className="px-6 py-4">
-                      <div className="font-medium text-gray-900">{draft.title}</div>
-                      <div className="text-sm text-gray-500 mt-1 line-clamp-1">
+                      <div className="font-medium text-[var(--text-primary)]">{draft.title}</div>
+                      <div className="text-sm text-[var(--text-muted)] mt-1 line-clamp-1">
                         {draft.excerpt}
                       </div>
                       {draft.rejectReason && (
@@ -336,7 +336,7 @@ export default function DraftApproval() {
                           {draft.seoScore}
                         </span>
                       ) : (
-                        <span className="text-gray-400">-</span>
+                        <span className="text-[var(--text-muted)]">-</span>
                       )}
                     </td>
                     <td className="px-6 py-4">
@@ -345,7 +345,7 @@ export default function DraftApproval() {
                         {getStatusBadge(draft.status)}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
+                    <td className="px-6 py-4 text-sm text-[var(--text-muted)]">
                       {draft.createdAt}
                     </td>
                     <td className="px-6 py-4 text-right">

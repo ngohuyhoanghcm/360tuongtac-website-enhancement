@@ -8,6 +8,9 @@
 
 import { BlogPostData } from './file-writer';
 import { validateBlogPost } from './validation';
+import { parseAIResponse } from './content-parser';
+import { validateBlogPostContent, normalizeBlogPostData } from './content-validator';
+import { generateRelatedContentSuggestions } from './related-content-suggester';
 
 // ============================================
 // Types & Interfaces
@@ -79,8 +82,9 @@ class AIProvider {
         model: process.env.AI_MODEL_GEMINI || 'gemini-2.5-flash',
         contents: `${systemPrompt}\n\n${prompt}`,
         config: {
-          maxOutputTokens: parseInt(process.env.AI_MAX_TOKENS || '4000'),
+          maxOutputTokens: parseInt(process.env.AI_MAX_TOKENS || '8000'),
           temperature: parseFloat(process.env.AI_TEMPERATURE || '0.7'),
+          responseMimeType: 'application/json', // Force JSON output
         }
       });
 
@@ -120,100 +124,68 @@ class AIProvider {
 // ============================================
 
 const SYSTEM_PROMPTS = {
-  blogGeneration: `Bạn là một chuyên gia content marketing và SEO với 10+ năm kinh nghiệm trong việc tạo bài viết blog chuẩn SEO cho thị trường Việt Nam.
+  blogGeneration: `Bạn là chuyên gia content marketing và SEO 10+ năm kinh nghiệm cho thị trường Việt Nam.
 
-NHIỆM VỤ CỦA BẠN:
-1. Tạo bài viết blog chất lượng cao, hấp dẫn và chuẩn SEO
-2. Tối ưu cho SEO (Search Engine Optimization)
-3. Tối ưu cho GEO (Generative Engine Optimization)
-4. Tối ưu cho AEO (Answer Engine Optimization)
-
-QUY TẮC SEO BẮT BUỘC:
-- Title: 50-70 ký tự, chứa từ khóa chính, hấp dẫn
-- Excerpt/Meta Description: 120-160 ký tự, mô tả hấp dẫn
-- Content: Tối thiểu 1500 ký tự, preferably 2000-3000+ ký tự
-- Tags: 3-10 tags liên quan
-- Structure: Có headings (H2, H3), lists, FAQs
-- Internal linking: Gợi ý 1-3 related services
-- Language: Tiếng Việt tự nhiên, không dịch máy
-
-QUY TẮC GEO (Generative Engine Optimization):
-- Sử dụng format Q&A cho các câu hỏi phổ biến
-- Thêm FAQ section (ít nhất 3-5 câu hỏi)
-- Sử dụng câu khẳng định rõ ràng, factual
-- Cite sources và data khi có thể
-- Structured data friendly
-
-QUY TẮC AEO (Answer Engine Optimization):
-- Trả lời trực tiếp các câu hỏi phổ biến
-- Optimized cho featured snippets
-- Step-by-step instructions cho how-to content
-- Definition blocks cho khái niệm
-- Comparison tables khi phù hợp
-
-FORMAT OUTPUT (JSON):
-{
-  "title": "Title bài viết (50-70 ký tự)",
-  "excerpt": "Meta description (120-160 ký tự)",
-  "content": "Nội dung đầy đủ với Markdown formatting",
-  "tags": ["tag1", "tag2", "tag3"],
-  "suggestedServices": ["service-slug-1", "service-slug-2"],
-  "faq": [
-    {"question": "Câu hỏi 1?", "answer": "Trả lời 1"},
-    {"question": "Câu hỏi 2?", "answer": "Trả lời 2"}
-  ]
-}`,
-
-  contentRewrite: `Bạn là chuyên gia content editing với khả năng viết lại nội dung để tối ưu SEO và hấp dẫn người đọc.
-
-NHIỆM VỤ:
-1. Viết lại nội dung cung cấp để chuẩn SEO
-2. Cải thiện chất lượng và readability
-3. Thêm structure (headings, lists, FAQs)
-4. Tối ưu cho Vietnamese audience
-5. Đảm bảo độ dài tối thiểu 1500 ký tự
-
-QUY TẮC:
-- Giữ nguyên ý chính và thông tin quan trọng
-- Cải thiện flow và readability
-- Thêm headings, subheadings hợp lý
-- Thêm FAQ section nếu phù hợp
-- Sử dụng ngôn ngữ tự nhiên, conversation tone
-- Output format: Markdown`,
-
-  topicExpansion: `Bạn là chuyên gia content strategy với khả năng phát triển từ topic thành bài viết blog hoàn chỉnh.
-
-NHIỆM VỤ:
-1. Phân tích topic được cung cấp
-2. Research và tạo outline chi tiết
-3. Viết bài viết hoàn chỉnh dựa trên outline
-4. Tối ưu SEO/GEO/AEO
-5. Đảm bảo chất lượng và depth
+NHIỆM VỤ: Tạo bài viết blog chuẩn SEO, tối ưu cho SEO/GEO/AEO.
 
 QUY TẮC BẮT BUỘC:
-- Content phải comprehensive và authoritative
-- Sử dụng data và examples khi có thể
-- Thêm actionable insights
-- Include FAQs và practical tips
-- Title: 50-70 ký tự, hấp dẫn, chứa từ khóa
-- Excerpt: 120-160 ký tự, mô tả content
-- Content: Ít nhất 1500 ký tự
-- Tags: 3-10 tags liên quan
+- Title: 50-60 ký tự, chứa từ khóa chính
+- Excerpt: 120-155 ký tự, mô tả hấp dẫn
+- Content: Markdown format, 3000-5000 ký tự (KHÔNG quá 5000)
+  * Dùng ## cho H2, ### cho H3
+  * Có danh sách, paragraphs ngắn gọn
+  * FAQ section 3-5 câu hỏi
+  * Viết tiếng Việt tự nhiên
+- Tags: 3-7 tags liên quan
+- relatedServices: 2-3 slug dịch vụ (vd: "tang-mat-livestream-tiktok")
+- relatedPosts: 3-5 slug bài viết (vd: "thuat-toan-tiktok-2025")
 
-**QUAN TRỌNG: Output PHẢI là JSON format**
+GEO: Dùng Q&A, câu khẳng định factual, structured data friendly.
+AEO: Trả lời trực tiếp, tối ưu featured snippets, step-by-step.
 
-{
-  "title": "Title bài viết (50-70 ký tự)",
-  "excerpt": "Meta description (120-160 ký tự)",
-  "content": "Nội dung đầy đủ với Markdown formatting (ít nhất 1500 ký tự)",
-  "tags": ["tag1", "tag2", "tag3"],
-  "faq": [
-    {"question": "Câu hỏi 1?", "answer": "Trả lời 1"},
-    {"question": "Câu hỏi 2?", "answer": "Trả lời 2"}
-  ]
-}
+FORMAT OUTPUT - JSON DUY NHẤT:
+{"title":"...","excerpt":"...","content":"...","tags":[...],"category":"...","relatedServices":[...],"relatedPosts":[...],"faq":[{"question":"...","answer":"..."}]}
 
-Đảm bảo JSON valid, không thêm text ngoài JSON!`
+⚠️ QUAN TRỌNG:
+- Chỉ trả về JSON, KHÔNG text khác, KHÔNG markdown code blocks
+- JSON PHẢI hoàn chỉnh, bắt đầu { kết thúc }
+- Content KHÔNG quá 5000 ký tự để tránh bị cắt
+- Escape đúng quotes trong content (dùng \\")
+- KHÔNG trailing commas`,
+
+  contentRewrite: `Bạn là chuyên gia content editing, viết lại nội dung chuẩn SEO cho thị trường Việt Nam.
+
+NHIỆM VỤ: Viết lại nội dung, cải thiện readability, thêm structure (headings, lists, FAQs).
+
+QUY TẮC:
+- Giữ ý chính, cải thiện flow
+- Thêm headings (##, ###), FAQ section
+- Content: Markdown format, 3000-5000 ký tự (KHÔNG quá 5000)
+- Ngôn ngữ tự nhiên, tiếng Việt
+
+FORMAT OUTPUT - JSON DUY NHẤT:
+{"title":"...","excerpt":"...","content":"...","tags":[...],"category":"...","relatedServices":[...],"relatedPosts":[...],"faq":[{"question":"...","answer":"..."}]}
+
+⚠️ Chỉ trả về JSON, KHÔNG text khác. Content KHÔNG quá 5000 ký tự.`,
+
+  topicExpansion: `Bạn là chuyên gia content strategy, phát triển topic thành bài viết blog hoàn chỉnh chuẩn SEO/GEO/AEO.
+
+QUY TẮC BẮT BUỘC:
+- Title: 50-60 ký tự, chứa từ khóa, hấp dẫn
+- Excerpt: 120-155 ký tự
+- Content: Markdown format, 3000-5000 ký tự (KHÔNG quá 5000)
+  * Dùng ## cho H2, ### cho H3
+  * Có danh sách, paragraphs, FAQ section 3-5 câu
+  * Data, examples, actionable insights
+  * Tiếng Việt tự nhiên
+- Tags: 3-7 tags
+- relatedServices: 2-3 slug dịch vụ
+- relatedPosts: 3-5 slug bài viết
+
+FORMAT OUTPUT - JSON DUY NHẤT:
+{"title":"...","excerpt":"...","content":"...","tags":[...],"category":"...","relatedServices":[...],"relatedPosts":[...],"faq":[{"question":"...","answer":"..."}]}
+
+⚠️ Chỉ trả về JSON. KHÔNG text khác. Content KHÔNG quá 5000 ký tự. JSON phải hoàn chỉnh.`
 };
 
 // ============================================
@@ -246,22 +218,38 @@ export class AIContentGenerator {
       }
 
       // Step 2: Generate blog post from extracted content
-      const prompt = `Dựa trên nội dung được trích xuất từ URL sau, hãy tạo một bài viết blog hoàn chỉnh, chuẩn SEO:
+      const prompt = `Dựa trên nội dung trích xuất từ URL, tạo bài viết blog mới chuẩn SEO.
 
 URL nguồn: ${url}
 Title gốc: ${extracted.title || 'N/A'}
-Nội dung trích xuất:
-${extracted.content.substring(0, 10000)}
+Nội dung trích xuất (tóm tắt):
+${extracted.content.substring(0, 4000)}
 
 Yêu cầu:
 - Category: ${options?.category || 'General'}
 - Target keywords: ${(options?.targetKeywords || []).join(', ')}
 - Tone: ${options?.tone || 'professional'}
-- Tối ưu SEO/GEO/AEO đầy đủ
-
-Tạo bài viết mới dựa trên nội dung này nhưng KHÔNG copy nguyên văn. Viết lại hoàn toàn với góc nhìn mới, insights mới và giá trị gia tăng.`;
+- Content: Markdown format, 3000-5000 ký tự (TUYỆT ĐỐI KHÔNG quá 5000)
+- Viết lại hoàn toàn, KHÔNG copy nguyên văn
+- Thêm FAQ section 3-5 câu hỏi
+- JSON PHẢI hoàn chỉnh, kết thúc bằng }`;
 
       const result = await this.aiProvider.generateContent(prompt, SYSTEM_PROMPTS.blogGeneration);
+      
+      // DEBUG: Save raw AI response for analysis
+      const fs = await import('fs');
+      const path = await import('path');
+      const debugPath = path.join(process.cwd(), 'debug-url-response.json');
+      fs.writeFileSync(debugPath, JSON.stringify({
+        inputType: 'url',
+        input: url,
+        rawResponse: result,
+        rawResponseLength: result.length,
+        timestamp: new Date().toISOString()
+      }, null, 2));
+      console.log('[AI Generator] 🔍 DEBUG: Raw response saved to debug-url-response.json');
+      console.log('[AI Generator] 🔍 DEBUG: Raw response length:', result.length);
+      console.log('[AI Generator] 🔍 DEBUG: First 1600 chars:', result.substring(0, 1600));
       
       // Step 3: Parse and validate
       return this.parseAndValidateResult(result, options);
@@ -282,7 +270,7 @@ Tạo bài viết mới dựa trên nội dung này nhưng KHÔNG copy nguyên v
     try {
       console.log('[AI Generator] Generating from topic:', topic);
 
-      const prompt = `Tạo một bài viết blog hoàn chỉnh, chuẩn SEO về topic sau:
+      const prompt = `Tạo bài viết blog chuẩn SEO về topic sau:
 
 Topic: ${topic}
 
@@ -290,12 +278,11 @@ Yêu cầu:
 - Category: ${options?.category || 'General'}
 - Target keywords: ${(options?.targetKeywords || []).join(', ')}
 - Tone: ${options?.tone || 'professional'}
-- Word count: ~${options?.wordCount || 2000} từ
-- Tối ưu SEO/GEO/AEO đầy đủ
-- Comprehensive, authoritative content
-- Include practical examples và actionable insights
-
-Hãy tạo bài viết chất lượng cao nhất có thể.`;
+- Content: Markdown format, 3000-5000 ký tự (TUYỆT ĐỐI KHÔNG quá 5000)
+- Tối ưu SEO/GEO/AEO
+- Practical examples, actionable insights
+- FAQ section 3-5 câu hỏi
+- JSON PHẢI hoàn chỉnh, kết thúc bằng }`;
 
       const result = await this.aiProvider.generateContent(prompt, SYSTEM_PROMPTS.topicExpansion);
       
@@ -346,209 +333,126 @@ Hãy tạo bài viết mới dựa trên ý tưởng từ nội dung này.`;
   }
 
   /**
-   * Parse AI response and validate
+   * Parse AI response and validate - UPDATED to use new content parser
    */
   private async parseAndValidateResult(aiResponse: string, options?: AIContentRequest['options']): Promise<AIContentResponse> {
     try {
-      // Try to parse JSON from AI response
-      let parsed: any;
-      
+      console.log('[AI Generator] === STARTING NEW PARSER PIPELINE ===');
       console.log('[AI Generator] Raw AI response length:', aiResponse.length);
-      console.log('[AI Generator] First 200 chars:', aiResponse.substring(0, 200));
+      console.log('[AI Generator] First 300 chars:', aiResponse.substring(0, 300));
       
-      // Extract JSON from markdown code blocks if present
-      // Try multiple patterns to handle different markdown formats
+      // Step 1: Use new content parser to strip markdown blocks and parse JSON
+      const parsedJson = await parseAIResponse(aiResponse);
+      console.log('[AI Generator] Parsed JSON successfully');
+      console.log('[AI Generator] Parsed title:', parsedJson.title);
+      console.log('[AI Generator] Parsed content length:', parsedJson.content?.length || 0);
       
-      // Simple string-based extraction (more reliable than regex)
-      const startMarker = '```json';
-      const endMarker = '```';
-      const startIndex = aiResponse.indexOf(startMarker);
+      // Step 2: Normalize fields (map imageUrl → featuredImage, imageAlt → alt)
+      const normalized = normalizeBlogPostData(parsedJson);
+      console.log('[AI Generator] Fields normalized');
+      console.log('[AI Generator] featuredImage:', normalized.featuredImage);
+      console.log('[AI Generator] alt:', normalized.alt);
       
-      if (startIndex !== -1) {
-        // Found ```json block
-        const contentStart = startIndex + startMarker.length;
-        const endIndex = aiResponse.indexOf(endMarker, contentStart);
-        
-        let jsonStr: string;
-        if (endIndex !== -1) {
-          // Has closing backticks
-          jsonStr = aiResponse.substring(contentStart, endIndex).trim();
-          console.log('[AI Generator] Extracted JSON block with closing, length:', jsonStr.length);
-        } else {
-          // No closing backticks - extract until end or next ```
-          console.warn('[AI Generator] No closing ``` found, extracting until end');
-          jsonStr = aiResponse.substring(contentStart).trim();
-          // Remove trailing text after last }
-          const lastBrace = jsonStr.lastIndexOf('}');
-          if (lastBrace !== -1) {
-            jsonStr = jsonStr.substring(0, lastBrace + 1);
-          }
-          console.log('[AI Generator] Extracted JSON block without closing, length:', jsonStr.length);
-        }
-        
-        try {
-          parsed = JSON.parse(jsonStr);
-          console.log('[AI Generator] Successfully parsed JSON from ```json block');
-        } catch (parseError) {
-          console.warn('[AI Generator] JSON parse failed:', parseError);
-          
-          // Strategy 1: Try to repair incomplete JSON
-          console.log('[AI Generator] Attempting JSON repair...');
-          let repairedJson = jsonStr;
-          
-          // Count opening and closing braces/brackets
-          const openBraces = (repairedJson.match(/\{/g) || []).length;
-          const closeBraces = (repairedJson.match(/\}/g) || []).length;
-          const openBrackets = (repairedJson.match(/\[/g) || []).length;
-          const closeBrackets = (repairedJson.match(/\]/g) || []).length;
-          
-          console.log('[AI Generator] Braces: {', openBraces, '} ', closeBraces, 'Brackets: [', openBrackets, '] ', closeBrackets);
-          
-          // Add missing closing braces/brackets
-          for (let i = 0; i < (openBraces - closeBraces); i++) {
-            repairedJson += '}';
-          }
-          for (let i = 0; i < (openBrackets - closeBrackets); i++) {
-            repairedJson += ']';
-          }
-          
-          // Try parsing repaired JSON
-          try {
-            parsed = JSON.parse(repairedJson);
-            console.log('[AI Generator] Successfully parsed REPAIRED JSON');
-          } catch (repairError) {
-            console.warn('[AI Generator] Repaired JSON also failed, trying extraction');
-            
-            // Strategy 2: Extract what we can from partial JSON
-            const firstBrace = repairedJson.indexOf('{');
-            const lastBrace = repairedJson.lastIndexOf('}');
-            if (firstBrace !== -1 && lastBrace > firstBrace) {
-              try {
-                const cleanJson = repairedJson.substring(firstBrace, lastBrace + 1);
-                // Try repairing again
-                let finalJson = cleanJson;
-                const ob = (finalJson.match(/\{/g) || []).length;
-                const cb = (finalJson.match(/\}/g) || []).length;
-                for (let i = 0; i < (ob - cb); i++) finalJson += '}';
-                
-                parsed = JSON.parse(finalJson);
-                console.log('[AI Generator] Successfully parsed extracted & repaired JSON');
-              } catch (e) {
-                console.warn('[AI Generator] All JSON parsing failed, using partial JSON extraction');
-                // Strategy 3: Extract fields from partial JSON (not text)
-                parsed = this.extractFieldsFromPartialJson(jsonStr, options);
-              }
-            } else {
-              // Use partial JSON extraction
-              parsed = this.extractFieldsFromPartialJson(jsonStr, options);
-            }
-          }
-        }
-      } else {
-        // Try raw JSON
-        const firstBrace = aiResponse.indexOf('{');
-        const lastBrace = aiResponse.lastIndexOf('}');
-        
-        if (firstBrace !== -1 && lastBrace > firstBrace) {
-          const jsonStr = aiResponse.substring(firstBrace, lastBrace + 1);
-          console.log('[AI Generator] Extracted raw JSON, length:', jsonStr.length);
-          try {
-            parsed = JSON.parse(jsonStr);
-            console.log('[AI Generator] Successfully parsed raw JSON');
-          } catch (parseError) {
-            console.warn('[AI Generator] Raw JSON parse failed:', parseError);
-            parsed = this.createStructuredFromText(aiResponse, options);
-          }
-        } else {
-          console.warn('[AI Generator] No JSON found, using fallback parser');
-          parsed = this.createStructuredFromText(aiResponse, options);
-        }
+      // Step 3: Validate content before proceeding
+      const validationResult = validateBlogPostContent(normalized);
+      console.log('[AI Generator] Validation result:', validationResult.valid);
+      console.log('[AI Generator] Validation errors:', validationResult.errors);
+      console.log('[AI Generator] Validation warnings:', validationResult.warnings);
+      
+      if (!validationResult.valid) {
+        return {
+          success: false,
+          errors: validationResult.errors
+        };
       }
-
-      // Generate slug from title
-      // Ensure title meets SEO requirements (50-70 chars)
-      let title = parsed.title || 'Untitled';
+      
+      // Step 4: Generate slug from title
+      let title = normalized.title;
       if (title.length > 70) {
-        // Truncate to 70 chars, preserve word boundary
         const truncated = title.substring(0, 70);
         const lastSpace = truncated.lastIndexOf(' ');
         title = lastSpace > 50 ? truncated.substring(0, lastSpace) : truncated;
-        console.log('[AI Generator] Title truncated from', parsed.title.length, 'to', title.length, 'chars');
+        console.log('[AI Generator] Title truncated from', normalized.title.length, 'to', title.length, 'chars');
       }
       
       const slug = this.generateSlug(title);
-
-      // Ensure excerpt meets minimum length for SEO (120-155 chars)
-      let excerpt = parsed.excerpt || '';
       
-      // If excerpt too short, extract from content
-      if (excerpt.length < 120 && parsed.content) {
-        const paragraphs = parsed.content.split(/<p>|\n\n+/).filter((p: string) => p.trim().length > 100);
+      // Step 5: Generate related content suggestions
+      console.log('[AI Generator] Generating related content suggestions...');
+      const relatedContent = generateRelatedContentSuggestions(
+        {
+          relatedServices: normalized.relatedServices,
+          relatedPosts: normalized.relatedPosts,
+          suggestedServices: normalized.suggestedServices // Legacy support
+        },
+        {
+          slug,
+          category: normalized.category || options?.category || 'General',
+          tags: normalized.tags.length > 0 ? normalized.tags : (options?.targetKeywords || [])
+        }
+      );
+      console.log('[AI Generator] Related services:', relatedContent.relatedServices);
+      console.log('[AI Generator] Related posts:', relatedContent.relatedPosts);
+      
+      // Step 5: Ensure excerpt meets SEO requirements
+      let excerpt = normalized.excerpt || '';
+      if (excerpt.length < 120 && normalized.content) {
+        const paragraphs = normalized.content.split(/<p>|\n\n+/).filter((p: string) => p.trim().length > 100);
         if (paragraphs.length > 0) {
           excerpt = paragraphs[0].replace(/<[^>]+>/g, '').trim();
         }
       }
       
-      // Final fallback: expand with context to meet minimum
       if (excerpt.length < 120) {
-        const title = parsed.title || 'Bài viết';
         const suffix = ' - Tìm hiểu chi tiết trong hướng dẫn cập nhật mới nhất 2026.';
         excerpt = title + suffix;
-        // Truncate title if needed to fit
         if (excerpt.length > 155) {
           excerpt = title.substring(0, 155 - suffix.length) + suffix;
         }
       }
       
-      // Ensure excerpt is within SEO limits (120-155 chars)
       if (excerpt.length > 155) {
         excerpt = excerpt.substring(0, 152) + '...';
       }
-      if (excerpt.length < 120) {
-        // Pad with spaces if absolutely necessary (shouldn't happen)
-        excerpt = excerpt.padEnd(120, ' ') + '.';
-      }
-
-      // Create BlogPostData with all required fields
+      
+      // Step 7: Create BlogPostData with all required fields
       const blogPost: Partial<BlogPostData> = {
-        id: `post-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`, // Auto-generate unique ID
+        id: `post-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         slug,
         title: title,
         excerpt: excerpt,
-        content: parsed.content || aiResponse,
-        category: options?.category || 'General',
-        tags: parsed.tags || options?.targetKeywords || [],
-        author: '360TuongTac Team',
-        date: new Date().toISOString().split('T')[0],
-        readTime: `${Math.max(5, Math.ceil((parsed.content?.length || 2000) / 1000))} phút`,
-        imageUrl: parsed.imageUrl || '/images/blog/placeholder.webp',
-        imageAlt: parsed.imageAlt || `${title} - 360TuongTac`,
-        metaTitle: parsed.metaTitle || (title.length <= 60 ? `${title} | Blog - 360TuongTac` : `${title.substring(0, 57)}...`),
-        metaDescription: excerpt, // Use same as excerpt (guaranteed 120-155 chars)
+        content: normalized.content, // Already converted to HTML by parser
+        category: normalized.category || options?.category || 'General',
+        tags: normalized.tags.length > 0 ? normalized.tags : (options?.targetKeywords && options.targetKeywords.length > 0 ? options.targetKeywords : [slug.split('-').slice(0, 3).join('-'), (normalized.category || 'general').toLowerCase()]),
+        author: normalized.author || '360TuongTac Team',
+        date: normalized.date || new Date().toISOString().split('T')[0],
+        readTime: normalized.readTime || `${Math.max(5, Math.ceil((normalized.content?.length || 2000) / 1000))} phút`,
+        // Set BOTH legacy and new field names for compatibility
+        imageUrl: normalized.featuredImage || '/images/blog/placeholder.webp',
+        imageAlt: normalized.alt || `${title} - 360TuongTac`,
+        featuredImage: normalized.featuredImage || '/images/blog/placeholder.webp',
+        alt: normalized.alt || `${title} - 360TuongTac`,
+        metaTitle: normalized.metaTitle || (title.length <= 40 ? `${title} | Blog - 360TuongTac` : title.substring(0, 60)),
+        metaDescription: excerpt,
+        // Related content (Phase 3)
+        relatedServices: relatedContent.relatedServices,
+        relatedPosts: relatedContent.relatedPosts,
       };
-
-      // Validate
-      console.log('[Validation] === STARTING VALIDATION ===');
+      
+      // Step 7: Final validation with existing validator
+      console.log('[Validation] === STARTING FINAL VALIDATION ===');
       console.log('[Validation] slug:', blogPost.slug, `(${blogPost.slug?.length} chars)`);
       console.log('[Validation] title:', blogPost.title, `(${blogPost.title?.length} chars)`);
       console.log('[Validation] excerpt:', blogPost.excerpt?.substring(0, 50) + '...', `(${blogPost.excerpt?.length} chars)`);
       console.log('[Validation] content:', `${blogPost.content?.length} chars`);
-      console.log('[Validation] category:', blogPost.category);
-      console.log('[Validation] tags:', blogPost.tags, `(${blogPost.tags?.length} items)`);
-      console.log('[Validation] author:', blogPost.author);
-      console.log('[Validation] date:', blogPost.date);
-      console.log('[Validation] readTime:', blogPost.readTime);
       console.log('[Validation] imageUrl:', blogPost.imageUrl);
-      console.log('[Validation] imageAlt:', blogPost.imageAlt, `(${blogPost.imageAlt?.length} chars)`);
-      console.log('[Validation] metaTitle:', blogPost.metaTitle, `(${blogPost.metaTitle?.length} chars)`);
-      console.log('[Validation] metaDescription:', blogPost.metaDescription?.substring(0, 50) + '...', `(${blogPost.metaDescription?.length} chars)`);
+      console.log('[Validation] imageAlt:', blogPost.imageAlt);
       
       const validation = validateBlogPost(blogPost as BlogPostData);
       
       console.log('[Validation] isValid:', validation.isValid);
       console.log('[Validation] seoScore:', validation.seoScore);
       console.log('[Validation] errors:', validation.errors);
-      console.log('[Validation] warnings:', validation.warnings);
       console.log('[Validation] === END VALIDATION ===');
 
       return {
@@ -563,7 +467,7 @@ Hãy tạo bài viết mới dựa trên ý tưởng từ nội dung này.`;
       console.error('[AI Generator] Error parsing result:', error);
       return {
         success: false,
-        errors: ['Không thể parse kết quả từ AI. Vui lòng thử lại.']
+        errors: ['Không thể parse kết quả từ AI. Vui lòng thử lại.', error instanceof Error ? error.message : 'Unknown error']
       };
     }
   }

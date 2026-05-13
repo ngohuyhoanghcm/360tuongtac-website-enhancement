@@ -47,7 +47,7 @@ export function searchBlogPosts(filters: SearchFilters = {}): BlogPostData[] {
       return [];
     }
     
-    const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.ts'));
+    const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.ts') && f !== 'index.ts');
     
     const posts: BlogPostData[] = [];
 

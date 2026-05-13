@@ -1,6 +1,6 @@
 import type { BlogPost } from './index';
 
-export const capNhatThuatToanTiktokThang4DieuChinh: BlogPost = {
+export const capNhatThuatToanTiktokThang42026: BlogPost = {
   id: 'cap-nhat-thuat-toan-tiktok-thang-4-2026',
   title: 'Cập Nhật Thuật Toán TikTok Tháng 4/2026: Ưu Tiên Search AI & Long-Form Content',
   excerpt: 'Phân tích từ đội ngũ Data 360TuongTac về đợt cập nhật lõi mới nhất của hệ thống xếp hạng video. Điều chỉnh chiến lược để không bị bão hòa.',

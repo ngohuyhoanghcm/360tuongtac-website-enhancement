@@ -11,6 +11,7 @@ export interface BlogPost {
   alt: string;
   slug: string;
   featured?: boolean;
+  published?: boolean;     // Publish status - true = published, false = unpublished/draft
   readTime?: string;
   tags?: string[];
   relatedServices?: string[];
@@ -29,8 +30,38 @@ export interface BlogPost {
 // Auto-generated from data/blog/ directory
 // DO NOT EDIT MANUALLY - Run: npx tsx scripts/rebuild-blog-index.ts
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { biKipTangTuongTacTiktokChongMatBatMiThuatToanVaChien } from './bi-kip-tang-tuong-tac-tiktok-chong-mat-bat-mi-thuat-toan-va-chien';
 import { cachTangTuongTacTiktokHieuQua } from './cach-tang-tuong-tac-tiktok-hieu-qua';
-import { capNhatThuatToanTiktokThang4DieuChinh } from './cap-nhat-thuat-toan-tiktok-thang-4-2026';
+import { capNhatThuatToanTiktokThang42026 } from './cap-nhat-thuat-toan-tiktok-thang-4-2026';
 import { caseStudyTangViewerTiktok } from './case-study-tang-viewer-tiktok';
 import { caseStudyTiktokShopThanhCong } from './case-study-tiktok-shop-thanh-cong';
 import { chonDichVuSmmUyTinKhongBiLua } from './chon-dich-vu-smm-uy-tin-khong-bi-lua';
@@ -46,8 +77,9 @@ import { tinHieuTiktokLaGi } from './tin-hieu-tiktok-la-gi';
 import { viewerThatVsViewerAo } from './viewer-that-vs-viewer-ao';
 
 export const allBlogPosts: BlogPost[] = [
+  biKipTangTuongTacTiktokChongMatBatMiThuatToanVaChien,
   cachTangTuongTacTiktokHieuQua,
-  capNhatThuatToanTiktokThang4DieuChinh,
+  capNhatThuatToanTiktokThang42026,
   caseStudyTangViewerTiktok,
   caseStudyTiktokShopThanhCong,
   chonDichVuSmmUyTinKhongBiLua,

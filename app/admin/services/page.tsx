@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, Edit, Eye, Filter, Plus } from 'lucide-react';
+import { Search, Edit, Eye, Filter, Plus, Trash2 } from 'lucide-react';
 import { SERVICES_DATA } from '@/data/services';
 
 export default function ServicesList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('Tất cả');
+  const [deletingSlug, setDeletingSlug] = useState<string | null>(null);
 
   const platforms = ['Tất cả', ...Array.from(new Set(SERVICES_DATA.map(s => s.platform)))];
 
@@ -17,6 +18,41 @@ export default function ServicesList() {
     const matchesPlatform = selectedPlatform === 'Tất cả' || service.platform === selectedPlatform;
     return matchesSearch && matchesPlatform;
   });
+
+  const handleDelete = async (slug: string, title: string) => {
+    if (!confirm(`Bạn có chắc muốn xóa dịch vụ "${title}"?\n\n⚠️ Hành động này không thể hoàn tác!`)) {
+      return;
+    }
+
+    setDeletingSlug(slug);
+
+    try {
+      const response = await fetch('/api/admin/service/delete', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ADMIN_API_SECRET || 'secret123'}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ slug }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(`❌ Lỗi: ${data.message}`);
+        return;
+      }
+
+      alert('✅ Dịch vụ đã được xóa thành công!');
+      
+      // Reload page to refresh the list
+      window.location.reload();
+    } catch (error) {
+      alert('❌ Đã có lỗi xảy ra khi xóa dịch vụ');
+    } finally {
+      setDeletingSlug(null);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -119,6 +155,18 @@ export default function ServicesList() {
                 >
                   <Edit size={18} />
                 </Link>
+                <button
+                  className="p-2 text-[var(--text-muted)] hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Xóa"
+                  disabled={deletingSlug === service.slug}
+                  onClick={() => handleDelete(service.slug, service.title)}
+                >
+                  {deletingSlug === service.slug ? (
+                    <div className="animate-spin w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full"></div>
+                  ) : (
+                    <Trash2 size={18} />
+                  )}
+                </button>
               </div>
             </div>
           </div>

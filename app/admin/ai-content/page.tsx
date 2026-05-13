@@ -146,7 +146,12 @@ export default function AIContentHub() {
           }, 5000); // Increased from 2s to 5s to show image preview
         }
       } else {
-        setError(data.errors?.[0] || 'Failed to generate content');
+        // Show detailed error: combine errors array and message field
+        const errorMessages = [
+          ...(data.errors || []),
+          data.message || ''
+        ].filter(Boolean);
+        setError(errorMessages.join(' | ') || 'Lỗi không xác định khi tạo nội dung');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Có lỗi xảy ra');
@@ -170,11 +175,11 @@ export default function AIContentHub() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-            <Sparkles className="w-8 h-8 text-blue-600" />
+          <h1 className="font-h1 text-3xl font-black text-[var(--text-primary)] flex items-center gap-2">
+            <Sparkles className="w-8 h-8 text-[#FF8C00]" />
             AI Content Hub
           </h1>
-          <p className="text-gray-600 mt-1">Tạo nội dung blog tự động với AI</p>
+          <p className="text-[var(--text-secondary)] mt-1">Tạo nội dung blog tự động với AI</p>
         </div>
         <Link
           href="/admin/ai-content/batch"
@@ -186,8 +191,8 @@ export default function AIContentHub() {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="border-b border-gray-200">
+      <div className="bg-[var(--surface)] rounded-2xl border border-[var(--border)]">
+        <div className="border-b border-[var(--border)]">
           <nav className="flex">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -197,13 +202,13 @@ export default function AIContentHub() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 py-4 px-6 text-center border-b-2 font-medium text-sm transition-colors ${
                     activeTab === tab.id
-                      ? 'border-blue-600 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? 'border-[#FF2E63] text-[#FF2E63]'
+                      : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border)]'
                   }`}
                 >
                   <Icon className="w-5 h-5 mx-auto mb-1" />
                   <div>{tab.label}</div>
-                  <div className="text-xs text-gray-400 mt-1">{tab.description}</div>
+                  <div className="text-xs text-[var(--text-muted)] mt-1">{tab.description}</div>
                 </button>
               );
             })}
@@ -215,13 +220,13 @@ export default function AIContentHub() {
           {activeTab === 'url' && (
             <div className="space-y-4">
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">URL bài viết nguồn</span>
+                <span className="text-sm font-medium text-[var(--text-primary)]">URL bài viết nguồn</span>
                 <input
                   type="url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://example.com/blog-post"
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="mt-1 block w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
                 />
               </label>
             </div>
@@ -236,7 +241,7 @@ export default function AIContentHub() {
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   placeholder="VD: Cách tăng like trên TikTok 2024"
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="mt-1 block w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
                 />
               </label>
             </div>
@@ -251,20 +256,20 @@ export default function AIContentHub() {
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Dán nội dung cần viết lại và tối ưu..."
                   rows={8}
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="mt-1 block w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
                 />
               </label>
             </div>
           )}
 
           {/* Options */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-6 border-t border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-6 border-t border-[var(--border)]">
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">Danh mục</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">Danh mục</span>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="mt-1 block w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>{cat}</option>
@@ -273,22 +278,22 @@ export default function AIContentHub() {
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">Target Keywords (cách nhau bởi dấu phẩy)</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">Target Keywords (cách nhau bởi dấu phẩy)</span>
               <input
                 type="text"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
                 placeholder="keyword1, keyword2, keyword3"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="mt-1 block w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
               />
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-gray-700">Tone giọng</span>
+              <span className="text-sm font-medium text-[var(--text-primary)]">Tone giọng</span>
               <select
                 value={tone}
                 onChange={(e) => setTone(e.target.value as any)}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="mt-1 block w-full px-4 py-2 bg-[var(--bg-secondary)] border border-[var(--border)] rounded-xl text-[var(--text-primary)] focus:outline-none focus:border-[#FF2E63] transition-colors"
               >
                 <option value="professional">Professional</option>
                 <option value="casual">Casual</option>
@@ -305,7 +310,7 @@ export default function AIContentHub() {
                   onChange={(e) => setAutoSave(e.target.checked)}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-                <span className="text-sm text-gray-700">Tự động lưu sau khi tạo</span>
+                <span className="text-sm text-[var(--text-secondary)]">Tự động lưu sau khi tạo</span>
               </label>
 
               <label className="flex items-center gap-2 cursor-pointer">
@@ -315,7 +320,7 @@ export default function AIContentHub() {
                   onChange={(e) => setGenerateImage(e.target.checked)}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-                <span className="text-sm text-gray-700 flex items-center gap-1">
+                <span className="text-sm text-[var(--text-secondary)] flex items-center gap-1">
                   <ImageIcon className="w-4 h-4" />
                   Tạo ảnh minh họa tự động
                 </span>
@@ -324,11 +329,11 @@ export default function AIContentHub() {
           </div>
 
           {/* Generate Button */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
+          <div className="mt-6 pt-6 border-t border-[var(--border)]">
             <button
               onClick={handleGenerate}
               disabled={isGenerating}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FF2E63] hover:opacity-90 disabled:opacity-50 text-white font-bold py-3 px-6 rounded-xl transition-opacity flex items-center justify-center gap-2"
             >
               {isGenerating ? (
                 <>
@@ -348,12 +353,12 @@ export default function AIContentHub() {
 
       {/* Progress Bar */}
       {isGenerating && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-[var(--surface)] rounded-2xl border border-[var(--border)] p-6">
           <div className="flex items-center gap-3 mb-3">
-            <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
-            <span className="font-medium text-gray-900">AI đang tạo nội dung...</span>
+            <Loader2 className="w-5 h-5 animate-spin text-[#FF2E63]" />
+            <span className="font-medium text-[var(--text-primary)]">AI đang tạo nội dung...</span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-[var(--bg-secondary)] rounded-full h-2">
             <div
               className={`h-2 rounded-full transition-all duration-500 ${
                 progressStage === 'generating_image' ? 'bg-purple-600' : 'bg-blue-600'
@@ -361,7 +366,7 @@ export default function AIContentHub() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-sm text-[var(--text-muted)] mt-2">
             {progress < 30 && '📊 Đang phân tích yêu cầu...'}
             {progress >= 30 && progress < 60 && '✍️ Đang tạo nội dung...'}
             {progress >= 60 && progress < 85 && '🔍 Đang tối ưu SEO...'}
@@ -386,9 +391,9 @@ export default function AIContentHub() {
 
       {/* Generated Content Preview */}
       {generatedContent && !autoSave && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-[var(--surface)] rounded-2xl border border-[var(--border)] p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
               <CheckCircle className="w-6 h-6 text-green-600" />
               Nội dung đã tạo xong
             </h2>
@@ -415,9 +420,9 @@ export default function AIContentHub() {
 
           {/* SEO Score */}
           {generatedContent.seoScore && (
-            <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+            <div className="mb-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-blue-900">SEO Score</span>
+                <span className="text-sm font-medium text-blue-400">SEO Score</span>
                 <span className={`text-2xl font-bold ${
                   generatedContent.seoScore >= 80 ? 'text-green-600' :
                   generatedContent.seoScore >= 60 ? 'text-yellow-600' : 'text-red-600'
@@ -425,7 +430,7 @@ export default function AIContentHub() {
                   {generatedContent.seoScore}/100
                 </span>
               </div>
-              <div className="w-full bg-blue-200 rounded-full h-2 mt-2">
+              <div className="w-full bg-[var(--bg-secondary)] rounded-full h-2 mt-2">
                 <div
                   className={`h-2 rounded-full ${
                     generatedContent.seoScore >= 80 ? 'bg-green-600' :
@@ -439,10 +444,10 @@ export default function AIContentHub() {
 
           {/* Generated Image Preview */}
           {generatedContent.imageUrl && (
-            <div className="mb-6 p-4 bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200 rounded-lg">
+            <div className="mb-6 p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
               <div className="flex items-center gap-2 mb-3">
                 <ImageIcon className="w-5 h-5 text-purple-600" />
-                <h3 className="font-semibold text-purple-900">Ảnh minh họa đã tạo</h3>
+                <h3 className="font-semibold text-purple-400">Ảnh minh họa đã tạo</h3>
               </div>
               <div className="relative rounded-lg overflow-hidden shadow-lg">
                 <img
@@ -464,11 +469,11 @@ export default function AIContentHub() {
 
           {/* Suggestions */}
           {generatedContent.suggestions && generatedContent.suggestions.length > 0 && (
-            <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <h3 className="font-medium text-yellow-900 mb-2">Gợi ý cải thiện:</h3>
+            <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+              <h3 className="font-medium text-yellow-500 mb-2">Gợi ý cải thiện:</h3>
               <ul className="list-disc list-inside space-y-1">
                 {generatedContent.suggestions.map((suggestion, idx) => (
-                  <li key={idx} className="text-sm text-yellow-800">{suggestion}</li>
+                  <li key={idx} className="text-sm text-yellow-400">{suggestion}</li>
                 ))}
               </ul>
             </div>
