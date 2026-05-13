@@ -16,6 +16,10 @@ export interface BlogPost {
   tags?: string[];
   relatedServices?: string[];
   relatedPosts?: string[];
+  // SEO fields
+  metaTitle?: string;
+  metaDescription?: string;
+  seoScore?: number;
   chart?: {
     type: 'Bar' | 'Area' | 'Pie';
     data: any[];
